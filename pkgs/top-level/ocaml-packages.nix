@@ -930,6 +930,10 @@ let
       inherit (pkgs) lame;
     };
 
+    landmarks = callPackage ../development/ocaml-modules/landmarks { };
+
+    landmarks-ppx = callPackage ../development/ocaml-modules/landmarks-ppx { };
+
     lastfm = callPackage ../development/ocaml-modules/lastfm { };
 
     lem = callPackage ../development/ocaml-modules/lem { };
@@ -1079,6 +1083,8 @@ let
     minisat = callPackage ../development/ocaml-modules/minisat { };
 
     minttea = callPackage ../development/ocaml-modules/minttea { };
+
+    miou = callPackage ../development/ocaml-modules/miou { };
 
     mirage = callPackage ../development/ocaml-modules/mirage { };
 
@@ -1696,8 +1702,6 @@ let
     soundtouch = callPackage ../development/ocaml-modules/soundtouch {
       inherit (pkgs) soundtouch;
     };
-
-    spacetime_lib = callPackage ../development/ocaml-modules/spacetime_lib { };
 
     speex = callPackage ../development/ocaml-modules/speex {
       inherit (pkgs) speex;

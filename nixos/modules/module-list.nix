@@ -54,6 +54,7 @@
   ./hardware/corectrl.nix
   ./hardware/cpu/amd-microcode.nix
   ./hardware/cpu/amd-sev.nix
+  ./hardware/cpu/amd-ryzen-smu.nix
   ./hardware/cpu/intel-microcode.nix
   ./hardware/cpu/intel-sgx.nix
   ./hardware/cpu/x86-msr.nix
@@ -178,6 +179,7 @@
   ./programs/environment.nix
   ./programs/evince.nix
   ./programs/extra-container.nix
+  ./programs/fcast-receiver.nix
   ./programs/feedbackd.nix
   ./programs/file-roller.nix
   ./programs/firefox.nix
@@ -212,6 +214,8 @@
   ./programs/kbdlight.nix
   ./programs/kclock.nix
   ./programs/kdeconnect.nix
+  ./programs/lazygit.nix
+  ./programs/kubeswitch.nix
   ./programs/less.nix
   ./programs/liboping.nix
   ./programs/light.nix
@@ -230,6 +234,7 @@
   ./programs/neovim.nix
   ./programs/nethoscope.nix
   ./programs/nexttrace.nix
+  ./programs/nh.nix
   ./programs/nix-index.nix
   ./programs/nix-ld.nix
   ./programs/nm-applet.nix
@@ -251,6 +256,7 @@
   ./programs/regreet.nix
   ./programs/rog-control-center.nix
   ./programs/rust-motd.nix
+  ./programs/ryzen-monitor-ng.nix
   ./programs/screen.nix
   ./programs/seahorse.nix
   ./programs/sedutil.nix
@@ -260,6 +266,7 @@
   ./programs/skim.nix
   ./programs/slock.nix
   ./programs/sniffnet.nix
+  ./programs/soundmodem.nix
   ./programs/spacefm.nix
   ./programs/ssh.nix
   ./programs/starship.nix
@@ -281,8 +288,8 @@
   ./programs/virt-manager.nix
   ./programs/wavemon.nix
   ./programs/wayland/cardboard.nix
-  ./programs/wayland/labwc.nix
   ./programs/wayland/hyprland.nix
+  ./programs/wayland/labwc.nix
   ./programs/wayland/river.nix
   ./programs/wayland/sway.nix
   ./programs/wayland/waybar.nix
@@ -685,6 +692,7 @@
   ./services/misc/clipmenu.nix
   ./services/misc/confd.nix
   ./services/misc/cpuminer-cryptonight.nix
+  ./services/misc/db-rest.nix
   ./services/misc/devmon.nix
   ./services/misc/dictd.nix
   ./services/misc/disnix.nix
@@ -1316,6 +1324,7 @@
   ./services/web-apps/cloudlog.nix
   ./services/web-apps/code-server.nix
   ./services/web-apps/convos.nix
+  ./services/web-apps/crabfit.nix
   ./services/web-apps/davis.nix
   ./services/web-apps/dex.nix
   ./services/web-apps/discourse.nix
@@ -1363,6 +1372,7 @@
   ./services/web-apps/miniflux.nix
   ./services/web-apps/monica.nix
   ./services/web-apps/moodle.nix
+  ./services/web-apps/movim.nix
   ./services/web-apps/netbox.nix
   ./services/web-apps/nextcloud.nix
   ./services/web-apps/nextcloud-notify_push.nix
