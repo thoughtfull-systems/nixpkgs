@@ -1804,6 +1804,12 @@ self: super: with self; {
 
   bundlewrap = callPackage ../development/python-modules/bundlewrap { };
 
+  bundlewrap-keepass = callPackage ../development/python-modules/bundlewrap-keepass { };
+
+  bundlewrap-pass = callPackage ../development/python-modules/bundlewrap-pass { };
+
+  bundlewrap-teamvault = callPackage ../development/python-modules/bundlewrap-teamvault { };
+
   busypie = callPackage ../development/python-modules/busypie { };
 
   bx-py-utils = callPackage ../development/python-modules/bx-py-utils { };
@@ -1925,6 +1931,8 @@ self: super: with self; {
       python3Packages = self;
     };
   };
+
+  catkin-pkg = callPackage ../development/python-modules/catkin-pkg { };
 
   catppuccin = callPackage ../development/python-modules/catppuccin { };
 
@@ -2478,6 +2486,8 @@ self: super: with self; {
 
   craft-application-1 = callPackage ../development/python-modules/craft-application-1 { };
 
+  craft-application = callPackage ../development/python-modules/craft-application { };
+
   craft-archives = callPackage ../development/python-modules/craft-archives { };
 
   craft-cli = callPackage ../development/python-modules/craft-cli { };
@@ -2487,6 +2497,8 @@ self: super: with self; {
   craft-parts = callPackage ../development/python-modules/craft-parts { };
 
   craft-providers = callPackage ../development/python-modules/craft-providers { };
+
+  craft-store = callPackage ../development/python-modules/craft-store { };
 
   cram = callPackage ../development/python-modules/cram { };
 
@@ -2642,14 +2654,7 @@ self: super: with self; {
 
   cython = callPackage ../development/python-modules/cython { };
 
-  cython_3 = self.cython.overridePythonAttrs (old: rec {
-    version = "3.0.9";
-    src = old.src.override {
-      inherit version;
-      hash = "sha256-otNU8FnR8FXTTPqmLFtovHisLOq2QHFI1H+1CM87pPM=";
-    };
-    patches = [ ];
-  });
+  cython_0 = callPackage ../development/python-modules/cython/0.nix { };
 
   cython-test-exception-raiser = callPackage ../development/python-modules/cython-test-exception-raiser { };
 
@@ -6139,6 +6144,8 @@ self: super: with self; {
 
   jsonschema-specifications = callPackage ../development/python-modules/jsonschema-specifications { };
 
+  jsonslicer = callPackage ../development/python-modules/jsonslicer { };
+
   jsonstreams = callPackage ../development/python-modules/jsonstreams { };
 
   json-tricks = callPackage ../development/python-modules/json-tricks { };
@@ -7056,6 +7063,8 @@ self: super: with self; {
   rtmixer = callPackage ../development/python-modules/rtmixer { };
 
   regress = callPackage ../development/python-modules/regress { };
+
+  macaroonbakery = callPackage ../development/python-modules/macaroonbakery { };
 
   mail-parser = callPackage ../development/python-modules/mail-parser { };
 
@@ -11909,6 +11918,8 @@ self: super: with self; {
 
   pytest_7 = callPackage ../development/python-modules/pytest/7.nix { };
 
+  pytest7CheckHook = pytestCheckHook.override { pytest = pytest_7; };
+
   pytest-aio = callPackage ../development/python-modules/pytest-aio { };
 
   pytest-aiohttp = callPackage ../development/python-modules/pytest-aiohttp { };
@@ -12173,6 +12184,8 @@ self: super: with self; {
   python3-gnutls = callPackage ../development/python-modules/python3-gnutls { };
 
   python3-openid = callPackage ../development/python-modules/python3-openid { };
+
+  python-apt = callPackage ../development/python-modules/python-apt { };
 
   python-arango = callPackage ../development/python-modules/python-arango { };
 
@@ -16422,8 +16435,6 @@ self: super: with self; {
   usort = callPackage ../development/python-modules/usort { };
 
   utils = callPackage ../development/python-modules/utils { };
-
-  uuid = callPackage ../development/python-modules/uuid { };
 
   uvcclient = callPackage ../development/python-modules/uvcclient { };
 

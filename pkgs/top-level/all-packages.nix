@@ -656,6 +656,8 @@ with pkgs;
 
   evhz = callPackage ../tools/misc/evhz { };
 
+  expand-response-params = callPackage ../build-support/expand-response-params { };
+
   expressvpn = callPackage ../applications/networking/expressvpn { };
 
   faq = callPackage ../development/tools/faq { };
@@ -1022,6 +1024,7 @@ with pkgs;
   fetchpijul = callPackage ../build-support/fetchpijul { };
 
   inherit (callPackages ../build-support/node/fetch-yarn-deps { })
+    fixup-yarn-lock
     prefetch-yarn-deps
     fetchYarnDeps;
 
@@ -2529,10 +2532,6 @@ with pkgs;
   gitty = callPackage ../applications/version-management/gitty { };
 
   gittyup = libsForQt5.callPackage ../applications/version-management/gittyup { };
-
-  gitui = callPackage ../applications/version-management/gitui {
-    inherit (darwin.apple_sdk.frameworks) Security AppKit;
-  };
 
   gitweb = callPackage ../applications/version-management/gitweb { };
 
@@ -9781,14 +9780,7 @@ with pkgs;
   ldc = callPackage ../development/compilers/ldc { };
 
   ligo =
-    let ocaml_p = ocaml-ng.ocamlPackages_4_14_janeStreet_0_15.overrideScope (self: super: {
-      zarith = super.zarith.overrideAttrs (o: {
-        src = fetchzip {
-          url = "https://github.com/ocaml/Zarith/archive/refs/tags/release-1.12.tar.gz";
-          hash = "sha256-SQegsMc1+UIod8XeJDE+H5q1huNDQI8CUh7IsHOoVMs=";
-        };
-      });
-    }); in
+    let ocaml_p = ocaml-ng.ocamlPackages_4_14_janeStreet_0_15; in
     callPackage ../development/compilers/ligo {
     coq = coq_8_13.override {
       customOCamlPackages = ocaml_p;
@@ -13292,8 +13284,6 @@ with pkgs;
 
   stm32loader = with python3Packages; toPythonApplication stm32loader;
 
-  storcli = callPackage ../tools/misc/storcli { };
-
   stremio = qt5.callPackage ../applications/video/stremio { };
 
   sunwait = callPackage ../applications/misc/sunwait { };
@@ -13631,16 +13621,9 @@ with pkgs;
 
   telegraf = callPackage ../servers/monitoring/telegraf { };
 
-  teleport_12 = callPackage ../servers/teleport/12 {
+  inherit (callPackages ../servers/teleport {
     inherit (darwin.apple_sdk.frameworks) CoreFoundation Security AppKit;
-  };
-  teleport_13 = callPackage ../servers/teleport/13 {
-    inherit (darwin.apple_sdk.frameworks) CoreFoundation Security AppKit;
-  };
-  teleport_14 = callPackage ../servers/teleport/14 {
-    inherit (darwin.apple_sdk.frameworks) CoreFoundation Security AppKit;
-  };
-  teleport = teleport_14;
+  }) teleport_13 teleport_14 teleport_15 teleport;
 
   telepresence = callPackage ../tools/networking/telepresence {
     pythonPackages = python3Packages;
@@ -14385,7 +14368,8 @@ with pkgs;
 
   wasm-tools = callPackage ../tools/misc/wasm-tools { };
 
-  wasmedge = darwin.apple_sdk_11_0.callPackage ../development/tools/wasmedge {
+  wasmedge = callPackage ../development/tools/wasmedge {
+    stdenv = if stdenv.isDarwin then overrideSDK stdenv "11.0" else llvmPackages.stdenv;
     inherit (darwin.apple_sdk_11_0.frameworks) Foundation;
   };
 
@@ -15618,7 +15602,6 @@ with pkgs;
 
   default-gcc-version =
     if (with stdenv.targetPlatform; isVc4 || libc == "relibc") then 6
-    else if stdenv.buildPlatform.isDarwin  then 12  # unable to test
     else 13;
   gcc = pkgs.${"gcc${toString default-gcc-version}"};
   gccFun = callPackage ../development/compilers/gcc;
@@ -16687,11 +16670,11 @@ with pkgs;
   wrapRustcWith = { rustc-unwrapped, ... } @ args: callPackage ../build-support/rust/rustc-wrapper args;
   wrapRustc = rustc-unwrapped: wrapRustcWith { inherit rustc-unwrapped; };
 
-  rust_1_76 = callPackage ../development/compilers/rust/1_76.nix {
+  rust_1_77 = callPackage ../development/compilers/rust/1_77.nix {
     inherit (darwin.apple_sdk.frameworks) CoreFoundation Security SystemConfiguration;
     llvm_17 = llvmPackages_17.libllvm;
   };
-  rust = rust_1_76;
+  rust = rust_1_77;
 
   mrustc = callPackage ../development/compilers/mrustc { };
   mrustc-minicargo = callPackage ../development/compilers/mrustc/minicargo.nix { };
@@ -16699,8 +16682,8 @@ with pkgs;
     openssl = openssl_1_1;
   };
 
-  rustPackages_1_76 = rust_1_76.packages.stable;
-  rustPackages = rustPackages_1_76;
+  rustPackages_1_77 = rust_1_77.packages.stable;
+  rustPackages = rustPackages_1_77;
 
   inherit (rustPackages) cargo cargo-auditable cargo-auditable-cargo-wrapper clippy rustc rustPlatform;
 
@@ -20339,6 +20322,7 @@ with pkgs;
     boost182
     boost183
     boost184
+    boost185
   ;
 
   boost = boost181;
@@ -22934,9 +22918,7 @@ with pkgs;
     stdenv = gccStdenv; # Required for darwin
   }) libprom libpromhttp;
 
-  libproxy = callPackage ../development/libraries/libproxy {
-    inherit (darwin.apple_sdk.frameworks) SystemConfiguration CoreFoundation JavaScriptCore;
-  };
+  libproxy = callPackage ../development/libraries/libproxy { };
 
   libpseudo = callPackage ../development/libraries/libpseudo { };
 
@@ -28723,8 +28705,6 @@ with pkgs;
 
   fanwood = callPackage ../data/fonts/fanwood { };
 
-  fira = callPackage ../data/fonts/fira { };
-
   fira-code = callPackage ../data/fonts/fira-code { };
   fira-code-symbols = callPackage ../data/fonts/fira-code/symbols.nix { };
   fira-code-nerdfont = nerdfonts.override {
@@ -28732,8 +28712,6 @@ with pkgs;
   };
 
   fira-go = callPackage ../data/fonts/fira-go { };
-
-  fira-mono = callPackage ../data/fonts/fira-mono { };
 
   flat-remix-icon-theme = callPackage ../data/icons/flat-remix-icon-theme {
     inherit (plasma5Packages) breeze-icons;
@@ -31736,10 +31714,6 @@ with pkgs;
 
   hexedit = callPackage ../applications/editors/hexedit { };
 
-  himalaya = callPackage ../applications/networking/mailreaders/himalaya {
-    inherit (darwin.apple_sdk.frameworks) AppKit Cocoa Security;
-  };
-
   hydrogen-web-unwrapped = callPackage ../applications/networking/instant-messengers/hydrogen-web/unwrapped.nix { };
 
   hydrogen-web = callPackage ../applications/networking/instant-messengers/hydrogen-web/wrapper.nix {
@@ -33462,8 +33436,6 @@ with pkgs;
   psi-notify = callPackage ../applications/misc/psi-notify { };
 
   ptex = callPackage ../development/libraries/ptex { };
-
-  pyright = nodePackages.pyright;
 
   qbec = callPackage ../applications/networking/cluster/qbec { };
 
@@ -35856,15 +35828,18 @@ with pkgs;
   kodiPackages = recurseIntoAttrs (kodi.packages);
 
   kodi = callPackage ../applications/video/kodi {
+    ffmpeg = ffmpeg_6;
     jre_headless = jdk11_headless;
   };
 
   kodi-wayland = callPackage ../applications/video/kodi {
+    ffmpeg = ffmpeg_6;
     jre_headless = jdk11_headless;
     waylandSupport = true;
   };
 
   kodi-gbm = callPackage ../applications/video/kodi {
+    ffmpeg = ffmpeg_6;
     jre_headless = jdk11_headless;
     gbmSupport = true;
   };
@@ -38927,9 +38902,7 @@ with pkgs;
 
   btor2tools = callPackage ../applications/science/logic/btor2tools { };
 
-  boolector = callPackage ../applications/science/logic/boolector {
-    stdenv = if stdenv.cc.isClang then overrideLibcxx llvmPackages_14.stdenv else stdenv;
-  };
+  boolector = callPackage ../applications/science/logic/boolector { };
 
   bitwuzla = callPackage ../applications/science/logic/bitwuzla { };
 
@@ -40622,8 +40595,6 @@ with pkgs;
   websocketd = callPackage ../applications/networking/websocketd { };
 
   wibo = pkgsi686Linux.callPackage ../applications/emulators/wibo { };
-
-  wike = callPackage ../applications/misc/wike { };
 
   wikicurses = callPackage ../applications/misc/wikicurses {
     pythonPackages = python3Packages;
