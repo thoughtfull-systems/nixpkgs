@@ -800,6 +800,12 @@
     githubId = 20405311;
     name = "Aksh Gupta";
   };
+  aktaboot = {
+    email = "akhtaboo@protonmail.com";
+    github = "aktaboot";
+    githubId = 120214979;
+    name = "aktaboot";
+  };
   al3xtjames = {
     email = "nix@alextjam.es";
     github = "al3xtjames";
@@ -16706,6 +16712,12 @@
     github = "rawkode";
     githubId = 145816;
     name = "David McKay";
+  };
+  raylas = {
+    email = "r@raymond.sh";
+    github = "raylas";
+    githubId = 8099415;
+    name = "Raymond Douglas";
   };
   rayslash = {
     email = "stevemathewjoy@tutanota.com";
