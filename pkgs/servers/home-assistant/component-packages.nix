@@ -2,7 +2,7 @@
 # Do not edit!
 
 {
-  version = "2024.4.2";
+  version = "2024.4.3";
   components = {
     "3_day_blinds" = ps: with ps; [
     ];
@@ -97,7 +97,8 @@
       airtouch4pyapi
     ];
     "airtouch5" = ps: with ps; [
-    ]; # missing inputs: airtouch5py
+      airtouch5py
+    ];
     "airvisual" = ps: with ps; [
       pyairvisual
     ];

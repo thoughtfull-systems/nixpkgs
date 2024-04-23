@@ -16509,6 +16509,13 @@
       fingerprint = "7573 56D7 79BB B888 773E  415E 736C CDF9 EF51 BD97";
     }];
   };
+  qyriad = {
+    email = "qyriad@qyriad.me";
+    github = "Qyriad";
+    githubId = 1542224;
+    matrix = "@qyriad:katesiria.org";
+    name = "Qyriad";
+  };
   r3dl3g = {
     email = "redleg@rothfuss-web.de";
     github = "r3dl3g";
@@ -18162,6 +18169,11 @@
     github = "serge-sans-paille";
     githubId = 863807;
     name = "Serge Guelton";
+  };
+  sergioribera = {
+    github = "SergioRibera";
+    githubId = 56278796;
+    name = "Sergio Ribera";
   };
   sersorrel = {
     email = "ash@sorrel.sh";
@@ -21892,12 +21904,6 @@
     github = "xeji";
     githubId = 36407913;
     name = "Uli Baum";
-  };
-  xfix = {
-    email = "kamila@borowska.pw";
-    github = "KamilaBorowska";
-    githubId = 1297598;
-    name = "Kamila Borowska";
   };
   xfnw = {
     email = "xfnw+nixos@riseup.net";

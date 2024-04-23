@@ -467,6 +467,8 @@ self: super: with self; {
 
   airtouch4pyapi = callPackage ../development/python-modules/airtouch4pyapi { };
 
+  airtouch5py = callPackage ../development/python-modules/airtouch5py { };
+
   ajpy = callPackage ../development/python-modules/ajpy { };
 
   ajsonrpc = callPackage ../development/python-modules/ajsonrpc { };
@@ -1352,7 +1354,7 @@ self: super: with self; {
 
   backports-entry-points-selectable = callPackage ../development/python-modules/backports-entry-points-selectable { };
 
-  backports_shutil_get_terminal_size = callPackage ../development/python-modules/backports_shutil_get_terminal_size { };
+  backports-shutil-get-terminal-size = callPackage ../development/python-modules/backports-shutil-get-terminal-size { };
 
   backports-shutil-which = callPackage ../development/python-modules/backports-shutil-which { };
 
@@ -1781,6 +1783,8 @@ self: super: with self; {
   btsmarthub-devicelist = callPackage ../development/python-modules/btsmarthub-devicelist { };
 
   btsocket = callPackage ../development/python-modules/btsocket { };
+
+  bubop = callPackage ../development/python-modules/bubop { };
 
   bucketstore = callPackage ../development/python-modules/bucketstore { };
 
@@ -5904,6 +5908,8 @@ self: super: with self; {
   isoweek = callPackage ../development/python-modules/isoweek { };
 
   itanium-demangler = callPackage ../development/python-modules/itanium-demangler { };
+
+  item-synchronizer = callPackage ../development/python-modules/item-synchronizer { };
 
   itemadapter = callPackage ../development/python-modules/itemadapter { };
 
@@ -11545,6 +11551,8 @@ self: super: with self; {
       setuptools sip;
   };
 
+  pyqtdarktheme = callPackage ../development/python-modules/pyqtdarktheme { };
+
   pyqtdatavisualization = pkgs.libsForQt5.callPackage ../development/python-modules/pyqtdatavisualization {
     inherit (self) buildPythonPackage pyqt5 pyqt-builder python pythonOlder
       setuptools sip;
@@ -14088,7 +14096,7 @@ self: super: with self; {
 
   spacy-lookups-data = callPackage ../development/python-modules/spacy/lookups-data.nix { };
 
-  spacy_models = callPackage ../development/python-modules/spacy/models.nix {
+  spacy-models = callPackage ../development/python-modules/spacy/models.nix {
       inherit (pkgs) jq;
   };
 
@@ -14677,6 +14685,8 @@ self: super: with self; {
 
   taskw = callPackage ../development/python-modules/taskw { };
 
+  taskw-ng = callPackage ../development/python-modules/taskw-ng { };
+
   tatsu = callPackage ../development/python-modules/tatsu { };
 
   taxi = callPackage ../development/python-modules/taxi { };
@@ -14915,7 +14925,7 @@ self: super: with self; {
   textacy = callPackage ../development/python-modules/textacy { };
 
   textnets = callPackage ../development/python-modules/textnets {
-    en_core_web_sm = spacy_models.en_core_web_sm;
+    en_core_web_sm = spacy-models.en_core_web_sm;
   };
 
   texttable = callPackage ../development/python-modules/texttable { };
