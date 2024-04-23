@@ -815,7 +815,7 @@ self: super: with self; {
 
   aspy-refactor-imports = callPackage ../development/python-modules/aspy-refactor-imports { };
 
-  aspy-yaml = callPackage ../development/python-modules/aspy.yaml { };
+  aspy-yaml = callPackage ../development/python-modules/aspy-yaml { };
 
   assay = callPackage ../development/python-modules/assay { };
 
@@ -1781,6 +1781,8 @@ self: super: with self; {
   btsmarthub-devicelist = callPackage ../development/python-modules/btsmarthub-devicelist { };
 
   btsocket = callPackage ../development/python-modules/btsocket { };
+
+  bubop = callPackage ../development/python-modules/bubop { };
 
   bucketstore = callPackage ../development/python-modules/bucketstore { };
 
@@ -5905,6 +5907,8 @@ self: super: with self; {
 
   itanium-demangler = callPackage ../development/python-modules/itanium-demangler { };
 
+  item-synchronizer = callPackage ../development/python-modules/item-synchronizer { };
+
   itemadapter = callPackage ../development/python-modules/itemadapter { };
 
   itemdb = callPackage ../development/python-modules/itemdb { };
@@ -9672,6 +9676,8 @@ self: super: with self; {
   pymeta3 = callPackage ../development/python-modules/pymeta3 { };
 
   pypemicro = callPackage ../development/python-modules/pypemicro { };
+
+  pymeshlab = toPythonModule (pkgs.libsForQt5.callPackage ../applications/graphics/pymeshlab { });
 
   pyprecice = callPackage ../development/python-modules/pyprecice { };
 
@@ -13950,7 +13956,7 @@ self: super: with self; {
 
   smpplib = callPackage ../development/python-modules/smpplib { };
 
-  smpp-pdu = callPackage ../development/python-modules/smpp.pdu { };
+  smpp-pdu = callPackage ../development/python-modules/smpp-pdu { };
 
   smtpdfix = callPackage ../development/python-modules/smtpdfix { };
 
@@ -14674,6 +14680,8 @@ self: super: with self; {
   tasklib = callPackage ../development/python-modules/tasklib { };
 
   taskw = callPackage ../development/python-modules/taskw { };
+
+  taskw-ng = callPackage ../development/python-modules/taskw-ng { };
 
   tatsu = callPackage ../development/python-modules/tatsu { };
 
