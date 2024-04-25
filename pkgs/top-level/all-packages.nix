@@ -1612,10 +1612,6 @@ with pkgs;
 
   afio = callPackage ../tools/archivers/afio { };
 
-  afl = callPackage ../tools/security/afl {
-    stdenv = clangStdenv;
-  };
-
   honggfuzz = callPackage ../tools/security/honggfuzz {
     clang = clang_16;
     llvm = llvm_16;
@@ -1630,7 +1626,7 @@ with pkgs;
 
   ledfx = callPackage ../applications/audio/ledfx { };
 
-  libdislocator = callPackage ../tools/security/afl/libdislocator.nix { };
+  libdislocator = callPackage ../tools/security/aflplusplus/libdislocator.nix { };
 
   afpfs-ng = callPackage ../tools/filesystems/afpfs-ng { };
 
@@ -5535,7 +5531,11 @@ with pkgs;
 
   grobi = callPackage ../tools/X11/grobi { };
 
-  gscan2pdf = callPackage ../applications/graphics/gscan2pdf { };
+  gscan2pdf = callPackage ../applications/graphics/gscan2pdf {
+    # needs this fork of libtiff, because original libtiff
+    # stopped packaging required tools with version 4.6
+    libtiff = libtiff_t;
+  };
 
   gsctl = callPackage ../applications/misc/gsctl { };
 
@@ -6667,7 +6667,7 @@ with pkgs;
   cdrkit = callPackage ../tools/cd-dvd/cdrkit { };
 
   cdrtools = callPackage ../tools/cd-dvd/cdrtools {
-    stdenv = if stdenv.isDarwin then overrideLibcxx llvmPackages_14.stdenv else stdenv;
+    stdenv = if stdenv.isDarwin then llvmPackages_14.stdenv else stdenv;
     inherit (darwin.apple_sdk.frameworks) Carbon IOKit;
   };
 
@@ -9159,8 +9159,9 @@ with pkgs;
   hybridreverb2 = callPackage ../applications/audio/hybridreverb2 { };
 
   hylafaxplus = callPackage ../servers/hylafaxplus {
-    # libtiff >= 4.6 dropped many executables needed by hylafaxplus
-    libtiff = libtiff_4_5;
+    # needs this fork of libtiff, because original libtiff
+    # stopped packaging required tools with version 4.6
+    libtiff = libtiff_t;
   };
 
   hyphen = callPackage ../development/libraries/hyphen { };
@@ -12547,6 +12548,8 @@ with pkgs;
 
   recoll = libsForQt5.callPackage ../applications/search/recoll { };
 
+  recoll-nox = recoll.override { withGui = false; };
+
   redoc-cli = callPackage ../development/tools/redoc-cli { };
 
   reflex = callPackage ../development/tools/reflex { };
@@ -13151,7 +13154,17 @@ with pkgs;
 
   smug = callPackage ../tools/misc/smug { };
 
-  smpq = callPackage ../applications/misc/smpq { };
+  smpq = callPackage ../by-name/sm/smpq/package.nix {
+    stormlib = stormlib.overrideAttrs (old: {
+      version = "9.22";
+      src = fetchFromGitHub {
+        owner = "ladislav-zezula";
+        repo = "StormLib";
+        rev = "v9.22";
+        hash = "sha256-jFUfxLzuRHAvFE+q19i6HfGcL6GX4vKL1g7l7LOhjeU=";
+      };
+    });
+  };
 
   snabb = callPackage ../tools/networking/snabb { };
 
@@ -18058,7 +18071,7 @@ with pkgs;
 
   nixd = callPackage ../development/tools/language-servers/nixd {
     llvmPackages = llvmPackages_16;
-    nix = nixVersions.nix_2_16;
+    nix = nixVersions.nix_2_19;
   };
 
   openscad-lsp = callPackage ../development/tools/language-servers/openscad-lsp { };
@@ -21119,9 +21132,6 @@ with pkgs;
   };
 
   glfw = glfw3;
-  glfw-wayland = glfw.override {
-    waylandSupport = true;
-  };
   glfw-wayland-minecraft = callPackage ../development/libraries/glfw/3.x-wayland-minecraft.nix {};
   glfw2 = callPackage ../development/libraries/glfw/2.x.nix { };
   glfw3 = callPackage ../development/libraries/glfw/3.x.nix {
@@ -21882,7 +21892,7 @@ with pkgs;
   lerc = callPackage ../development/libraries/lerc { };
 
   lib2geom = callPackage ../development/libraries/lib2geom {
-    stdenv = if stdenv.cc.isClang then overrideLibcxx llvmPackages_13.stdenv else stdenv;
+    stdenv = if stdenv.cc.isClang then llvmPackages_13.stdenv else stdenv;
   };
 
   lib3ds = callPackage ../development/libraries/lib3ds { };
@@ -23024,8 +23034,14 @@ with pkgs;
 
   libtifiles2 = callPackage ../development/libraries/libtifiles2 { };
 
-  libtiff = callPackage ../development/libraries/libtiff { };
-  libtiff_4_5 = callPackage ../development/libraries/libtiff/4.5.nix { };
+  inherit
+    ({
+      libtiff = callPackage ../development/libraries/libtiff { };
+      libtiff_t = callPackage ../development/libraries/libtiff/libtiff_t.nix { };
+    })
+    libtiff
+    libtiff_t
+    ;
 
   libtiger = callPackage ../development/libraries/libtiger { };
 
@@ -24067,16 +24083,7 @@ with pkgs;
 
   pylode = callPackage ../misc/pylode { };
 
-  python-qt = (callPackage ../development/libraries/python-qt {
-    python = python3;
-    inherit (builtins.mapAttrs (_: pkg: pkg.override (previousArgs: lib.optionalAttrs (previousArgs ? stdenv) { stdenv = gcc12Stdenv; })) qt5)
-      qmake qttools qtwebengine qtxmlpatterns;
-    stdenv = gcc12Stdenv;
-  })
-  .overrideAttrs(previousAttrs: {
-    NIX_CFLAGS_COMPILE = "-w";
-    meta = previousAttrs.meta // { broken = true; };
-  });
+  python-qt = libsForQt5.callPackage ../development/libraries/python-qt { };
 
   pyotherside = libsForQt5.callPackage ../development/libraries/pyotherside { };
 
@@ -24955,8 +24962,6 @@ with pkgs;
   vkdisplayinfo = callPackage ../tools/graphics/vkdisplayinfo { };
 
   vkdt = callPackage ../applications/graphics/vkdt { };
-
-  vkdt-wayland = callPackage ../applications/graphics/vkdt { glfw = glfw-wayland; };
 
   vlock = callPackage ../misc/screensavers/vlock { };
 
@@ -30342,9 +30347,7 @@ with pkgs;
 
   csound-manual = callPackage ../applications/audio/csound/csound-manual { };
 
-  csound-qt = libsForQt5.callPackage ../applications/audio/csound/csound-qt {
-    python = python3;
-  };
+  csound-qt = libsForQt5.callPackage ../applications/audio/csound/csound-qt { };
 
   codeblocks = callPackage ../applications/editors/codeblocks { };
   codeblocksFull = codeblocks.override { contribPlugins = true; };
@@ -39915,7 +39918,7 @@ with pkgs;
   dnadd = callPackage ../tools/nix/dnadd { };
 
   nix-eval-jobs = callPackage ../tools/package-management/nix-eval-jobs {
-    nix = nixVersions.nix_2_19;
+    nix = nixVersions.nix_2_21;
   };
 
   nix-doc = callPackage ../tools/package-management/nix-doc { };

@@ -689,6 +689,18 @@ final: prev:
     meta.homepage = "https://github.com/vim-scripts/argtextobj.vim/";
   };
 
+  arrow-nvim = buildVimPlugin {
+    pname = "arrow.nvim";
+    version = "2024-04-19";
+    src = fetchFromGitHub {
+      owner = "otavioschwanck";
+      repo = "arrow.nvim";
+      rev = "37f32c94cf6e01826af5d96337c70d2f9be0a280";
+      sha256 = "0v23gw86rmciaqbi27ifd3f5mw0vknm2482yznb30dpq3pk53327";
+    };
+    meta.homepage = "https://github.com/otavioschwanck/arrow.nvim/";
+  };
+
   astrotheme = buildVimPlugin {
     pname = "astrotheme";
     version = "2024-04-10";
@@ -8170,6 +8182,18 @@ final: prev:
       sha256 = "1m0f63ih6hhxmap9gyrp05px2a3pyswraf75vhmabwwxpn903l6h";
     };
     meta.homepage = "https://github.com/ishan9299/nvim-solarized-lua/";
+  };
+
+  nvim-sops = buildVimPlugin {
+    pname = "nvim-sops";
+    version = "2023-07-31";
+    src = fetchFromGitHub {
+      owner = "lucidph3nx";
+      repo = "nvim-sops";
+      rev = "cb2209562d00ef8c6c88bdec836d9edb8fbb96ef";
+      sha256 = "0fvxnx5ji3d4kgsxl2ssqs7s567ibk4h38mz70m3nhs3sxk696lj";
+    };
+    meta.homepage = "https://github.com/lucidph3nx/nvim-sops/";
   };
 
   nvim-spectre = buildVimPlugin {
