@@ -2264,6 +2264,8 @@ self: super: with self; {
 
   clldutils = callPackage ../development/python-modules/clldutils { };
 
+  cloudevents = callPackage ../development/python-modules/cloudevents { };
+
   cloudflare = callPackage ../development/python-modules/cloudflare { };
 
   cloudpathlib = callPackage ../development/python-modules/cloudpathlib { };
@@ -2699,6 +2701,8 @@ self: super: with self; {
   dask = callPackage ../development/python-modules/dask { };
 
   dask-awkward = callPackage ../development/python-modules/dask-awkward { };
+
+  dask-expr = callPackage ../development/python-modules/dask-expr { };
 
   dask-gateway = callPackage ../development/python-modules/dask-gateway { };
 
@@ -6405,6 +6409,8 @@ self: super: with self; {
 
   krfzf-py = callPackage ../development/python-modules/krfzf-py { };
 
+  kserve = callPackage ../development/python-modules/kserve { };
+
   kubernetes = callPackage ../development/python-modules/kubernetes { };
 
   kurbopy = callPackage ../development/python-modules/kurbopy { };
@@ -8532,6 +8538,8 @@ self: super: with self; {
 
   nampa = callPackage ../development/python-modules/nampa { };
 
+  nanobind = callPackage ../development/python-modules/nanobind { };
+
   nanoid = callPackage ../development/python-modules/nanoid { };
 
   nanoleaf = callPackage ../development/python-modules/nanoleaf { };
@@ -9767,6 +9775,8 @@ self: super: with self; {
   pipdate = callPackage ../development/python-modules/pipdate { };
 
   pipdeptree = callPackage ../development/python-modules/pipdeptree { };
+
+  pipe = callPackage ../development/python-modules/pipe { };
 
   pipenv-poetry-migrate = callPackage ../development/python-modules/pipenv-poetry-migrate { };
 
@@ -15051,6 +15061,8 @@ self: super: with self; {
 
   timezonefinder = callPackage ../development/python-modules/timezonefinder { };
 
+  timing-asgi = callPackage ../development/python-modules/timing-asgi { };
+
   timm = callPackage ../development/python-modules/timm { };
 
   tiny-cuda-nn = toPythonModule (pkgs.tiny-cuda-nn.override {
@@ -16349,8 +16361,6 @@ self: super: with self; {
   unifiled = callPackage ../development/python-modules/unifiled { };
 
   unique-log-filter = callPackage ../development/python-modules/unique-log-filter { };
-
-  units = callPackage ../development/python-modules/units { };
 
   unittest-data-provider = callPackage ../development/python-modules/unittest-data-provider { };
 
