@@ -6730,12 +6730,6 @@
     githubId = 5918766;
     name = "Franz Thoma";
   };
-  fogti = {
-    name = "Alain Fogtia Zscheile";
-    email = "fogti+devel@ytrizja.de";
-    github = "fogti";
-    githubId = 1618343;
-  };
   foo-dogsquared = {
     email = "foodogsquared@foodogsquared.one";
     github = "foo-dogsquared";
@@ -19047,12 +19041,6 @@
     githubId = 16364318;
     name = "Jeffrey Harmon";
   };
-  srapenne = {
-    email = "solene@perso.pw";
-    github = "rapenne-s";
-    githubId = 248016;
-    name = "Solène Rapenne";
-  };
   srghma = {
     email = "srghma@gmail.com";
     github = "srghma";
@@ -22573,12 +22561,6 @@
     github = "ztzg";
     githubId = 393108;
     name = "Damien Diederen";
-  };
-  zumorica = {
-    name = "Vera Aguilera Puerto";
-    email = "gradientvera+nix@outlook.com";
-    github = "Zumorica";
-    githubId = 6766154;
   };
   zupo = {
     name = "Nejc Zupan";

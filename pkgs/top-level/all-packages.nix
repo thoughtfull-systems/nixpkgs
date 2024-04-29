@@ -26346,8 +26346,6 @@ with pkgs;
       if stdenv.cc.isClang then llvmPackages.stdenv else stdenv;
   };
 
-  nginx-sso = callPackage ../servers/nginx-sso { };
-
   immudb = callPackage ../servers/nosql/immudb { };
 
   influxdb = callPackage ../servers/nosql/influxdb { };
@@ -37330,17 +37328,11 @@ with pkgs;
 
   principia = callPackage ../games/principia { };
 
-  prismlauncher-qt5-unwrapped = libsForQt5.callPackage ../games/prismlauncher {
+  prismlauncher-unwrapped = kdePackages.callPackage ../games/prismlauncher {
     inherit (darwin.apple_sdk.frameworks) Cocoa;
   };
 
-  prismlauncher-qt5 = libsForQt5.callPackage ../games/prismlauncher/wrapper.nix { prismlauncher-unwrapped = prismlauncher-qt5-unwrapped; };
-
-  prismlauncher-unwrapped = qt6Packages.callPackage ../games/prismlauncher {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-  };
-
-  prismlauncher = qt6Packages.callPackage ../games/prismlauncher/wrapper.nix { };
+  prismlauncher = kdePackages.callPackage ../games/prismlauncher/wrapper.nix { };
 
   pong3d = callPackage ../games/pong3d { };
 
