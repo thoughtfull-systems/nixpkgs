@@ -1086,12 +1086,6 @@
     githubId = 153175;
     name = "Andrew Marshall";
   };
-  amaxine = {
-    email = "max@ine.dev";
-    github = "amaxine";
-    githubId = 35892750;
-    name = "Maxine Aubrey";
-  };
   ambroisie = {
     email = "bruno.nixpkgs@belanyi.fr";
     github = "ambroisie";
@@ -1246,12 +1240,6 @@
     github = "andrewchambers";
     githubId = 962885;
     name = "Andrew Chambers";
-  };
-  andrew-d = {
-    email = "andrew@du.nham.ca";
-    github = "andrew-d";
-    githubId = 1079173;
-    name = "Andrew Dunham";
   };
   andrewrk = {
     email = "superjoe30@gmail.com";
@@ -1802,11 +1790,6 @@
     keys = [{
       fingerprint = "409D 201E 9450 8732 A49E  D0FC 6BDA F874 0068 08DF";
     }];
-  };
-  ashvith-shetty = {
-    github = "Ashvith10";
-    githubId = 113123021;
-    name = "Ashvith Shetty";
   };
   asininemonkey = {
     email = "nixpkgs@asininemonkey.com";
@@ -5956,12 +5939,6 @@
     githubId = 3221521;
     name = "Zhenbo Li";
     matrix = "@zhenbo:matrix.org";
-  };
-  endocrimes = {
-    email = "dani@builds.terrible.systems";
-    github = "endocrimes";
-    githubId = 1330683;
-    name = "Danielle Lancashire";
   };
   enorris = {
     name = "Eric Norris";
@@ -13732,15 +13709,6 @@
     githubId = 3856390;
     email = "mschwaig+nixpkgs@eml.cc";
   };
-  msfjarvis = {
-    github = "msfjarvis";
-    githubId = 13348378;
-    name = "Harsh Shandilya";
-    email = "nixos@msfjarvis.dev";
-    keys = [{
-      fingerprint = "8F87 050B 0F9C B841 1515  7399 B784 3F82 3355 E9B9";
-    }];
-  };
   msiedlarek = {
     email = "mikolaj@siedlarek.pl";
     github = "msiedlarek";
@@ -14659,12 +14627,6 @@
     github = "nova-r";
     githubId = 126072875;
     name = "nova madeline";
-  };
-  novenary = {
-    email = "streetwalkermc@gmail.com";
-    github = "9ary";
-    githubId = 1155030;
-    name = "novenary";
   };
   novoxd = {
     email = "radnovox@gmail.com";

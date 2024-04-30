@@ -32,7 +32,6 @@ with lib.maintainers; {
   acme = {
     members = [
       aanderse
-      andrew-d
       arianvp
       emily
       flokli
@@ -403,7 +402,6 @@ with lib.maintainers; {
       hedning
       jtojnar
       dasj19
-      amaxine
     ];
     githubTeams = [
       "gnome"
@@ -828,7 +826,6 @@ with lib.maintainers; {
 
   python = {
     members = [
-      fridh
       hexa
       jonringer
       tjni
