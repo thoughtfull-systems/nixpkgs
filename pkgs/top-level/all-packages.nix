@@ -3613,8 +3613,6 @@ with pkgs;
 
   codespell = callPackage ../development/tools/codespell { };
 
-  codux = callPackage ../applications/editors/codux { };
-
   conjure = callPackage ../applications/graphics/conjure { };
 
   coolreader = libsForQt5.callPackage ../applications/misc/coolreader { };
@@ -4282,8 +4280,6 @@ with pkgs;
 
   biliass = with python3.pkgs; toPythonApplication biliass;
 
-  bilibili = callPackage ../applications/video/bilibili { };
-
   bindfs = callPackage ../tools/filesystems/bindfs { };
 
   binwalk = with python3Packages; toPythonApplication binwalk;
@@ -4384,8 +4380,6 @@ with pkgs;
 
   bozohttpd = callPackage ../servers/http/bozohttpd { };
   bozohttpd-minimal = callPackage ../servers/http/bozohttpd { minimal = true; };
-
-  bpb = callPackage ../tools/security/bpb { inherit (darwin.apple_sdk.frameworks) Security; };
 
   brasero-original = lowPrio (callPackage ../tools/cd-dvd/brasero { });
 
@@ -5369,8 +5363,6 @@ with pkgs;
 
   fx-cast-bridge = callPackage ../tools/misc/fx-cast-bridge { };
 
-  fzf = callPackage ../tools/misc/fzf { };
-
   fzf-obc = callPackage ../shells/bash/fzf-obc { };
 
   fzf-zsh = callPackage ../shells/zsh/fzf-zsh { };
@@ -6277,8 +6269,6 @@ with pkgs;
   step-ca = callPackage ../tools/security/step-ca {
     inherit (darwin.apple_sdk.frameworks) PCSC;
   };
-
-  step-cli = callPackage ../tools/security/step-cli { };
 
   step-kms-plugin = callPackage ../tools/security/step-kms-plugin { };
 
@@ -8801,8 +8791,6 @@ with pkgs;
 
   gssdp-tools = callPackage ../development/libraries/gssdp/tools.nix { };
 
-  grype = callPackage ../tools/security/grype { };
-
   gt5 = callPackage ../tools/system/gt5 { };
 
   gtest = callPackage ../development/libraries/gtest { };
@@ -11014,17 +11002,18 @@ with pkgs;
   grocy = callPackage ../servers/grocy { };
 
   inherit (callPackages ../servers/nextcloud {})
-    nextcloud26 nextcloud27 nextcloud28;
+    nextcloud27 nextcloud28 nextcloud29;
 
-  nextcloud26Packages = callPackage ../servers/nextcloud/packages {
-    apps = lib.importJSON ../servers/nextcloud/packages/26.json;
-  };
   nextcloud27Packages = callPackage ../servers/nextcloud/packages {
     apps = lib.importJSON ../servers/nextcloud/packages/27.json;
   };
   nextcloud28Packages = callPackage ../servers/nextcloud/packages {
     apps = lib.importJSON ../servers/nextcloud/packages/28.json;
   };
+  nextcloud29Packages = callPackage ../servers/nextcloud/packages {
+    apps = lib.importJSON ../servers/nextcloud/packages/29.json;
+  };
+
 
   nextcloud-client = libsForQt5.callPackage ../applications/networking/nextcloud-client { };
 
@@ -13480,8 +13469,6 @@ with pkgs;
 
   systrayhelper = callPackage ../tools/misc/systrayhelper { };
 
-  syft = callPackage ../tools/admin/syft { };
-
   Sylk = callPackage ../applications/networking/Sylk { };
 
   privoxy = callPackage ../tools/networking/privoxy {
@@ -14414,10 +14401,7 @@ with pkgs;
 
   xl2tpd = callPackage ../tools/networking/xl2tpd { };
 
-  xlights = callPackage ../applications/misc/xlights/default.nix { };
-
   xe = callPackage ../tools/system/xe { };
-
 
   xray = callPackage ../tools/networking/xray { };
 
@@ -15334,6 +15318,8 @@ with pkgs;
 
   colmap = libsForQt5.callPackage ../applications/science/misc/colmap { inherit (config) cudaSupport; };
   colmapWithCuda = colmap.override { cudaSupport = true; };
+
+  opensplatWithCuda = opensplat.override { cudaSupport = true; };
 
   chickenPackages_4 = recurseIntoAttrs (callPackage ../development/compilers/chicken/4 { });
   chickenPackages_5 = recurseIntoAttrs (callPackage ../development/compilers/chicken/5 { });
@@ -16683,7 +16669,7 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) CoreFoundation Security;
   };
   cargo-clone = callPackage ../development/tools/rust/cargo-clone {
-    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
+    inherit (darwin.apple_sdk.frameworks) CoreServices Security SystemConfiguration;
   };
   cargo-codspeed = callPackage ../development/tools/rust/cargo-codspeed {
     rustPlatform = makeRustPlatform {
@@ -23824,7 +23810,8 @@ with pkgs;
   inherit (callPackages ../development/libraries/openssl { })
     openssl_1_1
     openssl_3
-    openssl_3_2;
+    openssl_3_2
+    openssl_3_3;
 
   opensubdiv = callPackage ../development/libraries/opensubdiv { };
 
@@ -24610,8 +24597,6 @@ with pkgs;
 
   stb = callPackage ../development/libraries/stb { };
 
-  stduuid = callPackage ../development/libraries/stduuid { };
-
   steghide = callPackage ../tools/graphics/steghide { };
 
   stegsolve = callPackage ../tools/graphics/stegsolve { };
@@ -24735,8 +24720,6 @@ with pkgs;
   tectonic-unwrapped = callPackage ../tools/typesetting/tectonic {
     harfbuzz = harfbuzzFull;
   };
-
-  tepl = callPackage ../development/libraries/tepl { };
 
   termbench-pro = callPackage ../development/libraries/termbench-pro { fmt = fmt_8; };
 
@@ -30717,8 +30700,6 @@ with pkgs;
 
   evilpixie = libsForQt5.callPackage ../applications/graphics/evilpixie { };
 
-  eww = callPackage ../applications/window-managers/eww { };
-
   exaile = callPackage ../applications/audio/exaile { };
 
   exercism = callPackage ../applications/misc/exercism { };
@@ -31393,8 +31374,6 @@ with pkgs;
   gnucash = callPackage ../applications/office/gnucash { };
 
   goffice = callPackage ../development/libraries/goffice { };
-
-  got = darwin.apple_sdk_11_0.callPackage ../applications/version-management/got { };
 
   gtkterm = callPackage ../tools/misc/gtkterm { };
 
@@ -32491,8 +32470,6 @@ with pkgs;
   kile-wl = callPackage ../applications/misc/kile-wl { };
 
   kiln = callPackage ../applications/misc/kiln { };
-
-  karmor = callPackage ../applications/networking/cluster/karmor { };
 
   kubernetes-code-generator = callPackage ../development/tools/kubernetes-code-generator { };
 
@@ -35902,8 +35879,6 @@ with pkgs;
 
   xplugd = callPackage ../tools/X11/xplugd { };
 
-  xpointerbarrier = callPackage ../tools/X11/xpointerbarrier { };
-
   xkb-switch = callPackage ../tools/X11/xkb-switch { };
 
   xkb-switch-i3 = callPackage ../tools/X11/xkb-switch-i3 { };
@@ -38818,7 +38793,9 @@ with pkgs;
     stdenv = gccStdenv;
   };
 
-  why3 = callPackage ../applications/science/logic/why3 { };
+  why3 = callPackage ../applications/science/logic/why3 {
+    coqPackages = coqPackages_8_18;
+  };
 
   wayback-machine-archiver = callPackage ../tools/misc/wayback-machine-archiver { };
 
@@ -40343,15 +40320,11 @@ with pkgs;
 
   terraform-backend-git = callPackage ../applications/networking/cluster/terraform-backend-git { };
 
-  terraform-compliance = python3Packages.callPackage ../applications/networking/cluster/terraform-compliance { };
-
   terraform-docs = callPackage ../applications/networking/cluster/terraform-docs { };
 
   terraform-inventory = callPackage ../applications/networking/cluster/terraform-inventory { };
 
   terraform-landscape = callPackage ../applications/networking/cluster/terraform-landscape { };
-
-  terragrunt = callPackage ../applications/networking/cluster/terragrunt { };
 
   tfautomv = callPackage ../applications/networking/cluster/tfautomv { };
 
