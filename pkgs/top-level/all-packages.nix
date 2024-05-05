@@ -1434,13 +1434,18 @@ with pkgs;
     name = "find-xml-catalogs-hook";
   } ../build-support/setup-hooks/find-xml-catalogs.sh;
 
-  wrapGAppsHook = callPackage ../build-support/setup-hooks/wrap-gapps-hook {
-    makeWrapper = makeBinaryWrapper;
+  wrapGAppsHook3 = wrapGAppsNoGuiHook.override {
+    isGraphical = true;
   };
 
-  wrapGAppsHook4 = wrapGAppsHook.override { gtk3 = __splicedPackages.gtk4; };
+  wrapGAppsHook4 = wrapGAppsNoGuiHook.override {
+    isGraphical = true;
+    gtk3 = __splicedPackages.gtk4;
+  };
 
-  wrapGAppsNoGuiHook = wrapGAppsHook.override { isGraphical = false; };
+  wrapGAppsNoGuiHook = callPackage ../build-support/setup-hooks/wrap-gapps-hook {
+    makeWrapper = makeBinaryWrapper;
+  };
 
   separateDebugInfo = makeSetupHook {
     name = "separate-debug-info-hook";
@@ -2781,6 +2786,10 @@ with pkgs;
 
   ripes = qt6Packages.callPackage ../applications/emulators/ripes { };
 
+  rmg-wayland = callPackage ../by-name/rm/rmg/package.nix {
+    withWayland = true;
+  };
+
   rpcemu = callPackage ../applications/emulators/rpcemu { };
 
   ruffle = callPackage ../applications/emulators/ruffle { };
@@ -3388,8 +3397,6 @@ with pkgs;
   };
 
   bitwise = callPackage ../tools/misc/bitwise { };
-
-  blanket = callPackage ../applications/audio/blanket { };
 
   blisp = darwin.apple_sdk_11_0.callPackage ../development/embedded/blisp {
     inherit (darwin.apple_sdk_11_0.frameworks) IOKit;
@@ -4426,8 +4433,6 @@ with pkgs;
 
   bundletool = callPackage ../development/tools/bundletool { };
 
-  bustle = haskellPackages.bustle;
-
   bwm_ng = callPackage ../tools/networking/bwm-ng { };
 
   bwbasic = callPackage ../development/interpreters/bwbasic { };
@@ -4772,8 +4777,6 @@ with pkgs;
 
   wob = callPackage ../tools/wayland/wob { };
 
-  wpaperd = callPackage ../tools/wayland/wpaperd { };
-
   wshowkeys = callPackage ../tools/wayland/wshowkeys { };
 
   wtype = callPackage ../tools/wayland/wtype { };
@@ -4790,9 +4793,7 @@ with pkgs;
 
   clipster = callPackage ../tools/misc/clipster { };
 
-  clockify = callPackage ../applications/office/clockify {
-    electron = electron_24;
-  };
+  clockify = callPackage ../applications/office/clockify { };
 
   contrast = callPackage ../applications/accessibility/contrast { };
 
@@ -4859,8 +4860,6 @@ with pkgs;
   csvtool = callPackage ../development/ocaml-modules/csv/csvtool.nix { };
 
   csv2latex = callPackage ../tools/misc/csv2latex { };
-
-  csvq = callPackage ../development/tools/csvq { };
 
   csvs-to-sqlite = callPackage ../tools/misc/csvs-to-sqlite { };
 
@@ -9258,10 +9257,7 @@ with pkgs;
 
   internetarchive = with python3Packages; toPythonApplication internetarchive;
 
-  invidious = callPackage ../servers/invidious {
-    # normally video.js is downloaded at build time
-    videojs = callPackage ../servers/invidious/videojs.nix { };
-  };
+  invidious = callPackage ../servers/invidious { };
 
   invoice2data  = callPackage ../tools/text/invoice2data  { };
 
@@ -13952,7 +13948,9 @@ with pkgs;
 
   tuptime = callPackage ../tools/system/tuptime { };
 
-  turbo = callPackage ../tools/misc/turbo {
+  turbo = callPackage ../tools/misc/turbo/wrapper.nix { };
+
+  turbo-unwrapped = callPackage ../tools/misc/turbo {
     inherit (darwin.apple_sdk_11_0.frameworks) IOKit CoreServices CoreFoundation;
   };
 
@@ -14617,9 +14615,9 @@ with pkgs;
   valum = callPackage ../development/web/valum { };
 
   inherit (callPackages ../servers/varnish { })
-    varnish60 varnish74;
+    varnish60 varnish74 varnish75;
   inherit (callPackages ../servers/varnish/packages.nix { })
-    varnish60Packages varnish74Packages;
+    varnish60Packages varnish74Packages varnish75Packages;
 
   varnishPackages = varnish74Packages;
   varnish = varnishPackages.varnish;
@@ -14765,7 +14763,9 @@ with pkgs;
 
   clipboard-jh = callPackage ../tools/misc/clipboard-jh { };
 
-  clipbuzz = callPackage ../tools/misc/clipbuzz { };
+  clipbuzz = callPackage ../tools/misc/clipbuzz {
+    zig = zig_0_12;
+  };
 
   xclip = callPackage ../tools/misc/xclip { };
 
@@ -16764,6 +16764,7 @@ with pkgs;
   };
   cargo-insta = callPackage ../development/tools/rust/cargo-insta { };
   cargo-lambda = callPackage ../development/tools/rust/cargo-lambda {
+    zig = zig_0_12;
     inherit (darwin.apple_sdk.frameworks) CoreServices Security;
   };
   cargo-limit = callPackage ../development/tools/rust/cargo-limit { };
@@ -16836,7 +16837,9 @@ with pkgs;
 
   cargo-public-api = callPackage ../development/tools/rust/cargo-public-api { };
 
-  cargo-zigbuild = callPackage ../development/tools/rust/cargo-zigbuild { };
+  cargo-zigbuild = callPackage ../development/tools/rust/cargo-zigbuild {
+    zig = zig_0_12;
+  };
 
   cauwugo = callPackage ../development/tools/rust/cauwugo { };
 
@@ -18642,15 +18645,7 @@ with pkgs;
 
   doclifter = callPackage ../development/tools/misc/doclifter { };
 
-  docutils = with python3Packages; toPythonApplication (
-    docutils.overridePythonAttrs (attrs: rec {
-      version = "0.20.1";
-      src = attrs.src.override {
-        inherit version;
-        hash = "sha256-8IpOJ2w6FYOobc4+NKuj/gTQK7ot1R7RYQYkToqSPjs=";
-      };
-    })
-  );
+  docutils = with python3Packages; toPythonApplication docutils;
 
   doctl = callPackage ../development/tools/doctl { };
 
@@ -19211,7 +19206,7 @@ with pkgs;
 
   modd = callPackage ../development/tools/modd { };
 
-  mold = callPackage ../development/tools/mold {
+  mold = callPackage ../by-name/mo/mold/package.nix {
     stdenv = if stdenv.isDarwin then overrideSDK stdenv "11.0" else stdenv;
     tbb = tbb_2021_11;
   };
@@ -20209,6 +20204,10 @@ with pkgs;
   azmq = callPackage ../development/libraries/azmq { };
 
   babl = callPackage ../development/libraries/babl { };
+
+  backlight-auto = callPackage ../by-name/ba/backlight-auto/package.nix {
+    zig = zig_0_11;
+  };
 
   backward-cpp = callPackage ../development/libraries/backward-cpp { };
 
@@ -21242,7 +21241,7 @@ with pkgs;
 
   gst_all_1 = recurseIntoAttrs(callPackage ../development/libraries/gstreamer {
     callPackage = newScope (gst_all_1 // { libav = pkgs.ffmpeg-headless; });
-    inherit (darwin.apple_sdk.frameworks) AudioToolbox AVFoundation Cocoa CoreFoundation CoreMedia CoreServices CoreVideo DiskArbitration Foundation IOKit MediaToolbox OpenGL Security VideoToolbox;
+    inherit (darwin.apple_sdk.frameworks) AudioToolbox AVFoundation Cocoa CoreFoundation CoreMedia CoreServices CoreVideo DiskArbitration Foundation IOKit MediaToolbox OpenGL Security SystemConfiguration VideoToolbox;
   });
 
   gusb = callPackage ../development/libraries/gusb { };
@@ -24331,14 +24330,6 @@ with pkgs;
     };
   });
 
-  SDL2_mixer = callPackage ../development/libraries/SDL2_mixer {
-    inherit (darwin.apple_sdk.frameworks) CoreServices AudioUnit AudioToolbox;
-  };
-  # SDL2_mixer_2_0 pinned for lzwolf
-  SDL2_mixer_2_0 = callPackage ../development/libraries/SDL2_mixer/2_0.nix { };
-
-  SDL2_net = callPackage ../development/libraries/SDL2_net { };
-
   SDL2_gfx = callPackage ../development/libraries/SDL2_gfx { };
 
   SDL2_sound = callPackage ../development/libraries/SDL2_sound {
@@ -24998,7 +24989,7 @@ with pkgs;
   whereami = callPackage ../development/libraries/whereami { };
 
   wildmidi = callPackage ../development/libraries/wildmidi {
-    inherit (darwin.apple_sdk.frameworks) OpenAL;
+    inherit (darwin.apple_sdk.frameworks) OpenAL CoreAudioKit;
   };
 
   wiredtiger = callPackage ../development/libraries/wiredtiger { };
@@ -25169,7 +25160,7 @@ with pkgs;
   zig_0_12 = darwin.apple_sdk_11_0.callPackage ../development/compilers/zig/0.12.nix {
     llvmPackages = llvmPackages_17;
   };
-  zig = zig_0_11;
+  zig = zig_0_12;
 
   zig-shell-completions = callPackage ../development/compilers/zig/shell-completions.nix { };
 
@@ -25631,8 +25622,6 @@ with pkgs;
   asterisk-module-sccp = callPackage ../servers/asterisk/sccp { };
 
   asterisk-ldap = lowPrio (asterisk.override { ldapSupport = true; });
-
-  sabnzbd = callPackage ../servers/sabnzbd { };
 
   baserow = callPackage ../servers/baserow { };
 
@@ -27172,9 +27161,7 @@ with pkgs;
 
   fatrace = callPackage ../os-specific/linux/fatrace { };
 
-  ffado = libsForQt5.callPackage ../os-specific/linux/ffado {
-    inherit (linuxPackages) kernel;
-  };
+  ffado = libsForQt5.callPackage ../os-specific/linux/ffado { };
   libffado = ffado;
 
   fbterm = callPackage ../os-specific/linux/fbterm { };
@@ -31274,8 +31261,6 @@ with pkgs;
 
   fractal = callPackage ../applications/networking/instant-messengers/fractal { };
 
-  fragments = callPackage ../applications/networking/p2p/fragments { };
-
   freedv = callPackage ../applications/radio/freedv {
     inherit (darwin.apple_sdk.frameworks) AppKit AVFoundation Cocoa CoreMedia;
     codec2 = codec2.override {
@@ -31318,10 +31303,19 @@ with pkgs;
 
   pulseaudio-module-xrdp = callPackage ../applications/networking/remote/xrdp/pulseaudio-module-xrdp { };
 
-  freerdp = callPackage ../applications/networking/remote/freerdp {
-    inherit (darwin.apple_sdk.frameworks) AudioToolbox AVFoundation Carbon Cocoa CoreMedia;
-    inherit (gst_all_1) gstreamer gst-plugins-base gst-plugins-good;
-  };
+  inherit
+    ({
+      freerdp = callPackage ../applications/networking/remote/freerdp {
+        inherit (darwin.apple_sdk.frameworks) AudioToolbox AVFoundation Carbon Cocoa CoreMedia;
+        inherit (gst_all_1) gstreamer gst-plugins-base gst-plugins-good;
+      };
+      freerdp3 = callPackage ../applications/networking/remote/freerdp/3.nix {
+        inherit (darwin.apple_sdk.frameworks) AudioToolbox AVFoundation Carbon Cocoa CoreMedia;
+      };
+    })
+    freerdp
+    freerdp3
+    ;
 
   freerdpUnstable = freerdp;
 
@@ -32822,8 +32816,6 @@ with pkgs;
 
   meld = callPackage ../applications/version-management/meld { };
 
-  meli = callPackage ../applications/networking/mailreaders/meli { };
-
   melmatcheq.lv2 = callPackage ../applications/audio/melmatcheq.lv2 { };
 
   melody = callPackage ../tools/misc/melody { };
@@ -33671,10 +33663,6 @@ with pkgs;
   opera = callPackage ../applications/networking/browsers/opera { };
 
   oranda = callPackage ../applications/misc/oranda { };
-
-  orca = python3Packages.callPackage ../applications/misc/orca {
-    inherit pkg-config;
-  };
 
   orca-c = callPackage ../applications/audio/orca-c { };
 
@@ -37187,8 +37175,6 @@ with pkgs;
 
   nudoku = callPackage ../games/nudoku { };
 
-  nxengine-evo = callPackage ../games/nxengine-evo { };
-
   oilrush = callPackage ../games/oilrush { };
 
   onscripter-en = callPackage ../games/onscripter-en { };
@@ -37809,6 +37795,7 @@ with pkgs;
     gnome43Extensions
     gnome44Extensions
     gnome45Extensions
+    gnome46Extensions
   ;
 
   gnome-connections = callPackage ../desktops/gnome/apps/gnome-connections { };
@@ -40082,7 +40069,7 @@ with pkgs;
   rfc-bibtex = callPackage ../tools/typesetting/rfc-bibtex { };
 
   pick-colour-picker = python3Packages.callPackage ../applications/graphics/pick-colour-picker {
-    inherit glib gtk3 gobject-introspection wrapGAppsHook;
+    inherit glib gtk3 gobject-introspection wrapGAppsHook3;
   };
 
   rpl = callPackage ../tools/text/rpl { };
