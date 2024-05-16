@@ -1024,6 +1024,8 @@ self: super: with self; {
 
   avro-python3 = callPackage ../development/python-modules/avro-python3 { };
 
+  avwx-engine = callPackage ../development/python-modules/avwx-engine { };
+
   aw-client = callPackage ../development/python-modules/aw-client { };
 
   aw-core = callPackage ../development/python-modules/aw-core { };
@@ -10597,6 +10599,8 @@ self: super: with self; {
 
   pyairvisual = callPackage ../development/python-modules/pyairvisual { };
 
+  pyais = callPackage ../development/python-modules/pyais { };
+
   pyalgotrade = callPackage ../development/python-modules/pyalgotrade { };
 
   pyamg = callPackage ../development/python-modules/pyamg { };
@@ -12821,8 +12825,6 @@ self: super: with self; {
   pyzerproc = callPackage ../development/python-modules/pyzerproc { };
 
   pyzmq = callPackage ../development/python-modules/pyzmq { };
-
-  pyzufall = callPackage ../development/python-modules/pyzufall { };
 
   qbittorrent-api = callPackage ../development/python-modules/qbittorrent-api { };
 
@@ -15424,6 +15426,8 @@ self: super: with self; {
   trove-classifiers = callPackage ../development/python-modules/trove-classifiers { };
 
   trueskill = callPackage ../development/python-modules/trueskill { };
+
+  truncnorm = callPackage ../development/python-modules/truncnorm { };
 
   trustme = callPackage ../development/python-modules/trustme { };
 
