@@ -6050,10 +6050,6 @@ with pkgs;
 
   pcp = callPackage ../tools/misc/pcp { };
 
-  persepolis = python3Packages.callPackage ../tools/networking/persepolis {
-    wrapQtAppsHook = qt5.wrapQtAppsHook;
-  };
-
   pev = callPackage ../development/tools/analysis/pev { };
 
   phd2 = callPackage ../applications/science/astronomy/phd2 { };
@@ -7621,8 +7617,6 @@ with pkgs;
   tsm-client-withGui = callPackage ../tools/backup/tsm-client { enableGui = true; };
 
   tracker = callPackage ../development/libraries/tracker { };
-
-  tracker-miners = callPackage ../development/libraries/tracker-miners { };
 
   tracy = callPackage ../development/tools/tracy { };
 
@@ -18262,14 +18256,6 @@ with pkgs;
 
   bpftools = callPackage ../os-specific/linux/bpftools { };
 
-  bcc = callPackage ../by-name/bc/bcc/package.nix {
-    llvmPackages = llvmPackages_16;
-  };
-
-  bpftrace = callPackage ../by-name/bp/bpftrace/package.nix {
-    llvmPackages = llvmPackages_16;
-  };
-
   bpm-tools = callPackage ../tools/audio/bpm-tools { };
 
   byacc = callPackage ../development/tools/parsing/byacc { };
@@ -27317,6 +27303,8 @@ with pkgs;
   linux_6_1_hardened = linuxKernel.kernels.linux_6_1_hardened;
   linuxPackages_6_6_hardened = linuxKernel.packages.linux_6_6_hardened;
   linux_6_6_hardened = linuxKernel.kernels.linux_6_6_hardened;
+  linuxPackages_6_8_hardened = linuxKernel.packages.linux_6_8_hardened;
+  linux_6_8_hardened = linuxKernel.kernels.linux_6_8_hardened;
 
   # GNU Linux-libre kernels
   linuxPackages-libre = linuxKernel.packages.linux_libre;
@@ -27831,7 +27819,9 @@ with pkgs;
 
   sdparm = callPackage ../os-specific/linux/sdparm { };
 
-  sdrangel = libsForQt5.callPackage ../applications/radio/sdrangel { };
+  sdrangel = libsForQt5.callPackage ../applications/radio/sdrangel {
+    stdenv = if stdenv.isDarwin then overrideSDK stdenv "11.0" else stdenv;
+  };
 
   setools = callPackage ../os-specific/linux/setools { };
 
@@ -31997,8 +31987,10 @@ with pkgs;
   };
 
   jabref = callPackage ../applications/office/jabref {
-    jdk = jdk21.override { enableJavaFX = true; };
-    gradle = gradle_8;
+    jdk = jdk.override {
+      enableJavaFX = true;
+      openjfx = openjfx22.override { withWebKit = true; };
+    };
   };
 
   jack_capture = callPackage ../applications/audio/jack-capture { };
@@ -33474,8 +33466,6 @@ with pkgs;
   openimageio = darwin.apple_sdk_11_0.callPackage ../development/libraries/openimageio {
     openexr = openexr_3;
   };
-
-  openjump = callPackage ../applications/misc/openjump { };
 
   open-music-kontrollers = lib.recurseIntoAttrs {
     eteroj = callPackage ../applications/audio/open-music-kontrollers/eteroj.nix { };
@@ -40646,7 +40636,7 @@ with pkgs;
 
   nitrokey-app = libsForQt5.callPackage ../tools/security/nitrokey-app { };
 
-  nitrokey-app2 = callPackage ../tools/security/nitrokey-app2 { };
+  nitrokey-app2 = qt6Packages.callPackage ../tools/security/nitrokey-app2 { };
 
   fpm2 = callPackage ../tools/security/fpm2 { };
 
