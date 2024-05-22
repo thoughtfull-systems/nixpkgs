@@ -10350,6 +10350,12 @@
     github = "k3a";
     githubId = 966992;
   };
+  k3yss = {
+    email = "rsi.dev17@gmail.com";
+    name = "Rishi Kumar";
+    github = "k3yss";
+    githubId = 96657880;
+  };
   k900 = {
     name = "Ilya K.";
     email = "me@0upti.me";
@@ -14490,6 +14496,12 @@
     githubId = 399535;
     name = "Niklas Hambüchen";
   };
+  nhnn = {
+    matrix = "@nhnn:nhnn.dev";
+    github = "thenhnn";
+    githubId = 162156666;
+    name = "nhnn";
+  };
   nhooyr = {
     email = "anmol@aubble.com";
     github = "nhooyr";
@@ -17587,6 +17599,12 @@
     name = "J. L. Bowden";
     github = "rosehobgoblin";
     githubId = 84164410;
+  };
+  roshaen = {
+    name = "Roshan Kumar";
+    email = "roshaen09@gmail.com";
+    github = "roshaen";
+    githubId = 58213083;
   };
   rossabaker = {
     name = "Ross A. Baker";

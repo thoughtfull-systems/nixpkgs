@@ -4683,8 +4683,6 @@ with pkgs;
 
   shotman = callPackage ../tools/wayland/shotman { };
 
-  slurp = callPackage ../tools/wayland/slurp { };
-
   sway-unwrapped = callPackage ../by-name/sw/sway-unwrapped/package.nix {
     wlroots = wlroots_0_17;
   };
@@ -4701,9 +4699,7 @@ with pkgs;
 
   wayland-utils = callPackage ../tools/wayland/wayland-utils { };
 
-  wayland-proxy-virtwl = callPackage ../tools/wayland/wayland-proxy-virtwl {
-    ocamlPackages = ocaml-ng.ocamlPackages_5_0;
-  };
+  wayland-proxy-virtwl = callPackage ../tools/wayland/wayland-proxy-virtwl { };
 
   waylogout = callPackage ../tools/wayland/waylogout { };
 
@@ -12898,8 +12894,6 @@ with pkgs;
 
   sigal = callPackage ../applications/misc/sigal { };
 
-  sigi = callPackage ../applications/misc/sigi { };
-
   sigil = libsForQt5.callPackage ../applications/editors/sigil { };
 
   signalbackup-tools = darwin.apple_sdk_11_0.callPackage
@@ -17180,7 +17174,7 @@ with pkgs;
   };
 
   inherit (beam.interpreters)
-    erlang erlang_27-rc3 erlang_26 erlang_25 erlang_24
+    erlang erlang_27 erlang_26 erlang_25 erlang_24
     erlang_odbc erlang_javac erlang_odbc_javac
     elixir elixir_1_16 elixir_1_15 elixir_1_14 elixir_1_13 elixir_1_12 elixir_1_11 elixir_1_10
     elixir-ls;
@@ -20900,7 +20894,7 @@ with pkgs;
 
   ghcid = haskellPackages.ghcid.bin;
 
-  gr-framework = libsForQt5.callPackage ../development/libraries/gr-framework {
+  gr-framework = callPackage ../by-name/gr/gr-framework/package.nix {
     stdenv = if stdenv.isDarwin then darwin.apple_sdk_11_0.stdenv else stdenv;
   };
 
@@ -24558,8 +24552,6 @@ with pkgs;
   svxlink = libsForQt5.callPackage ../applications/radio/svxlink { };
 
   swiftclient = with python3Packages; toPythonApplication python-swiftclient;
-
-  sword = callPackage ../development/libraries/sword { };
 
   biblesync = callPackage ../development/libraries/biblesync { };
 
@@ -28676,7 +28668,7 @@ with pkgs;
 
   kawkab-mono-font = callPackage ../data/fonts/kawkab-mono { };
 
-  kde-rounded-corners = libsForQt5.callPackage ../data/themes/kwin-decorations/kde-rounded-corners { };
+  kde-rounded-corners = kdePackages.callPackage ../data/themes/kwin-decorations/kde-rounded-corners { };
 
   khmeros = callPackage ../data/fonts/khmeros { };
 
@@ -36271,8 +36263,6 @@ with pkgs;
   augustus = callPackage ../games/augustus { };
 
   ballerburg = callPackage ../games/ballerburg { } ;
-
-  blockattack = callPackage ../games/blockattack { } ;
 
   colobot = callPackage ../games/colobot { };
 
