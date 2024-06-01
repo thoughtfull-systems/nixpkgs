@@ -1477,8 +1477,8 @@ let
         mktplcRef = {
           name = "elixir-ls";
           publisher = "JakeBecker";
-          version = "0.21.2";
-          hash = "sha256-UZthDY+O8rG+oz/jQyQKDPbdS+lVKiLyuicU+4SGivw=";
+          version = "0.21.3";
+          hash = "sha256-C6QFlqMIcefQhzBuVd3CnQHHaDdM1de7j+a/06wZ9FQ=";
         };
         meta = {
           changelog = "https://marketplace.visualstudio.com/items/JakeBecker.elixir-ls/changelog";
@@ -3094,7 +3094,7 @@ let
         };
         meta = {
           description = "Open any folder or repository inside a Docker container.";
-          downloadPage = "Use a container as your development environment";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers";
           homepage = "https://code.visualstudio.com/docs/devcontainers/containers";
           license = lib.licenses.unfree;
           maintainers = [ lib.maintainers.anthonyroussel ];
@@ -3291,6 +3291,21 @@ let
           homepage = "https://github.com/oderwat/vscode-indent-rainbow";
           license = lib.licenses.mit;
           maintainers = [ lib.maintainers.imgabe ];
+        };
+      };
+
+      phind.phind = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "phind";
+          publisher = "phind";
+          version = "0.22.2";
+          hash = "sha256-nN/7IVa4WaA5V39CHx0nrvWBmBNtISvAINTQzk02x1w=";
+        };
+        meta = {
+          description = "Using Phind AI service to provide answers based on the code context";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=phind.phind";
+          license = lib.licenses.unfree;
+          maintainers = [ lib.maintainers.onny ];
         };
       };
 
@@ -3913,8 +3928,8 @@ let
         mktplcRef = {
           name = "code-spell-checker";
           publisher = "streetsidesoftware";
-          version = "3.0.1";
-          hash = "sha256-KeYE6/yO2n3RHPjnJOnOyHsz4XW81y9AbkSC/I975kQ=";
+          version = "4.0.1";
+          hash = "sha256-Vxk+PpwwRV7dH8A9hI+DSzPMqH2l//VtrgUV+w8at4g=";
         };
         meta = {
           changelog = "https://marketplace.visualstudio.com/items/streetsidesoftware.code-spell-checker/changelog";
@@ -4730,6 +4745,23 @@ let
         meta = {
           license = lib.licenses.mit;
           maintainers = [ lib.maintainers.zeratax ];
+        };
+      };
+
+      xdebug.php-debug = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "php-debug";
+          publisher = "xdebug";
+          version = "1.34.0";
+          hash = "sha256-WAcXWCMmvuw7nkfGcOgmK+s+Nw6XpvNR4POXD85E/So=";
+        };
+        meta = {
+          description = "PHP Debug Adapter";
+          license = lib.licenses.mit;
+          homepage = "https://github.com/xdebug/vscode-php-debug";
+          changelog = "https://github.com/xdebug/vscode-php-debug/blob/main/CHANGELOG.md";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug";
+          maintainers = [ lib.maintainers.onny ];
         };
       };
 

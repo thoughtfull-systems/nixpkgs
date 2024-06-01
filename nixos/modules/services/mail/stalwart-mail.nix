@@ -7,28 +7,13 @@ let
   configFormat = pkgs.formats.toml { };
   configFile = configFormat.generate "stalwart-mail.toml" cfg.settings;
   dataDir = "/var/lib/stalwart-mail";
-  stalwartAtLeast = versionAtLeast cfg.package.version;
+  useLegacyStorage = versionOlder config.system.stateVersion "24.11";
 
 in {
   options.services.stalwart-mail = {
     enable = mkEnableOption "the Stalwart all-in-one email server";
 
-    package = mkOption {
-      type = types.package;
-      description = ''
-        Which package to use for the Stalwart mail server.
-
-        ::: {.note}
-        Upgrading from version 0.6.0 to version 0.7.0 or higher requires manual
-        intervention. See <https://github.com/stalwartlabs/mail-server/blob/main/UPGRADING.md>
-        for upgrade instructions.
-        :::
-      '';
-      default = pkgs.stalwart-mail_0_6;
-      defaultText = lib.literalExpression "pkgs.stalwart-mail_0_6";
-      example = lib.literalExpression "pkgs.stalwart-mail";
-      relatedPackages = [ "stalwart-mail_0_6" "stalwart-mail" ];
-    };
+    package = mkPackageOption pkgs "stalwart-mail" { };
 
     settings = mkOption {
       inherit (configFormat) type;
@@ -44,41 +29,61 @@ in {
 
   config = mkIf cfg.enable {
 
-    warnings = lib.optionals (!stalwartAtLeast "0.7.0") [
-      ''
-        Versions of stalwart-mail < 0.7.0 will get deprecated in NixOS 24.11.
-        Please set services.stalwart-mail.package to pkgs.stalwart-mail to
-        upgrade to the latest version.
-        Please note that upgrading to version >= 0.7 requires manual
-        intervention, see <https://github.com/stalwartlabs/mail-server/blob/main/UPGRADING.md>
-        for upgrade instructions.
-      ''
-    ];
-
     # Default config: all local
     services.stalwart-mail.settings = {
-      global.tracing.method = mkDefault "stdout";
-      global.tracing.level = mkDefault "info";
+      tracer.stdout = {
+        type = mkDefault "stdout";
+        level = mkDefault "info";
+        ansi = mkDefault false;  # no colour markers to journald
+        enable = mkDefault true;
+      };
       queue.path = mkDefault "${dataDir}/queue";
       report.path = mkDefault "${dataDir}/reports";
-      store.db.type = mkDefault "sqlite";
-      store.db.path = mkDefault "${dataDir}/data/index.sqlite3";
-      store.blob.type = mkDefault "fs";
-      store.blob.path = mkDefault "${dataDir}/data/blobs";
+      store = if useLegacyStorage then {
+        # structured data in SQLite, blobs on filesystem
+        db.type = mkDefault "sqlite";
+        db.path = mkDefault "${dataDir}/data/index.sqlite3";
+        fs.type = mkDefault "fs";
+        fs.path = mkDefault "${dataDir}/data/blobs";
+      } else {
+        # everything in RocksDB
+        db.type = mkDefault "rocksdb";
+        db.path = mkDefault "${dataDir}/db";
+        db.compression = mkDefault "lz4";
+      };
       storage.data = mkDefault "db";
       storage.fts = mkDefault "db";
       storage.lookup = mkDefault "db";
-      storage.blob = mkDefault "blob";
+      storage.blob = mkDefault (if useLegacyStorage then "fs" else "db");
+      directory.internal.type = mkDefault "internal";
+      directory.internal.store = mkDefault "db";
+      storage.directory = mkDefault "internal";
       resolver.type = mkDefault "system";
-      resolver.public-suffix = mkDefault ["https://publicsuffix.org/list/public_suffix_list.dat"];
+      resolver.public-suffix = lib.mkDefault [
+        "file://${pkgs.publicsuffix-list}/share/publicsuffix/public_suffix_list.dat"
+      ];
+    };
+
+    # This service stores a potentially large amount of data.
+    # Running it as a dynamic user would force chown to be run everytime the
+    # service is restarted on a potentially large number of files.
+    # That would cause unnecessary and unwanted delays.
+    users = {
+      groups.stalwart-mail = { };
+      users.stalwart-mail = {
+        isSystemUser = true;
+        group = "stalwart-mail";
+      };
     };
 
     systemd.services.stalwart-mail = {
       wantedBy = [ "multi-user.target" ];
       after = [ "local-fs.target" "network.target" ];
 
-      preStart = ''
+      preStart = if useLegacyStorage then ''
         mkdir -p ${dataDir}/{queue,reports,data/blobs}
+      '' else ''
+        mkdir -p ${dataDir}/{queue,reports,db}
       '';
 
       serviceConfig = {
@@ -96,8 +101,8 @@ in {
         StandardError = "journal";
         SyslogIdentifier = "stalwart-mail";
 
-        DynamicUser = true;
         User = "stalwart-mail";
+        Group = "stalwart-mail";
         StateDirectory = "stalwart-mail";
 
         # Bind standard privileged ports
@@ -136,6 +141,6 @@ in {
   };
 
   meta = {
-    maintainers = with maintainers; [ happysalada pacien ];
+    maintainers = with maintainers; [ happysalada pacien onny ];
   };
 }

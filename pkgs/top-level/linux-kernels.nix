@@ -213,7 +213,6 @@ in {
         kernelPatches = [
           kernelPatches.bridge_stp_helper
           kernelPatches.request_key_helper
-          kernelPatches.rust_1_77-6_9
         ];
       };
       latest = packageAliases.linux_latest.kernel;
@@ -270,6 +269,7 @@ in {
     linux_6_1_hardened = hardenedKernelFor kernels.linux_6_1 { };
     linux_6_6_hardened = hardenedKernelFor kernels.linux_6_6 { };
     linux_6_8_hardened = hardenedKernelFor kernels.linux_6_8 { };
+    linux_6_9_hardened = hardenedKernelFor kernels.linux_6_9 { };
 
   } // lib.optionalAttrs config.allowAliases {
     linux_4_9 = throw "linux 4.9 was removed because it will reach its end of life within 22.11";
@@ -416,6 +416,7 @@ in {
     nvidia_x11_legacy340   = nvidiaPackages.legacy_340;
     nvidia_x11_legacy390   = nvidiaPackages.legacy_390;
     nvidia_x11_legacy470   = nvidiaPackages.legacy_470;
+    nvidia_x11_legacy535   = nvidiaPackages.legacy_535;
     nvidia_x11_production  = nvidiaPackages.production;
     nvidia_x11_vulkan_beta = nvidiaPackages.vulkan_beta;
     nvidia_dc              = nvidiaPackages.dc;
@@ -659,6 +660,7 @@ in {
     linux_6_1_hardened = recurseIntoAttrs (packagesFor kernels.linux_6_1_hardened);
     linux_6_6_hardened = recurseIntoAttrs (packagesFor kernels.linux_6_6_hardened);
     linux_6_8_hardened = recurseIntoAttrs (packagesFor kernels.linux_6_8_hardened);
+    linux_6_9_hardened = recurseIntoAttrs (packagesFor kernels.linux_6_9_hardened);
 
     linux_zen = recurseIntoAttrs (packagesFor kernels.linux_zen);
     linux_lqx = recurseIntoAttrs (packagesFor kernels.linux_lqx);
