@@ -11585,7 +11585,7 @@
     name = "Daniel Kuehn";
   };
   lelgenio = {
-    email = "lelgenio@disroot.org";
+    email = "lelgenio@lelgenio.com";
     github = "lelgenio";
     githubId = 31388299;
     name = "Leonardo Eugênio";
@@ -12824,6 +12824,12 @@
     github = "mattchrist";
     githubId = 952712;
     name = "Matt Christ";
+  };
+  matteopacini = {
+    email = "m@matteopacini.me";
+    github = "matteo-pacini";
+    githubId = 3139724;
+    name = "Matteo Pacini";
   };
   matthewbauer = {
     email = "mjbauer95@gmail.com";
@@ -15211,6 +15217,12 @@
     github = "nzhang-zh";
     githubId = 30825096;
     name = "Ning Zhang";
+  };
+  o0th = {
+    email = "o0th@pm.me";
+    name = "Sabato Luca Guadagno";
+    github = "o0th";
+    githubId = 22490354;
   };
   oaksoaj = {
     email = "oaksoaj@riseup.net";
