@@ -429,8 +429,6 @@ with pkgs;
 
   catppuccin-papirus-folders = callPackage ../data/icons/catppuccin-papirus-folders { };
 
-  catppuccin-plymouth = callPackage ../data/themes/catppuccin-plymouth { };
-
   btdu = callPackage ../tools/misc/btdu { };
 
   ccal = callPackage ../tools/misc/ccal { };
@@ -6121,8 +6119,6 @@ with pkgs;
   reg = callPackage ../tools/virtualization/reg { };
 
   rex = callPackage ../tools/system/rex { };
-
-  river = callPackage ../applications/window-managers/river { };
 
   rivercarro = callPackage ../applications/misc/rivercarro { };
 
@@ -28252,8 +28248,6 @@ with pkgs;
 
   ananicy = callPackage ../misc/ananicy { };
 
-  ananicy-cpp = callPackage ../misc/ananicy-cpp { };
-
   andagii = callPackage ../data/fonts/andagii { };
 
   andika = callPackage ../data/fonts/andika { };
@@ -31764,8 +31758,6 @@ with pkgs;
   rootbar = callPackage ../applications/misc/rootbar { };
 
   waycorner = callPackage ../applications/misc/waycorner { };
-
-  waylock = callPackage ../applications/misc/waylock { };
 
   wayshot = callPackage ../tools/misc/wayshot { };
 
