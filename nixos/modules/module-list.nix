@@ -779,6 +779,7 @@
   ./services/misc/paperless.nix
   ./services/misc/parsoid.nix
   ./services/misc/persistent-evdev.nix
+  ./services/misc/pghero.nix
   ./services/misc/pinnwand.nix
   ./services/misc/plex.nix
   ./services/misc/plikd.nix
@@ -793,6 +794,7 @@
   ./services/misc/radarr.nix
   ./services/misc/readarr.nix
   ./services/misc/redmine.nix
+  ./services/misc/renovate.nix
   ./services/misc/ripple-data-api.nix
   ./services/misc/rippled.nix
   ./services/misc/rmfakecloud.nix
@@ -835,6 +837,7 @@
   ./services/misc/zoneminder.nix
   ./services/misc/zookeeper.nix
   ./services/monitoring/alerta.nix
+  ./services/monitoring/alloy.nix
   ./services/monitoring/apcupsd.nix
   ./services/monitoring/arbtt.nix
   ./services/monitoring/below.nix
