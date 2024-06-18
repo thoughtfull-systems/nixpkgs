@@ -7154,6 +7154,13 @@
     githubId = 77672306;
     name = "Florian Agbuya";
   };
+  fsnkty = {
+    name = "fsnkty";
+    github = "fsnkty";
+    githubId = 153512689;
+    email = "fsnkty@shimeji.cafe";
+    matrix = "@nuko:shimeji.cafe";
+  };
   fstamour = {
     email = "fr.st-amour@gmail.com";
     github = "fstamour";
@@ -12590,6 +12597,15 @@
     githubId = 2321672;
     name = "Makise Kurisu";
   };
+  Makuru = {
+    email = "makuru@makuru.org";
+    github = "makuru-dd";
+    githubId = 58048293;
+    name = "Makuru";
+    keys = [{
+      fingerprint = "5B22 7123 362F DEF1 8F79  BF2B 4792 3A0F EEB5 51C7";
+    }];
+  };
   malbarbo = {
     email = "malbarbo@gmail.com";
     github = "malbarbo";
@@ -15229,13 +15245,6 @@
     matrix = "@numkem:matrix.org";
     github = "numkem";
     githubId = 332423;
-  };
-  nu-nu-ko = {
-    email = "nuko@shimeji.cafe";
-    matrix = "@nuko:shimeji.cafe";
-    github = "nu-nu-ko";
-    githubId = 153512689;
-    name = "nuko";
   };
   nviets = {
     email = "nathan.g.viets@gmail.com";
@@ -21138,6 +21147,12 @@
     matrix = "@tpw_rules:matrix.org";
     github = "tpwrules";
     githubId = 208010;
+  };
+  traverseda = {
+    email = "traverse.da@gmail.com";
+    github = "traverseda";
+    githubId = 2125828;
+    name = "Alex Davies";
   };
   travisbhartwell = {
     email = "nafai@travishartwell.net";
