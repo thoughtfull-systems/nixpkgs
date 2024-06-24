@@ -2,7 +2,7 @@
   lib,
   stdenv,
   stdenvNoCC,
-  stdenvNoLibc,
+  crossLibcStdenv,
   runCommand,
   rsync,
   source,
@@ -19,7 +19,7 @@ lib.makeOverridable (
       if attrs.noCC or false then
         stdenvNoCC
       else if attrs.noLibc or false then
-        stdenvNoLibc
+        crossLibcStdenv
       else
         stdenv;
   in
@@ -86,7 +86,7 @@ lib.makeOverridable (
       # TODO should CC wrapper set this?
       CPP = "${stdenv'.cc.targetPrefix}cpp";
 
-      # Since STRIP below is the flag
+      # Since STRIP in `makeFlags` has to be a flag, not the binary itself
       STRIPBIN = "${stdenv'.cc.bintools.targetPrefix}strip";
     }
     // lib.optionalAttrs (attrs.headersOnly or false) {
