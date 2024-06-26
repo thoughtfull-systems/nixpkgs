@@ -3792,7 +3792,7 @@ self: super: with self; {
 
   eggdeps = callPackage ../development/python-modules/eggdeps { };
 
-  eigenpy = toPythonModule (callPackage ../development/python-modules/eigenpy { });
+  eigenpy = callPackage ../development/python-modules/eigenpy { };
 
   einops = callPackage ../development/python-modules/einops { };
 
@@ -4082,6 +4082,11 @@ self: super: with self; {
   ezdxf = callPackage ../development/python-modules/ezdxf { };
 
   ezyrb = callPackage ../development/python-modules/ezyrb { };
+
+  f3d = toPythonModule (pkgs.f3d.override {
+    withPythonBinding = true;
+    python3Packages = self;
+  });
 
   f5-icontrol-rest = callPackage ../development/python-modules/f5-icontrol-rest { };
 
@@ -5366,6 +5371,8 @@ self: super: with self; {
   hatch-vcs = callPackage ../development/python-modules/hatch-vcs { };
 
   hatch-nodejs-version = callPackage ../development/python-modules/hatch-nodejs-version { };
+
+  hatch-regex-commit = callPackage ../development/python-modules/hatch-regex-commit { };
 
   hatch-requirements-txt = callPackage ../development/python-modules/hatch-requirements-txt { };
 
@@ -10089,6 +10096,8 @@ self: super: with self; {
 
   pylddwrap = callPackage ../development/python-modules/pylddwrap { };
 
+  pyloadapi = callPackage ../development/python-modules/pyloadapi { };
+
   pyngo = callPackage ../development/python-modules/pyngo { };
 
   pyngrok = callPackage ../development/python-modules/pyngrok { };
@@ -13393,6 +13402,8 @@ self: super: with self; {
   rfc6555 = callPackage ../development/python-modules/rfc6555 { };
 
   rfc7464 = callPackage ../development/python-modules/rfc7464 { };
+
+  rfc8785 = callPackage ../development/python-modules/rfc8785 { };
 
   rfcat = callPackage ../development/python-modules/rfcat { };
 

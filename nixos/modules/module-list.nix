@@ -477,6 +477,7 @@
   ./services/desktops/bamf.nix
   ./services/desktops/blueman.nix
   ./services/desktops/cpupower-gui.nix
+  ./services/desktops/deepin/deepin-anything.nix
   ./services/desktops/deepin/dde-api.nix
   ./services/desktops/deepin/app-services.nix
   ./services/desktops/deepin/dde-daemon.nix
@@ -880,6 +881,7 @@
   ./services/monitoring/osquery.nix
   ./services/monitoring/parsedmarc.nix
   ./services/monitoring/prometheus/alertmanager-irc-relay.nix
+  ./services/monitoring/prometheus/alertmanager-webhook-logger.nix
   ./services/monitoring/prometheus/alertmanager.nix
   ./services/monitoring/prometheus/default.nix
   ./services/monitoring/prometheus/exporters.nix
