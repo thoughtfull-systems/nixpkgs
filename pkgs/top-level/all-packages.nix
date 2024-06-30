@@ -587,8 +587,6 @@ with pkgs;
 
   dt = callPackage ../tools/text/dt { };
 
-  dtv-scan-tables = callPackage ../data/misc/dtv-scan-tables { };
-
   dufs = callPackage ../servers/http/dufs { };
 
   dynein = callPackage ../development/tools/database/dynein {
@@ -3613,6 +3611,8 @@ with pkgs;
 
   cyclonedx-python = callPackage ../tools/misc/cyclonedx-python { };
 
+  dazel = python3Packages.callPackage ../development/tools/dazel { };
+
   dcap = callPackage ../tools/networking/dcap { };
 
   deltachat-cursed = callPackage ../applications/networking/instant-messengers/deltachat-cursed { };
@@ -5153,6 +5153,10 @@ with pkgs;
 
   fdroidserver = python3Packages.callPackage ../development/tools/fdroidserver { };
 
+  fedimint = callPackage ../by-name/fe/fedimint/package.nix {
+    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
+  };
+
   fetch-scm = callPackage ../tools/misc/fetch-scm { };
 
   fiano = callPackage ../tools/misc/fiano { };
@@ -5482,6 +5486,10 @@ with pkgs;
 
   hypr = callPackage ../applications/window-managers/hyprwm/hypr {
     cairo = cairo.override { xcbSupport = true; };  };
+
+  hyprland = callPackage ../by-name/hy/hyprland/package.nix {
+    libliftoff = libliftoff_0_4;
+  };
 
   hyprland-autoname-workspaces = callPackage ../applications/misc/hyprland-autoname-workspaces { };
 
@@ -6281,8 +6289,6 @@ with pkgs;
   mcrypt = callPackage ../tools/misc/mcrypt { };
 
   mongoaudit = callPackage ../tools/security/mongoaudit { };
-
-  mongodb-compass = callPackage ../tools/misc/mongodb-compass { };
 
   mongodb-tools = callPackage ../tools/misc/mongodb-tools { };
 
@@ -7467,8 +7473,6 @@ with pkgs;
   eid-mw = callPackage ../tools/security/eid-mw {
     autoreconfHook = buildPackages.autoreconfHook269;
   };
-
-  emote = callPackage ../tools/inputmethods/emote { };
 
   engauge-digitizer = libsForQt5.callPackage ../applications/science/math/engauge-digitizer { };
 
@@ -10206,10 +10210,6 @@ with pkgs;
 
   libnids = callPackage ../tools/networking/libnids { };
 
-  rtorrent = callPackage ../applications/networking/p2p/rakshasa-rtorrent {
-    libtorrent = callPackage ../applications/networking/p2p/rakshasa-rtorrent/libtorrent.nix { };
-  };
-
   jesec-rtorrent = callPackage ../applications/networking/p2p/jesec-rtorrent {
     libtorrent = callPackage ../applications/networking/p2p/jesec-rtorrent/libtorrent.nix { };
   };
@@ -10826,11 +10826,8 @@ with pkgs;
   grocy = callPackage ../servers/grocy { };
 
   inherit (callPackages ../servers/nextcloud {})
-    nextcloud27 nextcloud28 nextcloud29;
+    nextcloud28 nextcloud29;
 
-  nextcloud27Packages = callPackage ../servers/nextcloud/packages {
-    apps = lib.importJSON ../servers/nextcloud/packages/27.json;
-  };
   nextcloud28Packages = callPackage ../servers/nextcloud/packages {
     apps = lib.importJSON ../servers/nextcloud/packages/28.json;
   };
@@ -11010,8 +11007,6 @@ with pkgs;
   noise-repellent = callPackage ../applications/audio/noise-repellent { };
 
   noisetorch = callPackage ../applications/audio/noisetorch { };
-
-  notary = callPackage ../tools/security/notary { };
 
   notation = callPackage ../tools/security/notation { };
 
@@ -11472,8 +11467,6 @@ with pkgs;
   pagmo2 = callPackage ../development/libraries/pagmo2 { };
 
   paho-mqtt-c = callPackage ../development/libraries/paho-mqtt-c { };
-
-  paho-mqtt-cpp = callPackage ../development/libraries/paho-mqtt-cpp { };
 
   pakcs = callPackage ../development/compilers/pakcs {
     # Doesn't compile with GHC 9.0 due to whitespace syntax changes
@@ -12262,8 +12255,6 @@ with pkgs;
   redir = callPackage ../tools/networking/redir { };
 
   redpanda-client = callPackage ../servers/redpanda { };
-
-  redpanda-server = redpanda-client.server;
 
   redsocks = callPackage ../tools/networking/redsocks { };
 
@@ -16178,7 +16169,7 @@ with pkgs;
       else if platform.isLinux then 17
       else if platform.isWasm then 16
       # For unknown systems, assume the latest version is required.
-      else 17;
+      else 18;
     # We take the "max of the mins". Why? Since those are lower bounds of the
     # supported version set, this is like intersecting those sets and then
     # taking the min bound of that.
@@ -16362,11 +16353,14 @@ with pkgs;
 
   ocaml-crunch = ocamlPackages.crunch.bin;
 
+  inherit (ocaml-ng.ocamlPackages_4_14)
+    ocamlformat_0_19_0 ocamlformat_0_20_0 ocamlformat_0_20_1 ocamlformat_0_21_0
+    ocamlformat_0_22_4;
+
   inherit (ocamlPackages)
     ocamlformat # latest version
-    ocamlformat_0_19_0 ocamlformat_0_20_0 ocamlformat_0_20_1 ocamlformat_0_21_0
-    ocamlformat_0_22_4 ocamlformat_0_23_0 ocamlformat_0_24_1 ocamlformat_0_25_1
-    ocamlformat_0_26_0 ocamlformat_0_26_1 ocamlformat_0_26_2;
+    ocamlformat_0_23_0 ocamlformat_0_24_1 ocamlformat_0_25_1 ocamlformat_0_26_0
+    ocamlformat_0_26_1 ocamlformat_0_26_2;
 
   inherit (ocamlPackages) odig;
 
@@ -17866,14 +17860,11 @@ with pkgs;
   apacheAnt = callPackage ../development/tools/build-managers/apache-ant { };
   ant = apacheAnt;
 
-  apacheKafka = apacheKafka_3_5;
-  apacheKafka_2_8 = callPackage ../servers/apache-kafka { majorVersion = "2.8"; };
-  apacheKafka_3_0 = callPackage ../servers/apache-kafka { majorVersion = "3.0"; };
-  apacheKafka_3_1 = callPackage ../servers/apache-kafka { majorVersion = "3.1"; };
-  apacheKafka_3_2 = callPackage ../servers/apache-kafka { majorVersion = "3.2"; };
-  apacheKafka_3_3 = callPackage ../servers/apache-kafka { majorVersion = "3.3"; };
-  apacheKafka_3_4 = callPackage ../servers/apache-kafka { majorVersion = "3.4"; };
-  apacheKafka_3_5 = callPackage ../servers/apache-kafka { majorVersion = "3.5"; };
+  inherit (callPackages ../servers/apache-kafka { })
+    apacheKafka_3_6
+    apacheKafka_3_7;
+
+  apacheKafka = apacheKafka_3_7;
 
   apng2gif = callPackage ../tools/graphics/apng2gif { };
 
@@ -18324,8 +18315,6 @@ with pkgs;
   cflow = callPackage ../development/tools/misc/cflow { };
 
   cov-build = callPackage ../development/tools/analysis/cov-build { };
-
-  cppcheck = callPackage ../development/tools/analysis/cppcheck { };
 
   cpplint = callPackage ../development/tools/analysis/cpplint { };
 
@@ -19785,6 +19774,10 @@ with pkgs;
 
   yodl = callPackage ../development/tools/misc/yodl { };
 
+  yourkit-java = callPackage ../by-name/yo/yourkit-java/package.nix {
+    jre = jdk17;
+  };
+
   yq = python3.pkgs.toPythonApplication python3.pkgs.yq;
 
   yq-go = callPackage ../development/tools/yq-go { };
@@ -19817,19 +19810,7 @@ with pkgs;
       then overrideSDK stdenv { darwinMinVersion = "10.13"; }
       else stdenv;
   };
-  abseil-cpp_202206 = callPackage ../development/libraries/abseil-cpp/202206.nix {
-    # If abseil-cpp doesn’t have a deployment target of 10.13+, arrow-cpp crashes in libgrpc.dylib.
-    stdenv = if stdenv.isDarwin && stdenv.isx86_64
-      then overrideSDK stdenv { darwinMinVersion = "10.13"; }
-      else stdenv;
-  };
   abseil-cpp_202301 = callPackage ../development/libraries/abseil-cpp/202301.nix {
-    # If abseil-cpp doesn’t have a deployment target of 10.13+, arrow-cpp crashes in libgrpc.dylib.
-    stdenv = if stdenv.isDarwin && stdenv.isx86_64
-      then overrideSDK stdenv { darwinMinVersion = "10.13"; }
-      else stdenv;
-  };
-  abseil-cpp_202308 = callPackage ../development/libraries/abseil-cpp/202308.nix {
     # If abseil-cpp doesn’t have a deployment target of 10.13+, arrow-cpp crashes in libgrpc.dylib.
     stdenv = if stdenv.isDarwin && stdenv.isx86_64
       then overrideSDK stdenv { darwinMinVersion = "10.13"; }
@@ -21332,13 +21313,11 @@ with pkgs;
 
   icu-versions = callPackages ../development/libraries/icu { };
   inherit (icu-versions)
-    icu58
     icu60
     icu63
     icu64
     icu66
     icu67
-    icu68
     icu69
     icu70
     icu71
@@ -22225,7 +22204,8 @@ with pkgs;
 
   liblc3 = callPackage ../development/libraries/liblc3 { };
 
-  libliftoff = callPackage ../development/libraries/libliftoff { };
+  inherit (callPackages ../development/libraries/libliftoff { }) libliftoff_0_4 libliftoff_0_5;
+  libliftoff = libliftoff_0_5;
 
   liblqr1 = callPackage ../development/libraries/liblqr-1 {
     inherit (darwin.apple_sdk.frameworks) Carbon AppKit;
@@ -25065,6 +25045,17 @@ with pkgs;
     go = buildPackages.go_1_22;
   };
 
+  # requires a newer Apple SDK
+  go_1_23 = darwin.apple_sdk_11_0.callPackage ../development/compilers/go/1.23.nix {
+    inherit (darwin.apple_sdk_11_0.frameworks) Foundation Security;
+  };
+  buildGo123Module = darwin.apple_sdk_11_0.callPackage ../build-support/go/module.nix {
+    go = buildPackages.go_1_23;
+  };
+  buildGo123Package = darwin.apple_sdk_11_0.callPackage ../build-support/go/package.nix {
+    go = buildPackages.go_1_23;
+  };
+
   leaps = callPackage ../development/tools/leaps { };
 
   ### DEVELOPMENT / HARE
@@ -25098,7 +25089,11 @@ with pkgs;
 
   # Armed Bear Common Lisp
   abcl = wrapLisp {
-    pkg = callPackage ../development/compilers/abcl { };
+    pkg = callPackage ../development/compilers/abcl {
+      # https://armedbear.common-lisp.dev/ lists OpenJDK 17 as the highest
+      # supported JDK.
+      jdk = openjdk17;
+    };
     faslExt = "abcl";
   };
 
@@ -26233,7 +26228,6 @@ with pkgs;
   prometheus-lnd-exporter = callPackage ../servers/monitoring/prometheus/lnd-exporter.nix { };
   prometheus-mail-exporter = callPackage ../servers/monitoring/prometheus/mail-exporter.nix { };
   prometheus-mikrotik-exporter = callPackage ../servers/monitoring/prometheus/mikrotik-exporter.nix { };
-  prometheus-minio-exporter = callPackage ../servers/monitoring/prometheus/minio-exporter { };
   prometheus-modemmanager-exporter = callPackage ../servers/monitoring/prometheus/modemmanager-exporter.nix { };
   prometheus-mongodb-exporter = callPackage ../servers/monitoring/prometheus/mongodb-exporter.nix { };
   prometheus-mysqld-exporter = callPackage ../servers/monitoring/prometheus/mysqld-exporter.nix { };
@@ -32787,7 +32781,7 @@ with pkgs;
 
   mailspring = callPackage ../applications/networking/mailreaders/mailspring { };
 
-  memento = libsForQt5.callPackage ../applications/video/memento { };
+  memento = qt6Packages.callPackage ../applications/video/memento { };
 
   mm = callPackage ../applications/networking/instant-messengers/mm { };
 
@@ -36678,8 +36672,6 @@ with pkgs;
 
   left4gore-bin = callPackage ../games/left4gore { };
 
-  lgogdownloader = libsForQt5.callPackage ../games/lgogdownloader { };
-
   liberal-crime-squad = callPackage ../games/liberal-crime-squad { };
 
   liberation-circuit = callPackage ../games/liberation-circuit { };
@@ -38029,7 +38021,7 @@ with pkgs;
     protobuf = protobuf_21;
     # or-tools builds with -std=c++20, so abseil-cpp must
     # also be built that way
-    abseil-cpp = abseil-cpp_202206.override {
+    abseil-cpp = abseil-cpp.override {
       static = true;
       cxxStandard = "20";
     };

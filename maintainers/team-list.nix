@@ -380,6 +380,7 @@ with lib.maintainers;
   golang = {
     members = [
       kalbasit
+      katexochen
       mic92
       zowoq
       qbit
@@ -460,7 +461,6 @@ with lib.maintainers;
     members = [
       cleverca22
       disassembler
-      jonringer
       manveru
       nrdxp
     ];
@@ -794,7 +794,6 @@ with lib.maintainers;
   python = {
     members = [
       hexa
-      jonringer
       natsukium
     ];
     scope = "Maintain the Python interpreter and related packages.";
@@ -913,7 +912,6 @@ with lib.maintainers;
     members = [
       atemu
       eclairevoyant
-      jonringer
       k900
       mkg20001
     ];
@@ -945,7 +943,6 @@ with lib.maintainers;
   vim = {
     members = [
       figsoda
-      jonringer
       softinio
       teto
     ];
