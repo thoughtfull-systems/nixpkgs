@@ -695,6 +695,7 @@ mapAliases ({
   libcxxabi = throw "'libcxxabi' was merged into 'libcxx'"; # Converted to throw 2024-03-08
   libdwarf_20210528 = throw "'libdwarf_20210528' has been removed because it is not used in nixpkgs, move to libdwarf"; # Added 2024-03-23
   libgme = game-music-emu; # Added 2022-07-20
+  libgnome-keyring3 = libgnome-keyring; # Added 2024-06-22
   libgpgerror = libgpg-error; # Added 2021-09-04
   libheimdal = heimdal; # Added 2022-11-18
   libintlOrEmpty = throw "'libintlOrEmpty' has been replaced by gettext"; # Converted to throw 2023-09-10
@@ -921,18 +922,18 @@ mapAliases ({
   netbox_3_3 = throw "netbox 3.3 series has been removed as it was EOL"; # Added 2023-09-02
   netbox_3_5 = throw "netbox 3.5 series has been removed as it was EOL"; # Added 2024-01-22
   netease-music-tui = throw "netease-music-tui has been removed due to unmaintained by upstream and broken functionality"; # Added 2024-03-03
-  nextcloud26 = throw ''
-    Nextcloud v26 has been removed from `nixpkgs` as the support for is dropped
-    by upstream in 2024-04. Please upgrade to at least Nextcloud v27 by declaring
+  nextcloud27 = throw ''
+    Nextcloud v27 has been removed from `nixpkgs` as the support for is dropped
+    by upstream in 2024-06. Please upgrade to at least Nextcloud v28 by declaring
 
-        services.nextcloud.package = pkgs.nextcloud27;
+        services.nextcloud.package = pkgs.nextcloud28;
 
     in your NixOS config.
 
-    WARNING: if you were on Nextcloud 25 you have to upgrade to Nextcloud 26
-    first on 23.11 because Nextcloud doesn't support upgrades across multiple major versions!
-  ''; # Added 2023-10-13
-  nextcloud25Packages = throw "Nextcloud25 is EOL!"; # Added 2023-10-13
+    WARNING: if you were on Nextcloud 26 you have to upgrade to Nextcloud 27
+    first on 24.05 because Nextcloud doesn't support upgrades across multiple major versions!
+  ''; # Added 2024-06-25
+  nextcloud27Packages = throw "Nextcloud27 is EOL!"; # Added 2024-06-25
   nagiosPluginsOfficial = monitoring-plugins;
   neochat = libsForQt5.kdeGear.neochat; # added 2022-05-10
   neoload = throw "'neoload' has been removed as it is broken and unmaintained"; # Added 2024-03-02
@@ -1355,6 +1356,7 @@ mapAliases ({
   transmission = lib.warn (transmission3Warning {}) transmission_3; # Added 2024-06-10
   transmission-gtk = lib.warn (transmission3Warning {suffix = "-gtk";}) transmission_3-gtk; # Added 2024-06-10
   transmission-qt = lib.warn (transmission3Warning {suffix = "-qt";}) transmission_3-qt; # Added 2024-06-10
+  treefmt = treefmt2; # 2024-06-28
   libtransmission = lib.warn (transmission3Warning {prefix = "lib";}) libtransmission_3; # Added 2024-06-10
   transfig = fig2dev; # Added 2022-02-15
   transifex-client = transifex-cli; # Added 2023-12-29
