@@ -411,8 +411,6 @@ with pkgs;
 
   caroline = callPackage ../development/libraries/caroline { };
 
-  cartridges = callPackage ../applications/misc/cartridges { };
-
   castget = callPackage ../applications/networking/feedreaders/castget { };
 
   catatonit = callPackage ../applications/virtualization/catatonit { };
@@ -2884,6 +2882,10 @@ with pkgs;
     inherit (darwin) autoSignDarwinBinariesHook;
   };
 
+  saunafs = callPackage ../by-name/sa/saunafs/package.nix {
+    boost = boost185;
+  };
+
   mucommander = callPackage ../applications/file-managers/mucommander { };
 
   nnn = callPackage ../applications/file-managers/nnn { };
@@ -5274,8 +5276,6 @@ with pkgs;
 
   futhark = haskell.lib.compose.justStaticExecutables haskellPackages.futhark;
 
-  fx = callPackage ../development/tools/fx { };
-
   tllist = callPackage ../development/libraries/tllist { };
 
   fcft = callPackage ../development/libraries/fcft { };
@@ -5693,8 +5693,8 @@ with pkgs;
   loccount = callPackage ../development/tools/misc/loccount { };
 
   logseq = callPackage ../by-name/lo/logseq/package.nix {
-    # electron version from: https://github.com/logseq/logseq/blob/d8c6ca264bdf9a6a0f03c46dbf3509210367624a/package.json#L116
-    electron = electron_28;
+    # electron version from: https://github.com/logseq/logseq/blob/0.10.9/package.json#L116
+    electron = electron_27;
   };
 
   long-shebang = callPackage ../misc/long-shebang { };
@@ -6231,10 +6231,6 @@ with pkgs;
   roundcubePlugins = dontRecurseIntoAttrs (callPackage ../servers/roundcube/plugins { });
 
   routersploit = callPackage ../tools/security/routersploit { };
-
-  routinator = callPackage ../servers/routinator {
-    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
-  };
 
   rsbep = callPackage ../tools/backup/rsbep { };
 
@@ -12179,7 +12175,7 @@ with pkgs;
   raider = callPackage ../applications/misc/raider { };
 
   railway = callPackage ../development/tools/railway {
-    inherit (darwin.apple_sdk.frameworks) CoreServices Security;
+    inherit (darwin.apple_sdk.frameworks) CoreServices Security SystemConfiguration;
   };
 
   quota = if stdenv.isLinux then linuxquota else unixtools.quota;
@@ -14560,7 +14556,7 @@ with pkgs;
   clipboard-jh = callPackage ../tools/misc/clipboard-jh { };
 
   clipbuzz = callPackage ../tools/misc/clipbuzz {
-    zig = zig_0_12;
+    zig = buildPackages.zig_0_12;
   };
 
   xclip = callPackage ../tools/misc/xclip { };
@@ -15178,8 +15174,6 @@ with pkgs;
   libcxxStdenv = if stdenv.isDarwin then stdenv else lowPrio llvmPackages.libcxxStdenv;
 
   clean = callPackage ../development/compilers/clean { };
-
-  clickable = python3Packages.callPackage ../development/tools/clickable { };
 
   closurecompiler = callPackage ../development/compilers/closure { };
 
@@ -16573,7 +16567,7 @@ with pkgs;
   };
   cargo-insta = callPackage ../development/tools/rust/cargo-insta { };
   cargo-lambda = callPackage ../development/tools/rust/cargo-lambda {
-    zig = zig_0_12;
+    zig = buildPackages.zig_0_12;
     inherit (darwin.apple_sdk.frameworks) CoreServices Security;
   };
   cargo-limit = callPackage ../development/tools/rust/cargo-limit { };
@@ -16640,7 +16634,7 @@ with pkgs;
   cargo-public-api = callPackage ../development/tools/rust/cargo-public-api { };
 
   cargo-zigbuild = callPackage ../development/tools/rust/cargo-zigbuild {
-    zig = zig_0_12;
+    zig = buildPackages.zig_0_12;
   };
 
   cauwugo = callPackage ../development/tools/rust/cauwugo { };
@@ -19983,7 +19977,7 @@ with pkgs;
   babl = callPackage ../development/libraries/babl { };
 
   backlight-auto = callPackage ../by-name/ba/backlight-auto/package.nix {
-    zig = zig_0_11;
+    zig = buildPackages.zig_0_11;
   };
 
   backward-cpp = callPackage ../development/libraries/backward-cpp { };
@@ -22204,7 +22198,7 @@ with pkgs;
 
   liblc3 = callPackage ../development/libraries/liblc3 { };
 
-  inherit (callPackages ../development/libraries/libliftoff { }) libliftoff_0_4 libliftoff_0_5;
+  inherit (callPackage ../development/libraries/libliftoff { }) libliftoff_0_4 libliftoff_0_5;
   libliftoff = libliftoff_0_5;
 
   liblqr1 = callPackage ../development/libraries/liblqr-1 {
@@ -23756,8 +23750,7 @@ with pkgs;
 
   flatbuffers = callPackage ../development/libraries/flatbuffers { };
 
-  nanopb = callPackage ../development/libraries/nanopb { };
-  nanopbMalloc = callPackage ../development/libraries/nanopb { mallocBuild = true; };
+  nanopbMalloc = callPackage ../by-name/na/nanopb/package.nix { enableMalloc = true; };
 
   gnupth = callPackage ../development/libraries/pth { };
   pth = if stdenv.hostPlatform.isMusl then npth else gnupth;
@@ -32862,8 +32855,6 @@ with pkgs;
     pythonPackages = python3Packages;
   };
 
-  n8n = callPackage ../applications/networking/n8n { };
-
   neomutt = darwin.apple_sdk_11_0.callPackage ../applications/networking/mailreaders/neomutt { };
 
   neosay = callPackage ../applications/networking/instant-messengers/neosay { };
@@ -33163,7 +33154,7 @@ with pkgs;
   netcoredbg = callPackage ../development/tools/misc/netcoredbg { };
 
   ncdu = callPackage ../tools/misc/ncdu {
-    zig = zig_0_12;
+    zig = buildPackages.zig_0_12;
   };
 
   ncdu_1 = callPackage ../tools/misc/ncdu/1.nix { };
@@ -35093,6 +35084,10 @@ with pkgs;
 
   vscode-extensions = recurseIntoAttrs (callPackage ../applications/editors/vscode/extensions { });
 
+  vscode-js-debug = callPackage ../by-name/vs/vscode-js-debug/package.nix {
+    inherit (darwin.apple_sdk.frameworks) AppKit Security;
+  };
+
   vscodium = callPackage ../applications/editors/vscode/vscodium.nix { };
   vscodium-fhs = vscodium.fhs;
   vscodium-fhsWithPackages = vscodium.fhsWithPackages;
@@ -36898,12 +36893,6 @@ with pkgs;
 
   principia = callPackage ../games/principia { };
 
-  prismlauncher-unwrapped = kdePackages.callPackage ../games/prismlauncher {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-  };
-
-  prismlauncher = kdePackages.callPackage ../games/prismlauncher/wrapper.nix { };
-
   pong3d = callPackage ../games/pong3d { };
 
   pokerth = libsForQt5.callPackage ../games/pokerth {
@@ -38231,6 +38220,7 @@ with pkgs;
     coqPackages_8_17 coq_8_17
     coqPackages_8_18 coq_8_18
     coqPackages_8_19 coq_8_19
+    coqPackages_8_20 coq_8_20
     coqPackages      coq
   ;
 
