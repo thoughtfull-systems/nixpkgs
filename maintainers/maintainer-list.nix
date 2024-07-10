@@ -5333,6 +5333,12 @@
     githubId = 6199462;
     name = "Dmytro Rets";
   };
+  dretyuiop = {
+    email = "chewch03@gmail.com";
+    github = "dretyuiop";
+    githubId = 81854406;
+    name = "Chew Cheng Hong";
+  };
   drewrisinger = {
     email = "drisinger+nixpkgs@gmail.com";
     github = "drewrisinger";
@@ -8199,6 +8205,12 @@
     github = "hoppla20";
     githubId = 25618740;
     name = "Vincent Cui";
+  };
+  hornwall = {
+    email = "hannes@hornwall.me";
+    github = "hornwall";
+    githubId = 1064477;
+    name = "Hannes Hornwall";
   };
   hoverbear = {
     email = "operator+nix@hoverbear.org";
@@ -18482,6 +18494,14 @@
     githubId = 53050011;
     name = "Yohann Boniface";
   };
+  sigmasquadron = {
+    name = "Fernando Rodrigues";
+    email = "alpha@sigmasquadron.net";
+    matrix = "@sigmasquadron:matrix.org";
+    github = "SigmaSquadron";
+    githubId = 174749595;
+    keys = [ { fingerprint = "E3CD E225 47C6 2DB6 6CCD  BC06 CC3A E2EA 0000 0000"; } ];
+  };
   sikmir = {
     email = "sikmir@disroot.org";
     matrix = "@sikmir:matrix.org";
@@ -19767,6 +19787,12 @@
     github = "telotortium";
     githubId = 1755789;
     name = "Robert Irelan";
+  };
+  tembleking = {
+    name = "Fede Barcelona";
+    email = "fede_rico_94@hotmail.com";
+    github = "tembleking";
+    githubId = 2988780;
   };
   tengkuizdihar = {
     name = "Tengku Izdihar";
