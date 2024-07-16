@@ -205,6 +205,7 @@
   ./programs/goldwarden.nix
   ./programs/gpaste.nix
   ./programs/gphoto2.nix
+  ./programs/gpu-screen-recorder.nix
   ./programs/haguichi.nix
   ./programs/hamster.nix
   ./programs/htop.nix
@@ -1087,7 +1088,6 @@
   ./services/networking/mullvad-vpn.nix
   ./services/networking/multipath.nix
   ./services/networking/murmur.nix
-  ./services/networking/mxisd.nix
   ./services/networking/mycelium.nix
   ./services/networking/namecoind.nix
   ./services/networking/nar-serve.nix
@@ -1264,6 +1264,7 @@
   ./services/search/qdrant.nix
   ./services/search/quickwit.nix
   ./services/search/sonic-server.nix
+  ./services/search/tika.nix
   ./services/search/typesense.nix
   ./services/security/aesmd.nix
   ./services/security/authelia.nix
