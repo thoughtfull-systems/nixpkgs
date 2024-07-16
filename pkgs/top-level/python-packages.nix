@@ -421,6 +421,8 @@ self: super: with self; {
 
   aiosmtplib = callPackage ../development/python-modules/aiosmtplib { };
 
+  aiosolaredge = callPackage ../development/python-modules/aiosolaredge { };
+
   aiosomecomfort = callPackage ../development/python-modules/aiosomecomfort { };
 
   aiosqlite = callPackage ../development/python-modules/aiosqlite { };
@@ -700,6 +702,8 @@ self: super: with self; {
   aprslib = callPackage ../development/python-modules/aprslib { };
 
   apscheduler = callPackage ../development/python-modules/apscheduler { };
+
+  apsystems-ez1 = callPackage ../development/python-modules/apsystems-ez1 { };
 
   apsw = callPackage ../development/python-modules/apsw { };
 
@@ -3671,6 +3675,8 @@ self: super: with self; {
 
   dugong = callPackage ../development/python-modules/dugong { };
 
+  dukpy = callPackage ../development/python-modules/dukpy { };
+
   dulwich = callPackage ../development/python-modules/dulwich {
     inherit (pkgs) gnupg;
   };
@@ -6559,6 +6565,8 @@ self: super: with self; {
   knack = callPackage ../development/python-modules/knack { };
 
   kneed = callPackage ../development/python-modules/kneed { };
+
+  knocki = callPackage ../development/python-modules/knocki { };
 
   knx-frontend = callPackage ../development/python-modules/knx-frontend { };
 
@@ -9928,6 +9936,8 @@ self: super: with self; {
 
   psrpcore = callPackage ../development/python-modules/psrpcore { };
 
+  pyaprilaire = callPackage ../development/python-modules/pyaprilaire { };
+
   pybars3 = callPackage ../development/python-modules/pybars3 { };
 
   pymeta3 = callPackage ../development/python-modules/pymeta3 { };
@@ -11134,6 +11144,8 @@ self: super: with self; {
   pyecoforest = callPackage ../development/python-modules/pyecoforest { };
 
   pyeconet = callPackage ../development/python-modules/pyeconet { };
+
+  pyecotrend-ista = callPackage ../development/python-modules/pyecotrend-ista { };
 
   pyecowitt = callPackage ../development/python-modules/pyecowitt { };
 
