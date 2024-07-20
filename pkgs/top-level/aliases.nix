@@ -382,6 +382,7 @@ mapAliases ({
   emacsWithPackages = emacs.pkgs.withPackages; # Added 2020-12-18
 
   empathy = throw "empathy was removed as it is unmaintained and no longer launches due to libsoup3 migration"; # Added 2023-01-20
+  EmptyEpsilon = empty-epsilon; # Added 2024-07-14
   enchant1 = throw "enchant1 has been removed from nixpkgs, as it was unmaintained"; # Added 2023-01-18
   enyo-doom = enyo-launcher; # Added 2022-09-09
   epoxy = libepoxy; # Added 2021-11-11
@@ -470,6 +471,7 @@ mapAliases ({
   ghostwriter = libsForQt5.kdeGear.ghostwriter; # Added 2023-03-18
   go-dependency-manager = throw "'go-dependency-manager' is unmaintained and the go community now uses 'go.mod' mostly instead"; # Added 2023-10-04
   gotktrix = throw "'gotktrix' has been removed, as it was broken and unmaintained"; # Added 2023-12-06
+  git-backup = throw "git-backup has been removed, as it has been abandoned upstream. Consider using git-backup-go instead.";
   git-credential-1password = throw "'git-credential-1password' has been removed, as the upstream project is deleted."; # Added 2024-05-20
   git-subset = throw "'git-subset' has been removed in favor of 'git-filter-repo'"; # Added 2023-01-13
 
@@ -607,7 +609,6 @@ mapAliases ({
   hll2390dw-cups = throw "The hll2390dw-cups package was dropped since it was unmaintained."; # Added 2024-06-21
   ht-rust = xh; # Added 2021-02-13
   hydra-unstable = hydra_unstable; # added 2022-05-10
-  hyprspace = throw "hyprspace has been removed from nixpkgs because it is broken"; # Added 2024-07-15
   hyper-haskell = throw "'hyper-haskell' has been removed. reason: has been broken for a long time and depends on an insecure electron version"; # Added 2024-03-14
   hyper-haskell-server-with-packages = throw "'hyper-haskell-server-with-packages' has been removed. reason: has been broken for a long time"; # Added 2024-03-14
 
@@ -729,6 +730,7 @@ mapAliases ({
   librdf = lrdf; # Added 2020-03-22
   LibreArp = librearp; # Added 2024-06-12
   LibreArp-lv2 = librearp-lv2; # Added 2024-06-12
+  libreddit = throw "'libreddit' has been removed because it is unmaintained upstream. Consider using 'redlib', a maintained fork"; # Added 2024-07-17
   libressl_3_5 = throw "'libressl_3_5' has reached end-of-life "; # Added 2023-05-07
   librtlsdr = rtl-sdr; # Added 2023-02-18
   librewolf-wayland = librewolf; # Added 2022-11-15
@@ -1206,6 +1208,7 @@ mapAliases ({
   redocly-cli = redocly; # Added 2024-04-14
   redpanda = redpanda-client; # Added 2023-10-14
   redpanda-server = throw "'redpanda-server' has been removed because it was broken for a long time"; # Added 2024-06-10
+  replay-sorcery = throw "replay-sorcery has been removed as it is unmaintained upstream. Consider using gpu-screen-recorder or obs-studio instead."; # Added 2024-07-13
   restinio_0_6 = throw "restinio_0_6 has been removed from nixpkgs as it's not needed by downstream packages"; # Added 2024-07-04
   restya-board = throw "'restya-board' has been removed from nixpkgs, as it was broken and unmaintained"; # Added 2024-01-22
   retdec-full = throw "'retdec-full' is no longer needed, please use 'retdec'"; # Added 2024-02-05
@@ -1404,6 +1407,7 @@ mapAliases ({
   uade123 = uade; # Added 2022-07-30
   uberwriter = apostrophe; # Added 2020-04-23
   ubootBeagleboneBlack = ubootAmx335xEVM; # Added 2020-01-21
+  ubuntu_font_family = ubuntu-classic; # Added 2024-02-19
   ue4 = throw "ue4 has been removed, because the package was broken for years"; # Added 2023-11-22
   uefi-firmware-parser = throw "The uefi-firmware-parser package was dropped since it was unmaintained."; # Added 2024-06-21
   uhd3_5 = throw "uhd3_5 has been removed, because it was no longer needed"; # Added 2023-10-07
@@ -1440,6 +1444,7 @@ mapAliases ({
   vdirsyncerStable = vdirsyncer; # Added 2020-11-08, see https://github.com/NixOS/nixpkgs/issues/103026#issuecomment-723428168
   ventoy-bin = ventoy; # Added 2023-04-12
   ventoy-bin-full = ventoy-full; # Added 2023-04-12
+  verilog = iverilog; # Added 2024-07-12
   ViennaRNA = viennarna; # Added 2023-08-23
   vikunja-api = throw "'vikunja-api' has been replaced by 'vikunja'"; # Added 2024-02-19
   vikunja-frontend = throw "'vikunja-frontend' has been replaced by 'vikunja'"; # Added 2024-02-19
@@ -1475,6 +1480,7 @@ mapAliases ({
   win-qemu = throw "'win-qemu' has been replaced by 'virtio-win'"; # Added 2023-08-16
   win-virtio = virtio-win; # Added 2023-10-17
   win-signed-gplpv-drivers = throw "win-signed-gplpv-drivers has been removed from nixpkgs, as it's unmaintained: https://help.univention.com/t/installing-signed-gplpv-drivers/21828"; # Added 2023-08-17
+  wkhtmltopdf-bin = wkhtmltopdf; # Added 2024-07-17
   wlroots_0_14 = throw "'wlroots_0_14' has been removed in favor of newer versions"; # Added 2023-07-29
   wlroots_0_15 = throw "'wlroots_0_15' has been removed in favor of newer versions"; # Added 2024-03-28
   wordpress6_1 = throw "'wordpress6_1' has been removed in favor of the latest version"; # Added 2023-10-10
@@ -1497,6 +1503,7 @@ mapAliases ({
   xineLib = xine-lib; # Added 2021-04-27
   xineUI = xine-ui; # Added 2021-04-27
   xmlada = gnatPackages.xmlada; # Added 2024-02-25
+  xmr-stak = throw "xmr-stak has been removed from nixpkgs because it was broken"; # Added 2024-07-15
   xonsh-unwrapped = python3Packages.xonsh; # Added 2024-06-18
   xtrt = throw "xtrt has been removed due to being abandoned"; # Added 2023-05-25
   xulrunner = firefox-unwrapped; # Added 2023-11-03

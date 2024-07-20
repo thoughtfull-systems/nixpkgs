@@ -245,6 +245,7 @@ in {
   davis = handleTest ./davis.nix {};
   db-rest = handleTest ./db-rest.nix {};
   dconf = handleTest ./dconf.nix {};
+  ddns-updater = handleTest ./ddns-updater.nix {};
   deconz = handleTest ./deconz.nix {};
   deepin = handleTest ./deepin.nix {};
   deluge = handleTest ./deluge.nix {};
@@ -381,6 +382,7 @@ in {
   gonic = handleTest ./gonic.nix {};
   google-oslogin = handleTest ./google-oslogin {};
   goss = handleTest ./goss.nix {};
+  gotenberg = handleTest ./gotenberg.nix {};
   gotify-server = handleTest ./gotify-server.nix {};
   gotosocial = runTest ./web-apps/gotosocial.nix;
   grafana = handleTest ./grafana {};
@@ -502,7 +504,6 @@ in {
   leaps = handleTest ./leaps.nix {};
   lemmy = handleTest ./lemmy.nix {};
   libinput = handleTest ./libinput.nix {};
-  libreddit = handleTest ./libreddit.nix {};
   librenms = handleTest ./librenms.nix {};
   libresprite = handleTest ./libresprite.nix {};
   libreswan = runTest ./libreswan.nix;
@@ -596,6 +597,7 @@ in {
   # Fails on aarch64-linux at the PDF creation step - need to debug this on an
   # aarch64 machine..
   musescore = handleTestOn ["x86_64-linux"] ./musescore.nix {};
+  music-assistant = runTest ./music-assistant.nix;
   munin = handleTest ./munin.nix {};
   mutableUsers = handleTest ./mutable-users.nix {};
   mycelium = handleTest ./mycelium {};
@@ -687,7 +689,9 @@ in {
   ocis = handleTest ./ocis.nix {};
   oddjobd = handleTestOn [ "x86_64-linux" "aarch64-linux" ] ./oddjobd.nix {};
   oh-my-zsh = handleTest ./oh-my-zsh.nix {};
-  ollama = handleTest ./ollama.nix {};
+  ollama = runTest ./ollama.nix;
+  ollama-cuda = runTestOn ["x86_64-linux" "aarch64-linux"] ./ollama-cuda.nix;
+  ollama-rocm = runTestOn ["x86_64-linux" "aarch64-linux"] ./ollama-rocm.nix;
   ombi = handleTest ./ombi.nix {};
   openarena = handleTest ./openarena.nix {};
   openldap = handleTest ./openldap.nix {};
@@ -799,6 +803,7 @@ in {
   qemu-vm-restrictnetwork = handleTest ./qemu-vm-restrictnetwork.nix {};
   qemu-vm-volatile-root = runTest ./qemu-vm-volatile-root.nix;
   qemu-vm-external-disk-image = runTest ./qemu-vm-external-disk-image.nix;
+  qemu-vm-store = runTest ./qemu-vm-store.nix;
   qgis = handleTest ./qgis.nix { qgisPackage = pkgs.qgis; };
   qgis-ltr = handleTest ./qgis.nix { qgisPackage = pkgs.qgis-ltr; };
   qownnotes = handleTest ./qownnotes.nix {};
@@ -810,6 +815,7 @@ in {
   rabbitmq = handleTest ./rabbitmq.nix {};
   radarr = handleTest ./radarr.nix {};
   radicale = handleTest ./radicale.nix {};
+  radicle = runTest ./radicle.nix;
   ragnarwm = handleTest ./ragnarwm.nix {};
   rasdaemon = handleTest ./rasdaemon.nix {};
   readarr = handleTest ./readarr.nix {};

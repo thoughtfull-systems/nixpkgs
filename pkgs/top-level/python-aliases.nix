@@ -158,6 +158,7 @@ mapAliases ({
   email_validator = email-validator; # added 2022-06-22
   enhancements = throw "enhancements is unmaintained upstream and has therefore been removed"; # added 2023-10-27
   et_xmlfile = et-xmlfile; # added 2023-10-16
+  etebase-server = throw "pkgs.python3.etebase-server has been removed, use pkgs.etebase-server"; # added 2024-07-16
   ev3dev2 = python-ev3dev2; # added 2023-06-19
   eyeD3 = eyed3; # added 2024-01-03
   Fabric = fabric; # addedd 2023-02-19
@@ -521,6 +522,7 @@ mapAliases ({
   smmap2 = throw "smmap2 has been deprecated, use smmap instead."; # added 2020-03-14
   smpp_pdu = smpp-pdu; # added 2024-03-05
   somecomfort = throw "somecomfort was removed because Home Assistant switched to aiosomecomfort"; # added 2023-02-01
+  solaredge = throw "solaredge was removed because Home Assistant switched to aiosolaredge"; # added 2024-07-15
   sorl_thumbnail = sorl-thumbnail; # added 2023-11-12
   spacy_models = spacy-models; # added 2024-04-21
   SPARQLWrapper = sparqlwrapper;
