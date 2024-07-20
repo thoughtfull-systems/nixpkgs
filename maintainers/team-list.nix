@@ -95,7 +95,10 @@ with lib.maintainers;
   };
 
   budgie = {
-    members = [ bobby285271 ];
+    members = [
+      bobby285271
+      getchoo
+    ];
     scope = "Maintain Budgie desktop environment";
     shortName = "Budgie";
   };
@@ -359,6 +362,7 @@ with lib.maintainers;
 
   geospatial = {
     members = [
+      autra
       imincik
       l0b0
       nh2
@@ -502,6 +506,7 @@ with lib.maintainers;
       euank
       marcusramberg
       mic92
+      rorosen
       superherointj
       wrmilling
       yajo
@@ -944,6 +949,17 @@ with lib.maintainers;
     ];
     scope = "Group registration for Strid Tech AB team members who collectively maintain packages";
     shortName = "StridTech";
+  };
+
+  swift = {
+    members = [
+      dduan
+      stephank
+      trepetti
+      trundle
+    ];
+    scope = "Maintain Swift compiler suite for NixOS.";
+    shortName = "Swift";
   };
 
   systemd = {
