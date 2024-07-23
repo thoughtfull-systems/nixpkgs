@@ -2,7 +2,7 @@
 # Do not edit!
 
 {
-  version = "2024.7.2";
+  version = "2024.7.3";
   components = {
     "3_day_blinds" = ps: with ps; [
     ];
@@ -219,11 +219,12 @@
       apsystems-ez1
     ];
     "aquacell" = ps: with ps; [
+      aioaquacell
       fnv-hash-fast
       ifaddr
       psutil-home-assistant
       sqlalchemy
-    ]; # missing inputs: aioaquacell
+    ];
     "aqualogic" = ps: with ps; [
       aqualogic
     ];
@@ -5274,6 +5275,7 @@
     "aprilaire"
     "aprs"
     "apsystems"
+    "aquacell"
     "aranet"
     "arcam_fmj"
     "aseko_pool_live"
