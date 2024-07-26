@@ -8587,6 +8587,8 @@ with pkgs;
 
   graylog-5_2 = callPackage ../tools/misc/graylog/5.2.nix { };
 
+  graylog-6_0 = callPackage ../tools/misc/graylog/6.0.nix { };
+
   graylogPlugins = recurseIntoAttrs (
     callPackage ../tools/misc/graylog/plugins.nix { }
   );
@@ -22584,8 +22586,10 @@ with pkgs;
   inherit
     ({
       libmicrohttpd_0_9_77 = callPackage ../development/libraries/libmicrohttpd/0.9.77.nix { };
+      libmicrohttpd_1_0 = callPackage ../development/libraries/libmicrohttpd/1.0.nix { };
     })
     libmicrohttpd_0_9_77
+    libmicrohttpd_1_0
     ;
 
   libmicrohttpd = libmicrohttpd_0_9_77;
