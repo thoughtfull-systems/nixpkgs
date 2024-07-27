@@ -339,6 +339,10 @@ mapAliases ({
   notifymuch = throw "notifymuch has been promoted to a top-level attribute name: `pkgs.notifymuch`"; # added 2022-10-02
   Nuitka = nuitka; # added 2023-02-19
   ntlm-auth = throw "ntlm-auth has been removed, because it relies on the md4 implementation provided by openssl. Use pyspnego instead.";
+  openai-triton = triton; # added 2024-07-18
+  openai-triton-bin = triton-bin; # added 2024-07-18
+  openai-triton-cuda = triton-cuda; # added 2024-07-18
+  openai-triton-no-cuda = triton-no-cuda; # added 2024-07-18
   openapi-schema-pydantic = throw "openapi-schema-pydantic has been removed, since it is no longer maintained"; # added 2023-10-30
   opencv3 = throw "opencv3 has been removed as it is obsolete"; # added 2023-10-12
   opsdroid_get_image_size = opsdroid-get-image-size; # added 2023-10-16
@@ -402,6 +406,7 @@ mapAliases ({
   PyMVGLive = pymvglive; # added 2023-02-19
   pymyq = python-myq; # added 2023-10-20
   pynose = throw "pynose was removed, because it violates the license of nose, by redistributing modified LGPL code under MIT.";
+  python-ethtool = ethtool; # added 2024-07-23
   python-myq = throw "python-myq has been removed, as the service provider has decided to block its API requests"; # added 2023-12-07
   pyqt4 = throw "pyqt4 has been removed, because it depended on the long EOL qt4"; # added 2022-06-09
   pyqt5_sip = pyqt5-sip; # added 2024-01-07

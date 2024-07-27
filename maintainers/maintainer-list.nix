@@ -490,12 +490,6 @@
     githubId = 2071575;
     name = "Adam C. Stephens";
   };
-  adamlwgriffiths = {
-    email = "adam.lw.griffiths@gmail.com";
-    github = "adamlwgriffiths";
-    githubId = 1239156;
-    name = "Adam Griffiths";
-  };
   adamt = {
     email = "mail@adamtulinius.dk";
     github = "adamtulinius";
@@ -545,12 +539,6 @@
     github = "adnelson";
     githubId = 5091511;
     name = "Allen Nelson";
-  };
-  adolfogc = {
-    email = "adolfo.garcia.cr@gmail.com";
-    github = "adolfogc";
-    githubId = 1250775;
-    name = "Adolfo E. García Castro";
   };
   adriandole = {
     email = "adrian@dole.tech";
@@ -3619,6 +3607,12 @@
     githubId = 1438690;
     name = "Chris Pickard";
   };
+  chrispwill = {
+    email = "chris@chrispwill.com";
+    github = "chrispwill";
+    githubId = 271099;
+    name = "Chris Williams";
+  };
   chrisrosset = {
     email = "chris@rosset.org.uk";
     github = "chrisrosset";
@@ -6245,6 +6239,12 @@
     githubId = 2147649;
     name = "Euan Kemp";
   };
+  eum3l = {
+    email = "eum3l@proton.me";
+    githubId = 77971322;
+    github = "eum3l";
+    name = "Emil";
+  };
   eureka-cpu = {
     email = "github.eureka@gmail.com";
     github = "eureka-cpu";
@@ -7546,12 +7546,6 @@
     github = "goertzenator";
     githubId = 605072;
     name = "Daniel Goertzen";
-  };
-  goibhniu = {
-    email = "cillian.deroiste@gmail.com";
-    github = "cillianderoiste";
-    githubId = 643494;
-    name = "Cillian de Róiste";
   };
   GoldsteinE = {
     email = "root@goldstein.rs";
@@ -10035,12 +10029,6 @@
     github = "jpts";
     githubId = 5352661;
     name = "James Cleverley-Prance";
-  };
-  jqqqqqqqqqq = {
-    email = "jqqqqqqqqqq@gmail.com";
-    github = "jqqqqqqqqqq";
-    githubId = 12872927;
-    name = "Curtis Jiang";
   };
   jqueiroz = {
     email = "nixos@johnjq.com";
@@ -13970,6 +13958,12 @@
     githubId = 80128916;
     name = "MultisampledNight";
   };
+  multivac61 = {
+    email = "olafur@genkiinstruments.com";
+    github = "multivac61";
+    githubId = 4436129;
+    name = "multivac61";
+  };
   multun = {
     email = "victor.collod@epita.fr";
     github = "multun";
@@ -17622,6 +17616,12 @@
     github = "rsniezek";
     githubId = 19433256;
     name = "Radoslaw Sniezek";
+  };
+  rsrohitsingh682 = {
+    email = "rsrohitsingh682@gmail.com";
+    github = "rsrohitsingh682";
+    githubId = 45477585;
+    name = "Rohit Singh";
   };
   rster2002 = {
     name = "Bjørn";
@@ -22205,12 +22205,6 @@
     github = "yamashitax";
     githubId = 99486674;
     name = "山下";
-  };
-  yana = {
-    email = "yana@riseup.net";
-    github = "yanateras";
-    githubId = 1643293;
-    name = "Yana Timoshenko";
   };
   yanganto = {
     name = "Antonio Yang";

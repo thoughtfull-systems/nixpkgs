@@ -1001,8 +1001,6 @@ with pkgs;
 
   graph-easy = callPackage ../tools/graphics/graph-easy { };
 
-  mangal = callPackage ../applications/misc/mangal { };
-
   mermaid-filter = callPackage ../tools/misc/mermaid-filter { };
 
   graphw00f = callPackage ../tools/security/graphw00f { };
@@ -1850,8 +1848,6 @@ with pkgs;
   hostmux = callPackage ../tools/misc/hostmux { };
 
   hsd = callPackage ../tools/misc/hsd { };
-
-  httm = darwin.apple_sdk_11_0.callPackage ../tools/filesystems/httm { };
 
   hyperpotamus = callPackage ../tools/misc/hyperpotamus { };
 
@@ -3349,6 +3345,8 @@ with pkgs;
     }
   else if stdenv.hostPlatform.isLinux then
     callPackage ../stdenv/linux/make-bootstrap-tools.nix {}
+  else if stdenv.hostPlatform.isFreeBSD then
+    callPackage ../stdenv/freebsd/make-bootstrap-tools.nix {}
   else throw "freshBootstrapTools: unknown hostPlatform ${stdenv.hostPlatform.config}";
 
   boxes = callPackage ../tools/text/boxes { };
@@ -4497,10 +4495,6 @@ with pkgs;
   clash-geoip = callPackage ../data/misc/clash-geoip { };
 
   clevercsv = with python3Packages; toPythonApplication clevercsv;
-
-  clevis = callPackage ../tools/security/clevis {
-    asciidoc = asciidoc-full;
-  };
 
   cli53 = callPackage ../tools/admin/cli53 { };
 
@@ -10913,11 +10907,7 @@ with pkgs;
 
   npth = callPackage ../development/libraries/npth { };
 
-  nmap = callPackage ../tools/security/nmap { };
-
   nmap-formatter = callPackage ../tools/security/nmap-formatter { };
-
-  nmapsi4 = libsForQt5.callPackage ../tools/security/nmap/qt.nix { };
 
   noise-repellent = callPackage ../applications/audio/noise-repellent { };
 
@@ -11902,8 +11892,6 @@ with pkgs;
   pulumictl = callPackage ../development/tools/pulumictl { };
 
   pure-prompt = callPackage ../shells/zsh/pure-prompt { };
-
-  pv = callPackage ../tools/misc/pv { };
 
   pwgen = callPackage ../tools/security/pwgen { };
 
@@ -21146,7 +21134,7 @@ with pkgs;
 
   hwloc = callPackage ../development/libraries/hwloc { };
 
-  hydra_unstable = callPackage ../development/tools/misc/hydra/unstable.nix { nix = nixVersions.nix_2_20; };
+  hydra_unstable = callPackage ../development/tools/misc/hydra/unstable.nix { nix = nixVersions.nix_2_22; };
 
   hydra-cli = callPackage ../development/tools/misc/hydra-cli { };
 
@@ -22653,8 +22641,6 @@ with pkgs;
   };
 
   libusbgx = callPackage ../development/libraries/libusbgx { };
-
-  libusbmuxd = callPackage ../development/libraries/libusbmuxd { };
 
   libusbsio = callPackage ../development/libraries/libusbsio { };
 
@@ -32028,6 +32014,11 @@ with pkgs;
   });
   libreoffice-still-unwrapped = libreoffice-still.unwrapped;
 
+  libreoffice-collabora = callPackage ../applications/office/libreoffice {
+    variant = "collabora";
+    withFonts = true;
+  };
+
   libresprite = callPackage ../applications/editors/libresprite {
     inherit (darwin.apple_sdk.frameworks) AppKit Cocoa Foundation;
   };
@@ -34473,7 +34464,7 @@ with pkgs;
 
   tudu = callPackage ../applications/office/tudu { };
 
-  tuna = python3Packages.callPackage ../os-specific/linux/tuna { };
+  tuna = callPackage ../os-specific/linux/tuna { };
 
   tunefish = callPackage ../applications/audio/tunefish {
     stdenv = clangStdenv; # https://github.com/jpcima/tunefish/issues/4
@@ -34810,7 +34801,7 @@ with pkgs;
   };
 
   code-server = callPackage ../servers/code-server {
-    nodejs = nodejs_18;
+    nodejs = nodejs_20;
     inherit (darwin.apple_sdk.frameworks) AppKit Cocoa CoreServices Security;
     inherit (darwin) cctools;
     inherit (nodePackages) node-gyp;
@@ -38642,8 +38633,6 @@ with pkgs;
 
   eiciel = callPackage ../tools/filesystems/eiciel { };
 
-  apx = callPackage ../tools/package-management/apx { };
-
   dpkg = callPackage ../tools/package-management/dpkg { };
 
   dumb = callPackage ../misc/dumb { };
@@ -39961,8 +39950,6 @@ with pkgs;
   httraqt = libsForQt5.callPackage ../tools/backup/httrack/qt.nix { };
 
   mg = callPackage ../applications/editors/mg { };
-
-  mpvc = callPackage ../applications/misc/mpvc { };
 
   # Overriding does not work when using callPackage on discord using import instead. (https://github.com/NixOS/nixpkgs/pull/179906)
   discord = import ../applications/networking/instant-messengers/discord {
