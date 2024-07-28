@@ -789,8 +789,6 @@ with pkgs;
 
   octosuite = callPackage ../tools/security/octosuite { };
 
-  octosql = callPackage ../tools/misc/octosql { };
-
   onesixtyone = callPackage ../tools/security/onesixtyone { };
 
   oletools = with python3.pkgs; toPythonApplication oletools;
@@ -1598,10 +1596,6 @@ with pkgs;
 
   afsctool = callPackage ../tools/filesystems/afsctool {
     inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  agate = callPackage ../servers/gemini/agate {
-    inherit (darwin.apple_sdk.frameworks) Security;
   };
 
   agi = callPackage ../tools/graphics/agi { };
@@ -8468,8 +8462,6 @@ with pkgs;
 
   gql = callPackage ../applications/version-management/gql { };
 
-  grafterm = callPackage ../tools/misc/grafterm { };
-
   gradience = callPackage ../applications/misc/gradience { };
 
   grafx2 = callPackage ../applications/graphics/grafx2 { };
@@ -9897,9 +9889,9 @@ with pkgs;
 
   importNpmLock = callPackages ../build-support/node/import-npm-lock { };
 
-  nodePackages_latest = dontRecurseIntoAttrs nodejs_latest.pkgs // { __attrsFailEvaluation = true; };
+  nodePackages_latest = dontRecurseIntoAttrs nodejs_latest.pkgs;
 
-  nodePackages = dontRecurseIntoAttrs nodejs.pkgs // { __attrsFailEvaluation = true; };
+  nodePackages = dontRecurseIntoAttrs nodejs.pkgs;
 
   node2nix = nodePackages.node2nix;
 
@@ -16981,8 +16973,6 @@ with pkgs;
 
   kona = callPackage ../development/interpreters/kona { };
 
-  konf = callPackage ../development/tools/konf { };
-
   lambda-lisp = callPackage ../development/interpreters/lambda-lisp { };
   lambda-lisp-blc = lambda-lisp;
 
@@ -17194,19 +17184,20 @@ with pkgs;
 
   # List of extensions with overrides to apply to all Python package sets.
   pythonPackagesExtensions = [ ];
+
   # Python package sets.
-  python27Packages = python27.pkgs // { __attrsFailEvaluation = true; };
-  python39Packages = python39.pkgs // { __attrsFailEvaluation = true; };
-  python310Packages = python310.pkgs // { __attrsFailEvaluation = true; };
-  python311Packages = recurseIntoAttrs python311.pkgs // { pythonPackages = python311.pkgs // { __attrsFailEvaluation = true; }; };
-  python312Packages = recurseIntoAttrs python312.pkgs // { pythonPackages = python312.pkgs // { __attrsFailEvaluation = true; }; };
-  python313Packages = python313.pkgs // { __attrsFailEvaluation = true; };
-  pypyPackages = pypy.pkgs // { __attrsFailEvaluation = true; };
-  pypy2Packages = pypy2.pkgs // { __attrsFailEvaluation = true; };
-  pypy27Packages = pypy27.pkgs // { __attrsFailEvaluation = true; };
-  pypy3Packages = pypy3.pkgs // { __attrsFailEvaluation = true; };
-  pypy39Packages = pypy39.pkgs // { __attrsFailEvaluation = true; };
-  pypy310Packages = pypy310.pkgs // { __attrsFailEvaluation = true; };
+  python27Packages = python27.pkgs;
+  python39Packages = python39.pkgs;
+  python310Packages = python310.pkgs;
+  python311Packages = recurseIntoAttrs python311.pkgs;
+  python312Packages = recurseIntoAttrs python312.pkgs;
+  python313Packages = python313.pkgs;
+  pypyPackages = pypy.pkgs;
+  pypy2Packages = pypy2.pkgs;
+  pypy27Packages = pypy27.pkgs;
+  pypy3Packages = pypy3.pkgs;
+  pypy39Packages = pypy39.pkgs;
+  pypy310Packages = pypy310.pkgs;
 
   py3c = callPackage ../development/libraries/py3c { };
 
@@ -22716,7 +22707,6 @@ with pkgs;
   libviperfx = callPackage ../development/libraries/libviperfx { };
 
   libvpx = callPackage ../development/libraries/libvpx { };
-  libvpx_1_8 = callPackage ../development/libraries/libvpx/1_8.nix { };
 
   libvterm = callPackage ../development/libraries/libvterm { };
   libvterm-neovim = callPackage ../development/libraries/libvterm-neovim { };
@@ -23398,6 +23388,7 @@ with pkgs;
   openslp = callPackage ../development/libraries/openslp { };
 
   openstackclient = with python311Packages; toPythonApplication python-openstackclient;
+  barbicanclient = with python311Packages; toPythonApplication python-barbicanclient;
   glanceclient = with python311Packages; toPythonApplication python-glanceclient;
   heatclient = with python311Packages; toPythonApplication python-heatclient;
   ironicclient = with python311Packages; toPythonApplication python-ironicclient;
@@ -25996,8 +25987,6 @@ with pkgs;
   redshift_jdbc = callPackage ../development/java-modules/redshift_jdbc { };
 
   liquibase_redshift_extension = callPackage ../development/java-modules/liquibase_redshift_extension { };
-
-  promql-cli = callPackage ../tools/misc/promql-cli { };
 
   prom2json = callPackage ../servers/monitoring/prometheus/prom2json.nix { };
   prometheus = callPackage ../servers/monitoring/prometheus { };
@@ -30861,8 +30850,6 @@ with pkgs;
 
   deadd-notification-center = haskell.lib.compose.justStaticExecutables (haskellPackages.callPackage ../applications/misc/deadd-notification-center { });
 
-  lollypop = callPackage ../applications/audio/lollypop { };
-
   losslessaudiochecker = callPackage ../applications/audio/losslessaudiochecker { };
 
   m32edit = callPackage ../applications/audio/midas/m32edit.nix { };
@@ -33231,10 +33218,7 @@ with pkgs;
 
   picosnitch = callPackage ../tools/networking/picosnitch { };
 
-  pidginPackages =
-    let pidgin-plugins =
-          recurseIntoAttrs (callPackage ../applications/networking/instant-messengers/pidgin/pidgin-plugins { });
-    in pidgin-plugins // { pidginPackages = pidgin-plugins.pidginPackages // { __attrsFailEvaluation = true; }; };
+  pidginPackages = recurseIntoAttrs (callPackage ../applications/networking/instant-messengers/pidgin/pidgin-plugins { });
 
   inherit (pidginPackages) pidgin;
 
@@ -35318,9 +35302,11 @@ with pkgs;
 
   youki = callPackage ../applications/virtualization/youki { };
 
-  yt-dlp = with python3Packages; toPythonApplication yt-dlp;
-
-  yt-dlp-light = with python3Packages; toPythonApplication yt-dlp-light;
+  yt-dlp-light = yt-dlp.override {
+    atomicparsleySupport = false;
+    ffmpegSupport = false;
+    rtmpSupport = false;
+  };
 
   youtube-viewer = perlPackages.WWWYoutubeViewer;
 
@@ -39150,6 +39136,8 @@ with pkgs;
 
   nixpkgs-lint-community = callPackage ../tools/nix/nixpkgs-lint { };
 
+  nixpkgs-manual = callPackage ../../doc/doc-support/package.nix { };
+
   rnix-hashes = callPackage ../tools/nix/rnix-hashes { };
 
   nixos-artwork = callPackage ../data/misc/nixos-artwork { };
@@ -39568,8 +39556,6 @@ with pkgs;
 
   tewi-font = callPackage ../data/fonts/tewi { };
 
-  vcluster = callPackage ../applications/networking/cluster/vcluster { };
-
   sshportal = callPackage ../servers/sshportal { };
 
   ssh-audit = callPackage ../tools/security/ssh-audit { };
@@ -39987,7 +39973,7 @@ with pkgs;
 
   linkchecker = callPackage ../tools/networking/linkchecker { };
 
-  tomb = callPackage ../os-specific/linux/tomb {
+  tomb = callPackage ../by-name/to/tomb/package.nix {
     pinentry = pinentry-curses;
   };
 

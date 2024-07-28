@@ -5447,6 +5447,13 @@
     githubId = 1931963;
     name = "David Sferruzza";
   };
+  dstengele = {
+    name = "Dennis Stengele";
+    email = "dennis@stengele.me";
+    matrix = "@dstengele:pango.place";
+    github = "dstengele";
+    githubId = 1706418;
+  };
   dsuetin = {
     name = "Danil Suetin";
     email = "suetin085+nixpkgs@protonmail.com";
@@ -17414,6 +17421,12 @@
     githubId = 1080963;
     name = "Roberto";
   };
+  robertrichter = {
+    email = "robert.richter@rrcomtech.com";
+    github = "rrcomtech";
+    githubId = 50635122;
+    name = "Robert Richter";
+  };
   robgssp = {
     email = "robgssp@gmail.com";
     github = "robgssp";
@@ -18221,6 +18234,12 @@
     github = "Scrumplex";
     githubId = 11587657;
     keys = [ { fingerprint = "E173 237A C782 296D 98F5  ADAC E13D FD4B 4712 7951"; } ];
+  };
+  scvalex = {
+    name = "Alexandru Scvorțov";
+    email = "github@abstractbinary.org";
+    github = "scvalex";
+    githubId = 2588;
   };
   sdaqo = {
     name = "sdaqo";

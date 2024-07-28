@@ -152,7 +152,7 @@ let
     flatten flip
     concatMapStrings concatStringsSep
     getDev getLib
-    optionals optionalString;
+    optionals optionalAttrs optionalString;
 
   fontsConf = makeFontsConf {
     fontDirectories = [
@@ -200,6 +200,7 @@ let
       }) // {
         inherit (x) md5name md5;
       }) srcsAttributes.deps;
+  } // optionalAttrs (variant != "collabora") {
     translations = fetchurl srcsAttributes.translations;
     help = fetchurl srcsAttributes.help;
   };
@@ -641,5 +642,6 @@ in stdenv.mkDerivation (finalAttrs: {
     license = licenses.lgpl3;
     maintainers = with maintainers; [ raskin ];
     platforms = platforms.linux;
+    mainProgram = "libreoffice";
   };
 })
