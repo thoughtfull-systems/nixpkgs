@@ -32,6 +32,7 @@ jobs:
         run: |
           git merge --no-ff origin/workflows
           git merge --no-ff origin/flutter-apps
+          git merge --no-ff origin/initrd-dhcp-background
       - name: Push to origin
         shell: bash
         run: git push origin nixos-24.05
