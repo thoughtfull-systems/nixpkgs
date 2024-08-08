@@ -8128,6 +8128,8 @@ self: super: with self; {
 
   myjwt = callPackage ../development/python-modules/myjwt { };
 
+  mypermobil = callPackage ../development/python-modules/mypermobil { };
+
   mypy = callPackage ../development/python-modules/mypy { };
 
   mypy-boto3-builder = callPackage ../development/python-modules/mypy-boto3-builder { };
@@ -10400,6 +10402,8 @@ self: super: with self; {
   pytest-pudb = callPackage ../development/python-modules/pytest-pudb { };
 
   pytlv = callPackage ../development/python-modules/pytlv { };
+
+  pywebcopy = callPackage ../development/python-modules/pywebcopy { };
 
   python-codon-tables = callPackage ../development/python-modules/python-codon-tables { };
 
@@ -13681,6 +13685,8 @@ self: super: with self; {
   rich-rst = callPackage ../development/python-modules/rich-rst { };
 
   rich-theme-manager = callPackage ../development/python-modules/rich-theme-manager { };
+
+  riden = callPackage ../development/python-modules/riden { };
 
   ring-doorbell = callPackage ../development/python-modules/ring-doorbell { };
 
