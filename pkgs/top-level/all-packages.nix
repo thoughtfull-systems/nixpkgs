@@ -1335,6 +1335,8 @@ with pkgs;
 
   replaceDependency = callPackage ../build-support/replace-dependency.nix { };
 
+  replaceVars = callPackage ../build-support/replace-vars { };
+
   nukeReferences = callPackage ../build-support/nuke-references {
     inherit (darwin) signingUtils;
   };
@@ -7968,7 +7970,7 @@ with pkgs;
     wxGTK = wxGTK32;
   };
 
-  frescobaldi = python3Packages.callPackage ../misc/frescobaldi { };
+  frescobaldi = callPackage ../misc/frescobaldi { };
 
   freshfetch = callPackage ../tools/misc/freshfetch {
     inherit (darwin.apple_sdk.frameworks) AppKit CoreFoundation DiskArbitration Foundation IOKit;
@@ -9219,8 +9221,6 @@ with pkgs;
 
   jrnl = callPackage ../applications/misc/jrnl { };
 
-  jsawk = callPackage ../tools/text/jsawk { };
-
   jsbeautifier = with python3Packages; toPythonApplication jsbeautifier;
 
   jscoverage = callPackage ../development/tools/misc/jscoverage { };
@@ -9909,6 +9909,8 @@ with pkgs;
   leafpad = callPackage ../applications/editors/leafpad { };
 
   l3afpad = callPackage ../applications/editors/l3afpad { };
+
+  leanblueprint = with python3Packages; toPythonApplication leanblueprint;
 
   leanify = callPackage ../tools/misc/leanify { };
 
@@ -12295,8 +12297,6 @@ with pkgs;
 
   rpmextract = callPackage ../tools/archivers/rpmextract { };
 
-  rrdtool = callPackage ../tools/misc/rrdtool { };
-
   rscw = callPackage ../applications/radio/rscw { };
 
   rset = callPackage ../tools/admin/rset { };
@@ -12482,8 +12482,6 @@ with pkgs;
   sd = callPackage ../tools/text/sd {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
-
-  sd-mux-ctrl = callPackage ../tools/misc/sd-mux-ctrl { };
 
   sd-switch = callPackage ../os-specific/linux/sd-switch { };
 
@@ -17128,9 +17126,6 @@ with pkgs;
   spidermonkey_91 = callPackage ../development/interpreters/spidermonkey/91.nix {
     inherit (darwin) libobjc;
   };
-  spidermonkey_102 = callPackage ../development/interpreters/spidermonkey/102.nix {
-    inherit (darwin) libobjc;
-  };
   spidermonkey_115 = callPackage ../development/interpreters/spidermonkey/115.nix {
     inherit (darwin) libobjc;
   };
@@ -17429,8 +17424,6 @@ with pkgs;
   typst-lsp = callPackage ../development/tools/language-servers/typst-lsp { };
 
   vala-language-server = callPackage ../development/tools/language-servers/vala-language-server { };
-
-  verible = callPackage ../development/tools/language-servers/verible { };
 
   vscode-langservers-extracted = callPackage ../development/tools/language-servers/vscode-langservers-extracted { };
 
@@ -29292,7 +29285,7 @@ with pkgs;
   cardo = callPackage ../data/fonts/cardo { };
 
   cage = callPackage ../applications/window-managers/cage {
-    wlroots = wlroots_0_16;
+    wlroots = wlroots_0_17;
   };
 
   calf = callPackage ../applications/audio/calf {
@@ -30988,7 +30981,6 @@ with pkgs;
   super-productivity = callPackage ../applications/office/super-productivity { };
 
   inherit (callPackages ../development/libraries/wlroots {})
-    wlroots_0_16
     wlroots_0_17
     wlroots_0_18;
 
@@ -33632,7 +33624,10 @@ with pkgs;
   printrun = callPackage ../applications/misc/printrun { };
 
   prusa-slicer = darwin.apple_sdk_11_0.callPackage ../applications/misc/prusa-slicer {
-    stdenv = if stdenv.isDarwin then overrideSDK llvmPackages_14.stdenv "11.0" else stdenv;
+    # Build with clang even on Linux, because GCC uses absolutely obscene amounts of memory
+    # on this particular code base (OOM with 32GB memory and --cores 16 on GCC, succeeds
+    # with --cores 32 on clang).
+    stdenv = if stdenv.isDarwin then overrideSDK llvmPackages.stdenv "11.0" else llvmPackages.stdenv;
   };
 
   super-slicer = darwin.apple_sdk_11_0.callPackage ../applications/misc/prusa-slicer/super-slicer.nix { };
