@@ -1047,6 +1047,7 @@
   ./services/networking/harmonia.nix
   ./services/networking/haproxy.nix
   ./services/networking/headscale.nix
+  ./services/networking/hickory-dns.nix
   ./services/networking/hostapd.nix
   ./services/networking/htpdate.nix
   ./services/networking/https-dns-proxy.nix
@@ -1234,7 +1235,6 @@
   ./services/networking/tox-node.nix
   ./services/networking/toxvpn.nix
   ./services/networking/trickster.nix
-  ./services/networking/trust-dns.nix
   ./services/networking/tvheadend.nix
   ./services/networking/twingate.nix
   ./services/networking/ucarp.nix
@@ -1484,6 +1484,7 @@
   ./services/web-apps/trilium.nix
   ./services/web-apps/tt-rss.nix
   ./services/web-apps/vikunja.nix
+  ./services/web-apps/weblate.nix
   ./services/web-apps/whitebophir.nix
   ./services/web-apps/wiki-js.nix
   ./services/web-apps/windmill.nix
@@ -1679,6 +1680,7 @@
   ./virtualisation/ecs-agent.nix
   ./virtualisation/hyperv-guest.nix
   ./virtualisation/incus.nix
+  ./virtualisation/incus-agent.nix
   ./virtualisation/kvmgt.nix
   ./virtualisation/libvirtd.nix
   ./virtualisation/lxc.nix

@@ -418,11 +418,11 @@ buildLuarocksPackage {
   version = "2.8-1";
   knownRockspec = (fetchurl {
     url    = "mirror://luarocks/dkjson-2.8-1.rockspec";
-    sha256 = "060410qpbsvmw2kwbkwh5ivcpnqqcbmcj4dxhf8hvjgvwljsrdka";
+    hash = "sha256-arasJeX7yQ2Rg70RyepiGNvLdiyQz8Wn4HXrdTEIBBg=";
   }).outPath;
   src = fetchurl {
     url    = "http://dkolf.de/dkjson-lua/dkjson-2.8.tar.gz";
-    sha256 = "0js9z5ja3ws1i9gj2m673459rwm0gadxbf86mcif7d8286h61yh9";
+    hash = "sha256-JOjNO+uRwchh63uz+8m9QYu/+a1KpdBHGBYlgjajFTI=";
   };
 
   disabled = luaOlder "5.1" || luaAtLeast "5.5";
@@ -2081,6 +2081,30 @@ buildLuarocksPackage {
   meta = {
     homepage = "https://github.com/nvim-neorocks/luarocks-build-treesitter-parser";
     description = "A luarocks build backend for tree-sitter parsers.";
+    maintainers = with lib.maintainers; [ mrcjkb ];
+    license.fullName = "MIT";
+  };
+}) {};
+
+luarocks-build-treesitter-parser-cpp = callPackage({ buildLuarocksPackage, fetchurl, fetchzip, luaOlder, luafilesystem }:
+buildLuarocksPackage {
+  pname = "luarocks-build-treesitter-parser-cpp";
+  version = "1.0.0-1";
+  knownRockspec = (fetchurl {
+    url    = "mirror://luarocks/luarocks-build-treesitter-parser-cpp-1.0.0-1.rockspec";
+    sha256 = "0vvw3ai42jif2z2ir6l14jkjq138djbn04wnjblm3vilaz5k0sfv";
+  }).outPath;
+  src = fetchzip {
+    url    = "https://github.com/nvim-neorocks/luarocks-build-treesitter-parser-cpp/archive/v1.0.0.zip";
+    sha256 = "0j1f3wq19zng8ay6pniphb7m0xp131i9alqpdf0szpyq8y00w2s1";
+  };
+
+  disabled = luaOlder "5.1";
+  propagatedBuildInputs = [ luafilesystem ];
+
+  meta = {
+    homepage = "https://github.com/nvim-neorocks/luarocks-build-treesitter-parser-cpp";
+    description = "A luarocks build backend for tree-sitter parsers written in C++.";
     maintainers = with lib.maintainers; [ mrcjkb ];
     license.fullName = "MIT";
   };

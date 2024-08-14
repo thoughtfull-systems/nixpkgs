@@ -93,6 +93,8 @@ self: super: with self; {
 
   advocate = callPackage ../development/python-modules/advocate { };
 
+  aeidon = callPackage ../development/python-modules/aeidon { };
+
   aemet-opendata = callPackage ../development/python-modules/aemet-opendata { };
 
   aenum = callPackage ../development/python-modules/aenum { };
@@ -124,6 +126,8 @@ self: super: with self; {
   ago = callPackage ../development/python-modules/ago { };
 
   aggdraw = callPackage ../development/python-modules/aggdraw { };
+
+  ahocorasick-rs = callPackage ../development/python-modules/ahocorasick-rs { };
 
   aigpy = callPackage ../development/python-modules/aigpy { };
 
@@ -772,6 +776,8 @@ self: super: with self; {
   arpy = callPackage ../development/python-modules/arpy { };
 
   arnparse = callPackage ../development/python-modules/arnparse { };
+
+  array-api-strict = callPackage ../development/python-modules/array-api-strict { };
 
   array-record = callPackage ../development/python-modules/array-record { };
 
@@ -1959,8 +1965,6 @@ self: super: with self; {
 
   camel-converter = callPackage ../development/python-modules/camel-converter { };
 
-  can = callPackage ../development/python-modules/can { };
-
   canals = callPackage ../development/python-modules/canals { };
 
   canmatrix = callPackage ../development/python-modules/canmatrix { };
@@ -2375,6 +2379,8 @@ self: super: with self; {
     inherit (pkgs) cmigemo;
   };
 
+  cmsdials = callPackage ../development/python-modules/cmsdials { };
+
   cmsis-pack-manager = callPackage ../development/python-modules/cmsis-pack-manager { };
 
   cmsis-svd = callPackage ../development/python-modules/cmsis-svd { };
@@ -2694,8 +2700,14 @@ self: super: with self; {
 
   cufflinks = callPackage ../development/python-modules/cufflinks { };
 
-  # cupy 12.2.0 possibly incompatible with cutensor 2.0 that comes with cudaPackages_12
-  cupy = callPackage ../development/python-modules/cupy { cudaPackages = pkgs.cudaPackages_11; };
+  cupy = callPackage ../development/python-modules/cupy {
+    # cupy 12.2.0 possibly incompatible with cutensor 2.0 that comes with cudaPackages_12
+    cudaPackages = pkgs.cudaPackages_11.overrideScope (cu-fi: _: {
+      # CuDNN 9 is not supported:
+      # https://github.com/cupy/cupy/issues/8215
+      cudnn = cu-fi.cudnn_8_9;
+    });
+  };
 
   curio = callPackage ../development/python-modules/curio { };
 
@@ -2730,6 +2742,8 @@ self: super: with self; {
   cx-oracle = callPackage ../development/python-modules/cx-oracle { };
 
   cxxfilt = callPackage ../development/python-modules/cxxfilt { };
+
+  cxxheaderparser = callPackage ../development/python-modules/cxxheaderparser { };
 
   cycler = callPackage ../development/python-modules/cycler { };
 
@@ -3272,6 +3286,8 @@ self: super: with self; {
   django-cors-headers = callPackage ../development/python-modules/django-cors-headers { };
 
   django-countries = callPackage ../development/python-modules/django-countries { };
+
+  django-crispy-bootstrap3 = callPackage ../development/python-modules/django-crispy-bootstrap3 { };
 
   django-crispy-bootstrap4 = callPackage ../development/python-modules/django-crispy-bootstrap4 { };
 
@@ -5543,6 +5559,8 @@ self: super: with self; {
 
   highdicom = callPackage ../development/python-modules/highdicom { };
 
+  highspy = callPackage ../development/python-modules/highspy { };
+
   hid = callPackage ../development/python-modules/hid {
     inherit (pkgs) hidapi;
   };
@@ -6351,6 +6369,8 @@ self: super: with self; {
 
   json-merge-patch = callPackage ../development/python-modules/json-merge-patch { };
 
+  json-repair = callPackage ../development/python-modules/json-repair { };
+
   json-schema-for-humans = callPackage ../development/python-modules/json-schema-for-humans { };
 
   json-stream = callPackage ../development/python-modules/json-stream { };
@@ -6884,11 +6904,6 @@ self: super: with self; {
     inherit (pkgs) libgpiod;
   };
 
-  libgpuarray = callPackage ../development/python-modules/libgpuarray {
-    clblas = pkgs.clblas.override { inherit (self) boost; };
-    inherit (pkgs.config) cudaSupport;
-  };
-
   libgravatar = callPackage ../development/python-modules/libgravatar { };
 
   libiio = (toPythonModule (pkgs.libiio.override {
@@ -7282,6 +7297,8 @@ self: super: with self; {
 
   lottie = callPackage ../development/python-modules/lottie { };
 
+  lox = callPackage ../development/python-modules/lox { };
+
   lpc-checksum = callPackage ../development/python-modules/lpc-checksum { };
 
   lrcalc-python = callPackage ../development/python-modules/lrcalc-python { };
@@ -7554,6 +7571,8 @@ self: super: with self; {
   mdx-truly-sane-lists = callPackage ../development/python-modules/mdx-truly-sane-lists { };
 
   md2gemini = callPackage ../development/python-modules/md2gemini { };
+
+  md2pdf = callPackage ../development/python-modules/md2pdf { };
 
   mdformat = callPackage ../development/python-modules/mdformat { };
   mdformat-admon = callPackage ../development/python-modules/mdformat-admon { };
@@ -9242,6 +9261,8 @@ self: super: with self; {
   numpy_2 = callPackage ../development/python-modules/numpy/2.nix { };
   numpy = if self.pythonOlder "3.13" then numpy_1 else numpy_2;
 
+  numpy-groupies = callPackage ../development/python-modules/numpy-groupies { };
+
   numpy-stl = callPackage ../development/python-modules/numpy-stl { };
 
   numpyro = callPackage ../development/python-modules/numpyro { };
@@ -9249,6 +9270,8 @@ self: super: with self; {
   nunavut = callPackage ../development/python-modules/nunavut { };
 
   nutils = callPackage ../development/python-modules/nutils { };
+
+  nutils-poly = callPackage ../development/python-modules/nutils-poly { };
 
   nvchecker = callPackage ../development/python-modules/nvchecker { };
 
@@ -9893,6 +9916,8 @@ self: super: with self; {
 
   pdm-backend = callPackage ../development/python-modules/pdm-backend { };
 
+  pdm-build-locked = callPackage ../development/python-modules/pdm-build-locked { };
+
   pdm-pep517 = callPackage ../development/python-modules/pdm-pep517 { };
 
   pdoc = callPackage ../development/python-modules/pdoc { };
@@ -9990,6 +10015,8 @@ self: super: with self; {
   pgvector = callPackage ../development/python-modules/pgvector { };
 
   phe = callPackage ../development/python-modules/phe { };
+
+  phply = callPackage ../development/python-modules/phply { };
 
   phik = callPackage ../development/python-modules/phik { };
 
@@ -10408,6 +10435,8 @@ self: super: with self; {
   pytlv = callPackage ../development/python-modules/pytlv { };
 
   pywebcopy = callPackage ../development/python-modules/pywebcopy { };
+
+  python-can = callPackage ../development/python-modules/python-can { };
 
   python-codon-tables = callPackage ../development/python-modules/python-codon-tables { };
 
@@ -11136,8 +11165,6 @@ self: super: with self; {
 
   pycomfoconnect = callPackage ../development/python-modules/pycomfoconnect { };
 
-  pycontracts = callPackage ../development/python-modules/pycontracts { };
-
   pycosat = callPackage ../development/python-modules/pycosat { };
 
   pycotap = callPackage ../development/python-modules/pycotap { };
@@ -11523,6 +11550,8 @@ self: super: with self; {
   pyicloud = callPackage ../development/python-modules/pyicloud { };
 
   pyicu = callPackage ../development/python-modules/pyicu { };
+
+  pyicumessageformat = callPackage ../development/python-modules/pyicumessageformat { };
 
   pyimpfuzzy = callPackage ../development/python-modules/pyimpfuzzy {
     inherit (pkgs) ssdeep;
@@ -14388,6 +14417,8 @@ self: super: with self; {
 
   sip = callPackage ../development/python-modules/sip { };
 
+  siphashc = callPackage ../development/python-modules/siphashc { };
+
   sip4 = callPackage ../development/python-modules/sip/4.x.nix { };
 
   sipyco = callPackage ../development/python-modules/sipyco { };
@@ -14870,8 +14901,6 @@ self: super: with self; {
 
   sqlalchemy-jsonfield = callPackage ../development/python-modules/sqlalchemy-jsonfield { };
 
-  sqlalchemy-migrate = callPackage ../development/python-modules/sqlalchemy-migrate { };
-
   sqlalchemy-mixins = callPackage ../development/python-modules/sqlalchemy-mixins { };
 
   sqlalchemy-utils = callPackage ../development/python-modules/sqlalchemy-utils { };
@@ -15297,8 +15326,6 @@ self: super: with self; {
   temperusb = callPackage ../development/python-modules/temperusb { };
 
   tempest = callPackage ../development/python-modules/tempest { };
-
-  tempita = callPackage ../development/python-modules/tempita { };
 
   templateflow = callPackage ../development/python-modules/templateflow { };
 
@@ -15726,6 +15753,8 @@ self: super: with self; {
     cudaPackages = pkgs.cudaPackages_12;
   };
 
+  torchcrepe = callPackage ../development/python-modules/torchcrepe { };
+
   torchdiffeq = callPackage ../development/python-modules/torchdiffeq { };
 
   torchmetrics = callPackage ../development/python-modules/torchmetrics { };
@@ -15781,6 +15810,10 @@ self: super: with self; {
   tracerite = callPackage ../development/python-modules/tracerite { };
 
   tracing = callPackage ../development/python-modules/tracing { };
+
+  translate-toolkit = callPackage ../development/python-modules/translate-toolkit { };
+
+  translation-finder = callPackage ../development/python-modules/translation-finder { };
 
   trackpy = callPackage ../development/python-modules/trackpy { };
 
@@ -17347,6 +17380,10 @@ self: super: with self; {
   webencodings = callPackage ../development/python-modules/webencodings { };
 
   webexteamssdk = callPackage ../development/python-modules/webexteamssdk { };
+
+  weblate-language-data = callPackage ../development/python-modules/weblate-language-data { };
+
+  weblate-schemas = callPackage ../development/python-modules/weblate-schemas { };
 
   webob = callPackage ../development/python-modules/webob { };
 

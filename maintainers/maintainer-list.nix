@@ -2544,6 +2544,13 @@
     githubId = 410028;
     name = "Tobias Bergkvist";
   };
+  berquist = {
+    name = "Eric Berquist";
+    email = "eric.berquist@gmail.com";
+    github = "berquist";
+    githubId = 727571;
+    keys = [ { fingerprint = "AAD4 3B70 A504 9675 CFC8  B101 BAFD 205D 5FA2 B329"; } ];
+  };
   berryp = {
     email = "berryphillips@gmail.com";
     github = "berryp";
@@ -3026,10 +3033,11 @@
     name = "Roman Gerasimenko";
   };
   builditluc = {
-    email = "builditluc@icloud.com";
+    email = "git@builditluc.eu";
     github = "Builditluc";
     githubId = 37375448;
-    name = "Buildit";
+    name = "Builditluc";
+    keys = [ { fingerprint = "FF16E475723B8C1E57A6B2569374074AE2D6F20E"; } ];
   };
   buurro = {
     email = "marcoburro98@gmail.com";
@@ -4432,6 +4440,12 @@
     github = "danielbarter";
     githubId = 8081722;
     name = "Daniel Barter";
+  };
+  danielbritten = {
+    email = "nixpkgs@danielb.space";
+    github = "Coda-Coda";
+    githubId = 5212453;
+    name = "Daniel Britten";
   };
   danieldk = {
     email = "me@danieldk.eu";
@@ -16685,6 +16699,13 @@
     githubId = 23097564;
     name = "Nora Widdecke";
   };
+  pwnwriter = {
+    name = "Nabeen Tiwaree";
+    email = "hey@pwnwriter.xyz";
+    keys = [ { fingerprint = "B681 763F 9B5B DF27 9A13  9E0C 0544 A89B C519 20AA"; } ];
+    github = "pwnwriter";
+    githubId = 90331517;
+  };
   pwoelfel = {
     name = "Philipp Woelfel";
     email = "philipp.woelfel@gmail.com";
@@ -19718,11 +19739,23 @@
     githubId = 12984845;
     name = "Subhrajyoti Sen";
   };
+  sudoforge = {
+    github = "sudoforge";
+    githubId = 3893293;
+    name = "sudoforge";
+    keys = [ { fingerprint = "7EBCE51F278D30AE1C34036341BF61468C327D5A"; } ];
+  };
   sudosubin = {
     email = "sudosubin@gmail.com";
     github = "sudosubin";
     githubId = 32478597;
     name = "Subin Kim";
+  };
+  sugar700 = {
+    email = "sugar@sylveon.social";
+    github = "sugar700";
+    githubId = 168804988;
+    name = "sugar";
   };
   suhr = {
     email = "suhr@i2pmail.org";
@@ -20463,6 +20496,12 @@
     githubId = 844343;
     name = "Thiago K. Okada";
     matrix = "@k0kada:matrix.org";
+  };
+  thibaultd = {
+    email = "t@lichess.org";
+    github = "ornicar";
+    githubId = 140370;
+    name = "Thibault D";
   };
   thibaultlemaire = {
     email = "thibault.lemaire@protonmail.com";
