@@ -4427,8 +4427,6 @@ with pkgs;
     gflags = null; # only required for examples/tests
   };
 
-  cbor-diag = callPackage ../development/tools/cbor-diag { };
-
   cassowary = callPackage ../tools/networking/cassowary { };
 
   croc = callPackage ../tools/networking/croc { };
@@ -15477,9 +15475,7 @@ with pkgs;
 
   hop = callPackage ../development/compilers/hop { };
 
-  hop-cli = callPackage ../tools/admin/hop-cli {
-    inherit (darwin.apple_sdk.frameworks) CoreServices Security SystemConfiguration;
-  };
+  hop-cli = throw "hop-cli has been removed as the service has been shut-down"; #Added 2024-08-13
 
   falcon = callPackage ../development/interpreters/falcon {
     stdenv = gcc10Stdenv;
@@ -38692,7 +38688,7 @@ with pkgs;
   dnadd = callPackage ../tools/nix/dnadd { };
 
   nix-eval-jobs = callPackage ../tools/package-management/nix-eval-jobs {
-    nix = nixVersions.nix_2_22;
+    nix = nixVersions.nix_2_24;
   };
 
   nix-doc = callPackage ../tools/package-management/nix-doc { };
