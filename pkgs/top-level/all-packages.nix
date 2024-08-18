@@ -864,8 +864,6 @@ with pkgs;
 
   # Dotnet
 
-  csharp-ls = callPackage ../development/tools/language-servers/csharp-ls { };
-
   dotnetCorePackages = recurseIntoAttrs (callPackage ../development/compilers/dotnet {});
 
   dotnet-sdk_6 = dotnetCorePackages.sdk_6_0;
@@ -2745,8 +2743,6 @@ with pkgs;
 
   tiny8086 = callPackage ../applications/emulators/tiny8086 { };
 
-  tinyemu = callPackage ../applications/emulators/tinyemu { };
-
   uae = callPackage ../applications/emulators/uae { };
 
   vbam = callPackage ../applications/emulators/vbam { };
@@ -4548,8 +4544,6 @@ with pkgs;
   coreboot-configurator = libsForQt5.callPackage ../tools/misc/coreboot-configurator { };
 
   corosync = callPackage ../servers/corosync { };
-
-  cowsay = callPackage ../tools/misc/cowsay { };
 
   fw-ectool = callPackage ../os-specific/linux/fw-ectool { };
 
@@ -8277,8 +8271,6 @@ with pkgs;
 
   gocryptfs = callPackage ../tools/filesystems/gocryptfs { };
 
-  godot_4 = callPackage ../development/tools/godot/4 { };
-
   godot3 = callPackage ../development/tools/godot/3 { };
 
   godot3-export-templates = callPackage ../development/tools/godot/3/export-templates.nix { };
@@ -10323,8 +10315,6 @@ with pkgs;
   mfoc = callPackage ../tools/security/mfoc { };
 
   microbin = callPackage ../servers/microbin { };
-
-  microdnf = callPackage ../tools/package-management/microdnf { };
 
   microplane = callPackage ../tools/misc/microplane { };
 
@@ -17392,8 +17382,6 @@ with pkgs;
 
   postgres-lsp = callPackage ../development/tools/language-servers/postgres-lsp { };
 
-  pylyzer = callPackage ../development/tools/language-servers/pylyzer { };
-
   ruff-lsp = python3Packages.callPackage ../development/tools/language-servers/ruff-lsp { };
 
   rune-languageserver = callPackage ../development/tools/language-servers/rune-languageserver { };
@@ -20473,12 +20461,21 @@ with pkgs;
   # Only supported on Linux and only on glibc
   glibcLocales =
     if stdenv.hostPlatform.isLinux && stdenv.hostPlatform.isGnu
-    then callPackage ../development/libraries/glibc/locales.nix { }
-    else null;
+    then callPackage ../development/libraries/glibc/locales.nix {
+      stdenv = if (!stdenv.cc.isGNU) then
+        gccStdenv
+      else stdenv;
+      withLinuxHeaders = !stdenv.cc.isGNU;
+    } else null;
   glibcLocalesUtf8 =
     if stdenv.hostPlatform.isLinux && stdenv.hostPlatform.isGnu
-    then callPackage ../development/libraries/glibc/locales.nix { allLocales = false; }
-    else null;
+    then callPackage ../development/libraries/glibc/locales.nix {
+      stdenv = if (!stdenv.cc.isGNU) then
+        gccStdenv
+      else stdenv;
+      withLinuxHeaders = !stdenv.cc.isGNU;
+      allLocales = false;
+    } else null;
 
   glibcInfo = callPackage ../development/libraries/glibc/info.nix { };
 
@@ -23689,8 +23686,6 @@ with pkgs;
   };
   csfml = callPackage ../development/libraries/csfml { };
 
-  shapelib = callPackage ../development/libraries/shapelib { };
-
   sharness = callPackage ../development/libraries/sharness { };
 
   shibboleth-sp = callPackage ../development/libraries/shibboleth-sp { };
@@ -24417,8 +24412,6 @@ with pkgs;
 
   yyjson = callPackage ../development/libraries/yyjson { };
 
-  zchunk = callPackage ../development/libraries/zchunk { };
-
   zeitgeist = callPackage ../development/libraries/zeitgeist { };
 
   zlib = callPackage ../development/libraries/zlib { };
@@ -24528,8 +24521,6 @@ with pkgs;
   commonsIo = callPackage ../development/libraries/java/commons/io { };
 
   commonsMath = callPackage ../development/libraries/java/commons/math { };
-
-  fastjar = callPackage ../development/tools/java/fastjar { };
 
   httpunit = callPackage ../development/libraries/java/httpunit { };
 
@@ -26164,8 +26155,6 @@ with pkgs;
 
   acpitool = callPackage ../os-specific/linux/acpitool { };
 
-  aldente = callPackage ../os-specific/darwin/aldente { };
-
   alfred = callPackage ../os-specific/linux/batman-adv/alfred.nix { };
 
   alertmanager-irc-relay = callPackage ../servers/monitoring/alertmanager-irc-relay { };
@@ -26886,7 +26875,6 @@ with pkgs;
 
   ocf-resource-agents = callPackage ../os-specific/linux/ocf-resource-agents { };
 
-  open-vm-tools = callPackage ../applications/virtualization/open-vm-tools { };
   open-vm-tools-headless = open-vm-tools.override { withX = false; };
 
   oxtools = callPackage ../os-specific/linux/oxtools { };
@@ -27112,7 +27100,11 @@ with pkgs;
   prototool = callPackage ../development/tools/prototool { };
 
   qemu_kvm = lowPrio (qemu.override { hostCpuOnly = true; });
-  qemu_full = lowPrio (qemu.override { smbdSupport = true; cephSupport = true; glusterfsSupport = true; });
+  qemu_full = lowPrio (qemu.override {
+    smbdSupport = lib.meta.availableOn stdenv.hostPlatform samba;
+    cephSupport = lib.meta.availableOn stdenv.hostPlatform ceph;
+    glusterfsSupport = lib.meta.availableOn stdenv.hostPlatform glusterfs && lib.meta.availableOn stdenv.hostPlatform libuuid;
+  });
 
   # See `xenPackages` source for explanations.
   # Building with `xen` instead of `xen-slim` is possible, but makes no sense.
@@ -32410,10 +32402,6 @@ with pkgs;
 
   shod = callPackage ../applications/window-managers/shod { };
 
-  shotcut = qt6Packages.callPackage ../applications/video/shotcut {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-  };
-
   shogun = callPackage ../applications/science/machine-learning/shogun {
     protobuf = protobuf_21;
   };
@@ -34433,8 +34421,6 @@ with pkgs;
 
   vpv = callPackage ../applications/graphics/vpv { };
 
-  vsce = callPackage ../development/tools/vsce { };
-
   vscode = callPackage ../applications/editors/vscode/vscode.nix { };
   vscode-fhs = vscode.fhs;
   vscode-fhsWithPackages = vscode.fhsWithPackages;
@@ -34456,13 +34442,11 @@ with pkgs;
   openvscode-server = callPackage ../servers/openvscode-server {
     nodejs = nodejs_18;
     inherit (darwin.apple_sdk.frameworks) AppKit Cocoa Security;
-    inherit (nodePackages) node-gyp;
   };
 
   code-server = callPackage ../servers/code-server {
     nodejs = nodejs_20;
     inherit (darwin.apple_sdk.frameworks) AppKit Cocoa CoreServices Security;
-    inherit (nodePackages) node-gyp;
   };
 
   vue = callPackage ../applications/misc/vue { };
@@ -35413,10 +35397,6 @@ with pkgs;
   dhewm3 = callPackage ../games/doom-ports/dhewm3 { };
 
   doomseeker = qt5.callPackage ../games/doom-ports/doomseeker { };
-
-  doomretro = callPackage ../games/doom-ports/doomretro {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-  };
 
   doomrunner = qt5.callPackage ../games/doom-ports/doomrunner { };
 
@@ -38852,8 +38832,6 @@ with pkgs;
   robo3t = callPackage ../applications/misc/robo3t { };
 
   rucksack = callPackage ../development/tools/rucksack { };
-
-  ruff = callPackage ../development/tools/ruff { };
 
   sam-ba = callPackage ../tools/misc/sam-ba { };
 
