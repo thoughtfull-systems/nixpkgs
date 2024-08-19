@@ -11009,6 +11009,8 @@ with pkgs;
 
   openfec = callPackage ../development/libraries/openfec { };
 
+  ophcrack-cli = ophcrack.override { enableGui = false; };
+
   ophis = python3Packages.callPackage ../development/compilers/ophis { };
 
   open-ecard = callPackage ../tools/security/open-ecard { };
@@ -17381,8 +17383,6 @@ with pkgs;
   perlnavigator = callPackage ../development/tools/language-servers/perlnavigator { };
 
   postgres-lsp = callPackage ../development/tools/language-servers/postgres-lsp { };
-
-  ruff-lsp = python3Packages.callPackage ../development/tools/language-servers/ruff-lsp { };
 
   rune-languageserver = callPackage ../development/tools/language-servers/rune-languageserver { };
 
@@ -39469,8 +39469,6 @@ with pkgs;
   xteddy = callPackage ../applications/misc/xteddy { };
 
   xva-img = callPackage ../tools/virtualization/xva-img { };
-
-  xwiimote = callPackage ../misc/drivers/xwiimote { };
 
   xzoom = callPackage ../tools/X11/xzoom { };
 
