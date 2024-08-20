@@ -643,8 +643,6 @@ with pkgs;
 
   firefly-desktop = callPackage ../applications/misc/firefly-desktop { };
 
-  flaca = callPackage ../applications/graphics/flaca { };
-
   frece = callPackage ../development/tools/frece { };
 
   frida-tools = callPackage ../tools/security/frida-tools { };
@@ -7868,8 +7866,6 @@ with pkgs;
 
   flintlock = callPackage ../applications/virtualization/flintlock { };
 
-  flip-link = callPackage ../development/tools/flip-link { };
-
   flips = callPackage ../tools/compression/flips { };
 
   flowblade = callPackage ../applications/video/flowblade { };
@@ -10253,8 +10249,6 @@ with pkgs;
   marktext = callPackage ../applications/misc/marktext { };
 
   mars-mips = callPackage ../development/tools/mars-mips { };
-
-  maui-shell = libsForQt5.callPackage ../applications/window-managers/maui-shell { };
 
   mawk = callPackage ../tools/text/mawk { };
 
@@ -13193,14 +13187,14 @@ with pkgs;
 
   thelounge = callPackage ../applications/networking/irc/thelounge { };
 
-  theLoungePlugins = with lib; let
-    pkgs = filterAttrs (name: _: hasPrefix "thelounge-" name) nodePackages;
-    getPackagesWithPrefix = prefix: mapAttrs' (name: pkg: nameValuePair (removePrefix ("thelounge-" + prefix + "-") name) pkg)
-      (filterAttrs (name: _: hasPrefix ("thelounge-" + prefix + "-") name) pkgs);
+  theLoungePlugins = let
+    pkgs = lib.filterAttrs (name: _: lib.hasPrefix "thelounge-" name) nodePackages;
+    getPackagesWithPrefix = prefix: lib.mapAttrs' (name: pkg: lib.nameValuePair (lib.removePrefix ("thelounge-" + prefix + "-") name) pkg)
+      (lib.filterAttrs (name: _: lib.hasPrefix ("thelounge-" + prefix + "-") name) pkgs);
   in
-  recurseIntoAttrs {
-    plugins = recurseIntoAttrs (getPackagesWithPrefix "plugin");
-    themes = recurseIntoAttrs (getPackagesWithPrefix "theme");
+  lib.recurseIntoAttrs {
+    plugins = lib.recurseIntoAttrs (getPackagesWithPrefix "plugin");
+    themes = lib.recurseIntoAttrs (getPackagesWithPrefix "theme");
   };
 
   theme-sh = callPackage ../tools/misc/theme-sh { };
@@ -14336,8 +14330,6 @@ with pkgs;
   xdxf2slob = callPackage ../tools/misc/xdxf2slob { };
 
   xe-guest-utilities = callPackage ../tools/virtualization/xe-guest-utilities { };
-
-  xen-guest-agent = callPackage ../tools/virtualization/xen-guest-agent { };
 
   xflux = callPackage ../tools/misc/xflux { };
   xflux-gui = python3Packages.callPackage ../tools/misc/xflux/gui.nix { };
@@ -18028,8 +18020,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  dwfv = callPackage ../applications/science/electronics/dwfv { };
-
   dwz = callPackage ../development/tools/misc/dwz { };
 
   easypdkprog = callPackage ../development/embedded/easypdkprog { };
@@ -19431,8 +19421,6 @@ with pkgs;
   allegro4 = callPackage ../development/libraries/allegro { };
   allegro5 = callPackage ../development/libraries/allegro/5.nix { };
 
-  amdvlk = callPackage ../development/libraries/amdvlk { };
-
   amf-headers = callPackage ../development/libraries/amf-headers { };
 
   aml = callPackage ../development/libraries/aml { };
@@ -19588,7 +19576,7 @@ with pkgs;
 
   # TODO(@Ericson2314): Build bionic libc from source
   bionic = if stdenv.hostPlatform.useAndroidPrebuilt
-    then pkgs."androidndkPkgs_${stdenv.hostPlatform.ndkVer}".libraries
+    then pkgs."androidndkPkgs_${stdenv.hostPlatform.androidNdkVer}".libraries
     else callPackage ../os-specific/linux/bionic-prebuilt { };
 
   boolstuff = callPackage ../development/libraries/boolstuff { };
@@ -22039,8 +22027,6 @@ with pkgs;
 
   libmp3splt = callPackage ../development/libraries/libmp3splt { };
 
-  libmrss = callPackage ../development/libraries/libmrss { };
-
   libmspack = callPackage ../development/libraries/libmspack { };
 
   libmusicbrainz3 = callPackage ../development/libraries/libmusicbrainz { };
@@ -22076,8 +22062,6 @@ with pkgs;
   libnftnl = callPackage ../development/libraries/libnftnl { };
 
   libnova = callPackage ../development/libraries/science/astronomy/libnova { };
-
-  libnxml = callPackage ../development/libraries/libnxml { };
 
   libodfgen = callPackage ../development/libraries/libodfgen { };
 
@@ -33189,8 +33173,6 @@ with pkgs;
 
   qxw = callPackage ../applications/editors/qxw { };
 
-  rabbitvcs = callPackage ../applications/version-management/rabbitvcs { };
-
   rakarrack = callPackage ../applications/audio/rakarrack {
     fltk = fltk13;
   };
@@ -35778,6 +35760,8 @@ with pkgs;
   flock = callPackage ../development/tools/flock { };
 
   forge-mtg = callPackage ../games/forge-mtg { };
+
+  freecad-wayland = freecad.override { withWayland = true; };
 
   freeciv = callPackage ../games/freeciv {
     sdl2Client = false;
@@ -38742,8 +38726,6 @@ with pkgs;
   nix-serve = callPackage ../tools/package-management/nix-serve { };
 
   nix-serve-ng = haskell.lib.compose.justStaticExecutables haskellPackages.nix-serve-ng;
-
-  nix-simple-deploy = callPackage ../tools/package-management/nix-simple-deploy { };
 
   nix-visualize = python3.pkgs.callPackage ../tools/package-management/nix-visualize { };
 
