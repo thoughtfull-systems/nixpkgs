@@ -3429,6 +3429,12 @@
     githubId = 977929;
     name = "Cody Allen";
   };
+  Celibistrial = {
+    email = "ryan80222@gmail.com";
+    github = "Celibistrial";
+    githubId = 82810795;
+    name = "Gaurav Choudhury";
+  };
   centromere = {
     email = "nix@centromere.net";
     github = "centromere";
@@ -5640,7 +5646,7 @@
     matrix = "@e1mo:chaos.jetzt";
     github = "e1mo";
     githubId = 61651268;
-    name = "Moritz Fromm";
+    name = "Nina Fromm";
     keys = [ { fingerprint = "67BE E563 43B6 420D 550E  DF2A 6D61 7FD0 A85B AADA"; } ];
   };
   eadwu = {
@@ -7676,6 +7682,12 @@
     github = "goodrone";
     githubId = 1621335;
     name = "Andrew Trachenko";
+  };
+  gordon-bp = {
+    email = "gordy@hanakano.com";
+    github = "Gordon-BP";
+    githubId = 77560236;
+    name = "Gordon Clark";
   };
   gotcha = {
     email = "gotcha@bubblenet.be";
@@ -10102,6 +10114,12 @@
     github = "JoshVanL";
     githubId = 15893072;
     name = "Josh van Leeuwen";
+  };
+  jovandeginste = {
+    email = "jo.vandeginste@gmail.com";
+    github = "jovandeginste";
+    githubId = 3170771;
+    name = "Jo Vandeginste";
   };
   jpagex = {
     name = "Jérémy Pagé";
@@ -15221,6 +15239,12 @@
     github = "odygrd";
     githubId = 7397786;
     name = "Odysseas Georgoudis";
+  };
+  ofalvai = {
+    email = "ofalvai@gmail.com";
+    github = "ofalvai";
+    githubId = 1694986;
+    name = "Olivér Falvai";
   };
   ofek = {
     email = "oss@ofek.dev";
