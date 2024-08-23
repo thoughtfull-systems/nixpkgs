@@ -6876,8 +6876,6 @@ with pkgs;
 
   convfont = callPackage ../tools/misc/convfont { };
 
-  convmv = callPackage ../tools/misc/convmv { };
-
   cpcfs = callPackage ../tools/filesystems/cpcfs { };
 
   coreutils =  callPackage ../tools/misc/coreutils { };
@@ -8801,8 +8799,6 @@ with pkgs;
   hubicfuse = callPackage ../tools/filesystems/hubicfuse { };
 
   humanfriendly = with python3Packages; toPythonApplication humanfriendly;
-
-  hwinfo = callPackage ../tools/system/hwinfo { };
 
   hw-probe = perlPackages.callPackage ../tools/system/hw-probe { };
 
@@ -31509,10 +31505,6 @@ with pkgs;
 
   lame = callPackage ../development/libraries/lame { };
 
-  labwc = callPackage ../by-name/la/labwc/package.nix {
-    wlroots = wlroots_0_17;
-  };
-
   larswm = callPackage ../applications/window-managers/larswm { };
 
   lash = callPackage ../applications/audio/lash { };
@@ -37257,8 +37249,6 @@ with pkgs;
   p4est-dbg = callPackage ../development/libraries/science/math/p4est {
     p4est-sc = p4est-sc-dbg;
   };
-
-  parmetis = callPackage ../development/libraries/science/math/parmetis { };
 
   QuadProgpp = callPackage ../development/libraries/science/math/QuadProgpp { };
 
