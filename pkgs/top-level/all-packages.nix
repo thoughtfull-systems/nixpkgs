@@ -5639,7 +5639,7 @@ with pkgs;
   medusa = callPackage ../tools/security/medusa { };
 
   megasync = libsForQt5.callPackage ../applications/misc/megasync {
-    ffmpeg = ffmpeg_4;
+    ffmpeg = ffmpeg_7;
   };
 
   megacmd = callPackage ../applications/misc/megacmd { };
@@ -10656,8 +10656,6 @@ with pkgs;
 
   nb = callPackage ../tools/misc/nb { };
 
-  nbqa = callPackage ../tools/misc/nbqa { };
-
   kb = callPackage ../tools/misc/kb { };
 
   notable = callPackage ../applications/misc/notable { };
@@ -13683,8 +13681,6 @@ with pkgs;
     pythonPackages = python3Packages;
   };
 
-  video-trimmer = callPackage ../applications/video/video-trimmer { };
-
   via = callPackage ../tools/misc/via { };
 
   vial = callPackage ../tools/misc/vial { };
@@ -14921,6 +14917,7 @@ with pkgs;
   flutterPackages-source = recurseIntoAttrs (callPackage ../development/compilers/flutter { useNixpkgsEngine = true; });
   flutterPackages = flutterPackages-bin;
   flutter = flutterPackages.stable;
+  flutter324 = flutterPackages.v3_24;
   flutter323 = flutterPackages.v3_23;
   flutter322 = flutterPackages.v3_22;
   flutter319 = flutterPackages.v3_19;
@@ -17336,7 +17333,7 @@ with pkgs;
   ansible-lint = callPackage ../tools/admin/ansible/lint.nix { };
 
   antares = callPackage ../by-name/an/antares/package.nix {
-    electron = electron_29;
+    electron = electron_30;
   };
 
   antlr2 = callPackage ../development/tools/parsing/antlr/2.7.7.nix { };
@@ -17411,7 +17408,7 @@ with pkgs;
   electron_24 = electron_24-bin;
   electron_27 = electron_27-bin;
   electron_28 = electron_28-bin;
-  electron_29 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_29 then electron-source.electron_29 else electron_29-bin;
+  electron_29 = electron_29-bin;
   electron_30 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_30 then electron-source.electron_30 else electron_30-bin;
   electron_31 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_31 then electron-source.electron_31 else electron_31-bin;
   electron = electron_31;
@@ -18719,10 +18716,6 @@ with pkgs;
 
   ran = callPackage ../servers/http/ran { };
 
-  rathole = callPackage ../tools/networking/rathole {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
   retry = callPackage ../tools/system/retry { };
 
   rizin = pkgs.callPackage ../development/tools/analysis/rizin { };
@@ -20007,8 +20000,6 @@ with pkgs;
     ffmpeg-full;
 
   ffmpegthumbnailer = callPackage ../development/libraries/ffmpegthumbnailer { };
-
-  ffmpeg-normalize = python3Packages.callPackage ../applications/video/ffmpeg-normalize { };
 
   ffms = callPackage ../development/libraries/ffms { };
 
@@ -26225,7 +26216,9 @@ with pkgs;
 
   firmware-manager = callPackage ../os-specific/linux/firmware/firmware-manager { };
 
-  firmware-updater = callPackage ../os-specific/linux/firmware/firmware-updater { };
+  firmware-updater = callPackage ../os-specific/linux/firmware/firmware-updater {
+    flutter = flutterPackages.v3_22;
+  };
 
   fwts = callPackage ../os-specific/linux/fwts { };
 
@@ -28576,7 +28569,7 @@ with pkgs;
 
   whitesur-icon-theme = callPackage ../data/icons/whitesur-icon-theme { };
 
-  whitesur-kde = libsForQt5.callPackage ../data/themes/whitesur-kde { };
+  whitesur-kde = kdePackages.callPackage ../data/themes/whitesur-kde { };
 
   wireless-regdb = callPackage ../data/misc/wireless-regdb { };
 
@@ -33336,8 +33329,6 @@ with pkgs;
   sway-launcher-desktop = callPackage ../applications/misc/sway-launcher-desktop { };
 
   tart = callPackage ../applications/virtualization/tart { };
-
-  viber = callPackage ../applications/networking/instant-messengers/viber { };
 
   wavebox = callPackage ../applications/networking/instant-messengers/wavebox { };
 
