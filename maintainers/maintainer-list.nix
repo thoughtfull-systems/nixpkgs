@@ -18783,6 +18783,12 @@
     githubId = 307899;
     name = "Gurkan Gur";
   };
+  sequencer = {
+    email = "liu@jiuyang.me";
+    github = "sequencer";
+    githubId = 5791019;
+    name = "Jiuyang Liu";
+  };
   serge = {
     email = "sb@canva.com";
     github = "serge-belov";
@@ -21834,6 +21840,12 @@
     github = "vinnymeller";
     githubId = 19894025;
     name = "Vinny Meller";
+  };
+  vinylen = {
+    email = "victor@viclab.se";
+    github = "vinylen";
+    githubId = 98466471;
+    name = "Victor Nilsson";
   };
   vinymeuh = {
     email = "vinymeuh@gmail.com";
