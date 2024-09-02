@@ -1139,9 +1139,11 @@ with pkgs;
           if stdenv.isDarwin || stdenv.hostPlatform.isWindows
             then false
             else old.gssSupport or true; # `? true` is the default
-        libkrb5 = buildPackages.libkrb5.override {
+        libkrb5 = buildPackages.krb5.override {
           fetchurl = stdenv.fetchurlBoot;
           inherit pkg-config perl openssl;
+          withLibedit = false;
+          byacc = buildPackages.byacc.override { fetchurl = stdenv.fetchurlBoot; };
           keyutils = buildPackages.keyutils.override { fetchurl = stdenv.fetchurlBoot; };
         };
         nghttp2 = buildPackages.nghttp2.override {
@@ -4261,11 +4263,6 @@ with pkgs;
 
   brutespray = callPackage ../tools/security/brutespray { };
 
-  breakpointHook = assert stdenv.buildPlatform.isLinux;
-    makeSetupHook {
-      name = "breakpoint-hook";
-    } ../build-support/setup-hooks/breakpoint-hook.sh;
-
   btrfs-progs = callPackage ../tools/filesystems/btrfs-progs { };
 
   btrfs-snap = callPackage ../tools/filesystems/btrfs-snap { };
@@ -5659,7 +5656,7 @@ with pkgs;
         substitutions = {
           crossFile = writeText "cross-file.conf" ''
               [binaries]
-              exe_wrapper = ${lib.escapeShellArg (stdenv.targetPlatform.emulator pkgs)}
+              exe_wrapper = '${lib.escape [ "'" "\\" ] (stdenv.targetPlatform.emulator pkgs)}'
             '';
         };
       }
@@ -6910,7 +6907,8 @@ with pkgs;
   cudaPackages_12_1 = callPackage ./cuda-packages.nix { cudaVersion = "12.1"; };
   cudaPackages_12_2 = callPackage ./cuda-packages.nix { cudaVersion = "12.2"; };
   cudaPackages_12_3 = callPackage ./cuda-packages.nix { cudaVersion = "12.3"; };
-  cudaPackages_12 = cudaPackages_12_2; # Latest supported by cudnn
+  cudaPackages_12_4 = callPackage ./cuda-packages.nix { cudaVersion = "12.4"; };
+  cudaPackages_12 = cudaPackages_12_4; # Latest supported by cudnn
 
   cudaPackages = recurseIntoAttrs cudaPackages_12;
 
@@ -8125,8 +8123,6 @@ with pkgs;
   glmark2 = callPackage ../tools/graphics/glmark2 { };
 
   glogg = libsForQt5.callPackage ../tools/text/glogg { };
-
-  glxinfo = callPackage ../tools/graphics/glxinfo { };
 
   gmrender-resurrect = callPackage ../tools/networking/gmrender-resurrect {
     inherit (gst_all_1) gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav;
@@ -11071,7 +11067,7 @@ with pkgs;
   openvpn_learnaddress = callPackage ../tools/networking/openvpn/openvpn_learnaddress.nix { };
 
   openvpn-auth-ldap = callPackage ../tools/networking/openvpn/openvpn-auth-ldap.nix {
-    stdenv = clangStdenv;
+    inherit (llvmPackages_17) stdenv;
   };
 
   namespaced-openvpn = python3Packages.callPackage ../tools/networking/namespaced-openvpn { };
@@ -12428,8 +12424,6 @@ with pkgs;
   setroot = callPackage  ../tools/X11/setroot { };
 
   setserial = callPackage ../tools/system/setserial { };
-
-  setzer = callPackage ../applications/editors/setzer { };
 
   seqdiag = with python3Packages; toPythonApplication seqdiag;
 
@@ -14917,6 +14911,7 @@ with pkgs;
   flutterPackages-source = recurseIntoAttrs (callPackage ../development/compilers/flutter { useNixpkgsEngine = true; });
   flutterPackages = flutterPackages-bin;
   flutter = flutterPackages.stable;
+  flutter324 = flutterPackages.v3_24;
   flutter323 = flutterPackages.v3_23;
   flutter322 = flutterPackages.v3_22;
   flutter319 = flutterPackages.v3_19;
@@ -16983,8 +16978,8 @@ with pkgs;
     ruby_3_2
     ruby_3_3;
 
-  ruby = ruby_3_1;
-  rubyPackages = rubyPackages_3_1;
+  ruby = ruby_3_3;
+  rubyPackages = rubyPackages_3_3;
 
   rubyPackages_3_1 = recurseIntoAttrs ruby_3_1.gems;
   rubyPackages_3_2 = recurseIntoAttrs ruby_3_2.gems;
@@ -19023,9 +19018,7 @@ with pkgs;
 
   szyszka = callPackage ../tools/misc/szyszka { };
 
-  taplo = callPackage ../development/tools/taplo {
-    inherit (darwin.apple_sdk.frameworks) Security;
-  };
+  taplo = callPackage ../development/tools/taplo { };
 
   taoup = callPackage ../tools/misc/taoup { };
 
@@ -19867,9 +19860,9 @@ with pkgs;
       intel-media-driver
       intel-vaapi-driver
       mesa
+      mesa-demos
       libva-vdpau-driver
       libvdpau-va-gl
-      glxinfo
       vdpauinfo;
   };
 
@@ -19999,8 +19992,6 @@ with pkgs;
     ffmpeg-full;
 
   ffmpegthumbnailer = callPackage ../development/libraries/ffmpegthumbnailer { };
-
-  ffmpeg-normalize = python3Packages.callPackage ../applications/video/ffmpeg-normalize { };
 
   ffms = callPackage ../development/libraries/ffms { };
 
@@ -20764,7 +20755,7 @@ with pkgs;
 
   hwloc = callPackage ../development/libraries/hwloc { };
 
-  hydra_unstable = callPackage ../development/tools/misc/hydra/unstable.nix { nix = nixVersions.nix_2_22; };
+  hydra = callPackage ../by-name/hy/hydra/package.nix { nix = nixVersions.nix_2_22; };
 
   hydra-cli = callPackage ../development/tools/misc/hydra-cli { };
 
@@ -20984,7 +20975,7 @@ with pkgs;
   krb5 = callPackage ../development/libraries/kerberos/krb5.nix {
     inherit (buildPackages.darwin) bootstrap_cmds;
   };
-  libkrb5 = krb5.override { type = "lib"; };
+  libkrb5 = krb5; # TODO(de11n) Try to make krb5 reuse libkrb5 as a dependency
 
   kronosnet = callPackage ../development/libraries/kronosnet { };
 
@@ -22441,10 +22432,6 @@ with pkgs;
 
   libzdb = callPackage ../development/libraries/libzdb { };
 
-  libwacom = callPackage ../development/libraries/libwacom { };
-
-  libwacom-surface = callPackage ../development/libraries/libwacom/surface.nix { };
-
   lightlocker = callPackage ../misc/screensavers/light-locker { };
 
   lightspark = callPackage ../misc/lightspark { };
@@ -22887,8 +22874,6 @@ with pkgs;
 
   oneDNN_2 = callPackage ../development/libraries/oneDNN/2.nix { };
 
-  onedrive = callPackage ../applications/networking/sync/onedrive { };
-
   oneko = callPackage ../applications/misc/oneko { };
 
   oniguruma = callPackage ../development/libraries/oniguruma { };
@@ -23178,6 +23163,7 @@ with pkgs;
 
   inherit
     ({
+      protobuf_28 = callPackage ../development/libraries/protobuf/28.nix { };
       protobuf_27 = callPackage ../development/libraries/protobuf/27.nix { };
       protobuf_26 = callPackage ../development/libraries/protobuf/26.nix { };
       protobuf_25 = callPackage ../development/libraries/protobuf/25.nix { };
@@ -23192,6 +23178,7 @@ with pkgs;
         abseil-cpp = abseil-cpp_202103;
       };
     })
+    protobuf_28
     protobuf_27
     protobuf_26
     protobuf_25
@@ -24117,7 +24104,7 @@ with pkgs;
   wavpack = callPackage ../development/libraries/wavpack { };
 
   wayland = darwin.apple_sdk_11_0.callPackage ../development/libraries/wayland { };
-  wayland-scanner = wayland.bin;
+  wayland-scanner = callPackage ../development/libraries/wayland/scanner.nix { };
 
   wayland-protocols = callPackage ../development/libraries/wayland/protocols.nix { };
 
@@ -26133,7 +26120,7 @@ with pkgs;
 
   cpustat = callPackage ../os-specific/linux/cpustat { };
 
-  cockroachdb-bin = callPackage ../servers/sql/cockroachdb/cockroachdb-bin.nix { };
+  cockroachdb = callPackage ../servers/sql/cockroachdb { };
 
   coconutbattery = callPackage ../os-specific/darwin/coconutbattery { };
 
@@ -26217,7 +26204,9 @@ with pkgs;
 
   firmware-manager = callPackage ../os-specific/linux/firmware/firmware-manager { };
 
-  firmware-updater = callPackage ../os-specific/linux/firmware/firmware-updater { };
+  firmware-updater = callPackage ../os-specific/linux/firmware/firmware-updater {
+    flutter = flutterPackages.v3_22;
+  };
 
   fwts = callPackage ../os-specific/linux/fwts { };
 
@@ -28568,7 +28557,7 @@ with pkgs;
 
   whitesur-icon-theme = callPackage ../data/icons/whitesur-icon-theme { };
 
-  whitesur-kde = libsForQt5.callPackage ../data/themes/whitesur-kde { };
+  whitesur-kde = kdePackages.callPackage ../data/themes/whitesur-kde { };
 
   wireless-regdb = callPackage ../data/misc/wireless-regdb { };
 
@@ -32787,8 +32776,6 @@ with pkgs;
 
   ponymix = callPackage ../applications/audio/ponymix { };
 
-  pop-launcher = callPackage ../applications/misc/pop-launcher { };
-
   pothos = libsForQt5.callPackage ../applications/radio/pothos { };
 
   potrace = callPackage ../applications/graphics/potrace { };
@@ -33649,10 +33636,6 @@ with pkgs;
   tanka = callPackage ../applications/networking/cluster/tanka { };
 
   teams = callPackage ../applications/networking/instant-messengers/teams { };
-
-  teams-for-linux = callPackage ../applications/networking/instant-messengers/teams-for-linux {
-    electron = electron_29;
-  };
 
   teamspeak_client = libsForQt5.callPackage ../applications/networking/instant-messengers/teamspeak/client.nix { };
   teamspeak5_client = callPackage ../applications/networking/instant-messengers/teamspeak/client5.nix { };
@@ -35049,8 +35032,6 @@ with pkgs;
   namecoind = callPackage ../applications/blockchains/namecoin { };
 
   nbxplorer = callPackage ../applications/blockchains/nbxplorer { };
-
-  ethabi = callPackage ../applications/blockchains/ethabi { };
 
   pycoin = with python3Packages; toPythonApplication pycoin;
 
