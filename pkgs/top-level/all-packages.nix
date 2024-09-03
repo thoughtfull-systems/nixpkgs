@@ -8149,6 +8149,8 @@ with pkgs;
 
   gnome-solanum = callPackage ../applications/misc/gnome-solanum { };
 
+  gnome-panel-with-modules = callPackage ../by-name/gn/gnome-panel/wrapper.nix { };
+
   gnome-podcasts = callPackage ../applications/audio/gnome-podcasts { };
 
   gnome-photos = callPackage ../applications/graphics/gnome-photos { };
@@ -21142,8 +21144,6 @@ with pkgs;
 
   libbs2b = callPackage ../development/libraries/audio/libbs2b { };
 
-  libbytesize = callPackage ../development/libraries/libbytesize { };
-
   libcaca = callPackage ../development/libraries/libcaca { };
 
   libcacard = callPackage ../development/libraries/libcacard { };
@@ -24570,7 +24570,12 @@ with pkgs;
     faslExt = "fasl";
     flags = [ "--dynamic-space-size" "3000" ];
   };
-  sbcl = sbcl_2_4_7;
+  sbcl_2_4_8 = wrapLisp {
+    pkg = callPackage ../development/compilers/sbcl { version = "2.4.8"; };
+    faslExt = "fasl";
+    flags = [ "--dynamic-space-size" "3000" ];
+  };
+  sbcl = sbcl_2_4_8;
 
   sbclPackages = recurseIntoAttrs sbcl.pkgs;
 
@@ -28017,9 +28022,7 @@ with pkgs;
 
   mobile-broadband-provider-info = callPackage ../data/misc/mobile-broadband-provider-info { };
 
-  mojave-gtk-theme = callPackage ../data/themes/mojave {
-    inherit (gnome) gnome-shell;
-  };
+  mojave-gtk-theme = callPackage ../data/themes/mojave { };
 
   moka-icon-theme = callPackage ../data/icons/moka-icon-theme { };
 
@@ -28531,9 +28534,7 @@ with pkgs;
 
   vimix-cursor-theme = callPackage ../data/icons/vimix-cursor-theme { };
 
-  vimix-gtk-themes = callPackage ../data/themes/vimix {
-    inherit (gnome) gnome-shell;
-  };
+  vimix-gtk-themes = callPackage ../data/themes/vimix { };
 
   vimix-icon-theme = callPackage ../data/icons/vimix-icon-theme { };
 
@@ -28549,9 +28550,7 @@ with pkgs;
 
   whitesur-cursors = callPackage ../data/icons/whitesur-cursors { };
 
-  whitesur-gtk-theme = callPackage ../data/themes/whitesur {
-    inherit (gnome) gnome-shell;
-  };
+  whitesur-gtk-theme = callPackage ../data/themes/whitesur { };
 
   whitesur-icon-theme = callPackage ../data/icons/whitesur-icon-theme { };
 
@@ -29728,8 +29727,6 @@ with pkgs;
   };
 
   keepass-diff = callPackage ../applications/misc/keepass-diff { };
-
-  keeweb = callPackage ../applications/misc/keeweb { };
 
   evolution-data-server-gtk4 = evolution-data-server.override { withGtk3 = false; withGtk4 = true; };
   evolution-ews = callPackage ../applications/networking/mailreaders/evolution/evolution-ews { };
@@ -31565,11 +31562,6 @@ with pkgs;
   luminanceHDR = libsForQt5.callPackage ../applications/graphics/luminance-hdr { };
 
   lxdvdrip = callPackage ../applications/video/lxdvdrip { };
-
-  handbrake = callPackage ../applications/video/handbrake {
-    inherit (darwin.apple_sdk.frameworks) AudioToolbox Foundation VideoToolbox;
-    inherit (darwin) libobjc;
-  };
 
   handlr = callPackage ../tools/misc/handlr { };
 
@@ -36509,13 +36501,14 @@ with pkgs;
 
   gnome-extensions-cli = python3Packages.callPackage ../desktops/gnome/misc/gnome-extensions-cli { };
 
-  gnome-text-editor = callPackage ../desktops/gnome/apps/gnome-text-editor { };
-
-  gnome-tour = callPackage ../desktops/gnome/core/gnome-tour { };
+  gnome-bluetooth_1_0 = callPackage ../by-name/gn/gnome-bluetooth/1.0 { };
 
   gnome-browser-connector = callPackage ../desktops/gnome/extensions/gnome-browser-connector { };
 
-  gnome-2048 = callPackage ../desktops/gnome/games/gnome-2048 { };
+  gnome-session-ctl = callPackage ../by-name/gn/gnome-session/ctl.nix { };
+
+  # Using 43 to match Mutter used in Pantheon
+  gnome-settings-daemon43 = callPackage ../by-name/gn/gnome-settings-daemon/43 { };
 
   gnustep = recurseIntoAttrs (callPackage ../desktops/gnustep { });
 
@@ -36544,6 +36537,9 @@ with pkgs;
   });
 
   mate = recurseIntoAttrs (callPackage ../desktops/mate { });
+
+  # Needed for elementary's gala, wingpanel and greeter until support for higher versions is provided
+  mutter43 = callPackage ../by-name/mu/mutter/43 { };
 
   pantheon = recurseIntoAttrs (callPackage ../desktops/pantheon { });
 
@@ -39428,10 +39424,6 @@ with pkgs;
   undaemonize = callPackage ../tools/system/undaemonize { };
 
   houdini = callPackage ../applications/misc/houdini { };
-
-  openfst = callPackage ../development/libraries/openfst { };
-
-  opengrm-ngram = callPackage ../development/libraries/opengrm-ngram { };
 
   openring = callPackage ../applications/misc/openring { };
 
