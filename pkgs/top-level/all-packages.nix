@@ -22943,6 +22943,7 @@ with pkgs;
   glanceclient = with python311Packages; toPythonApplication python-glanceclient;
   heatclient = with python311Packages; toPythonApplication python-heatclient;
   ironicclient = with python311Packages; toPythonApplication python-ironicclient;
+  magnumclient = with python311Packages; toPythonApplication python-magnumclient;
   manilaclient = with python311Packages; toPythonApplication python-manilaclient;
   mistralclient = with python311Packages; toPythonApplication python-mistralclient;
   swiftclient = with python311Packages; toPythonApplication python-swiftclient;
@@ -23441,19 +23442,7 @@ with pkgs;
 
   scope-lite = callPackage ../development/libraries/scope-lite { };
 
-  SDL_classic = callPackage ../development/libraries/SDL ({
-    inherit (darwin.apple_sdk.frameworks) OpenGL CoreAudio CoreServices AudioUnit Kernel Cocoa GLUT;
-  } // lib.optionalAttrs stdenv.hostPlatform.isAndroid {
-    # libGLU doesn’t work with Android’s SDL
-    libGLU = null;
-  });
-
-  SDL_compat = callPackage ../development/libraries/SDL_compat {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-    inherit (darwin) autoSignDarwinBinariesHook;
-  };
-
-  SDL = SDL_classic;
+  SDL = SDL1;
 
   SDL2 = callPackage ../development/libraries/SDL2 {
     inherit (darwin.apple_sdk.frameworks) AudioUnit Cocoa CoreAudio CoreServices ForceFeedback OpenGL;
@@ -25107,6 +25096,25 @@ with pkgs;
   merecat = callPackage ../servers/http/merecat { };
 
   meteor = callPackage ../servers/meteor { };
+
+  micro-full = micro.wrapper.override {
+    extraPackages = [
+      wl-clipboard
+      xclip
+    ];
+  };
+
+  micro-with-wl-clipboard = micro.wrapper.override {
+    extraPackages = [
+      wl-clipboard
+    ];
+  };
+
+  micro-with-xclip = micro.wrapper.override {
+    extraPackages = [
+      xclip
+    ];
+  };
 
   micronaut = callPackage ../development/tools/micronaut { };
 
@@ -32008,7 +32016,7 @@ with pkgs;
     autoreconfHook = buildPackages.autoreconfHook269;
   };
 
-  musescore = libsForQt5.callPackage ../applications/audio/musescore { };
+  musescore = qt6.callPackage ../applications/audio/musescore { };
 
   music-player = callPackage ../applications/audio/music-player { };
 
