@@ -31,19 +31,6 @@ with pkgs;
   # it's just the plain stdenv.
   stdenv_32bit = lowPrio (if stdenv.hostPlatform.is32bit then stdenv else multiStdenv);
 
-  stdenvNoCC = stdenv.override (
-    { cc = null; hasCC = false; }
-
-    // lib.optionalAttrs (stdenv.hostPlatform.isDarwin && (stdenv.hostPlatform != stdenv.buildPlatform)) {
-      # TODO: This is a hack to use stdenvNoCC to produce a CF when cross
-      # compiling. It's not very sound. The cross stdenv has:
-      #   extraBuildInputs = [ targetPackages.darwin.apple_sdks.frameworks.CoreFoundation ]
-      # and uses stdenvNoCC. In order to make this not infinitely recursive, we
-      # need to exclude this extraBuildInput.
-      extraBuildInputs = [];
-    }
-  );
-
   mkStdenvNoLibs = stdenv: let
     bintools = stdenv.cc.bintools.override {
       libc = null;
@@ -61,7 +48,7 @@ with pkgs;
   };
 
   stdenvNoLibs =
-    if stdenvNoCC.hostPlatform != stdenvNoCC.buildPlatform && (stdenv.hostPlatform.isDarwin || stdenv.hostPlatform.useLLVM or false)
+    if stdenvNoCC.hostPlatform != stdenvNoCC.buildPlatform
     then
       # We cannot touch binutils or cc themselves, because that will cause
       # infinite recursion. So instead, we just choose a libc based on the
@@ -74,7 +61,17 @@ with pkgs;
       # thing to to create an earlier thing (leading to infinite recursion) and
       # we also would still respect the stage arguments choices for these
       # things.
-      overrideCC stdenv buildPackages.llvmPackages.clangNoCompilerRt
+      (if stdenvNoCC.hostPlatform.isDarwin || stdenvNoCC.hostPlatform.useLLVM or false
+       then overrideCC stdenvNoCC buildPackages.llvmPackages.clangNoCompilerRt
+       else gccCrossLibcStdenv)
+    else mkStdenvNoLibs stdenv;
+
+  stdenvNoLibc =
+    if stdenvNoCC.hostPlatform != stdenvNoCC.buildPlatform
+    then
+      (if stdenvNoCC.hostPlatform.isDarwin || stdenvNoCC.hostPlatform.useLLVM or false
+       then overrideCC stdenvNoCC buildPackages.llvmPackages.clangNoLibc
+       else gccCrossLibcStdenv)
     else mkStdenvNoLibs stdenv;
 
   gccStdenvNoLibs = mkStdenvNoLibs gccStdenv;
@@ -878,12 +875,8 @@ with pkgs;
   dotnet-runtime = dotnetCorePackages.runtime_6_0;
   dotnet-aspnetcore = dotnetCorePackages.aspnetcore_6_0;
 
-  buildDotnetModule = callPackage ../build-support/dotnet/build-dotnet-module { };
   nuget-to-nix = callPackage ../build-support/dotnet/nuget-to-nix { };
-  mkNugetSource = callPackage ../build-support/dotnet/make-nuget-source { };
-  mkNugetDeps = (newScope dotnetCorePackages) ../build-support/dotnet/make-nuget-deps { };
-
-  buildDotnetGlobalTool = callPackage ../build-support/dotnet/build-dotnet-global-tool { };
+  inherit (dotnetCorePackages) buildDotnetModule buildDotnetGlobalTool mkNugetSource mkNugetDeps;
 
   fsautocomplete = callPackage ../development/tools/fsautocomplete { };
 
@@ -3049,8 +3042,6 @@ with pkgs;
     ammonite_2_13;
   ammonite = ammonite_2_13;
 
-  amp = callPackage ../applications/editors/amp { };
-
   ams = callPackage ../applications/audio/ams { };
 
   amtterm = callPackage ../tools/system/amtterm { };
@@ -4016,7 +4007,9 @@ with pkgs;
 
   atftp = callPackage ../tools/networking/atftp { };
 
-  atlas = callPackage ../development/tools/database/atlas { };
+  atlas = callPackage ../by-name/at/atlas/package.nix {
+    buildGoModule = buildGo123Module;
+  };
 
   authoscope = callPackage ../tools/security/authoscope {
     inherit (darwin.apple_sdk.frameworks) Security;
@@ -5274,12 +5267,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  gpu-burn = callPackage ../applications/misc/gpu-burn {
-    # gpu-burn doesn't build on gcc11. CUDA 11.3 is the last version to use
-    # pre-gcc11, in particular gcc9.
-    stdenv = gcc9Stdenv;
-  };
-
   gpu-viewer = callPackage ../applications/misc/gpu-viewer { };
 
   greg = callPackage ../applications/audio/greg {
@@ -5402,8 +5389,6 @@ with pkgs;
   invoiceplane = callPackage ../servers/web-apps/invoiceplane { };
 
   iotas = callPackage ../applications/office/iotas { };
-
-  iotools = callPackage ../tools/misc/iotools { };
 
   jellycli = callPackage ../applications/audio/jellycli { };
 
@@ -10760,7 +10745,9 @@ with pkgs;
 
   noisetorch = callPackage ../applications/audio/noisetorch { };
 
-  notation = callPackage ../tools/security/notation { };
+  notation = callPackage ../by-name/no/notation/package.nix {
+    buildGoModule = buildGo123Module;
+  };
 
   notify-osd = callPackage ../applications/misc/notify-osd { };
 
@@ -13781,11 +13768,6 @@ with pkgs;
   wasm-text-gen = nodePackages."@webassemblyjs/wasm-text-gen-1.11.1";
   wast-refmt = nodePackages."@webassemblyjs/wast-refmt-1.11.1";
 
-  wasm-bindgen-cli = callPackage ../development/tools/wasm-bindgen-cli {
-    inherit (darwin.apple_sdk.frameworks) Security;
-    nodejs = nodejs_latest;
-  };
-
   wasm-tools = callPackage ../tools/misc/wasm-tools { };
 
   wasmedge = callPackage ../development/tools/wasmedge {
@@ -15009,11 +14991,6 @@ with pkgs;
 
   gccCrossLibcStdenv = overrideCC stdenvNoCC buildPackages.gccWithoutTargetLibc;
 
-  crossLibcStdenv =
-    if stdenv.hostPlatform.useLLVM or false || stdenv.hostPlatform.isDarwin
-    then overrideCC stdenv buildPackages.llvmPackages.clangNoLibc
-    else gccCrossLibcStdenv;
-
   # The GCC used to build libc for the target platform. Normal gccs will be
   # built with, and use, that cross-compiled libc.
   gccWithoutTargetLibc = assert stdenv.targetPlatform != stdenv.hostPlatform; let
@@ -15922,9 +15899,18 @@ with pkgs;
 
   makeRustPlatform = callPackage ../development/compilers/rust/make-rust-platform.nix { };
 
-  buildRustCrate = callPackage ../build-support/rust/build-rust-crate ({ } // lib.optionalAttrs (stdenv.hostPlatform.libc == null) {
-    stdenv = stdenvNoCC; # Some build targets without libc will fail to evaluate with a normal stdenv.
-  });
+  buildRustCrate =
+    let
+      # Returns a true if the builder's rustc was built with support for the target.
+      targetAlreadyIncluded = lib.elem stdenv.hostPlatform.rust.rustcTarget
+        (lib.splitString "," (lib.removePrefix "--target=" (
+          lib.elemAt (lib.filter (f: lib.hasPrefix "--target=" f) pkgsBuildBuild.rustc.unwrapped.configureFlags) 0
+        )));
+    in
+    callPackage ../build-support/rust/build-rust-crate ({ } // lib.optionalAttrs (stdenv.hostPlatform.libc == null) {
+      stdenv = stdenvNoCC; # Some build targets without libc will fail to evaluate with a normal stdenv.
+    } // lib.optionalAttrs targetAlreadyIncluded { inherit (pkgsBuildBuild) rustc cargo; } # Optimization.
+  );
   buildRustCrateHelpers = callPackage ../build-support/rust/build-rust-crate/helpers.nix { };
 
   cargo2junit = callPackage ../development/tools/rust/cargo2junit { };
@@ -16540,6 +16526,12 @@ with pkgs;
     wxSupport = false;
     systemdSupport = false;
   };
+  beam_nodocs = callPackage ./beam-packages.nix {
+    beam = beam_nodocs;
+    wxSupport = false;
+    systemdSupport = false;
+    ex_docSupport = false;
+  };
 
   inherit (beam.interpreters)
     erlang erlang_27 erlang_26 erlang_25 erlang_24
@@ -16631,7 +16623,11 @@ with pkgs;
   zuo = callPackage ../development/interpreters/zuo { };
 
   ### LUA interpreters
-  emilua = callPackage ../development/interpreters/emilua { };
+  emiluaPlugins = recurseIntoAttrs
+    (callPackage ./emilua-plugins.nix {}
+      (callPackage ../development/interpreters/emilua { }));
+
+  inherit (emiluaPlugins) emilua;
 
   luaInterpreters = callPackage ./../development/interpreters/lua-5 { };
   inherit (luaInterpreters) lua5_1 lua5_2 lua5_2_compat lua5_3 lua5_3_compat lua5_4 lua5_4_compat luajit_2_1 luajit_2_0 luajit_openresty;
@@ -17036,8 +17032,6 @@ with pkgs;
 
   eltclsh = callPackage ../development/tools/eltclsh { };
 
-  waagent = callPackage ../applications/networking/cluster/waagent { };
-
   wasm = ocamlPackages.wasm;
 
   wasm3 = callPackage ../development/interpreters/wasm3 { };
@@ -17052,9 +17046,8 @@ with pkgs;
 
   h3 = h3_3;
 
-  avrlibc      = callPackage ../development/misc/avr/libc { };
-  avrlibcCross = callPackage ../development/misc/avr/libc {
-    stdenv = crossLibcStdenv;
+  avrlibc = callPackage ../development/misc/avr/libc {
+    stdenv = stdenvNoLibc;
   };
 
   avr8burnomat = callPackage ../development/misc/avr8-burn-omat { };
@@ -17126,10 +17119,7 @@ with pkgs;
 
   msp430GccSupport = callPackage ../development/misc/msp430/gcc-support.nix { };
 
-  msp430Newlib      = callPackage ../development/misc/msp430/newlib.nix { };
-  msp430NewlibCross = callPackage ../development/misc/msp430/newlib.nix {
-    newlib = newlibCross;
-  };
+  msp430Newlib = callPackage ../development/misc/msp430/newlib.nix { };
 
   mspds = callPackage ../development/misc/msp430/mspds { };
   mspds-bin = callPackage ../development/misc/msp430/mspds/binary.nix { };
@@ -18854,8 +18844,6 @@ with pkgs;
 
   shellharden = callPackage ../development/tools/shellharden { };
 
-  schemaspy = callPackage ../development/tools/database/schemaspy { };
-
   scenebuilder = callPackage ../development/tools/scenebuilder { };
 
   scenic-view = callPackage ../development/tools/scenic-view { };
@@ -19132,7 +19120,9 @@ with pkgs;
   valgrind = callPackage ../development/tools/analysis/valgrind {
     inherit (buildPackages.darwin) xnu bootstrap_cmds;
   };
-  valgrind-light = res.valgrind.override { gdb = null; };
+  valgrind-light = (res.valgrind.override { gdb = null; }).overrideAttrs (oldAttrs: {
+    meta.description = "${oldAttrs.meta.description} (without GDB)";
+  });
 
   qcachegrind = libsForQt5.callPackage ../development/tools/analysis/qcachegrind { };
 
@@ -20271,14 +20261,14 @@ with pkgs;
   };
 
   muslCross = musl.override {
-    stdenv = crossLibcStdenv;
+    stdenv = stdenvNoLibc;
   };
 
   # These are used when buiding compiler-rt / libgcc, prior to building libc.
   preLibcCrossHeaders = let
     inherit (stdenv.targetPlatform) libc;
   in     if stdenv.targetPlatform.isMinGW then targetPackages.windows.mingw_w64_headers or windows.mingw_w64_headers
-    else if libc == "nblibc" then targetPackages.netbsdCross.headers or netbsdCross.headers
+    else if libc == "nblibc" then targetPackages.netbsd.headers or netbsd.headers
     else if libc == "libSystem" && stdenv.targetPlatform.isAarch64 then targetPackages.darwin.LibsystemCross or darwin.LibsystemCross
     else null;
 
@@ -20289,13 +20279,13 @@ with pkgs;
     /**/ if name == null then null
     else if name == "glibc" then targetPackages.glibcCross or glibcCross
     else if name == "bionic" then targetPackages.bionic or bionic
-    else if name == "uclibc" then targetPackages.uclibcCross or uclibcCross
-    else if name == "avrlibc" then targetPackages.avrlibcCross or avrlibcCross
-    else if name == "newlib" && stdenv.targetPlatform.isMsp430 then targetPackages.msp430NewlibCross or msp430NewlibCross
+    else if name == "uclibc" then targetPackages.uclibc or uclibc
+    else if name == "avrlibc" then targetPackages.avrlibc or avrlibc
+    else if name == "newlib" && stdenv.targetPlatform.isMsp430 then targetPackages.msp430Newlib or msp430Newlib
     else if name == "newlib" && stdenv.targetPlatform.isVc4 then targetPackages.vc4-newlib or vc4-newlib
     else if name == "newlib" && stdenv.targetPlatform.isOr1k then targetPackages.or1k-newlib or or1k-newlib
-    else if name == "newlib" then targetPackages.newlibCross or newlibCross
-    else if name == "newlib-nano" then targetPackages.newlib-nanoCross or newlib-nanoCross
+    else if name == "newlib" then targetPackages.newlib or newlib
+    else if name == "newlib-nano" then targetPackages.newlib-nano or newlib-nano
     else if name == "musl" then targetPackages.muslCross or muslCross
     else if name == "msvcrt" then targetPackages.windows.mingw_w64 or windows.mingw_w64
     else if name == "ucrt" then targetPackages.windows.mingw_w64 or windows.mingw_w64
@@ -20310,7 +20300,10 @@ with pkgs;
     else if name == "relibc" then targetPackages.relibc or relibc
     else throw "Unknown libc ${name}";
 
-  libcCross = assert stdenv.targetPlatform != stdenv.buildPlatform; libcCrossChooser stdenv.targetPlatform.libc;
+  libcCross =
+    if stdenv.targetPlatform == stdenv.buildPlatform
+    then null
+    else libcCrossChooser stdenv.targetPlatform.libc;
 
   threadsCross =
     lib.optionalAttrs (stdenv.targetPlatform.isMinGW && !(stdenv.targetPlatform.useLLVM or false)) {
@@ -20321,7 +20314,7 @@ with pkgs;
     };
 
   wasilibc = callPackage ../development/libraries/wasilibc {
-    stdenv = crossLibcStdenv;
+    stdenv = stdenvNoLibc;
   };
 
   # Only supported on Linux and only on glibc
@@ -22193,8 +22186,6 @@ with pkgs;
   libunique3 = callPackage ../development/libraries/libunique/3.x.nix { };
 
   liburcu = callPackage ../development/libraries/liburcu { };
-
-  libjaylink = callPackage ../development/libraries/libjaylink { };
 
   libusb-compat-0_1 = callPackage ../development/libraries/libusb-compat/0.1.nix { };
 
@@ -25953,8 +25944,6 @@ with pkgs;
 
   ### SERVERS / GEOSPATIAL
 
-  fit-trackee = callPackage ../servers/geospatial/fit-trackee { };
-
   martin = callPackage ../servers/geospatial/martin {
     inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
   };
@@ -26008,12 +25997,6 @@ with pkgs;
     ;
 
   mlxbf-bootimages = callPackage ../misc/mlxbf-bootimages { };
-
-  microcodeAmd = callPackage ../os-specific/linux/microcode/amd.nix { };
-
-  microcodeIntel = callPackage ../os-specific/linux/microcode/intel.nix { };
-
-  iucode-tool = callPackage ../os-specific/linux/microcode/iucode-tool.nix { };
 
   inherit (callPackages ../os-specific/linux/apparmor { })
     libapparmor apparmor-utils apparmor-bin-utils apparmor-parser apparmor-pam
@@ -27235,14 +27218,6 @@ with pkgs;
   inherit (callPackage ../misc/barebox {})
     buildBarebox
     bareboxTools;
-
-  uclibc-ng-cross = uclibc-ng.override {
-    stdenv = crossLibcStdenv;
-  };
-
-  # Aliases
-  uclibc = uclibc-ng;
-  uclibcCross = uclibc-ng-cross;
 
   eudev = callPackage ../by-name/eu/eudev/package.nix {
     util-linux = util-linuxMinimal;
@@ -28907,7 +28882,7 @@ with pkgs;
 
   backintime-common = callPackage ../applications/networking/sync/backintime/common.nix { };
 
-  backintime-qt = libsForQt5.callPackage ../applications/networking/sync/backintime/qt.nix { };
+  backintime-qt = qt6.callPackage ../applications/networking/sync/backintime/qt.nix { };
 
   backintime = backintime-qt;
 
@@ -30191,23 +30166,6 @@ with pkgs;
     jre = jre8; # TODO: remove override https://github.com/NixOS/nixpkgs/pull/89731
   };
 
-  freenet = callPackage ../applications/networking/p2p/freenet {
-    gradle = gradle_7;
-    jdk = jdk17_headless;
-    # Reduce closure size
-    jre = pkgs.jre17_minimal.override {
-      modules = [
-        "java.base"
-        "java.logging"
-        "java.naming"
-        "java.sql"
-        "java.desktop"
-        "java.management"
-      ];
-      jdk = jdk17_headless;
-    };
-  };
-
   freeoffice = callPackage ../applications/office/softmaker/freeoffice.nix { };
 
   freepv = callPackage ../applications/graphics/freepv { };
@@ -31080,12 +31038,13 @@ with pkgs;
 
   jwm-settings-manager = callPackage ../applications/window-managers/jwm/jwm-settings-manager.nix { };
 
-  inherit (callPackage ../applications/networking/cluster/k3s {
-    buildGoModule = buildGo121Module;
-    go = go_1_21;
-  }) k3s_1_28 k3s_1_29;
-  inherit (callPackage ../applications/networking/cluster/k3s { }) k3s_1_30;
-  k3s = k3s_1_30;
+  inherit (callPackage ../applications/networking/cluster/k3s { })
+    k3s_1_28
+    k3s_1_29
+    k3s_1_30
+    k3s_1_31
+    ;
+  k3s = k3s_1_31;
 
   k3sup = callPackage ../applications/networking/cluster/k3sup { };
 
@@ -31881,10 +31840,6 @@ with pkgs;
 
   clerk = callPackage ../applications/audio/clerk { };
 
-  jujutsu = callPackage ../applications/version-management/jujutsu {
-    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
-  };
-
   nbstripout = callPackage ../applications/version-management/nbstripout { };
 
   ncmpc = callPackage ../applications/audio/ncmpc { };
@@ -32017,8 +31972,6 @@ with pkgs;
   };
 
   musescore = qt6.callPackage ../applications/audio/musescore { };
-
-  music-player = callPackage ../applications/audio/music-player { };
 
   mmh = callPackage ../applications/networking/mailreaders/mmh { };
   mutt = callPackage ../applications/networking/mailreaders/mutt { };
@@ -32823,9 +32776,17 @@ with pkgs;
   eiskaltdcpp = libsForQt5.callPackage ../applications/networking/p2p/eiskaltdcpp { };
 
   qemu = callPackage ../applications/virtualization/qemu {
-    inherit (darwin.apple_sdk.frameworks) CoreServices Cocoa Hypervisor vmnet;
+    inherit (darwin.apple_sdk_12_3.frameworks) CoreServices Cocoa Hypervisor Kernel vmnet;
     inherit (darwin.stubs) rez setfile;
     inherit (darwin) sigtool;
+    stdenv =
+      if stdenv.hostPlatform.isDarwin then
+        overrideSDK stdenv {
+          darwinSdkVersion = "12.3";
+          darwinMinVersion = "12.0";
+        }
+      else
+        stdenv;
   };
 
   qemu-python-utils = python3Packages.toPythonApplication (
@@ -39497,17 +39458,13 @@ with pkgs;
 
   new-session-manager = callPackage ../applications/audio/new-session-manager { };
 
-  newlib = callPackage ../development/misc/newlib { };
-  newlibCross = callPackage ../development/misc/newlib {
-    stdenv = crossLibcStdenv;
+  newlib = callPackage ../development/misc/newlib {
+    stdenv = stdenvNoLibc;
   };
 
   newlib-nano = callPackage ../development/misc/newlib {
+    stdenv = stdenvNoLibc;
     nanoizeNewlib = true;
-  };
-  newlib-nanoCross = callPackage ../development/misc/newlib {
-    nanoizeNewlib = true;
-    stdenv = crossLibcStdenv;
   };
 
   omnisharp-roslyn = callPackage ../development/tools/omnisharp-roslyn { };
