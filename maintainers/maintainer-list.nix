@@ -243,6 +243,12 @@
     github = "48cf";
     githubId = 32851089;
   };
+  _4ever2 = {
+    email = "eske@cs.au.dk";
+    github = "4ever2";
+    githubId = 3417013;
+    name = "Eske Nielsen";
+  };
   _6543 = {
     email = "6543@obermui.de";
     github = "6543";
@@ -1895,6 +1901,13 @@
     github = "astavie";
     githubId = 7745457;
     name = "Astavie";
+  };
+  asterismono = {
+    email = "cmiki@amono.me";
+    github = "AsterisMono";
+    githubId = 54884471;
+    name = "Chatnoir Miki";
+    matrix = "@mikiiki:matrix.org";
   };
   astro = {
     email = "astro@spaceboyz.net";
@@ -8077,6 +8090,12 @@
     githubId = 1162118;
     name = "Harald Gliebe";
   };
+  hakan-demirli = {
+    email = "ehdemirli@proton.me";
+    github = "hakan-demirli";
+    githubId = 78746991;
+    name = "Emre Hakan Demirli";
+  };
   hakuch = {
     email = "hakuch@gmail.com";
     github = "hakuch";
@@ -8603,6 +8622,12 @@
     github = "hufman";
     githubId = 1592375;
     name = "Walter Huf";
+  };
+  hughmandalidis = {
+    name = "Hugh Mandalidis";
+    email = "mandalidis.hugh@gmail.com";
+    github = "ThanePatrol";
+    githubId = 23148089;
   };
   hughobrien = {
     email = "github@hughobrien.ie";
@@ -16244,6 +16269,11 @@
     githubId = 13309623;
     name = "Philipp Herzog";
   };
+  PhilVoel = {
+    github = "PhilVoel";
+    githubId = 56931301;
+    name = "Philipp Völler";
+  };
   phip1611 = {
     email = "phip1611@gmail.com";
     github = "phip1611";
@@ -18541,6 +18571,13 @@
     github = "saschagrunert";
     githubId = 695473;
     name = "Sascha Grunert";
+  };
+  saturn745 = {
+    email = "git-commits.rk7uq@aleeas.com";
+    github = "saturn745";
+    githubId = 90934664;
+    name = "Saturn745";
+    matrix = "@galaxyyy:matrix.org";
   };
   saulecabrera = {
     name = "Saúl Cabrera";
