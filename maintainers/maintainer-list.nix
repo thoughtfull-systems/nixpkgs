@@ -742,6 +742,12 @@
     githubId = 45179933;
     name = "Alex Jackson";
   };
+  ajgon = {
+    email = "igor@rzegocki.pl";
+    github = "ajgon";
+    githubId = 150545;
+    name = "Igor Rzegocki";
+  };
   ajgrf = {
     email = "a@ajgrf.com";
     github = "ajgrf";
@@ -2248,6 +2254,12 @@
     name = "Baitinq";
     github = "Baitinq";
     githubId = 30861839;
+  };
+  baksa = {
+    email = "baksa@pm.me";
+    name = "Kryštof Baksa";
+    github = "Golbinex";
+    githubId = 62813600;
   };
   balodja = {
     email = "balodja@gmail.com";
@@ -4543,6 +4555,12 @@
     github = "daneads";
     githubId = 24708079;
     name = "Dan Eads";
+  };
+  danerieber = {
+    email = "danerieber@gmail.com";
+    github = "danerieber";
+    githubId = 6487079;
+    name = "Dane Rieber";
   };
   danid3v = {
     email = "sch220233@spengergasse.at";
@@ -11295,6 +11313,12 @@
     githubId = 4032;
     name = "Kristoffer Thømt Ravneberg";
   };
+  kristianan = {
+    email = "kristian@krined.no";
+    github = "KristianAN";
+    githubId = 80984519;
+    name = "Kristian Alvestad Nedevold-Hansen";
+  };
   kristian-brucaj = {
     email = "kbrucaj@gmail.com";
     github = "Flameslice";
@@ -12110,6 +12134,11 @@
     github = "LouisDK1";
     githubId = 4969294;
     name = "Louis Tim Larsen";
+  };
+  louis-thevenet = {
+    name = "Louis Thevenet";
+    github = "louis-thevenet";
+    githubId = 55986107;
   };
   lovek323 = {
     email = "jason@oconal.id.au";
@@ -17215,6 +17244,12 @@
     github = "raboof";
     githubId = 131856;
     name = "Arnout Engelen";
+  };
+  racci = {
+    name = "James Draycott";
+    email = "me@racci.dev";
+    github = "DaRacci";
+    githubId = 90304606;
   };
   raehik = {
     email = "thefirstmuffinman@gmail.com";
