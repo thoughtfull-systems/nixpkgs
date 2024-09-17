@@ -6755,16 +6755,6 @@ with pkgs;
 
   clolcat = callPackage ../tools/misc/clolcat { };
 
-  cloog = callPackage ../development/libraries/cloog {
-    isl = isl_0_14;
-  };
-
-  cloog_0_18_0 = callPackage ../development/libraries/cloog/0.18.0.nix {
-    isl = isl_0_11;
-  };
-
-  cloogppl = callPackage ../development/libraries/cloog-ppl { };
-
   cloud-utils = callPackage ../tools/misc/cloud-utils { };
 
   cloudlist = callPackage ../tools/security/cloudlist { };
@@ -7028,8 +7018,6 @@ with pkgs;
   djbdns = callPackage ../tools/networking/djbdns { };
 
   dnscrypt-proxy = callPackage ../tools/networking/dnscrypt-proxy { };
-
-  dnscrypt-wrapper = callPackage ../tools/networking/dnscrypt-wrapper { };
 
   dnscontrol = callPackage ../applications/networking/dnscontrol { };
 
@@ -8441,8 +8429,6 @@ with pkgs;
 
   gtkgnutella = callPackage ../tools/networking/p2p/gtk-gnutella { };
 
-  gtkperf = callPackage ../development/tools/misc/gtkperf { };
-
   gtkradiant = callPackage ../applications/misc/gtkradiant { };
 
   gtk-frdp = callPackage ../development/libraries/gtk-frdp { };
@@ -8952,8 +8938,6 @@ with pkgs;
   ised = callPackage ../tools/misc/ised { };
 
   isl = isl_0_20;
-  isl_0_11 = callPackage ../development/libraries/isl/0.11.1.nix { };
-  isl_0_14 = callPackage ../development/libraries/isl/0.14.1.nix { };
   isl_0_17 = callPackage ../development/libraries/isl/0.17.1.nix { };
   isl_0_20 = callPackage ../development/libraries/isl/0.20.0.nix { };
   isl_0_24 = callPackage ../development/libraries/isl/0.24.0.nix { };
@@ -9793,8 +9777,6 @@ with pkgs;
   ldns = callPackage ../development/libraries/ldns { };
 
   leafpad = callPackage ../applications/editors/leafpad { };
-
-  l3afpad = callPackage ../applications/editors/l3afpad { };
 
   leanblueprint = with python3Packages; toPythonApplication leanblueprint;
 
@@ -11683,10 +11665,6 @@ with pkgs;
   psutils = callPackage ../tools/typesetting/psutils { };
 
   psudohash = callPackage ../tools/security/psudohash { };
-
-  psensor = callPackage ../tools/system/psensor {
-    libXNVCtrl = linuxPackages.nvidia_x11.settings.libXNVCtrl;
-  };
 
   pubs = callPackage ../tools/misc/pubs { };
 
@@ -14231,10 +14209,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  xprite-editor = callPackage ../tools/misc/xprite-editor {
-    inherit (darwin.apple_sdk.frameworks) AppKit;
-  };
-
   xq-xml = callPackage ../tools/text/xml/xq { };
 
   xsecurelock = callPackage ../tools/X11/xsecurelock { };
@@ -14909,7 +14883,6 @@ with pkgs;
       extraBuildInputs = lib.optional stdenv.hostPlatform.isDarwin clang.cc;
     };
 
-  gcc6Stdenv = overrideCC gccStdenv buildPackages.gcc6;
   gcc7Stdenv = overrideCC gccStdenv buildPackages.gcc7;
   gcc8Stdenv = overrideCC gccStdenv buildPackages.gcc8;
   gcc9Stdenv = overrideCC gccStdenv buildPackages.gcc9;
@@ -15003,7 +14976,7 @@ with pkgs;
   };
 
   inherit (callPackage ../development/compilers/gcc/all.nix { inherit noSysDirs; })
-    gcc6 gcc7 gcc8 gcc9 gcc10 gcc11 gcc12 gcc13 gcc14;
+    gcc7 gcc8 gcc9 gcc10 gcc11 gcc12 gcc13 gcc14;
 
   gcc_latest = gcc14;
 
@@ -15016,18 +14989,6 @@ with pkgs;
     langJit = true;
     enableLTO = false;
   };
-
-  gcj = gcj6;
-  gcj6 = wrapCC (gcc6.cc.override {
-    name = "gcj";
-    langJava = true;
-    langFortran = false;
-    langCC = false;
-    langC = false;
-    profiledCompiler = false;
-    inherit zip unzip zlib boehmgc gettext pkg-config perl;
-    inherit (gnome2) libart_lgpl;
-  });
 
   gnat = gnat12; # When changing this, update also gnatPackages
 
@@ -19384,8 +19345,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) CoreAudio AudioToolbox;
   };
 
-  ayatana-ido = callPackage ../development/libraries/ayatana-ido { };
-
   ayatana-webmail = callPackage ../applications/networking/mailreaders/ayatana-webmail { };
 
   azmq = callPackage ../development/libraries/azmq { };
@@ -21560,8 +21519,6 @@ with pkgs;
   libindicator-gtk2 = libindicator.override { gtkVersion = "2"; };
   libindicator-gtk3 = libindicator.override { gtkVersion = "3"; };
   libindicator = callPackage ../development/libraries/libindicator { };
-
-  libayatana-indicator = callPackage ../development/libraries/libayatana-indicator { };
 
   libinotify-kqueue = callPackage ../development/libraries/libinotify-kqueue { };
 
@@ -24769,7 +24726,7 @@ with pkgs;
 
   engelsystem = callPackage ../servers/web-apps/engelsystem { };
 
-  envoy = callPackage ../servers/http/envoy {
+  envoy = callPackage ../by-name/en/envoy/package.nix {
     jdk = openjdk11_headless;
     gn = gn1924;
   };
@@ -25762,7 +25719,9 @@ with pkgs;
 
   systemd-journal2gelf = callPackage ../tools/system/systemd-journal2gelf { };
 
-  tailscale = callPackage ../servers/tailscale { };
+  tailscale = callPackage ../servers/tailscale {
+    buildGoModule = buildGo123Module;
+  };
 
   tailscale-systray = callPackage ../applications/misc/tailscale-systray { };
 
@@ -28832,10 +28791,6 @@ with pkgs;
 
   armcord = callPackage ../applications/networking/instant-messengers/armcord { };
 
-  aumix = callPackage ../applications/audio/aumix {
-    gtkGUI = false;
-  };
-
   autopanosiftc = callPackage ../applications/graphics/autopanosiftc { };
 
   ausweisapp = qt6Packages.callPackage ../applications/misc/ausweisapp { };
@@ -30312,13 +30267,9 @@ with pkgs;
 
   glowing-bear = callPackage ../applications/networking/irc/glowing-bear { };
 
-  gmtk = callPackage ../development/libraries/gmtk { };
-
   gmu = callPackage ../applications/audio/gmu { };
 
   gnaural = callPackage ../applications/audio/gnaural { };
-
-  gnome_mplayer = callPackage ../applications/video/gnome-mplayer { };
 
   gnumeric = callPackage ../applications/office/gnumeric { };
 
@@ -30362,10 +30313,6 @@ with pkgs;
   gigedit = callPackage ../applications/audio/gigedit { };
 
   gqview = callPackage ../applications/graphics/gqview { };
-
-  gmpc = callPackage ../applications/audio/gmpc { };
-
-  gmtp = callPackage ../applications/misc/gmtp { };
 
   gnomecast = callPackage ../applications/video/gnomecast { };
 
@@ -31617,10 +31564,6 @@ with pkgs;
 
   metersLv2 = callPackage ../applications/audio/meters_lv2 { };
 
-  mhwaveedit = callPackage ../applications/audio/mhwaveedit {
-    autoreconfHook = buildPackages.autoreconfHook269;
-  };
-
   michabo = libsForQt5.callPackage ../applications/misc/michabo { };
 
   mid2key = callPackage ../applications/audio/mid2key { };
@@ -31776,8 +31719,6 @@ with pkgs;
   easytag = callPackage ../applications/audio/easytag { };
 
   mp3gain = callPackage ../applications/audio/mp3gain { };
-
-  mp3info = callPackage ../applications/audio/mp3info { };
 
   mp3splt = callPackage ../applications/audio/mp3splt { };
 
@@ -33605,8 +33546,6 @@ with pkgs;
 
   thokr = callPackage ../applications/misc/thokr { };
 
-  thonny = callPackage ../applications/editors/thonny { };
-
   betterbird-unwrapped = callPackage ../applications/networking/mailreaders/betterbird { };
   betterbird = wrapThunderbird betterbird-unwrapped {
     desktopName = "Betterbird";
@@ -35043,8 +34982,6 @@ with pkgs;
     fteqcc;
 
   gamepad-tool = callPackage ../games/gamepad-tool { };
-
-  gnome-hexgl = callPackage ../games/gnome-hexgl { };
 
   gotypist = callPackage ../games/gotypist { };
 
