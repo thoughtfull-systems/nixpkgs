@@ -11065,8 +11065,6 @@ with pkgs;
 
   paperless-ngx = callPackage ../applications/office/paperless-ngx { };
 
-  paperoni = callPackage ../tools/text/paperoni { };
-
   paperwork = callPackage ../applications/office/paperwork/paperwork-gtk.nix { };
 
   papeer = callPackage ../tools/text/papeer { };
@@ -17868,8 +17866,6 @@ with pkgs;
 
   gnome-inform7 = callPackage ../applications/editors/gnome-inform7 { };
 
-  gnome-latex = callPackage ../applications/editors/gnome-latex { };
-
   gnome-network-displays = callPackage ../applications/networking/gnome-network-displays { };
 
   gnome-multi-writer = callPackage ../applications/misc/gnome-multi-writer { };
@@ -19486,8 +19482,6 @@ with pkgs;
 
   croaring = callPackage ../development/libraries/croaring { };
 
-  crocoddyl = callPackage ../development/libraries/crocoddyl { };
-
   crossguid = callPackage ../development/libraries/crossguid { };
 
   cryptopp = callPackage ../development/libraries/crypto++ { };
@@ -19654,8 +19648,6 @@ with pkgs;
   };
 
   libesmtp = callPackage ../development/libraries/libesmtp { };
-
-  example-robot-data = callPackage ../development/libraries/example-robot-data { };
 
   exiv2 = callPackage ../development/libraries/exiv2 { };
 
@@ -22777,8 +22769,6 @@ with pkgs;
   pico-sdk = callPackage ../development/libraries/pico-sdk { };
 
   pingvin-share =  callPackage ../servers/pingvin-share { };
-
-  pinocchio = callPackage ../development/libraries/pinocchio { };
 
   pipelight = callPackage ../tools/misc/pipelight {
     stdenv = stdenv_32bit;
@@ -29220,8 +29210,6 @@ with pkgs;
     autoreconfHook = buildPackages.autoreconfHook269;
   };
 
-  elvis = callPackage ../applications/editors/elvis { };
-
   inherit (recurseIntoAttrs (callPackage ../applications/editors/emacs { }))
     emacs28
     emacs28-gtk2
@@ -30198,10 +30186,6 @@ with pkgs;
   hledger-utils = with python3.pkgs; toPythonApplication hledger-utils;
 
   hmm = callPackage ../applications/misc/hmm { };
-
-  homebank = callPackage ../applications/office/homebank {
-    gtk = gtk3;
-  };
 
   hollywood = callPackage ../applications/misc/hollywood {
     inherit (python3Packages) pygments;
@@ -35678,6 +35662,8 @@ with pkgs;
 
   steam-run = steam.run;
 
+  steam-run-free = steamPackages.steam-fhsenv-without-steam.run;
+
   steam-tui = callPackage ../games/steam-tui { };
 
   steamcmd = steamPackages.steamcmd;
@@ -38016,9 +38002,7 @@ with pkgs;
 
   nixpkgs-review = callPackage ../tools/package-management/nixpkgs-review { };
 
-  nix-serve = callPackage ../tools/package-management/nix-serve {
-    nix = nixVersions.nix_2_18;
-  };
+  nix-serve = callPackage ../tools/package-management/nix-serve { };
 
   nix-serve-ng = haskell.lib.compose.justStaticExecutables haskellPackages.nix-serve-ng;
 
