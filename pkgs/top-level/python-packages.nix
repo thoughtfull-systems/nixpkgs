@@ -7812,6 +7812,8 @@ self: super: with self; {
 
   meteofrance-api = callPackage ../development/python-modules/meteofrance-api { };
 
+  meteoswiss-async = callPackage ../development/python-modules/meteoswiss-async { };
+
   methodtools = callPackage ../development/python-modules/methodtools { };
 
   mezzanine = callPackage ../development/python-modules/mezzanine { };
@@ -9425,6 +9427,8 @@ self: super: with self; {
   osc-diagram = callPackage ../development/python-modules/osc-diagram { };
 
   osc-lib = callPackage ../development/python-modules/osc-lib { };
+
+  osc-placement = callPackage ../development/python-modules/osc-placement { };
 
   osc-sdk-python = callPackage ../development/python-modules/osc-sdk-python { };
 
@@ -12554,6 +12558,8 @@ self: super: with self; {
   python3-gnutls = callPackage ../development/python-modules/python3-gnutls { };
 
   python3-openid = callPackage ../development/python-modules/python3-openid { };
+
+  python-aodhclient = callPackage ../development/python-modules/python-aodhclient { };
 
   python-apt = callPackage ../development/python-modules/python-apt { };
 
