@@ -1234,6 +1234,12 @@
     githubId = 37040543;
     name = "Wroclaw";
   };
+  amuckstot30 = {
+    email = "amuckstot30@tutanota.com";
+    github = "amuckstot30";
+    githubId = 157274630;
+    name = "amuckstot30";
+  };
   amyipdev = {
     email = "amy@amyip.net";
     github = "amyipdev";
@@ -5027,6 +5033,12 @@
     email = "hjsdbb1@gmail.com";
     github = "definfo";
     githubId = 66514911;
+  };
+  deftdawg = {
+    name = "DeftDawg";
+    github = "deftdawg";
+    email = "deftdawg@gmail.com";
+    githubId = 4991612;
   };
   deifactor = {
     name = "Ash Zahlen";
@@ -10746,6 +10758,13 @@
     github = "jwijenbergh";
     githubId = 46386452;
     name = "Jeroen Wijenbergh";
+  };
+  jwillikers = {
+    email = "jordan@jwillikers.com";
+    github = "jwillikers";
+    githubId = 19399197;
+    name = "Jordan Williams";
+    keys = [ { fingerprint = "A6AB 406A F5F1 DE02 CEA3 B6F0 9FB4 2B0E 7F65 7D8C"; } ];
   };
   jwygoda = {
     email = "jaroslaw@wygoda.me";
