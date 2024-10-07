@@ -17701,6 +17701,12 @@
     githubId = 145816;
     name = "David McKay";
   };
+  rayhem = {
+    email = "glosser1@gmail.com";
+    github = "rayhem";
+    githubId = 49202382;
+    name = "Connor Glosser";
+  };
   raylas = {
     email = "r@raymond.sh";
     github = "raylas";
@@ -18497,6 +18503,11 @@
     github = "rubenhoenle";
     githubId = 56157634;
     name = "Ruben Hönle";
+  };
+  rubikcubed = {
+    github = "rubikcubed";
+    githubId = 91467402;
+    name = "rubikcubed";
   };
   ruby0b = {
     github = "ruby0b";
@@ -23794,6 +23805,13 @@
     github = "Zimmi48";
     githubId = 1108325;
     name = "Théo Zimmermann";
+  };
+  zimward = {
+    name = "zimward";
+    github = "zimward";
+    githubId = 96021122;
+    matrix = "@memoryfragmentation:matrix.org";
+    keys = [ { fingerprint = "CBF7 FA5E F4B5 8B68 5977  3E3E 4CAC 61D6 A482 FCD9"; } ];
   };
   zlepper = {
     name = "Rasmus Hansen";

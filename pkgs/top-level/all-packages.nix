@@ -534,6 +534,10 @@ with pkgs;
 
   dcgm = callPackage ../os-specific/linux/dcgm { };
 
+  deck = callPackage ../by-name/de/deck/package.nix {
+    buildGoModule = buildGo123Module;
+  };
+
   dhallDirectoryToNix = callPackage ../build-support/dhall/directory-to-nix.nix { };
 
   dhallPackageToNix = callPackage ../build-support/dhall/package-to-nix.nix { };
@@ -615,8 +619,6 @@ with pkgs;
   fh = callPackage ../tools/nix/fh { };
 
   figma-agent = callPackage ../applications/graphics/figma-agent { };
-
-  figma-linux = callPackage ../applications/graphics/figma-linux { };
 
   firefly-desktop = callPackage ../applications/misc/firefly-desktop { };
 
@@ -3151,8 +3153,6 @@ with pkgs;
 
   okta-aws-cli = callPackage ../tools/admin/okta-aws-cli { };
 
-  awsebcli = callPackage ../tools/virtualization/awsebcli { };
-
   awslimitchecker = callPackage ../tools/admin/awslimitchecker { };
 
   awslogs = callPackage ../tools/admin/awslogs { };
@@ -5163,8 +5163,6 @@ with pkgs;
   gping = callPackage ../tools/networking/gping {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
-
-  gpu-viewer = callPackage ../applications/misc/gpu-viewer { };
 
   greg = callPackage ../applications/audio/greg {
     pythonPackages = python3Packages;
@@ -10995,11 +10993,7 @@ with pkgs;
 
   paho-mqtt-c = callPackage ../development/libraries/paho-mqtt-c { };
 
-  pakcs = callPackage ../development/compilers/pakcs {
-    # Doesn't compile with GHC 9.0 due to whitespace syntax changes
-    # see also https://github.com/NixOS/nixpkgs/issues/166108
-    haskellPackages = haskell.packages.ghc810;
-  };
+  pakcs = callPackage ../development/compilers/pakcs { };
 
   pal = callPackage ../tools/misc/pal { };
 
@@ -11984,8 +11978,6 @@ with pkgs;
 
   rund = callPackage ../development/tools/rund { };
 
-  runme = callPackage ../development/tools/misc/runme { };
-
   runzip = callPackage ../tools/archivers/runzip { };
 
   ruplacer = callPackage ../tools/text/ruplacer {
@@ -12470,7 +12462,7 @@ with pkgs;
 
   sparrow-unwrapped = callPackage ../applications/blockchains/sparrow {
     openimajgrabber = callPackage ../applications/blockchains/sparrow/openimajgrabber.nix {};
-    openjdk = openjdk21.override { enableJavaFX = true; };
+    openjdk = jdk22.override { enableJavaFX = true; };
   };
 
   sparrow = callPackage ../applications/blockchains/sparrow/fhsenv.nix { };
@@ -12714,8 +12706,6 @@ with pkgs;
   systembus-notify = callPackage ../applications/misc/systembus-notify { };
 
   stricat = callPackage ../tools/security/stricat { };
-
-  staruml = callPackage ../tools/misc/staruml { };
 
   stone-phaser = callPackage ../applications/audio/stone-phaser { };
 
@@ -16771,8 +16761,6 @@ with pkgs;
 
   inav-blackbox-tools = callPackage ../tools/misc/inav-blackbox-tools { };
 
-  infracost = callPackage ../tools/misc/infracost { };
-
   msp430GccSupport = callPackage ../development/misc/msp430/gcc-support.nix { };
 
   msp430Newlib = callPackage ../development/misc/msp430/newlib.nix { };
@@ -17647,8 +17635,6 @@ with pkgs;
   findbugs = callPackage ../development/tools/analysis/findbugs { };
 
   findnewest = callPackage ../development/tools/misc/findnewest { };
-
-  firebase-tools = callPackage ../development/tools/firebase-tools { };
 
   flootty = callPackage ../development/tools/flootty { };
 
@@ -19794,8 +19780,6 @@ with pkgs;
 
   hnswlib = callPackage ../development/libraries/hnswlib { };
 
-  httplib = callPackage ../development/libraries/httplib { };
-
   icon-lang = callPackage ../development/interpreters/icon-lang { };
 
   libgit2 = callPackage ../development/libraries/libgit2 {
@@ -20676,8 +20660,6 @@ with pkgs;
   libbass_fx = (callPackage ../development/libraries/audio/libbass { }).bass_fx;
   libbassmix = (callPackage ../development/libraries/audio/libbass { }).bassmix;
 
-  libbde = callPackage ../development/libraries/libbde { };
-
   libbdplus = callPackage ../development/libraries/libbdplus { };
 
   libblockdev = callPackage ../development/libraries/libblockdev { };
@@ -21263,14 +21245,6 @@ with pkgs;
   libredwg = callPackage ../development/libraries/libredwg { };
 
   librem = callPackage ../development/libraries/librem { };
-
-  libremidi = callPackage ../development/libraries/libremidi {
-      inherit (darwin.apple_sdk.frameworks)
-        CoreAudio
-        CoreFoundation
-        CoreMIDI
-        CoreServices;
-  };
 
   libremines = qt6.callPackage ../games/libremines { };
 
@@ -29078,10 +29052,6 @@ with pkgs;
 
   enhanced-ctorrent = callPackage ../applications/networking/p2p/enhanced-ctorrent { };
 
-  entangle = callPackage ../applications/video/entangle {
-    inherit (gst_all_1) gstreamer gst-plugins-base;
-  };
-
   eolie = callPackage ../applications/networking/browsers/eolie { };
 
   eos-installer = callPackage ../applications/misc/eos-installer { };
@@ -31367,7 +31337,9 @@ with pkgs;
 
   mpvScripts = mpv-unwrapped.scripts;
 
-  shaka-packager = callPackage ../applications/video/shaka-packager { };
+  shaka-packager = callPackage ../by-name/sh/shaka-packager/package.nix {
+    abseil-cpp = abseil-cpp_202401;
+  };
 
   mpvpaper = callPackage ../tools/wayland/mpvpaper { };
 
@@ -31687,10 +31659,6 @@ with pkgs;
 
   nanorc = callPackage ../applications/editors/nano/nanorc { };
 
-  netbeans = callPackage ../applications/editors/netbeans {
-    jdk = jdk17;
-  };
-
   netcoredbg = callPackage ../development/tools/misc/netcoredbg { };
 
   ncdu = callPackage ../tools/misc/ncdu {
@@ -31758,8 +31726,6 @@ with pkgs;
 
   obs-studio-plugins = recurseIntoAttrs (callPackage ../applications/video/obs-studio/plugins {});
   wrapOBS = callPackage ../applications/video/obs-studio/wrapper.nix { };
-
-  obsidian = callPackage ../applications/misc/obsidian { };
 
   octoprint = callPackage ../applications/misc/octoprint { };
 
@@ -34378,8 +34344,6 @@ with pkgs;
   samplv1 = libsForQt5.callPackage ../applications/audio/samplv1 { };
 
   scaleft = callPackage ../applications/networking/scaleft { };
-
-  scaleway-cli = callPackage ../tools/admin/scaleway-cli { };
 
   beancount = with python3.pkgs; toPythonApplication beancount;
 
@@ -38250,13 +38214,9 @@ with pkgs;
 
   valent = callPackage ../applications/misc/valent { };
 
-  vault = callPackage ../tools/security/vault { };
-
   vault-medusa = callPackage ../tools/security/vault-medusa { };
 
   vault-ssh-plus = callPackage ../tools/security/vault-ssh-plus { };
-
-  vault-bin = callPackage ../tools/security/vault/vault-bin.nix { };
 
   vaultenv = haskell.lib.justStaticExecutables haskellPackages.vaultenv;
 
