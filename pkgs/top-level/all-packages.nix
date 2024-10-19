@@ -2191,8 +2191,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
   };
 
-  git-branchstack = python3.pkgs.callPackage ../applications/version-management/git-branchstack { };
-
   git-bug = callPackage ../applications/version-management/git-bug { };
 
   git-bug-migration = callPackage ../applications/version-management/git-bug-migration { };
@@ -2364,7 +2362,7 @@ with pkgs;
 
   gitls = callPackage ../applications/version-management/gitls { };
 
-  gitmux = callPackage ../applications/version-management/gitmux { };
+  gitmux = callPackage ../applications/version-management/gitmux { buildGoModule = buildGo122Module; };
 
   gitnuro = callPackage ../applications/version-management/gitnuro { };
 
@@ -4415,8 +4413,6 @@ with pkgs;
   chopchop = callPackage ../tools/security/chopchop { };
 
   clapboard = callPackage ../tools/wayland/clapboard { };
-
-  cliphist = callPackage ../tools/wayland/cliphist { };
 
   clipman = callPackage ../tools/wayland/clipman { };
 
@@ -8606,6 +8602,7 @@ with pkgs;
     fmt = fmt_8.override { inherit stdenv; };
     nanodbc_llvm = nanodbc.override { inherit stdenv; };
     avro-cpp_llvm = avro-cpp.override { inherit stdenv boost; };
+    spdlog_llvm = spdlog.override { inherit stdenv fmt; };
   })
     irods
     irods-icommands;
@@ -8836,7 +8833,9 @@ with pkgs;
 
   jmespath = callPackage ../development/tools/jmespath { };
 
-  juicefs = callPackage ../tools/filesystems/juicefs { };
+  juicefs = callPackage ../tools/filesystems/juicefs {
+    buildGoModule = buildGo122Module;
+  };
 
   juicity = callPackage ../tools/networking/juicity { };
 
@@ -13642,6 +13641,10 @@ with pkgs;
 
   vul = callPackage ../applications/misc/vul { };
 
+  vuls = callPackage ../by-name/vu/vuls/package.nix {
+    buildGoModule = buildGo123Module;
+  };
+
   xarchive = callPackage ../tools/archivers/xarchive { };
 
   xarchiver = callPackage ../tools/archivers/xarchiver { };
@@ -13783,10 +13786,6 @@ with pkgs;
   wget = callPackage ../tools/networking/wget { };
 
   wget2 = callPackage ../tools/networking/wget2 { };
-
-  wgpu-utils = callPackage ../tools/graphics/wgpu-utils {
-    inherit (darwin.apple_sdk.frameworks) QuartzCore;
-  };
 
   wg-bond = callPackage ../applications/networking/wg-bond { };
 
@@ -15147,18 +15146,19 @@ with pkgs;
   juniper = callPackage ../development/compilers/juniper { };
 
   inherit (callPackage ../development/compilers/julia { })
-    julia_16-bin
     julia_19-bin
     julia_110-bin
+    julia_111-bin
     julia_19
-    julia_110;
+    julia_110
+    julia_111;
 
-  julia-lts = julia_16-bin;
-  julia-stable = julia_110;
+  julia-lts = julia_110-bin;
+  julia-stable = julia_111;
   julia = julia-stable;
 
-  julia-lts-bin = julia_16-bin;
-  julia-stable-bin = julia_110-bin;
+  julia-lts-bin = julia_110-bin;
+  julia-stable-bin = julia_111-bin;
   julia-bin = julia-stable-bin;
 
   kind2 = darwin.apple_sdk_11_0.callPackage ../development/compilers/kind2 { };
@@ -18393,8 +18393,6 @@ with pkgs;
 
   smc = callPackage ../tools/misc/smc { };
 
-  snakemake = callPackage ../applications/science/misc/snakemake { };
-
   snore = callPackage ../tools/misc/snore { };
 
   snzip = callPackage ../tools/archivers/snzip { };
@@ -20673,8 +20671,6 @@ with pkgs;
   libcollectdclient = callPackage ../development/libraries/libcollectdclient { };
 
   libcomps = callPackage ../tools/package-management/libcomps { python = python3; };
-
-  libcpr = callPackage ../development/libraries/libcpr { };
 
   libcredis = callPackage ../development/libraries/libcredis { };
 
@@ -23233,8 +23229,6 @@ with pkgs;
 
   tagparser = callPackage ../development/libraries/tagparser { };
 
-  taskflow = callPackage ../development/libraries/taskflow { };
-
   tclap = tclap_1_2;
 
   tclap_1_2 = callPackage ../development/libraries/tclap/1.2.nix { };
@@ -24485,9 +24479,6 @@ with pkgs;
   };
 
   matrix-alertmanager = callPackage ../servers/monitoring/matrix-alertmanager { };
-
-  mattermost = callPackage ../servers/mattermost { };
-  matterircd = callPackage ../servers/mattermost/matterircd.nix { };
 
   mattermost-desktop = callPackage ../applications/networking/instant-messengers/mattermost-desktop { };
 
@@ -28126,10 +28117,6 @@ with pkgs;
     audacious = audacious.override { audacious-plugins = null; };
   };
 
-  audacity = callPackage ../applications/audio/audacity {
-    inherit (darwin.apple_sdk.frameworks) AppKit CoreAudioKit;
-  };
-
   audio-recorder = callPackage ../applications/audio/audio-recorder { };
 
   auto-multiple-choice = callPackage ../applications/misc/auto-multiple-choice { };
@@ -28153,8 +28140,6 @@ with pkgs;
   ax25-apps = callPackage ../applications/radio/ax25-apps { };
 
   ax25-tools = callPackage ../applications/radio/ax25-tools { };
-
-  azpainter = callPackage ../applications/graphics/azpainter { };
 
   bambootracker = libsForQt5.callPackage ../applications/audio/bambootracker {
     stdenv = if stdenv.hostPlatform.isDarwin then
@@ -31500,15 +31485,6 @@ with pkgs;
 
   ncdu_1 = callPackage ../tools/misc/ncdu/1.nix { };
 
-  ncspot = callPackage ../applications/audio/ncspot {
-    inherit (darwin.apple_sdk.frameworks) Cocoa;
-
-    withALSA = stdenv.hostPlatform.isLinux;
-    withPulseAudio = config.pulseaudio or stdenv.hostPlatform.isLinux;
-    withPortAudio = stdenv.hostPlatform.isDarwin;
-    withMPRIS = stdenv.hostPlatform.isLinux;
-  };
-
   ncview = callPackage ../tools/X11/ncview { } ;
 
   ne = callPackage ../applications/editors/ne { };
@@ -32322,8 +32298,6 @@ with pkgs;
   secrets-extractor = callPackage ../tools/security/secrets-extractor { };
 
   secretscanner = callPackage ../tools/security/secretscanner { };
-
-  setconf = python3.pkgs.callPackage ../tools/misc/setconf { };
 
   semiphemeral = callPackage ../tools/misc/semiphemeral { };
 
@@ -33509,8 +33483,6 @@ with pkgs;
 
   wings = callPackage ../applications/graphics/wings { };
 
-  write_stylus = libsForQt5.callPackage ../applications/graphics/write_stylus { };
-
   wlc = callPackage  ../tools/misc/wlc { };
 
   wlclock = callPackage ../applications/misc/wlclock { };
@@ -33871,8 +33843,6 @@ with pkgs;
   ytmdl = callPackage ../tools/misc/ytmdl { };
 
   yuview = libsForQt5.yuview;
-
-  wallust = callPackage ../applications/misc/wallust { };
 
   zam-plugins = callPackage ../applications/audio/zam-plugins { };
 
@@ -35224,17 +35194,14 @@ with pkgs;
 
   stockfish = callPackage ../games/stockfish { };
 
-  steamPackages = recurseIntoAttrs (callPackage ../games/steam { });
-
-  steam = steamPackages.steam-fhsenv;
-
   steam-run = steam.run;
 
-  steam-run-free = steamPackages.steam-fhsenv-without-steam.run;
+  # This exists so Hydra tries to build all of Steam's dependencies.
+  steam-fhsenv-without-steam = steam.override { steam-unwrapped = null; };
+
+  steam-run-free = steam-fhsenv-without-steam.run;
 
   steam-tui = callPackage ../games/steam-tui { };
-
-  steamcmd = steamPackages.steamcmd;
 
   steam-acf = callPackage ../tools/games/steam-acf { };
 
@@ -38642,8 +38609,6 @@ with pkgs;
   fac-build = callPackage ../development/tools/build-managers/fac {
     inherit (darwin.apple_sdk.frameworks) CoreServices;
   };
-
-  nufmt = callPackage ../development/tools/nufmt { };
 
   bottom = darwin.apple_sdk_11_0.callPackage ../tools/system/bottom { };
 
