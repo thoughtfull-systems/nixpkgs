@@ -1817,6 +1817,13 @@
     githubId = 338268;
     name = "Alexei Robyn";
   };
+  artem = {
+    email = "a@pelenitsyn.top";
+    github = "ulysses4ever";
+    githubId = 6832600;
+    name = "Artem Pelenitsyn";
+    matrix = "@artem.types:matrix.org";
+  };
   artemist = {
     email = "me@artem.ist";
     github = "artemist";
@@ -8938,6 +8945,12 @@
     githubId = 6109326;
     name = "David Hummel";
   };
+  husjon = {
+    name = "Jon Erling Hustadnes";
+    email = "jonerling.hustadnes+nixpkgs@gmail.com";
+    github = "husjon";
+    githubId = 554229;
+  };
   husky = {
     email = "husky@husky.sh";
     github = "huskyistaken";
@@ -9479,6 +9492,12 @@
     github = "ivarmedi";
     githubId = 1318743;
     name = "Ivar";
+  };
+  ivyfanchiang = {
+    email = "dev@ivyfanchiang.ca";
+    github = "hexadecimalDinosaur";
+    githubId = 36890802;
+    name = "Ivy Fan-Chiang";
   };
   iwanb = {
     email = "tracnar@gmail.com";
@@ -10801,6 +10820,12 @@
     github = "jukremer";
     githubId = 79042825;
     name = "Jan Kremer";
+  };
+  JulianFP = {
+    name = "Julian Partanen";
+    github = "JulianFP";
+    githubId = 70963316;
+    keys = [ { fingerprint = "C61D 7747 43DE EF05 4E4A  3AC1 6FE2 79EB 5C9F 3466"; } ];
   };
   juliendehos = {
     email = "dehos@lisic.univ-littoral.fr";
@@ -12730,6 +12755,12 @@
     githubId = 26020062;
     name = "lumi";
   };
+  luna_1024 = {
+    email = "contact@luna.computer";
+    github = "luna-1024";
+    githubId = 7243615;
+    name = "Luna";
+  };
   lunarequest = {
     email = "nullarequest@vivlaid.net";
     github = "Lunarequest";
@@ -13728,6 +13759,12 @@
     github = "mattmelling";
     githubId = 1215331;
     name = "Matt Melling";
+  };
+  melon = {
+    email = "melontime05@gmail.com";
+    github = "BlaiZephyr";
+    githubId = 101197249;
+    name = "Tim";
   };
   melsigl = {
     email = "melanie.bianca.sigl@gmail.com";
@@ -18372,7 +18409,7 @@
   };
   rnhmjoj = {
     email = "rnhmjoj@inventati.org";
-    matrix = "@rnhmjoj:maxwell.ydns.eu";
+    matrix = "@rnhmjoj:eurofusion.eu";
     github = "rnhmjoj";
     githubId = 2817565;
     name = "Michele Guerini Rocco";
