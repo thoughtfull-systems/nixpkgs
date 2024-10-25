@@ -9431,6 +9431,13 @@
     github = "istoph";
     githubId = 114227790;
   };
+  itepastra = {
+    name = "Noa Aarts";
+    github = "itepastra";
+    githubId = 27058689;
+    email = "itepastra@gmail.com";
+    keys = [ { fingerprint = "E681 4CAF 06AE B076 D55D  3E32 A16C DCBF 1472 541F"; } ];
+  };
   ius = {
     email = "j.de.gram@gmail.com";
     name = "Joerie de Gram";
@@ -14484,7 +14491,7 @@
   };
   moraxyc = {
     name = "Moraxyc Xu";
-    email = "nix@qaq.li";
+    email = "i@qaq.li";
     github = "Moraxyc";
     githubId = 69713071;
   };
@@ -15374,12 +15381,6 @@
     matrix = "@niklaskorz:korz.dev";
     github = "niklaskorz";
     githubId = 590517;
-  };
-  NikolaMandic = {
-    email = "nikola@mandic.email";
-    github = "NikolaMandic";
-    githubId = 4368690;
-    name = "Ratko Mladic";
   };
   nikstur = {
     email = "nikstur@outlook.com";
@@ -19610,10 +19611,11 @@
   };
   shadowrz = {
     email = "shadowrz+nixpkgs@disroot.org";
-    matrix = "@ShadowRZ:matrixim.cc";
+    matrix = "@shadowrz:nixos.dev";
     github = "ShadowRZ";
     githubId = 23130178;
     name = "夜坂雅";
+    keys = [ { fingerprint = "3237 D49E 8F81 5A45 2133  64EA 4FF3 5790 F405 53A9"; } ];
   };
   shahrukh330 = {
     email = "shahrukh330@gmail.com";

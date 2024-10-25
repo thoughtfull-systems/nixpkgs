@@ -10559,6 +10559,10 @@ self: super: with self; {
 
   pocket = callPackage ../development/python-modules/pocket { };
 
+  pocketsphinx = callPackage ../development/python-modules/pocketsphinx {
+    inherit (pkgs) pocketsphinx;
+  };
+
   podcastparser = callPackage ../development/python-modules/podcastparser { };
 
   podcats = callPackage ../development/python-modules/podcats { };
@@ -17569,6 +17573,8 @@ self: super: with self; {
   wordcloud = callPackage ../development/python-modules/wordcloud { };
 
   wordfreq = callPackage ../development/python-modules/wordfreq { };
+
+  world-bank-data = callPackage ../development/python-modules/world-bank-data { };
 
   worldengine = callPackage ../development/python-modules/worldengine { };
 
