@@ -3336,6 +3336,8 @@ self: super: with self; {
 
   django-celery-results = callPackage ../development/python-modules/django-celery-results { };
 
+  django-choices-field = callPackage ../development/python-modules/django-choices-field { };
+
   django-ckeditor = callPackage ../development/python-modules/django-ckeditor { };
 
   django-classy-tags = callPackage ../development/python-modules/django-classy-tags { };
@@ -3405,6 +3407,8 @@ self: super: with self; {
   django-hierarkey = callPackage ../development/python-modules/django-hierarkey { };
 
   django-hijack = callPackage ../development/python-modules/django-hijack { };
+
+  django-htmx = callPackage ../development/python-modules/django-htmx { };
 
   django-i18nfield = callPackage ../development/python-modules/django-i18nfield { };
 
@@ -3524,6 +3528,8 @@ self: super: with self; {
 
   djangorestframework-guardian2 = callPackage ../development/python-modules/djangorestframework-guardian2 { };
 
+  djangorestframework-jsonp = callPackage ../development/python-modules/djangorestframework-jsonp { };
+
   djangorestframework-recursive = callPackage ../development/python-modules/djangorestframework-recursive { };
 
   djangorestframework-simplejwt = callPackage ../development/python-modules/djangorestframework-simplejwt { };
@@ -3609,6 +3615,8 @@ self: super: with self; {
   dlx = callPackage ../development/python-modules/dlx { };
 
   dmenu-python = callPackage ../development/python-modules/dmenu { };
+
+  dmt-core = callPackage ../development/python-modules/dmt-core { };
 
   dm-control = callPackage ../development/python-modules/dm-control { };
 
@@ -6846,6 +6854,8 @@ self: super: with self; {
   kserve = callPackage ../development/python-modules/kserve { };
 
   kubernetes = callPackage ../development/python-modules/kubernetes { };
+
+  kubernetes-asyncio = callPackage ../development/python-modules/kubernetes-asyncio { };
 
   kurbopy = callPackage ../development/python-modules/kurbopy { };
 
@@ -13579,6 +13589,8 @@ self: super: with self; {
 
   reproject = callPackage ../development/python-modules/reproject { };
 
+  reprint = callPackage ../development/python-modules/reprint { };
+
   reprshed = callPackage ../development/python-modules/reprshed { };
 
   reptor = callPackage ../development/python-modules/reptor { };
@@ -15084,6 +15096,8 @@ self: super: with self; {
   stravalib = callPackage ../development/python-modules/stravalib { };
 
   strawberry-graphql = callPackage ../development/python-modules/strawberry-graphql { };
+
+  strawberry-django = callPackage ../development/python-modules/strawberry-django { };
 
   strct = callPackage ../development/python-modules/strct { };
 
@@ -17203,6 +17217,8 @@ self: super: with self; {
   velbus-aio = callPackage ../development/python-modules/velbus-aio { };
 
   verboselogs = callPackage ../development/python-modules/verboselogs { };
+
+  verilogae = callPackage ../development/python-modules/verilogae { };
 
   verlib2 = callPackage ../development/python-modules/verlib2 { };
 

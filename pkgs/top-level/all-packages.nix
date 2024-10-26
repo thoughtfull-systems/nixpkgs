@@ -4169,8 +4169,6 @@ with pkgs;
 
   btrbk = callPackage ../tools/backup/btrbk { };
 
-  buildpack = callPackage ../development/tools/buildpack { };
-
   bonk = callPackage ../tools/misc/bonk { };
 
   bottom-rs = callPackage ../tools/misc/bottom-rs { };
@@ -4809,7 +4807,7 @@ with pkgs;
 
   element-desktop = callPackage ../applications/networking/instant-messengers/element/element-desktop.nix {
     inherit (darwin.apple_sdk.frameworks) Security AppKit CoreServices;
-    electron = electron_31;
+    electron = electron_32;
   };
   element-desktop-wayland = writeScriptBin "element-desktop" ''
     #!/bin/sh
@@ -9165,7 +9163,9 @@ with pkgs;
 
   lksctp-tools = callPackage ../os-specific/linux/lksctp-tools { };
 
-  lldpd = callPackage ../tools/networking/lldpd { };
+  lldpd = callPackage ../tools/networking/lldpd {
+    inherit (darwin.apple_sdk.frameworks) Foundation;
+  };
 
   llm = with python3Packages; toPythonApplication llm;
 
@@ -10274,8 +10274,10 @@ with pkgs;
 
   netbootxyz-efi = callPackage ../tools/misc/netbootxyz-efi { };
 
-  inherit (callPackage ../servers/web-apps/netbox { })
-    netbox netbox_3_6 netbox_3_7;
+  inherit (callPackage ../servers/web-apps/netbox { }) netbox_3_7;
+
+  # Not in aliases because it wouldn't get picked up by callPackage
+  netbox = netbox_4_1;
 
   netbox2netshot = callPackage ../tools/admin/netbox2netshot { };
 
@@ -11874,8 +11876,6 @@ with pkgs;
   rowhammer-test = callPackage ../tools/system/rowhammer-test { };
 
   rpPPPoE = callPackage ../tools/networking/rp-pppoe { };
-
-  rpiboot = callPackage ../development/misc/rpiboot { };
 
   rpm = callPackage ../tools/package-management/rpm {
     python = python3;
@@ -16946,10 +16946,10 @@ with pkgs;
   electron_30 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_30 then electron-source.electron_30 else electron_30-bin;
   electron_31 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_31 then electron-source.electron_31 else electron_31-bin;
   electron_32 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_32 then electron-source.electron_32 else electron_32-bin;
-  electron_33 = electron_33-bin;
-  electron = electron_32;
-  electron-bin = electron_32-bin;
-  electron-chromedriver = electron-chromedriver_32;
+  electron_33 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_33 then electron-source.electron_33 else electron_33-bin;
+  electron = electron_33;
+  electron-bin = electron_33-bin;
+  electron-chromedriver = electron-chromedriver_33;
 
   autobuild = callPackage ../development/tools/misc/autobuild { };
 
@@ -18557,8 +18557,6 @@ with pkgs;
   };
 
   time-ghc-modules = callPackage ../development/tools/time-ghc-modules { };
-
-  tflint = callPackage ../development/tools/analysis/tflint { };
 
   tflint-plugins = recurseIntoAttrs (
     callPackage ../development/tools/analysis/tflint-plugins { }
@@ -36243,7 +36241,9 @@ with pkgs;
   };
   cvc4 = callPackage ../applications/science/logic/cvc4 { };
 
-  cvc5 = callPackage ../applications/science/logic/cvc5 { };
+  cvc5 = callPackage ../applications/science/logic/cvc5 {
+    cadical = pkgs.cadical.override { version = "2.0.0"; };
+  };
 
   drat-trim = callPackage ../applications/science/logic/drat-trim { };
 
@@ -37093,8 +37093,6 @@ with pkgs;
   hplip = callPackage ../misc/drivers/hplip { };
 
   hplipWithPlugin = hplip.override { withPlugin = true; };
-
-  hyfetch = callPackage ../tools/misc/hyfetch { };
 
   hyperfine = callPackage ../tools/misc/hyperfine {
     inherit (darwin.apple_sdk.frameworks) Security;
