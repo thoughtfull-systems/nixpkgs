@@ -2434,8 +2434,6 @@ self: super: with self; {
 
   cocotb-bus = callPackage ../development/python-modules/cocotb-bus { };
 
-  codecov = callPackage ../development/python-modules/codecov { };
-
   codepy = callPackage ../development/python-modules/codepy { };
 
   cogapp = callPackage ../development/python-modules/cogapp { };
@@ -3571,6 +3569,8 @@ self: super: with self; {
   django-tastypie = callPackage ../development/python-modules/django-tastypie { };
 
   django-timezone-field = callPackage ../development/python-modules/django-timezone-field { };
+
+  django-tinymce = callPackage ../development/python-modules/django-tinymce { };
 
   django-treebeard = callPackage ../development/python-modules/django-treebeard { };
 
@@ -8889,6 +8889,8 @@ self: super: with self; {
 
   netapp-ontap = callPackage ../development/python-modules/netapp-ontap { };
 
+  netbox-bgp = callPackage ../development/python-modules/netbox-bgp { };
+
   netbox-documents = callPackage ../development/python-modules/netbox-documents { };
 
   netbox-reorder-rack = callPackage ../development/python-modules/netbox-reorder-rack { };
@@ -9578,9 +9580,7 @@ self: super: with self; {
 
   oslo-serialization = callPackage ../development/python-modules/oslo-serialization { };
 
-  oslo-utils = callPackage ../development/python-modules/oslo-utils {
-    qemu = pkgs.qemu;
-  };
+  oslo-utils = callPackage ../development/python-modules/oslo-utils { };
 
   oslotest = callPackage ../development/python-modules/oslotest { };
 
@@ -10373,6 +10373,8 @@ self: super: with self; {
   pytest-mockito = callPackage ../development/python-modules/pytest-mockito { };
 
   pytest-pudb = callPackage ../development/python-modules/pytest-pudb { };
+
+  pytest-ruff = callPackage ../development/python-modules/pytest-ruff { };
 
   pytlv = callPackage ../development/python-modules/pytlv { };
 
@@ -11228,7 +11230,7 @@ self: super: with self; {
 
   pydmd = callPackage ../development/python-modules/pydmd { };
 
-  pydns = callPackage ../development/python-modules/py3dns { };
+  py3dns = callPackage ../development/python-modules/py3dns { };
 
   pydocstyle = callPackage ../development/python-modules/pydocstyle { };
 
@@ -13677,6 +13679,8 @@ self: super: with self; {
 
   retry-decorator = callPackage ../development/python-modules/retry-decorator { };
 
+  retry2 = callPackage ../development/python-modules/retry2 { };
+
   retrying = callPackage ../development/python-modules/retrying { };
 
   returns = callPackage ../development/python-modules/returns { };
@@ -13916,6 +13920,10 @@ self: super: with self; {
   rubicon-objc = callPackage ../development/python-modules/rubicon-objc { };
 
   rubymarshal = callPackage ../development/python-modules/rubymarshal { };
+
+  ruff = toPythonModule (pkgs.ruff.override {
+    python3Packages = self;
+  });
 
   ruff-api = callPackage ../development/python-modules/ruff-api { };
 
@@ -17938,6 +17946,8 @@ self: super: with self; {
   zerorpc = callPackage ../development/python-modules/zerorpc { };
 
   zetup = callPackage ../development/python-modules/zetup { };
+
+  zeversolar = callPackage ../development/python-modules/zeversolar { };
 
   zeversolarlocal = callPackage ../development/python-modules/zeversolarlocal { };
 
