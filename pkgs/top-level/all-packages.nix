@@ -7506,8 +7506,6 @@ with pkgs;
 
   flashrom = callPackage ../tools/misc/flashrom { };
 
-  flent = python3Packages.callPackage ../applications/networking/flent { };
-
   flexoptix-app = callPackage ../tools/misc/flexoptix-app { };
 
   flpsed = callPackage ../applications/editors/flpsed { };
@@ -8470,8 +8468,6 @@ with pkgs;
   htpdate = callPackage ../tools/networking/htpdate { };
 
   http-prompt = callPackage ../tools/networking/http-prompt { };
-
-  http-getter = callPackage ../applications/networking/flent/http-getter.nix { };
 
   httpdump = callPackage ../tools/security/httpdump { };
 
@@ -9569,8 +9565,6 @@ with pkgs;
   libck = callPackage ../development/libraries/libck { };
 
   libcork = callPackage ../development/libraries/libcork { };
-
-  libconfig = callPackage ../development/libraries/libconfig { };
 
   libcmis = callPackage ../development/libraries/libcmis { };
 
@@ -11432,10 +11426,6 @@ with pkgs;
 
   ticktick = callPackage ../applications/office/ticktick { };
 
-  pyditz = callPackage ../applications/misc/pyditz {
-    pythonPackages = python3Packages;
-  };
-
   py-spy = darwin.apple_sdk_11_0.callPackage ../development/tools/py-spy {
     # https://github.com/benfred/py-spy/issues/633
     python3 = python311;
@@ -11638,8 +11628,6 @@ with pkgs;
   realesrgan-ncnn-vulkan = callPackage ../tools/graphics/realesrgan-ncnn-vulkan { };
 
   react-native-debugger = callPackage ../development/tools/react-native-debugger { };
-
-  readarr = callPackage ../servers/readarr { };
 
   read-edid = callPackage ../os-specific/linux/read-edid { };
 
@@ -14464,6 +14452,7 @@ with pkgs;
   flutterPackages-source = recurseIntoAttrs (callPackage ../development/compilers/flutter { useNixpkgsEngine = true; });
   flutterPackages = flutterPackages-bin;
   flutter = flutterPackages.stable;
+  flutter327 = flutterPackages.v3_27;
   flutter326 = flutterPackages.v3_26;
   flutter324 = flutterPackages.v3_24;
   flutter319 = flutterPackages.v3_19;
@@ -15327,11 +15316,14 @@ with pkgs;
 
   muonlang = callPackage ../development/compilers/muonlang { };
 
-  inherit (callPackages ../development/compilers/nim
-                        { inherit (darwin) Security;  }
-          ) nim-unwrapped-1 nim-unwrapped-2 nim1 nim2;
   nim = nim2;
-  buildNimPackage = callPackage ../development/compilers/nim/build-nim-package.nix { };
+  nim1 = nim-1_0;
+  nim2 = nim-2_2;
+  nim-unwrapped = nim-unwrapped-2_2;
+  nim-unwrapped-1 = nim-unwrapped-1_0;
+  nim-unwrapped-2 = nim-unwrapped-2_2;
+
+  buildNimPackage = callPackage ../build-support/build-nim-package.nix { };
   nimOverrides = callPackage ./nim-overrides.nix { };
 
   neko = callPackage ../development/compilers/neko { };
@@ -18384,8 +18376,6 @@ with pkgs;
   spruce = callPackage ../development/tools/misc/spruce { };
 
   sqlboiler-crdb = callPackage ../development/tools/database/sqlboiler-crdb { };
-
-  sqlc = callPackage ../development/tools/database/sqlc { };
 
   sqlcheck = callPackage ../development/tools/database/sqlcheck { };
 
@@ -25086,7 +25076,10 @@ with pkgs;
 
   inherit (callPackages ../servers/http/tomcat { })
     tomcat9
-    tomcat10;
+    tomcat10
+    tomcat11;
+
+  tomcat = tomcat11;
 
   tomcat_mysql_jdbc = callPackage ../servers/http/tomcat/jdbc/mysql { };
 
@@ -27858,6 +27851,7 @@ with pkgs;
 
   inherit (qt6Packages.callPackage ../applications/office/activitywatch { })
     aw-qt
+    aw-notify
     aw-server-rust
     aw-watcher-afk
     aw-watcher-window;
@@ -30266,7 +30260,7 @@ with pkgs;
 
   kondo = callPackage ../applications/misc/kondo { };
 
-  kotatogram-desktop = kdePackages.callPackage ../applications/networking/instant-messengers/telegram/kotatogram-desktop {
+  kotatogram-desktop = libsForQt5.callPackage ../applications/networking/instant-messengers/telegram/kotatogram-desktop {
     stdenv = if stdenv.hostPlatform.isDarwin
       then overrideSDK stdenv "11.0"
       else stdenv;
@@ -30346,8 +30340,6 @@ with pkgs;
   kubelogin = callPackage ../applications/networking/cluster/kubelogin { };
 
   kubevpn = callPackage ../applications/networking/cluster/kubevpn { };
-
-  k8sgpt = callPackage ../applications/networking/cluster/k8sgpt { };
 
   k9s = callPackage ../applications/networking/cluster/k9s { };
 
@@ -33589,8 +33581,6 @@ with pkgs;
 
   xrestop = callPackage ../tools/X11/xrestop { };
 
-  xrgears = callPackage ../applications/graphics/xrgears { };
-
   xsd = callPackage ../development/libraries/xsd {
     stdenv = gcc9Stdenv;
   };
@@ -33858,8 +33848,6 @@ with pkgs;
   ergo = callPackage ../applications/blockchains/ergo { };
 
   erigon = callPackage ../applications/blockchains/erigon { };
-
-  exodus = callPackage ../applications/blockchains/exodus { };
 
   faraday = callPackage ../applications/blockchains/faraday { };
 
@@ -36457,8 +36445,6 @@ with pkgs;
   xcircuit = callPackage ../applications/science/electronics/xcircuit { };
 
   xoscope = callPackage ../applications/science/electronics/xoscope { };
-
-  xschem = callPackage ../applications/science/electronics/xschem { };
 
   xyce = callPackage ../applications/science/electronics/xyce { };
 
