@@ -681,6 +681,8 @@ with pkgs;
     inherit (darwin) DarwinTools;
   };
 
+  mumps_par = callPackage ../by-name/mu/mumps/package.nix { mpiSupport = true; };
+
   mix2nix = callPackage ../development/tools/mix2nix { };
 
   n98-magerun = callPackage ../development/tools/misc/n98-magerun { };
@@ -8127,11 +8129,6 @@ with pkgs;
 
   groff = callPackage ../tools/text/groff { };
 
-  gromit-mpx = callPackage ../tools/graphics/gromit-mpx {
-    gtk = gtk3;
-    libappindicator = libappindicator-gtk3;
-  };
-
   gron = callPackage ../development/tools/gron { };
 
   groonga = callPackage ../servers/search/groonga { };
@@ -10337,8 +10334,6 @@ with pkgs;
 
   nomad-driver-podman = callPackage ../applications/networking/cluster/nomad-driver-podman { };
 
-  nomad-pack = callPackage ../applications/networking/cluster/nomad-pack { };
-
   nova = callPackage ../applications/networking/cluster/nova { };
 
   nomino = callPackage ../tools/misc/nomino { };
@@ -12327,8 +12322,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  sonar-scanner-cli = callPackage ../tools/security/sonar-scanner-cli { };
-
   snapshot = callPackage ../applications/graphics/snapshot { };
 
   solvespace = callPackage ../applications/graphics/solvespace { };
@@ -12905,8 +12898,6 @@ with pkgs;
   trackma-qt = trackma.override { withQT = true; };
 
   tran = callPackage ../tools/networking/tran { };
-
-  trayscale = callPackage ../applications/networking/trayscale { };
 
   tpmmanager = libsForQt5.callPackage ../applications/misc/tpmmanager { };
 
@@ -14804,6 +14795,7 @@ with pkgs;
 
   gleam = callPackage ../development/compilers/gleam {
     inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
+    erlang = erlang_27;
   };
 
   gmqcc = callPackage ../development/compilers/gmqcc { };
@@ -19790,7 +19782,6 @@ with pkgs;
   gmm = callPackage ../development/libraries/gmm { };
 
   gmp4 = callPackage ../development/libraries/gmp/4.3.2.nix { }; # required by older GHC versions
-  gmp5 = callPackage ../development/libraries/gmp/5.1.x.nix { };
   gmp6 = callPackage ../development/libraries/gmp/6.x.nix { };
   gmp = gmp6;
   gmpxx = gmp.override { cxx = true; };
@@ -26239,8 +26230,8 @@ with pkgs;
 
   sdparm = callPackage ../os-specific/linux/sdparm { };
 
-  sdrangel = libsForQt5.callPackage ../applications/radio/sdrangel {
-    stdenv = if stdenv.hostPlatform.isDarwin then overrideSDK stdenv "11.0" else stdenv;
+  sdrangel = qt6Packages.callPackage ../applications/radio/sdrangel {
+    stdenv = if stdenv.hostPlatform.isDarwin then overrideSDK stdenv "12.3" else stdenv;
   };
 
   setools = callPackage ../os-specific/linux/setools { };
@@ -28586,7 +28577,7 @@ with pkgs;
   dmenu = callPackage ../applications/misc/dmenu { };
   dmenu-wayland = callPackage ../applications/misc/dmenu/wayland.nix { };
 
-  dmenu-rs = callPackage ../applications/misc/dmenu-rs { };
+  dmenu-rs-enable-plugins = dmenu-rs.override { enablePlugins = true; };
 
   dmensamenu = callPackage ../applications/misc/dmensamenu {
     inherit (python3Packages) buildPythonApplication requests;
@@ -31229,6 +31220,8 @@ with pkgs;
 
   scudcloud = callPackage ../applications/networking/instant-messengers/scudcloud { };
 
+  scx = recurseIntoAttrs (callPackage ../os-specific/linux/scx { });
+
   shod = callPackage ../applications/window-managers/shod { };
 
   shogun = callPackage ../applications/science/machine-learning/shogun {
@@ -32666,12 +32659,6 @@ with pkgs;
 
   thokr = callPackage ../applications/misc/thokr { };
 
-  betterbird-unwrapped = callPackage ../applications/networking/mailreaders/betterbird { };
-  betterbird = wrapThunderbird betterbird-unwrapped {
-    desktopName = "Betterbird";
-    pname = "betterbird";
-  };
-
   thunderbirdPackages = recurseIntoAttrs (callPackage ../applications/networking/mailreaders/thunderbird/packages.nix {
     callPackage = newScope {
       inherit (rustPackages) cargo rustc;
@@ -32681,7 +32668,6 @@ with pkgs;
   thunderbird-unwrapped = thunderbirdPackages.thunderbird;
   thunderbird = wrapThunderbird thunderbird-unwrapped { };
 
-  thunderbird-115 = wrapThunderbird thunderbirdPackages.thunderbird-115 { };
   thunderbird-128 = wrapThunderbird thunderbirdPackages.thunderbird-128 { };
 
   thunderbird-bin = wrapThunderbird thunderbird-bin-unwrapped {
@@ -36585,8 +36571,6 @@ with pkgs;
   gildas = callPackage ../applications/science/astronomy/gildas { };
 
   gplates = libsForQt5.callPackage ../applications/science/misc/gplates { };
-
-  grap = callPackage ../tools/security/grap { };
 
   gravit = callPackage ../applications/science/astronomy/gravit { };
 
