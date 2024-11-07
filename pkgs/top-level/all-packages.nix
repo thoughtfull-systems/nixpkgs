@@ -1634,8 +1634,6 @@ with pkgs;
 
   askalono = callPackage ../tools/misc/askalono { };
 
-  asleap = callPackage ../tools/networking/asleap { };
-
   awsbck = callPackage ../tools/backup/awsbck {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
@@ -2224,8 +2222,6 @@ with pkgs;
   git-extras = callPackage ../applications/version-management/git-extras { };
 
   git-fame = callPackage ../applications/version-management/git-fame { };
-
-  git-fast-export = callPackage ../applications/version-management/fast-export { };
 
   git-fire = callPackage ../applications/version-management/git-fire { };
 
@@ -4613,8 +4609,6 @@ with pkgs;
   diagrams-builder = callPackage ../tools/graphics/diagrams-builder {
     inherit (haskellPackages) ghcWithPackages diagrams-builder;
   };
-
-  dialect = callPackage ../applications/misc/dialect { };
 
   dialogbox = libsForQt5.callPackage ../tools/misc/dialogbox { };
 
@@ -10004,7 +9998,7 @@ with pkgs;
   mole = callPackage ../tools/networking/mole { };
 
   morgen = callPackage ../applications/office/morgen {
-    electron = electron_30;
+    electron = electron_32;
   };
 
   mosh = callPackage ../tools/networking/mosh { };
@@ -12096,10 +12090,6 @@ with pkgs;
   silc_client = callPackage ../applications/networking/instant-messengers/silc-client { };
 
   silc_server = callPackage ../servers/silc-server { };
-
-  sile = callPackage ../tools/typesetting/sile {
-    lua = lua5_3;
-  };
 
   silenthound = callPackage ../tools/security/silenthound { };
 
@@ -32168,8 +32158,6 @@ with pkgs;
     curses = ncurses;
   };
 
-  linuxstopmotion = libsForQt5.callPackage ../applications/video/linuxstopmotion { };
-
   sweethome3d = recurseIntoAttrs (
     (callPackage ../applications/misc/sweethome3d { }) //
     (callPackage ../applications/misc/sweethome3d/editors.nix {
@@ -33933,9 +33921,7 @@ with pkgs;
 
   colobot = callPackage ../games/colobot { };
 
-  corsix-th = callPackage ../games/corsix-th {
-    inherit (darwin.apple_sdk.frameworks) Cocoa CoreVideo CoreMedia VideoToolbox;
-  };
+  corsix-th = callPackage ../games/corsix-th { };
 
   enigma = callPackage ../games/enigma { };
 
@@ -33973,9 +33959,7 @@ with pkgs;
 
   keeperrl = callPackage ../games/keeperrl { };
 
-  shipwright = callPackage ../games/shipwright {
-    stdenv = if stdenv.hostPlatform.isDarwin then overrideSDK stdenv "11.0" else stdenv;
-  };
+  shipwright = callPackage ../games/shipwright { };
 
   wipeout-rewrite = callPackage ../games/wipeout-rewrite {
     inherit (darwin.apple_sdk.frameworks) Foundation;
@@ -38245,8 +38229,6 @@ with pkgs;
   qubes-core-vchan-xen = callPackage ../applications/qubes/qubes-core-vchan-xen { };
 
   sieveshell = with python3.pkgs; toPythonApplication managesieve;
-
-  gortr = callPackage ../servers/gortr { };
 
   stayrtr = callPackage ../servers/stayrtr { };
 

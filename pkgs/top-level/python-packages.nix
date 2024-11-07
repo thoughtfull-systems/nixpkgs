@@ -702,6 +702,8 @@ self: super: with self; {
 
   appdirs = callPackage ../development/python-modules/appdirs { };
 
+  appimage = callPackage ../development/python-modules/appimage { };
+
   apple-weatherkit = callPackage ../development/python-modules/apple-weatherkit { };
 
   applicationinsights = callPackage ../development/python-modules/applicationinsights { };
@@ -10441,6 +10443,8 @@ self: super: with self; {
   pysqlitecipher = callPackage ../development/python-modules/pysqlitecipher { };
 
   pysyncthru = callPackage ../development/python-modules/pysyncthru { };
+
+  pytask = callPackage ../development/python-modules/pytask { };
 
   pytest-mockito = callPackage ../development/python-modules/pytest-mockito { };
 
