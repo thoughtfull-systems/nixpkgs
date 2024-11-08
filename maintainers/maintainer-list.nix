@@ -870,6 +870,12 @@
     githubId = 56970006;
     keys = [ { fingerprint = "50E2 669C AB38 2F4A 5F72  1667 0D6B FC01 D45E DADD"; } ];
   };
+  akotro = {
+    name = "Antonis Kotronakis";
+    email = "mail@akotro.dev";
+    github = "akotro";
+    githubId = 20772540;
+  };
   akru = {
     email = "mail@akru.me";
     github = "akru";
@@ -2351,7 +2357,7 @@
     email = "baduhai@pm.me";
     github = "baduhai";
     githubId = 31864305;
-    name = "William";
+    name = "William Hai";
   };
   baitinq = {
     email = "manuelpalenzuelamerino@gmail.com";
@@ -4440,6 +4446,12 @@
       { fingerprint = "6607 0B24 8CE5 64ED 22CE  0950 A697 A56F 1F15 1189"; }
       { fingerprint = "D8CB 816A B678 A4E6 1EC7  5325 230F 4AC1 53F9 0F29"; }
     ];
+  };
+  corbinwunderlich = {
+    email = "corbin@wcopy.net";
+    github = "CorbinWunderlich";
+    githubId = 140280062;
+    name = "Corbin Wunderlich";
   };
   corngood = {
     email = "corngood@gmail.com";
@@ -9151,12 +9163,6 @@
     githubId = 30196;
     name = "Ian Liu Rodrigues";
   };
-  ianmjones = {
-    email = "ian@ianmjones.com";
-    github = "ianmjones";
-    githubId = 4710;
-    name = "Ian M. Jones";
-  };
   ianwookim = {
     email = "ianwookim@gmail.com";
     github = "wavewave";
@@ -9536,6 +9542,11 @@
     name = "Christoph Hüffelmann";
     github = "istoph";
     githubId = 114227790;
+  };
+  istudyatuni = {
+    name = "Ilia";
+    github = "istudyatuni";
+    githubId = 43654815;
   };
   itepastra = {
     name = "Noa Aarts";

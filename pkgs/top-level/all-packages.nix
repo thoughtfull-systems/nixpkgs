@@ -446,8 +446,6 @@ with pkgs;
 
   ciel = callPackage ../tools/package-management/ciel { };
 
-  circt = callPackage ../development/compilers/circt { };
-
   clang-uml = callPackage ../by-name/cl/clang-uml/package.nix {
     stdenv = clangStdenv;
   };
@@ -1606,8 +1604,6 @@ with pkgs;
   inherit (recurseIntoAttrs (callPackage ../tools/package-management/akku { }))
     akku akkuPackages;
 
-  alice-lg = callPackage ../servers/alice-lg{ };
-
   alice-tools = callPackage ../tools/games/alice-tools {
     withGUI = false;
   };
@@ -1760,8 +1756,6 @@ with pkgs;
 
   grizzly = callPackage ../tools/misc/grizzly { };
 
-  guestfs-tools = callPackage ../tools/virtualization/guestfs-tools { };
-
   fabs = callPackage ../tools/backup/fabs { };
 
   fm = callPackage ../applications/file-managers/fm { };
@@ -1786,7 +1780,7 @@ with pkgs;
 
   hyperpotamus = callPackage ../tools/misc/hyperpotamus { };
 
-  inherit (callPackages ../tools/networking/ivpn/default.nix {}) ivpn ivpn-service;
+  inherit (callPackages ../tools/networking/ivpn/default.nix { buildGoModule = buildGo122Module; }) ivpn ivpn-service;
 
   jobber = callPackage ../tools/system/jobber { };
 
@@ -3120,8 +3114,6 @@ with pkgs;
   awslogs = callPackage ../tools/admin/awslogs { };
 
   awsume = python3Packages.callPackage ../tools/admin/awsume { };
-
-  aws-assume-role = callPackage ../tools/admin/aws-assume-role { };
 
   aws-lambda-rie = callPackage ../tools/admin/aws-lambda-runtime-interface-emulator { };
 
@@ -4701,8 +4693,6 @@ with pkgs;
   dwt1-shell-color-scripts = callPackage ../tools/misc/dwt1-shell-color-scripts { };
 
   dtrx = callPackage ../tools/compression/dtrx { };
-
-  dua = callPackage ../tools/misc/dua { };
 
   duf = callPackage ../tools/misc/duf { };
 
@@ -6476,10 +6466,6 @@ with pkgs;
 
   age-plugin-tpm = callPackage ../tools/security/age-plugin-tpm { };
 
-  age-plugin-yubikey = darwin.apple_sdk_11_0.callPackage ../tools/security/age-plugin-yubikey {
-    inherit (darwin.apple_sdk_11_0.frameworks) Foundation PCSC IOKit;
-  };
-
   artim-dark = callPackage ../data/themes/artim-dark { };
 
   bbin = callPackage ../development/tools/bbin { };
@@ -6991,8 +6977,6 @@ with pkgs;
   duo-unix = callPackage ../tools/security/duo-unix { };
 
   dupe-krill = callPackage ../tools/filesystems/dupe-krill { };
-
-  duplicacy = callPackage ../tools/backup/duplicacy { };
 
   duplicity = callPackage ../tools/backup/duplicity { };
 
@@ -9786,8 +9770,6 @@ with pkgs;
 
   maildrop = callPackage ../tools/networking/maildrop { };
 
-  mailhog = callPackage ../servers/mail/mailhog { };
-
   mailnag = callPackage ../applications/networking/mailreaders/mailnag {
     availablePlugins = {
       # More are listed here: https://github.com/pulb/mailnag/#desktop-integration
@@ -10266,6 +10248,7 @@ with pkgs;
     nomad_1_6
     nomad_1_7
     nomad_1_8
+    nomad_1_9
     ;
 
   nomad-autoscaler = callPackage ../applications/networking/cluster/nomad-autoscaler { };
@@ -12065,9 +12048,6 @@ with pkgs;
 
   sigil = libsForQt5.callPackage ../applications/editors/sigil { };
 
-  signalbackup-tools = darwin.apple_sdk_11_0.callPackage
-    ../applications/networking/instant-messengers/signalbackup-tools { };
-
   signald = callPackage ../applications/networking/instant-messengers/signald { };
 
   signaldctl = callPackage ../applications/networking/instant-messengers/signaldctl { };
@@ -12323,11 +12303,6 @@ with pkgs;
 
   somebar = callPackage ../applications/misc/somebar { };
 
-  spacebar = callPackage ../os-specific/darwin/spacebar {
-    inherit (darwin.apple_sdk.frameworks)
-      Carbon Cocoa ScriptingBridge SkyLight;
-  };
-
   speech-denoiser = callPackage ../applications/audio/speech-denoiser { };
 
   splot = haskell.lib.compose.justStaticExecutables haskellPackages.splot;
@@ -12368,8 +12343,6 @@ with pkgs;
   sstp = callPackage ../tools/networking/sstp { };
 
   strip-nondeterminism = perlPackages.strip-nondeterminism;
-
-  structorizer = callPackage ../applications/graphics/structorizer { };
 
   subberthehut = callPackage ../tools/misc/subberthehut { };
 
@@ -12852,10 +12825,6 @@ with pkgs;
   trezor-agent = with python3Packages; toPythonApplication trezor-agent;
 
   trezor-suite = callPackage ../applications/blockchains/trezor-suite { };
-
-  trunk = callPackage ../development/tools/trunk {
-    inherit (darwin.apple_sdk.frameworks) CoreServices SystemConfiguration;
-  };
 
   trunk-ng = callPackage ../by-name/tr/trunk-ng/package.nix {
     inherit (darwin.apple_sdk.frameworks) CoreServices Security SystemConfiguration;
@@ -14170,7 +14139,6 @@ with pkgs;
   aspectj = callPackage ../development/compilers/aspectj { };
 
   ats = callPackage ../development/compilers/ats { };
-  ats2 = callPackage ../development/compilers/ats2 { };
 
   ats-acc = callPackage ../development/tools/ats-acc { };
 
@@ -15991,6 +15959,8 @@ with pkgs;
     lfe lfe_2_1;
   beamPackages = beam.packages.erlang // { __attrsFailEvaluation = true; };
 
+  erlang_language_platform = callPackage ../by-name/er/erlang-language-platform/package.nix { };
+
   expr = callPackage ../development/interpreters/expr { };
 
   genemichaels = callPackage ../development/tools/rust/genemichaels { };
@@ -17470,8 +17440,6 @@ with pkgs;
   gnome-doc-utils = callPackage ../development/tools/documentation/gnome-doc-utils { };
 
   gnome-desktop-testing = callPackage ../development/tools/gnome-desktop-testing { };
-
-  gnome-firmware = callPackage ../applications/misc/gnome-firmware { };
 
   gnome-tecla = callPackage ../applications/misc/gnome-tecla { };
 
@@ -22520,8 +22488,6 @@ with pkgs;
 
   rapidfuzz-cpp = callPackage ../development/libraries/rapidfuzz-cpp { };
 
-  rapidjson = callPackage ../development/libraries/rapidjson { };
-
   rapidxml = callPackage ../development/libraries/rapidxml { };
 
   rapidyaml = callPackage ../development/libraries/rapidyaml {};
@@ -23350,8 +23316,6 @@ with pkgs;
 
   x265 = callPackage ../development/libraries/x265 { };
 
-  xandikos = callPackage ../servers/xandikos { };
-
   inherit (callPackages ../development/libraries/xapian { })
     xapian_1_4;
   xapian = xapian_1_4;
@@ -23948,8 +23912,6 @@ with pkgs;
   bird = callPackage ../servers/bird { };
 
   bird-lg = callPackage ../servers/bird-lg { };
-
-  birdwatcher = callPackage ../servers/birdwatcher { };
 
   bloat = callPackage ../servers/bloat { };
 
@@ -25002,8 +24964,6 @@ with pkgs;
 
   tailscale-systray = callPackage ../applications/misc/tailscale-systray { };
 
-  tailspin = callPackage ../tools/misc/tailspin { };
-
   trafficserver = callPackage ../servers/http/trafficserver { };
 
   inherit (callPackages ../servers/http/tomcat { })
@@ -25371,8 +25331,6 @@ with pkgs;
   libuuid = if stdenv.hostPlatform.isLinux
     then util-linuxMinimal
     else null;
-
-  light = callPackage ../os-specific/linux/light { };
 
   lightum = callPackage ../os-specific/linux/lightum { };
 
@@ -28781,8 +28739,6 @@ with pkgs;
   input-leap = qt6Packages.callPackage ../applications/misc/input-leap {
     avahi = avahi.override { withLibdnssdCompat = true; };
   };
-
-  karlender = callPackage ../applications/office/karlender { };
 
   keepassxc = libsForQt5.callPackage ../applications/misc/keepassxc {
     inherit (darwin.apple_sdk_11_0.frameworks) LocalAuthentication;
@@ -38229,8 +38185,6 @@ with pkgs;
   qubes-core-vchan-xen = callPackage ../applications/qubes/qubes-core-vchan-xen { };
 
   sieveshell = with python3.pkgs; toPythonApplication managesieve;
-
-  stayrtr = callPackage ../servers/stayrtr { };
 
   sunshine = callPackage ../servers/sunshine { };
 

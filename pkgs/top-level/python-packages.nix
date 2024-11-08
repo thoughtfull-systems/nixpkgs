@@ -4663,6 +4663,8 @@ self: super: with self; {
 
   flax = callPackage ../development/python-modules/flax { };
 
+  flaxlib = callPackage ../development/python-modules/flaxlib { };
+
   fleep = callPackage ../development/python-modules/fleep { };
 
   flet = callPackage ../development/python-modules/flet { };
@@ -5793,6 +5795,8 @@ self: super: with self; {
   holoviews = callPackage ../development/python-modules/holoviews { };
 
   home-assistant-bluetooth = callPackage ../development/python-modules/home-assistant-bluetooth { };
+
+  home-assistant-chip-wheels = callPackage ../development/python-modules/home-assistant-chip-wheels { };
 
   home-assistant-chip-clusters = callPackage ../development/python-modules/home-assistant-chip-clusters { };
 
@@ -15465,8 +15469,6 @@ self: super: with self; {
 
   teamcity-messages = callPackage ../development/python-modules/teamcity-messages { };
 
-  telegram = callPackage ../development/python-modules/telegram { };
-
   telegraph = callPackage ../development/python-modules/telegraph { };
 
   telepath = callPackage ../development/python-modules/telepath { };
@@ -17740,6 +17742,8 @@ self: super: with self; {
 
   wtforms-bootstrap5 = callPackage ../development/python-modules/wtforms-bootstrap5 { };
 
+  wtforms-sqlalchemy = callPackage ../development/python-modules/wtforms-sqlalchemy { };
+
   wunsen = callPackage ../development/python-modules/wunsen { };
 
   wtf-peewee = callPackage ../development/python-modules/wtf-peewee { };
@@ -17768,8 +17772,6 @@ self: super: with self; {
   xarray = callPackage ../development/python-modules/xarray { };
 
   xarray-dataclasses = callPackage ../development/python-modules/xarray-dataclasses { };
-
-  xarray-datatree = callPackage ../development/python-modules/xarray-datatree { };
 
   xarray-einstats = callPackage ../development/python-modules/xarray-einstats { };
 
