@@ -17914,10 +17914,6 @@ with pkgs;
 
   ansible-lint = callPackage ../tools/admin/ansible/lint.nix { };
 
-  antares = callPackage ../by-name/an/antares/package.nix {
-    electron = electron_30;
-  };
-
   antlr2 = callPackage ../development/tools/parsing/antlr/2.7.7.nix { };
   antlr3_4 = callPackage ../development/tools/parsing/antlr/3.4.nix { };
   antlr3_5 = callPackage ../development/tools/parsing/antlr/3.5.nix { };
@@ -35377,7 +35373,7 @@ with pkgs;
 
   webcamoid = libsForQt5.callPackage ../applications/video/webcamoid { };
 
-  webcord = callPackage ../by-name/we/webcord/package.nix { electron = electron_30; };
+  webcord = callPackage ../by-name/we/webcord/package.nix { electron = electron_32; };
 
   webcord-vencord = callPackage ../by-name/we/webcord-vencord/package.nix { electron = electron_31; };
 
