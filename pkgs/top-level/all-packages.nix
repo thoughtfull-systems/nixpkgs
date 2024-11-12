@@ -1697,8 +1697,6 @@ with pkgs;
 
   askalono = callPackage ../tools/misc/askalono { };
 
-  asleap = callPackage ../tools/networking/asleap { };
-
   awsbck = callPackage ../tools/backup/awsbck {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
@@ -17994,7 +17992,7 @@ with pkgs;
   electron_27 = electron_27-bin;
   electron_28 = electron_28-bin;
   electron_29 = electron_29-bin;
-  electron_30 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_30 then electron-source.electron_30 else electron_30-bin;
+  electron_30 = electron_30-bin;
   electron_31 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_31 then electron-source.electron_31 else electron_31-bin;
   electron_32 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_32 then electron-source.electron_32 else electron_32-bin;
   electron_33 = if lib.meta.availableOn stdenv.hostPlatform electron-source.electron_33 then electron-source.electron_33 else electron_33-bin;
@@ -27314,6 +27312,8 @@ with pkgs;
   linux_6_1_hardened = linuxKernel.kernels.linux_6_1_hardened;
   linuxPackages_6_6_hardened = linuxKernel.packages.linux_6_6_hardened;
   linux_6_6_hardened = linuxKernel.kernels.linux_6_6_hardened;
+  linuxPackages_6_11_hardened = linuxKernel.packages.linux_6_11_hardened;
+  linux_6_11_hardened = linuxKernel.kernels.linux_6_11_hardened;
 
   # GNU Linux-libre kernels
   linuxPackages-libre = linuxKernel.packages.linux_libre;
