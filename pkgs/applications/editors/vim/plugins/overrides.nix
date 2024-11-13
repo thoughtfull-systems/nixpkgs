@@ -293,7 +293,7 @@ in
           --replace "let g:clang_library_path = ''
       + "''"
       + ''
-        " "let g:clang_library_path='${llvmPackages.libclang.lib}/lib/libclang.so'"
+        " "let g:clang_library_path='${lib.getLib llvmPackages.libclang}/lib/libclang.so'"
 
               substituteInPlace "$out"/plugin/libclang.py \
                 --replace "/usr/lib/clang" "${llvmPackages.clang.cc}/lib/clang"
@@ -302,7 +302,7 @@ in
 
   clighter8 = super.clighter8.overrideAttrs {
     preFixup = ''
-      sed "/^let g:clighter8_libclang_path/s|')$|${llvmPackages.clang.cc.lib}/lib/libclang.so')|" \
+      sed "/^let g:clighter8_libclang_path/s|')$|${lib.getLib llvmPackages.clang.cc}/lib/libclang.so')|" \
         -i "$out"/plugin/clighter8.vim
     '';
   };
@@ -1532,6 +1532,13 @@ in
     dependencies = with self; [ ultisnips ];
   };
 
+  neoconf-nvim = super.neoconf-nvim.overrideAttrs {
+    dependencies = with self; [ nvim-lspconfig ];
+
+    doInstallCheck = true;
+    nvimRequireCheck = "neoconf";
+  };
+
   neogit = super.neogit.overrideAttrs {
     dependencies = with self; [ plenary-nvim ];
     nvimRequireCheck = "neogit";
@@ -2259,6 +2266,16 @@ in
 
   telescope-z-nvim = super.telescope-z-nvim.overrideAttrs {
     dependencies = with self; [ telescope-nvim ];
+  };
+
+  quarto-nvim = super.quarto-nvim.overrideAttrs {
+    dependencies = with self; [
+      nvim-lspconfig
+      otter-nvim
+    ];
+
+    nvimRequireCheck = "quarto";
+    doInstallCheck = true;
   };
 
   telescope-zoxide = super.telescope-zoxide.overrideAttrs {
