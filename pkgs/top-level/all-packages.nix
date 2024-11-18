@@ -30985,13 +30985,19 @@ with pkgs;
 
   buildMozillaMach = opts: callPackage (import ../applications/networking/browsers/firefox/common.nix opts) { };
 
-  firefoxPackages = recurseIntoAttrs (callPackage ../applications/networking/browsers/firefox/packages.nix {});
-
-  firefox-unwrapped = firefoxPackages.firefox;
-  firefox-beta-unwrapped = firefoxPackages.firefox-beta;
-  firefox-devedition-unwrapped = firefoxPackages.firefox-devedition;
-  firefox-esr-128-unwrapped = firefoxPackages.firefox-esr-128;
-  firefox-esr-unwrapped = firefoxPackages.firefox-esr-128;
+  firefox-unwrapped = import ../applications/networking/browsers/firefox/packages/firefox.nix {
+    inherit stdenv lib callPackage fetchurl nixosTests buildMozillaMach;
+  };
+  firefox-beta-unwrapped = import ../applications/networking/browsers/firefox/packages/firefox-beta.nix {
+    inherit stdenv lib callPackage fetchurl nixosTests buildMozillaMach;
+  };
+  firefox-devedition-unwrapped = import ../applications/networking/browsers/firefox/packages/firefox-devedition.nix {
+    inherit stdenv lib callPackage fetchurl nixosTests buildMozillaMach;
+  };
+  firefox-esr-128-unwrapped = import ../applications/networking/browsers/firefox/packages/firefox-esr-128.nix {
+    inherit stdenv lib callPackage fetchurl nixosTests buildMozillaMach;
+  };
+  firefox-esr-unwrapped = firefox-esr-128-unwrapped;
 
   firefox = wrapFirefox firefox-unwrapped { };
   firefox-beta = wrapFirefox firefox-beta-unwrapped {
@@ -31050,7 +31056,9 @@ with pkgs;
     wmClass = "firefox-aurora";
   };
 
-  librewolf-unwrapped = callPackage ../applications/networking/browsers/librewolf { };
+  librewolf-unwrapped = import ../applications/networking/browsers/librewolf {
+    inherit stdenv lib callPackage buildMozillaMach nixosTests;
+  };
 
   librewolf = wrapFirefox librewolf-unwrapped {
     inherit (librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
@@ -31069,7 +31077,9 @@ with pkgs;
 
   flex-ndax = callPackage ../applications/radio/flex-ndax { };
 
-  floorp-unwrapped = callPackage ../applications/networking/browsers/floorp { };
+  floorp-unwrapped = import ../applications/networking/browsers/floorp {
+    inherit stdenv lib fetchFromGitHub buildMozillaMach nixosTests python311 fetchpatch;
+  };
 
   floorp = wrapFirefox floorp-unwrapped { };
 
