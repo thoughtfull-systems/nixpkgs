@@ -119,6 +119,7 @@ in {
   alloy = handleTest ./alloy.nix {};
   allTerminfo = handleTest ./all-terminfo.nix {};
   alps = handleTest ./alps.nix {};
+  amazon-cloudwatch-agent = handleTest ./amazon-cloudwatch-agent.nix {};
   amazon-init-shell = handleTest ./amazon-init-shell.nix {};
   amazon-ssm-agent = handleTest ./amazon-ssm-agent.nix {};
   amd-sev = runTest ./amd-sev.nix;
@@ -183,6 +184,7 @@ in {
   cagebreak = handleTest ./cagebreak.nix {};
   calibre-web = handleTest ./calibre-web.nix {};
   calibre-server = handleTest ./calibre-server.nix {};
+  canaille = handleTest ./canaille.nix {};
   castopod = handleTest ./castopod.nix {};
   cassandra_3_0 = handleTest ./cassandra.nix { testPackage = pkgs.cassandra_3_0; };
   cassandra_3_11 = handleTest ./cassandra.nix { testPackage = pkgs.cassandra_3_11; };
@@ -514,6 +516,7 @@ in {
   keycloak = discoverTests (import ./keycloak.nix);
   keyd = handleTest ./keyd.nix {};
   keymap = handleTest ./keymap.nix {};
+  kimai = handleTest ./kimai.nix {};
   knot = handleTest ./knot.nix {};
   komga = handleTest ./komga.nix {};
   krb5 = discoverTests (import ./krb5);
@@ -747,6 +750,7 @@ in {
   openstack-image-userdata = (handleTestOn ["x86_64-linux"] ./openstack-image.nix {}).userdata or {};
   opentabletdriver = handleTest ./opentabletdriver.nix {};
   opentelemetry-collector = handleTest ./opentelemetry-collector.nix {};
+  open-web-calendar = handleTest ./web-apps/open-web-calendar.nix {};
   ocsinventory-agent = handleTestOn [ "x86_64-linux" "aarch64-linux" ] ./ocsinventory-agent.nix {};
   owncast = handleTest ./owncast.nix {};
   outline = handleTest ./outline.nix {};

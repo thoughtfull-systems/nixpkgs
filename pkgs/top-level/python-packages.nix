@@ -698,6 +698,8 @@ self: super: with self; {
 
   aplpy = callPackage ../development/python-modules/aplpy { };
 
+  apollo-fpga = callPackage ../development/python-modules/apollo-fpga { };
+
   app-model = callPackage ../development/python-modules/app-model { };
 
   appdirs = callPackage ../development/python-modules/appdirs { };
@@ -1087,6 +1089,8 @@ self: super: with self; {
     inherit (pkgs) cmake ninja;
   };
 
+  awkward-pandas = callPackage ../development/python-modules/awkward-pandas { };
+
   aws-adfs = callPackage ../development/python-modules/aws-adfs { };
 
   aws-encryption-sdk = callPackage ../development/python-modules/aws-encryption-sdk { };
@@ -1279,6 +1283,8 @@ self: super: with self; {
 
   azure-mgmt-msi = callPackage ../development/python-modules/azure-mgmt-msi { };
 
+  azure-mgmt-mysqlflexibleservers = callPackage ../development/python-modules/azure-mgmt-mysqlflexibleservers { };
+
   azure-mgmt-netapp = callPackage ../development/python-modules/azure-mgmt-netapp { };
 
   azure-mgmt-network = callPackage ../development/python-modules/azure-mgmt-network { };
@@ -1288,6 +1294,8 @@ self: super: with self; {
   azure-mgmt-nspkg = callPackage ../development/python-modules/azure-mgmt-nspkg { };
 
   azure-mgmt-policyinsights = callPackage ../development/python-modules/azure-mgmt-policyinsights { };
+
+  azure-mgmt-postgresqlflexibleservers = callPackage ../development/python-modules/azure-mgmt-postgresqlflexibleservers { };
 
   azure-mgmt-powerbiembedded = callPackage ../development/python-modules/azure-mgmt-powerbiembedded { };
 
@@ -1432,25 +1440,19 @@ self: super: with self; {
 
   backoff = callPackage ../development/python-modules/backoff { };
 
-  backports-cached-property = callPackage ../development/python-modules/backports-cached-property { };
-
   backports-datetime-fromisoformat = callPackage ../development/python-modules/backports-datetime-fromisoformat { };
 
   backports-entry-points-selectable = callPackage ../development/python-modules/backports-entry-points-selectable { };
-
-  backports-shutil-get-terminal-size = callPackage ../development/python-modules/backports-shutil-get-terminal-size { };
-
-  backports-shutil-which = callPackage ../development/python-modules/backports-shutil-which { };
 
   backports-strenum = callPackage ../development/python-modules/backports-strenum { };
 
   backports-tarfile = callPackage ../development/python-modules/backports-tarfile { };
 
-  backports-zoneinfo = callPackage ../development/python-modules/backports-zoneinfo { };
-
   bacpypes = callPackage ../development/python-modules/bacpypes { };
 
   bagit = callPackage ../development/python-modules/bagit { };
+
+  baize = callPackage ../development/python-modules/baize { };
 
   banal = callPackage ../development/python-modules/banal { };
 
@@ -2038,6 +2040,8 @@ self: super: with self; {
   };
 
   captcha = callPackage ../development/python-modules/captcha { };
+
+  captum = callPackage ../development/python-modules/captum { };
 
   capturer = callPackage ../development/python-modules/capturer { };
 
@@ -2830,6 +2834,8 @@ self: super: with self; {
 
   cymruwhois = callPackage ../development/python-modules/cymruwhois { };
 
+  cynthion = callPackage ../development/python-modules/cynthion { };
+
   cypari2 = callPackage ../development/python-modules/cypari2 { };
 
   cypherpunkpay = callPackage ../development/python-modules/cypherpunkpay { };
@@ -3430,6 +3436,8 @@ self: super: with self; {
   django-extensions = callPackage ../development/python-modules/django-extensions { };
 
   django-filer = callPackage ../development/python-modules/django-filer { };
+
+  django-filingcabinet = callPackage ../development/python-modules/django-filingcabinet { };
 
   django-filter = callPackage ../development/python-modules/django-filter { };
 
@@ -4592,6 +4600,8 @@ self: super: with self; {
 
   flask-admin = callPackage ../development/python-modules/flask-admin { };
 
+  flask-allowed-hosts = callPackage ../development/python-modules/flask-allowed-hosts { };
+
   flask-api = callPackage ../development/python-modules/flask-api { };
 
   flask-appbuilder = callPackage ../development/python-modules/flask-appbuilder { };
@@ -4692,9 +4702,13 @@ self: super: with self; {
 
   flask-testing = callPackage ../development/python-modules/flask-testing { };
 
+  flask-themer = callPackage ../development/python-modules/flask-themer { };
+
   flask-themes2 = callPackage ../development/python-modules/flask-themes2 { };
 
   flask-versioned = callPackage ../development/python-modules/flask-versioned { };
+
+  flask-webtest = callPackage ../development/python-modules/flask-webtest { };
 
   flask-wtf = callPackage ../development/python-modules/flask-wtf { };
 
@@ -5404,6 +5418,8 @@ self: super: with self; {
   govee-local-api = callPackage ../development/python-modules/govee-local-api { };
 
   goveelights = callPackage ../development/python-modules/goveelights { };
+
+  gower = callPackage ../development/python-modules/gower { };
 
   gpapi = callPackage ../development/python-modules/gpapi { };
 
@@ -6806,6 +6822,8 @@ self: super: with self; {
 
   kaleido = callPackage ../development/python-modules/kaleido { };
 
+  kalshi-python = callPackage ../development/python-modules/kalshi-python {};
+
   kanidm = callPackage ../development/python-modules/kanidm { };
 
   kaptan = callPackage ../development/python-modules/kaptan { };
@@ -6847,6 +6865,8 @@ self: super: with self; {
   keepkey = callPackage ../development/python-modules/keepkey { };
 
   kegtron-ble = callPackage ../development/python-modules/kegtron-ble { };
+
+  keke = callPackage ../development/python-modules/keke { };
 
   keras-applications = callPackage ../development/python-modules/keras-applications { };
 
@@ -7621,6 +7641,10 @@ self: super: with self; {
   luhn = callPackage ../development/python-modules/luhn { };
 
   lunarcalendar = callPackage ../development/python-modules/lunarcalendar { };
+
+  luna-soc = callPackage ../development/python-modules/luna-soc { };
+
+  luna-usb = callPackage ../development/python-modules/luna-usb { };
 
   luqum = callPackage ../development/python-modules/luqum { };
 
@@ -10383,6 +10407,8 @@ self: super: with self; {
 
   pyfreedompro = callPackage ../development/python-modules/pyfreedompro { };
 
+  pygelf = callPackage ../development/python-modules/pygelf { };
+
   pygments-style-github = callPackage ../development/python-modules/pygments-style-github { };
 
   pygnmi = callPackage ../development/python-modules/pygnmi { };
@@ -12776,6 +12802,8 @@ self: super: with self; {
 
   pytest-shutil = callPackage ../development/python-modules/pytest-shutil { };
 
+  pytest-smtpd = callPackage ../development/python-modules/pytest-smtpd { };
+
   pytest-spec = callPackage ../development/python-modules/pytest-spec { };
 
   python-status = callPackage ../development/python-modules/python-status { };
@@ -14663,6 +14691,8 @@ self: super: with self; {
 
   slack-sdk = callPackage ../development/python-modules/slack-sdk { };
 
+  slapd = callPackage ../development/python-modules/slapd { };
+
   sleekxmpp = callPackage ../development/python-modules/sleekxmpp { };
 
   sleekxmppfs = callPackage ../development/python-modules/sleekxmppfs { };
@@ -15129,6 +15159,8 @@ self: super: with self; {
   sqlalchemy-file = callPackage ../development/python-modules/sqlalchemy-file { };
 
   sqlalchemy-i18n = callPackage ../development/python-modules/sqlalchemy-i18n { };
+
+  sqlalchemy-json = callPackage ../development/python-modules/sqlalchemy-json { };
 
   sqlalchemy-jsonfield = callPackage ../development/python-modules/sqlalchemy-jsonfield { };
 
@@ -17346,6 +17378,8 @@ self: super: with self; {
 
   usb-monitor = callPackage ../development/python-modules/usb-monitor { };
 
+  usb-protocol = callPackage ../development/python-modules/usb-protocol { };
+
   usbrelay-py = callPackage ../os-specific/linux/usbrelay/python.nix { };
 
   usbtmc = callPackage ../development/python-modules/usbtmc { };
@@ -17552,6 +17586,8 @@ self: super: with self; {
   vttlib = callPackage ../development/python-modules/vttlib { };
 
   vulcan-api = callPackage ../development/python-modules/vulcan-api { };
+
+  vulkan = callPackage ../development/python-modules/vulkan { };
 
   vultr = callPackage ../development/python-modules/vultr { };
 
@@ -17856,6 +17892,8 @@ self: super: with self; {
   };
 
   wyoming = callPackage ../development/python-modules/wyoming { };
+
+  x-transformers = callPackage ../development/python-modules/x-transformers { };
 
   x-wr-timezone = callPackage ../development/python-modules/x-wr-timezone { };
 
@@ -18268,6 +18306,8 @@ self: super: with self; {
   zwave-js-server-python = callPackage ../development/python-modules/zwave-js-server-python { };
 
   zxcvbn = callPackage ../development/python-modules/zxcvbn { };
+
+  zxcvbn-rs-py = callPackage ../development/python-modules/zxcvbn-rs-py { };
 
   zxing-cpp = callPackage ../development/python-modules/zxing-cpp {
     libzxing-cpp = pkgs.zxing-cpp;

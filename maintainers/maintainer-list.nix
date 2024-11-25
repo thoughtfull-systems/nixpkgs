@@ -4186,7 +4186,7 @@
     matrix = "@clot27:matrix.org";
   };
   cloudripper = {
-    email = "other.wing8806@fastmail.com";
+    email = "dev+nixpkgs@cldrpr.com";
     github = "cloudripper";
     githubId = 70971768;
     name = "cloudripper";
@@ -6043,6 +6043,12 @@
     github = "dwarfmaster";
     githubId = 2025623;
     name = "Luc Chabassier";
+  };
+  dwrege = {
+    email = "email@dwrege.de";
+    github = "dominicwrege";
+    githubId = 7389000;
+    name = "Dominic Wrege";
   };
   dxf = {
     email = "dingxiangfei2009@gmail.com";
@@ -12740,6 +12746,14 @@
     githubId = 5624721;
     name = "Ben Wolsieffer";
   };
+  lordmzte = {
+    name = "Moritz Thomae";
+    email = "lord@mzte.de";
+    matrix = "@lordmzte:mzte.de";
+    github = "LordMZTE";
+    githubId = 28735087;
+    keys = [ { fingerprint = "AB47 3D70 53D2 74CA DC2C  230C B648 02DC 33A6 4FF6"; } ];
+  };
   lord-valen = {
     name = "Lord Valen";
     matrix = "@lord-valen:matrix.org";
@@ -12865,12 +12879,6 @@
     github = "LU15W1R7H";
     githubId = 37505890;
     name = "Luis Wirth";
-  };
-  luc65r = {
-    email = "lucas@ransan.fr";
-    github = "luc65r";
-    githubId = 59375051;
-    name = "Lucas Ransan";
   };
   LucaGuerra = {
     email = "luca@guerra.sh";
@@ -13071,6 +13079,13 @@
     github = "Lunarequest";
     githubId = 30698906;
     name = "Luna D Dragon";
+  };
+  luNeder = {
+    email = "luana@luana.dev.br";
+    matrix = "@luana:catgirl.cloud";
+    github = "LuNeder";
+    githubId = 19750714;
+    name = "Luana Neder";
   };
   lunik1 = {
     email = "ch.nixpkgs@themaw.xyz";
@@ -15206,6 +15221,13 @@
     githubId = 1234956;
     "keys" = [ { "fingerprint" = "F21A 6194 C9DB 9899 CD09 E24E 434B 2C14 B8C3 3422"; } ];
   };
+  nadiaholmquist = {
+    name = "Nadia Holmquist Pedersen";
+    email = "nadia@nhp.sh";
+    matrix = "@nhp:matrix.org";
+    github = "nadiaholmquist";
+    githubId = 893884;
+  };
   nadir-ishiguro = {
     github = "nadir-ishiguro";
     githubId = 23151917;
@@ -15571,6 +15593,13 @@
     github = "nh2";
     githubId = 399535;
     name = "Niklas Hambüchen";
+  };
+  n-hass = {
+    email = "nick@hassan.host";
+    github = "n-hass";
+    githubId = 72363381;
+    name = "n-hass";
+    keys = [ { fingerprint = "FDEE 6116 DBA7 8840 7323  4466 A371 5973 2728 A6A6"; } ];
   };
   nhnn = {
     matrix = "@nhnn:nhnn.dev";
@@ -16894,6 +16923,12 @@
     github = "pcboy";
     githubId = 943430;
     name = "David Hagege";
+  };
+  peat-psuwit = {
+    name = "Ratchanan Srirattanamet";
+    email = "peat@peat-network.xyz";
+    github = "peat-psuwit";
+    githubId = 6771175;
   };
   pedohorse = {
     github = "pedohorse";
@@ -18823,6 +18858,12 @@
     github = "robberer";
     githubId = 6204883;
     name = "Longrin Wischnewski";
+  };
+  robbiebuxton = {
+    email = "robbiesbuxton@gmail.com";
+    github = "robbiebuxton";
+    githubId = 67549526;
+    name = "Robbie Buxton";
   };
   robbinch = {
     email = "robbinch33@gmail.com";
@@ -23040,6 +23081,12 @@
     github = "velovix";
     githubId = 2856634;
     name = "Tyler Compton";
+  };
+  venikx = {
+    email = "code@venikx.com";
+    github = "venikx";
+    githubId = 24815061;
+    name = "Kevin De Baerdemaeker";
   };
   veprbl = {
     email = "veprbl@gmail.com";

@@ -148,6 +148,7 @@
   ./programs/alvr.nix
   ./programs/appgate-sdp.nix
   ./programs/appimage.nix
+  ./programs/arp-scan.nix
   ./programs/atop.nix
   ./programs/ausweisapp.nix
   ./programs/autojump.nix
@@ -263,6 +264,7 @@
   ./programs/openvpn3.nix
   ./programs/obs-studio.nix
   ./programs/partition-manager.nix
+  ./programs/pay-respects.nix
   ./programs/plotinus.nix
   ./programs/pqos-wrapper.nix
   ./programs/projecteur.nix
@@ -295,6 +297,7 @@
   ./programs/sysdig.nix
   ./programs/system-config-printer.nix
   ./programs/systemtap.nix
+  ./programs/tcpdump.nix
   ./programs/thefuck.nix
   ./programs/thunar.nix
   ./programs/thunderbird.nix
@@ -877,6 +880,7 @@
   ./services/misc/zookeeper.nix
   ./services/monitoring/alerta.nix
   ./services/monitoring/alloy.nix
+  ./services/monitoring/amazon-cloudwatch-agent.nix
   ./services/monitoring/apcupsd.nix
   ./services/monitoring/arbtt.nix
   ./services/monitoring/below.nix
@@ -1297,6 +1301,7 @@
   ./services/scheduling/atd.nix
   ./services/scheduling/cron.nix
   ./services/scheduling/fcron.nix
+  ./services/scheduling/scx.nix
   ./services/search/elasticsearch-curator.nix
   ./services/search/elasticsearch.nix
   ./services/search/hound.nix
@@ -1311,6 +1316,7 @@
   ./services/security/aesmd.nix
   ./services/security/authelia.nix
   ./services/security/bitwarden-directory-connector-cli.nix
+  ./services/security/canaille.nix
   ./services/security/certmgr.nix
   ./services/security/cfssl.nix
   ./services/security/clamav.nix
@@ -1459,6 +1465,7 @@
   ./services/web-apps/kasmweb/default.nix
   ./services/web-apps/kavita.nix
   ./services/web-apps/keycloak.nix
+  ./services/web-apps/kimai.nix
   ./services/web-apps/komga.nix
   ./services/web-apps/lanraragi.nix
   ./services/web-apps/lemmy.nix
@@ -1488,6 +1495,7 @@
   ./services/web-apps/onlyoffice.nix
   ./services/web-apps/openvscode-server.nix
   ./services/web-apps/mediagoblin.nix
+  ./services/web-apps/open-web-calendar.nix
   ./services/web-apps/mobilizon.nix
   ./services/web-apps/openwebrx.nix
   ./services/web-apps/outline.nix
@@ -1500,6 +1508,7 @@
   ./services/web-apps/pingvin-share.nix
   ./services/web-apps/plantuml-server.nix
   ./services/web-apps/plausible.nix
+  ./services/web-apps/porn-vault/default.nix
   ./services/web-apps/powerdns-admin.nix
   ./services/web-apps/pretalx.nix
   ./services/web-apps/pretix.nix
