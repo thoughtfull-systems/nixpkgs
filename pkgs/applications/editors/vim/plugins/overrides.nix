@@ -57,6 +57,7 @@
   taskwarrior3,
   tmux,
   tup,
+  typescript,
   vim,
   which,
   xkb-switch,
@@ -588,6 +589,11 @@ in
     pname = "coc-nginx";
     inherit (nodePackages."@yaegassy/coc-nginx") version meta;
     src = "${nodePackages."@yaegassy/coc-nginx"}/lib/node_modules/@yaegassy/coc-nginx";
+  };
+
+  codecompanion-nvim = super.codecompanion-nvim.overrideAttrs {
+    dependencies = with self; [ plenary-nvim ];
+    nvimRequireCheck = "codecompanion";
   };
 
   codeium-nvim =
@@ -1826,6 +1832,11 @@ in
     ];
   };
 
+  nvim-lsp-file-operations = super.nvim-lsp-file-operations.overrideAttrs {
+    dependencies = [ self.plenary-nvim ];
+    nvimRequireCheck = "lsp-file-operations";
+  };
+
   nvim-lsputils = super.nvim-lsputils.overrideAttrs {
     dependencies = with self; [ popfix ];
     nvimRequireCheck = "lsputil.codeAction";
@@ -2608,6 +2619,19 @@ in
   todo-comments-nvim = super.todo-comments-nvim.overrideAttrs {
     dependencies = [ self.plenary-nvim ];
     nvimRequireCheck = "todo-comments";
+  };
+
+  triptych-nvim = super.triptych-nvim.overrideAttrs {
+    dependencies = [ self.plenary-nvim ];
+    nvimRequireCheck = "triptych";
+  };
+
+  tsc-nvim = super.tsc-nvim.overrideAttrs {
+    patches = [ ./patches/tsc.nvim/fix-path.patch ];
+
+    postPatch = ''
+      substituteInPlace lua/tsc/utils.lua --replace '@tsc@' ${typescript}/bin/tsc
+    '';
   };
 
   tssorter-nvim = super.tssorter-nvim.overrideAttrs {
