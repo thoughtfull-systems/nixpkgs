@@ -1478,6 +1478,7 @@ with pkgs;
   _6tunnel = callPackage ../tools/networking/6tunnel { };
 
   _7zz = darwin.apple_sdk_11_0.callPackage ../tools/archivers/7zz { };
+  _7zz-rar = _7zz.override { enableUnfree = true; };
 
   _9pfs = callPackage ../tools/filesystems/9pfs { };
 
@@ -5066,7 +5067,6 @@ with pkgs;
 
   element-desktop = callPackage ../applications/networking/instant-messengers/element/element-desktop.nix {
     inherit (darwin.apple_sdk.frameworks) Security AppKit CoreServices;
-    electron = electron_32;
   };
   element-desktop-wayland = writeScriptBin "element-desktop" ''
     #!/bin/sh
@@ -11511,6 +11511,7 @@ with pkgs;
   };
 
   p7zip = callPackage ../tools/archivers/p7zip { };
+  p7zip-rar = p7zip.override { enableUnfree = true; };
 
   packagekit = callPackage ../tools/package-management/packagekit { };
 
@@ -35013,7 +35014,6 @@ with pkgs;
 
   ungoogled-chromium = callPackage ../applications/networking/browsers/chromium ((config.chromium or {}) // {
     ungoogled = true;
-    channel = "ungoogled-chromium";
   });
 
   uni = callPackage ../applications/misc/uni { };
