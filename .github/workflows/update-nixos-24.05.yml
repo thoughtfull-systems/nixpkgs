@@ -1,0 +1,38 @@
+name: Update nixos-24.05
+on:
+  push:
+    branches:
+      - workflows
+  schedule:
+    # every day at midnight
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+concurrency:
+  group: ${{github.workflow}}
+  cancel-in-progress: true
+jobs:
+  update-nixos:
+    name: Update nixos-24.05
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: thoughtfull-systems/checkout@main
+        with:
+          ref: nixos-24.05
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+      - name: Add upstream remote
+        shell: bash
+        run: git remote add -t nixos-24.05 --no-tags -f upstream "https://github.com/nixos/nixpkgs.git"
+      - name: Merge from upstream/nixos-24.05
+        shell: bash
+        run: git merge --no-ff upstream/nixos-24.05
+      - name: Merge branches
+        shell: bash
+        run: |
+          git merge --no-ff origin/workflows
+          git merge --no-ff origin/flutter-apps
+          git merge --no-ff origin/initrd-dhcp-background
+      - name: Push to origin
+        shell: bash
+        run: git push origin nixos-24.05

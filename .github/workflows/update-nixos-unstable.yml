@@ -1,0 +1,37 @@
+name: Update nixos-unstable
+on:
+  push:
+    branches:
+      - workflows
+  schedule:
+    # every day at midnight
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+concurrency:
+  group: ${{github.workflow}}
+  cancel-in-progress: true
+jobs:
+  update-nixos:
+    name: Update nixos-unstable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: thoughtfull-systems/checkout@main
+        with:
+          ref: nixos-unstable
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+      - name: Add upstream remote
+        shell: bash
+        run: git remote add -t nixos-unstable --no-tags -f upstream "https://github.com/nixos/nixpkgs.git"
+      - name: Merge from upstream/nixos-unstable
+        shell: bash
+        run: git merge --no-ff upstream/nixos-unstable
+      - name: Merge branches
+        shell: bash
+        run: |
+          git merge --no-ff origin/workflows
+          git merge --no-ff origin/initrd-dhcp-background
+      - name: Push to origin
+        shell: bash
+        run: git push origin nixos-unstable
