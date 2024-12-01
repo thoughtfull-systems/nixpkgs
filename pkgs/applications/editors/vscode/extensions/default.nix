@@ -903,6 +903,22 @@ let
         };
       };
 
+      chanhx.crabviz = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "crabviz";
+          publisher = "chanhx";
+          version = "0.4.0";
+          hash = "sha256-SOsoSQLDNRqby91Ire4euSz6udRZI6G/RVloVjIvhUM=";
+        };
+        meta = {
+          description = "VSCode extension for generating call graphs based on LSP";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=chanhx.crabviz";
+          homepage = "https://github.com/chanhx/crabviz";
+          license = lib.licenses.asl20;
+          maintainers = with lib.maintainers; [ thtrf ];
+        };
+      };
+
       charliermarsh.ruff = callPackage ./charliermarsh.ruff { };
 
       cameron.vscode-pytest = buildVscodeMarketplaceExtension {
@@ -2055,8 +2071,8 @@ let
         mktplcRef = {
           publisher = "github";
           name = "copilot";
-          version = "1.243.1191"; # compatible with vscode ^1.95
-          hash = "sha256-tMUFMi+lBZZQA/8UTyoqQ5s+xnWKh39V8GYErO9ZuSo=";
+          version = "1.246.1233"; # compatible with vscode ^1.95
+          hash = "sha256-Pz46qTCGtn7q7UqCzwkQbuEEkH6tKxZV1HKSUs9WA8M=";
         };
 
         meta = {
