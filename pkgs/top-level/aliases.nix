@@ -62,6 +62,7 @@ mapAliases {
 
   ### _ ###
   _1password = lib.warn "_1password has been renamed to _1password-cli to better follow upstream name usage" _1password-cli; # Added 2024-10-24
+  "7z2hashcat" = throw "'7z2hashcat' has been renamed to '_7z2hashcat' as the former isn't a valid variable name."; # Added 2024-11-27
 
   ### A ###
 
@@ -110,6 +111,7 @@ mapAliases {
   ao = libfive; # Added 2024-10-11
   apacheKafka_3_5 = throw "apacheKafka_2_8 through _3_5 have been removed from nixpkgs as outdated"; # Added 2024-06-13
   antimicroX = throw "'antimicroX' has been renamed to/replaced by 'antimicrox'"; # Converted to throw 2024-10-17
+  apacheAnt = ant; # Added 2024-11-28
   appthreat-depscan = dep-scan; # Added 2024-04-10
   arcanist = throw "arcanist was removed as phabricator is not supported and does not accept fixes"; # Added 2024-06-07
   aria = aria2; # Added 2024-03-26
@@ -453,6 +455,7 @@ mapAliases {
     topGit = top-git;
   }; # Added 2021-01-14
 
+  gkraken = throw "'gkraken' has been deprecated by upstream. Consider using the replacement 'coolercontrol' instead."; # Added 2024-11-22
   glew-egl = lib.warn "'glew-egl' is now provided by 'glew' directly" glew; # Added 2024-08-11
   glfw-wayland = glfw; # Added 2024-04-19
   glfw-wayland-minecraft = glfw3-minecraft; # Added 2024-05-08
@@ -651,6 +654,7 @@ mapAliases {
   librewolf-wayland = librewolf; # Added 2022-11-15
   libseat = throw "'libseat' has been renamed to/replaced by 'seatd'"; # Converted to throw 2024-10-17
   libsForQt515 = libsForQt5; # Added 2022-11-24
+  libstdcxx5 = throw "libstdcxx5 is severly outdated and has been removed"; # Added 2024-11-24
   libtensorflow-bin = libtensorflow; # Added 2022-09-25
   libtorrentRasterbar = throw "'libtorrentRasterbar' has been renamed to/replaced by 'libtorrent-rasterbar'"; # Converted to throw 2024-10-17
   libtorrentRasterbar-1_2_x = throw "'libtorrentRasterbar-1_2_x' has been renamed to/replaced by 'libtorrent-rasterbar-1_2_x'"; # Converted to throw 2024-10-17
@@ -663,6 +667,7 @@ mapAliases {
   libyamlcpp_0_3 = yaml-cpp_0_3; # Added 2023-01-29
   lightdm_gtk_greeter = lightdm-gtk-greeter; # Added 2022-08-01
   lightstep-tracer-cpp = throw "lightstep-tracer-cpp is deprecated since 2022-08-29; the upstream recommends migration to opentelemetry projects.";
+  limesctl = throw "limesctl has been removed because it is insignificant."; # Added 2024-11-25
   linux_wallpaperengine = throw "linux_wallpaperengine was removed due to freeimage dependency"; # Added 2024-07-19
   lispPackages_new = throw "Lisp packages have been redesigned. See 'lisp-modules' in the nixpkgs manual."; # Added 2024-05-07
   lispPackages = throw "Lisp packages have been redesigned. See 'lisp-modules' in the nixpkgs manual."; # Added 2024-05-07
@@ -1300,6 +1305,8 @@ mapAliases {
   urxvt_tabbedex = throw "'urxvt_tabbedex' has been renamed to/replaced by 'rxvt-unicode-plugins.tabbedex'"; # Converted to throw 2024-10-17
   urxvt_theme_switch = throw "'urxvt_theme_switch' has been renamed to/replaced by 'rxvt-unicode-plugins.theme-switch'"; # Converted to throw 2024-10-17
   urxvt_vtwheel = throw "'urxvt_vtwheel' has been renamed to/replaced by 'rxvt-unicode-plugins.vtwheel'"; # Converted to throw 2024-10-17
+  ut2004Packages = throw "UT2004 requires libstdc++5 which is not supported by nixpkgs anymore"; # Added 2024-11-24
+  ut2004demo = ut2004Packages; # Added 2024-11-24
   util-linuxCurses = util-linux; # Added 2022-04-12
   utillinux = util-linux; # Added 2020-11-24, keep until node2nix is phased out, see https://github.com/NixOS/nixpkgs/issues/229475
 
