@@ -744,6 +744,10 @@ with pkgs;
     propagatedBuildInputs = [ dieHook ];
   } ../build-support/setup-hooks/shorten-perl-shebang.sh;
 
+  sile = callPackage ../by-name/si/sile/package.nix {
+    lua = luajit;
+  };
+
   singularity-tools = callPackage ../build-support/singularity-tools { };
 
   srcOnly = callPackage ../build-support/src-only { };
@@ -774,6 +778,8 @@ with pkgs;
   };
 
   referencesByPopularity = callPackage ../build-support/references-by-popularity { };
+
+  dockerMakeLayers = callPackage ../build-support/docker/make-layers.nix { };
 
   removeReferencesTo = callPackage ../build-support/remove-references-to {
     inherit (darwin) signingUtils;
@@ -2144,7 +2150,7 @@ with pkgs;
   cloudflared = callPackage ../applications/networking/cloudflared {
     # https://github.com/cloudflare/cloudflared/issues/1151#issuecomment-1888819250
     buildGoModule = buildGoModule.override {
-      go = go_1_22.overrideAttrs {
+      go = buildPackages.go_1_22.overrideAttrs {
         pname = "cloudflare-go";
         version = "1.22.2-devel-cf";
         src = fetchFromGitHub {
@@ -2338,10 +2344,6 @@ with pkgs;
   };
 
   fdroidcl = pkgs.callPackage ../development/mobile/fdroidcl { };
-
-  fedimint = callPackage ../by-name/fe/fedimint/package.nix {
-    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
-  };
 
   flowgger = callPackage ../tools/misc/flowgger {
     inherit (darwin.apple_sdk.frameworks) CoreServices;
@@ -4195,10 +4197,6 @@ with pkgs;
   };
 
   mx-puppet-discord = callPackage ../servers/mx-puppet-discord { };
-
-  nagstamon = callPackage ../tools/misc/nagstamon {
-    pythonPackages = python3Packages;
-  };
 
   nanoemoji = with python3Packages; toPythonApplication nanoemoji;
 
@@ -7804,8 +7802,6 @@ with pkgs;
 
   antlr = antlr4;
 
-  ant = apacheAnt;
-
   inherit (callPackages ../servers/apache-kafka { })
     apacheKafka_3_6
     apacheKafka_3_7
@@ -9032,10 +9028,6 @@ with pkgs;
   eigen = callPackage ../development/libraries/eigen { };
 
   eigen2 = callPackage ../development/libraries/eigen/2.0.nix { };
-
-  vapoursynth = callPackage ../by-name/va/vapoursynth/package.nix {
-    inherit (darwin.apple_sdk.frameworks) ApplicationServices;
-  };
 
   vapoursynth-editor = libsForQt5.callPackage ../by-name/va/vapoursynth/editor.nix { };
 
@@ -11522,9 +11514,7 @@ with pkgs;
 
   alerta-server = callPackage ../servers/monitoring/alerta { };
 
-  apacheHttpd_2_4 = callPackage ../servers/http/apache-httpd/2.4.nix {
-    inherit (darwin.apple_sdk.frameworks) Foundation;
-  };
+  apacheHttpd_2_4 = callPackage ../servers/http/apache-httpd/2.4.nix { };
   apacheHttpd = apacheHttpd_2_4;
 
   apacheHttpdPackagesFor = apacheHttpd: self: let callPackage = newScope self; in {
@@ -11809,8 +11799,6 @@ with pkgs;
 
   inherit (callPackage ../applications/networking/mullvad { })
     mullvad;
-
-  mullvad-vpn = callPackage ../applications/networking/mullvad-vpn { };
 
   mullvad-closest = with python3Packages; toPythonApplication mullvad-closest;
 
@@ -12141,12 +12129,10 @@ with pkgs;
 
   qremotecontrol-server = libsForQt5.callPackage ../servers/misc/qremotecontrol-server { };
 
-  rabbitmq-server = callPackage ../servers/amqp/rabbitmq-server {
-    erlang = erlang_26;
+  rabbitmq-server = callPackage ../by-name/ra/rabbitmq-server/package.nix rec {
+    erlang = erlang_27;
+    elixir = pkgs.elixir.override { inherit erlang; };
   };
-
-  radicale2 = callPackage ../servers/radicale/2.x.nix { };
-  radicale3 = radicale;
 
   qcal = callPackage ../tools/networking/qcal/default.nix { };
 
@@ -13432,15 +13418,6 @@ with pkgs;
   bluefish = callPackage ../applications/editors/bluefish {
     gtk = gtk3;
   };
-
-  bluej = callPackage ../applications/editors/bluej {
-    openjdk = openjdk17.override {
-      enableJavaFX = true;
-      openjfx_jdk = openjfx17.override { withWebKit = true; };
-    };
-  };
-
-  bluejeans-gui = callPackage ../applications/networking/instant-messengers/bluejeans { };
 
   breezy = with python3Packages; toPythonApplication breezy;
 
@@ -15001,11 +14978,7 @@ with pkgs;
       speechdSupport = config.mumble.speechdSupport or false;
     }).mumble;
 
-  mumble_overlay = callPackage ../applications/networking/mumble/overlay.nix {
-    mumble_i686 = if stdenv.hostPlatform.system == "x86_64-linux"
-      then pkgsi686Linux.mumble
-      else null;
-  };
+  mumble_overlay = (callPackages ../applications/networking/mumble {}).overlay;
 
   mup = callPackage ../applications/audio/mup {
     autoreconfHook = buildPackages.autoreconfHook269;
@@ -15171,8 +15144,6 @@ with pkgs;
 
   omegat = callPackage ../applications/misc/omegat.nix { };
 
-  inherit (callPackage ../applications/networking/onionshare { }) onionshare onionshare-gui;
-
   openambit = qt5.callPackage ../applications/misc/openambit { };
 
   openbox-menu = callPackage ../applications/misc/openbox-menu {
@@ -15211,8 +15182,6 @@ with pkgs;
   opentimestamps-client = python3Packages.callPackage ../tools/misc/opentimestamps-client { };
 
   opentoonz = libsForQt5.callPackage ../applications/graphics/opentoonz { };
-
-  opentabletdriver = callPackage ../tools/X11/opentabletdriver { };
 
   opentx = libsForQt5.callPackage ../applications/misc/opentx { };
 
