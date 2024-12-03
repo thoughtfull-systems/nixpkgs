@@ -4250,10 +4250,6 @@ with pkgs;
 
   mx-puppet-discord = callPackage ../servers/mx-puppet-discord { };
 
-  nagstamon = callPackage ../tools/misc/nagstamon {
-    pythonPackages = python3Packages;
-  };
-
   nanoemoji = with python3Packages; toPythonApplication nanoemoji;
 
   nbtscanner = callPackage ../tools/security/nbtscanner {
@@ -12213,9 +12209,6 @@ with pkgs;
     erlang = erlang_26;
   };
 
-  radicale2 = callPackage ../servers/radicale/2.x.nix { };
-  radicale3 = radicale;
-
   qcal = callPackage ../tools/networking/qcal/default.nix { };
 
   rake = callPackage ../development/tools/build-managers/rake { };
@@ -13740,11 +13733,6 @@ with pkgs;
 
   droopy = python3Packages.callPackage ../applications/networking/droopy { };
 
-  dexed = darwin.apple_sdk_11_0.callPackage ../applications/audio/dexed {
-    inherit (darwin.apple_sdk_11_0.frameworks) Accelerate Cocoa WebKit MetalKit DiscRecording CoreAudioKit;
-    inherit (darwin.apple_sdk_11_0.libs) simd;
-  };
-
   dwl = callPackage ../by-name/dw/dwl/package.nix {
     wlroots = wlroots_0_18;
   };
@@ -14057,11 +14045,6 @@ with pkgs;
 
   filezilla = darwin.apple_sdk_11_0.callPackage ../applications/networking/ftp/filezilla {
     inherit (darwin.apple_sdk_11_0.frameworks) CoreServices Security;
-  };
-
-  fire = darwin.apple_sdk_11_0.callPackage ../applications/audio/fire {
-    inherit (darwin.apple_sdk_11_0.frameworks) Accelerate Cocoa WebKit CoreServices DiscRecording CoreAudioKit MetalKit;
-    inherit (darwin.apple_sdk_11_0.libs) simd;
   };
 
   buildMozillaMach = opts: callPackage (import ../applications/networking/browsers/firefox/common.nix opts) { };
@@ -16176,9 +16159,7 @@ with pkgs;
     ocamlPackages = ocaml-ng.ocamlPackages_4_14;
   };
 
-  virt-manager = callPackage ../applications/virtualization/virt-manager {
-    system-libvirt = libvirt;
-  };
+  virt-manager = callPackage ../applications/virtualization/virt-manager { };
 
   virt-manager-qt = libsForQt5.callPackage ../applications/virtualization/virt-manager/qt.nix {
     qtermwidget = lxqt.qtermwidget_1_4;
