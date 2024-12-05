@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - workflows
+      - initrd-dhcp-background
+      - fix-tlp-networkmanager-dispatch
   schedule:
     # every day at midnight
     - cron: "0 0 * * *"
@@ -32,6 +34,7 @@ jobs:
         run: |
           git merge --no-ff origin/workflows
           git merge --no-ff origin/initrd-dhcp-background
+          git merge --no-ff origin/fix-tlp-networkmanager-dispatch
       - name: Push to origin
         shell: bash
         run: git push origin nixos-24.11
