@@ -11776,6 +11776,19 @@ with pkgs;
 
   jitsi-videobridge = callPackage ../servers/jitsi-videobridge { };
 
+  kanidm_1_3 = callPackage ../by-name/ka/kanidm/1_3.nix { };
+  kanidm_1_4 = callPackage ../by-name/ka/kanidm/1_4.nix { };
+
+  kanidmWithSecretProvisioning = kanidmWithSecretProvisioning_1_4;
+
+  kanidmWithSecretProvisioning_1_3 = callPackage ../by-name/ka/kanidm/1_3.nix {
+    enableSecretProvisioning = true;
+  };
+
+  kanidmWithSecretProvisioning_1_4 = callPackage ../by-name/ka/kanidm/1_4.nix {
+    enableSecretProvisioning = true;
+  };
+
   knot-resolver = callPackage ../servers/dns/knot-resolver {
     systemd = systemdMinimal; # in closure already anyway
   };
@@ -13633,7 +13646,6 @@ with pkgs;
   };
   datadog-process-agent = callPackage ../tools/networking/dd-agent/datadog-process-agent.nix { };
   datadog-integrations-core = extras: callPackage ../tools/networking/dd-agent/integrations-core.nix {
-    python = python3;
     extraIntegrations = extras;
   };
 
@@ -15283,8 +15295,6 @@ with pkgs;
   opentimestamps-client = python3Packages.callPackage ../tools/misc/opentimestamps-client { };
 
   opentoonz = libsForQt5.callPackage ../applications/graphics/opentoonz { };
-
-  opentabletdriver = callPackage ../tools/X11/opentabletdriver { };
 
   opentx = libsForQt5.callPackage ../applications/misc/opentx { };
 

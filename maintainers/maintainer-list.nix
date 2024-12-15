@@ -5027,6 +5027,12 @@
     githubId = 118536343;
     name = "David Hamelin";
   };
+  David-Kopczynski = {
+    name = "David Elias Chris Kopczynski";
+    email = "mail@davidkopczynski.com";
+    github = "David-Kopczynski";
+    githubId = 53194670;
+  };
   david-r-cox = {
     email = "david@integrated-reasoning.com";
     github = "david-r-cox";
@@ -10726,6 +10732,11 @@
     githubId = 26210439;
     name = "Joonas Rautiola";
     keys = [ { fingerprint = "87EC DD30 6614 E510 5299  F0D4 090E B48A 4669 AA54"; } ];
+  };
+  Jojo4GH = {
+    name = "Jonas Broeckmann";
+    github = "Jojo4GH";
+    githubId = 36777568;
   };
   jojosch = {
     name = "Johannes Schleifenbaum";
@@ -17742,7 +17753,10 @@
     github = "JarvisCraft";
     githubId = 7693005;
     name = "Petr Portnov";
-    keys = [ { fingerprint = "884B 08D2 8DFF 6209 1857  C1C7 7E8F C8F7 D1BB 84A3"; } ];
+    keys = [
+      { fingerprint = "884B 08D2 8DFF 6209 1857  C1C7 7E8F C8F7 D1BB 84A3"; }
+      { fingerprint = "AA96 35AA F392 52BF 0E60  825E 1192 2217 F828 8484"; }
+    ];
   };
   progval = {
     email = "progval+nix@progval.net";
