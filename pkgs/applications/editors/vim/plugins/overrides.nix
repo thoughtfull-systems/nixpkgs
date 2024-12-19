@@ -1285,9 +1285,7 @@ in
   };
 
   hex-nvim = super.hex-nvim.overrideAttrs {
-    postPatch = ''
-      substituteInPlace lua/hex.lua --replace xxd ${xxd}/bin/xxd
-    '';
+    runtimeDeps = [ xxd ];
     nvimRequireCheck = "hex";
   };
 
@@ -2739,7 +2737,6 @@ in
   };
 
   roslyn-nvim = super.roslyn-nvim.overrideAttrs {
-    dependencies = [ self.nvim-lspconfig ];
     nvimRequireCheck = "roslyn";
   };
 
