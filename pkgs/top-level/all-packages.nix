@@ -1510,10 +1510,6 @@ with pkgs;
     inherit (darwin) autoSignDarwinBinariesHook;
   };
 
-  saunafs = callPackage ../by-name/sa/saunafs/package.nix {
-    boost = boost185;
-  };
-
   vifm-full = vifm.override {
     mediaSupport = true;
     inherit lib udisks2 python3;
@@ -1587,9 +1583,7 @@ with pkgs;
   };
   termite-unwrapped = callPackage ../applications/terminal-emulators/termite { };
 
-  wezterm = darwin.apple_sdk_11_0.callPackage ../applications/terminal-emulators/wezterm {
-    inherit (darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
-  };
+  wezterm = callPackage ../applications/terminal-emulators/wezterm { };
 
   twine = with python3Packages; toPythonApplication twine;
 
@@ -1614,6 +1608,7 @@ with pkgs;
   android-tools = lowPrio (darwin.apple_sdk_11_0.callPackage ../tools/misc/android-tools { });
 
   angie = callPackage ../servers/http/angie {
+    zlib-ng = zlib-ng.override { withZlibCompat = true; };
     withPerl = false;
     # We don't use `with` statement here on purpose!
     # See https://github.com/NixOS/nixpkgs/pull/10474#discussion_r42369334
@@ -1621,6 +1616,7 @@ with pkgs;
   };
 
   angieQuic = callPackage ../servers/http/angie {
+    zlib-ng = zlib-ng.override { withZlibCompat = true; };
     withPerl = false;
     withQuic = true;
     # We don't use `with` statement here on purpose!
@@ -1657,6 +1653,8 @@ with pkgs;
   arj = callPackage ../tools/archivers/arj {
     stdenv = gccStdenv;
   };
+
+  arpack-mpi = arpack.override { useMpi = true; };
 
   inherit (callPackages ../data/fonts/arphic {})
     arphic-ukai arphic-uming;
@@ -2124,6 +2122,8 @@ with pkgs;
                           };
 
   clevercsv = with python3Packages; toPythonApplication clevercsv;
+
+  cleanit = with python3Packages; toPythonApplication cleanit;
 
   clickgen = with python3Packages; toPythonApplication clickgen;
 
@@ -3797,7 +3797,7 @@ with pkgs;
     stdenv = llvmPackages_13.libcxxStdenv;
     libcxx = llvmPackages_13.libcxx;
     boost = boost178.override { inherit stdenv; };
-    fmt = fmt_8.override { inherit stdenv; };
+    fmt = fmt_9.override { inherit stdenv; };
     nanodbc_llvm = nanodbc.override { inherit stdenv; };
     avro-cpp_llvm = avro-cpp.override { inherit stdenv boost; };
     spdlog_llvm = spdlog.override { inherit stdenv fmt; };
@@ -4171,9 +4171,9 @@ with pkgs;
 
   nixnote2 = libsForQt5.callPackage ../applications/misc/nixnote2 { };
 
-  nodejs = hiPrio nodejs_20;
-  nodejs-slim = nodejs-slim_20;
-  corepack = hiPrio corepack_20;
+  nodejs = hiPrio nodejs_22;
+  nodejs-slim = nodejs-slim_22;
+  corepack = hiPrio corepack_22;
 
   nodejs_18 = callPackage ../development/web/nodejs/v18.nix { };
   nodejs-slim_18 = callPackage ../development/web/nodejs/v18.nix { enableNpm = false; };
@@ -4676,7 +4676,6 @@ with pkgs;
   };
 
   osl = libsForQt5.callPackage ../development/compilers/osl {
-    boost = boost179;
     libclang = llvmPackages_15.libclang;
     clang = clang_15;
     llvm = llvm_15;
@@ -4909,10 +4908,7 @@ with pkgs;
 
   pypass = with python3Packages; toPythonApplication pypass;
 
-  py-spy = darwin.apple_sdk_11_0.callPackage ../development/tools/py-spy {
-    # https://github.com/benfred/py-spy/issues/633
-    python3 = python311;
-  };
+  py-spy = darwin.apple_sdk_11_0.callPackage ../development/tools/py-spy { };
 
   pydeps = with python3Packages; toPythonApplication pydeps;
 
@@ -5060,7 +5056,6 @@ with pkgs;
   rosenpass-tools = callPackage ../tools/networking/rosenpass/tools.nix  { };
 
   rpm = callPackage ../tools/package-management/rpm {
-    python = python3;
     lua = lua5_4;
   };
 
@@ -5111,10 +5106,6 @@ with pkgs;
   };
 
   scfbuild = python3.pkgs.callPackage ../tools/misc/scfbuild { };
-
-  sd = callPackage ../tools/text/sd {
-    inherit (darwin.apple_sdk.frameworks) Security;
-  };
 
   securefs = darwin.apple_sdk_11_0.callPackage ../tools/filesystems/securefs { };
 
@@ -5985,7 +5976,7 @@ with pkgs;
   gerbilPackages-unstable = pkgs.gerbil-support.gerbilPackages-unstable; # NB: don't recurseIntoAttrs for (unstable!) libraries
   glow-lang = pkgs.gerbilPackages-unstable.glow-lang;
 
-  default-gcc-version = 13;
+  default-gcc-version = 14;
   gcc = pkgs.${"gcc${toString default-gcc-version}"};
   gccFun = callPackage ../development/compilers/gcc;
   gcc-unwrapped = gcc.cc;
@@ -6579,18 +6570,7 @@ with pkgs;
   libllvm = llvmPackages.libllvm;
   llvm-manpages = llvmPackages.llvm-manpages;
 
-  # Please remove all this logic when bumping to LLVM 19 and make this
-  # a simple alias.
-  llvmPackages = let
-    # This returns the minimum supported version for the platform. The
-    # assumption is that or any later version is good.
-    choose = platform: if platform.isDarwin then 16 else 18;
-    # We take the "max of the mins". Why? Since those are lower bounds of the
-    # supported version set, this is like intersecting those sets and then
-    # taking the min bound of that.
-    minSupported = toString (lib.trivial.max (choose stdenv.hostPlatform) (choose
-      stdenv.targetPlatform));
-  in pkgs.${"llvmPackages_${minSupported}"};
+  llvmPackages = llvmPackages_19;
 
   inherit (rec {
     llvmPackagesSet = recurseIntoAttrs (callPackages ../development/compilers/llvm { });
@@ -6758,11 +6738,11 @@ with pkgs;
   wrapRustcWith = { rustc-unwrapped, ... } @ args: callPackage ../build-support/rust/rustc-wrapper args;
   wrapRustc = rustc-unwrapped: wrapRustcWith { inherit rustc-unwrapped; };
 
-  rust_1_82 = callPackage ../development/compilers/rust/1_82.nix {
+  rust_1_83 = callPackage ../development/compilers/rust/1_83.nix {
     inherit (darwin.apple_sdk.frameworks) CoreFoundation Security SystemConfiguration;
-    llvm_18 = llvmPackages_18.libllvm;
+    llvm_19 = llvmPackages_19.libllvm;
   };
-  rust = rust_1_82;
+  rust = rust_1_83;
 
   mrustc = callPackage ../development/compilers/mrustc { };
   mrustc-minicargo = callPackage ../development/compilers/mrustc/minicargo.nix { };
@@ -6770,8 +6750,8 @@ with pkgs;
     openssl = openssl_1_1;
   };
 
-  rustPackages_1_82 = rust_1_82.packages.stable;
-  rustPackages = rustPackages_1_82;
+  rustPackages_1_83 = rust_1_83.packages.stable;
+  rustPackages = rustPackages_1_83;
 
   inherit (rustPackages) cargo cargo-auditable cargo-auditable-cargo-wrapper clippy rustc rustPlatform;
 
@@ -6953,8 +6933,8 @@ with pkgs;
   swi-prolog-gui = swi-prolog.override { withGui = true; };
 
   tbb_2020_3 = callPackage ../development/libraries/tbb/2020_3.nix { };
-  tbb_2021_5 = callPackage ../development/libraries/tbb/2021_5.nix { } ;
   tbb_2021_11 = callPackage ../development/libraries/tbb { };
+  tbb_2022_0 = callPackage ../development/libraries/tbb/2022_0.nix { };
   # many packages still fail with latest version
   tbb = tbb_2020_3;
 
@@ -7442,9 +7422,9 @@ with pkgs;
   python27Packages = python27.pkgs;
   python39Packages = python39.pkgs;
   python310Packages = python310.pkgs;
-  python311Packages = recurseIntoAttrs python311.pkgs;
+  python311Packages = python311.pkgs;
   python312Packages = recurseIntoAttrs python312.pkgs;
-  python313Packages = python313.pkgs;
+  python313Packages = recurseIntoAttrs python313.pkgs;
   python314Packages = python314.pkgs;
   pypyPackages = pypy.pkgs;
   pypy2Packages = pypy2.pkgs;
@@ -8412,9 +8392,7 @@ with pkgs;
 
   inherit (regclient) regbot regctl regsync;
 
-  reno = callPackage ../development/tools/reno {
-    python3Packages = python311Packages;
-  };
+  reno = with python311Packages; toPythonApplication reno;
 
   replace-secret = callPackage ../build-support/replace-secret/replace-secret.nix { };
 
@@ -8742,12 +8720,10 @@ with pkgs;
     boost181
     boost182
     boost183
-    boost184
-    boost185
     boost186
   ;
 
-  boost = boost181;
+  boost = boost186;
 
   inherit (callPackages ../development/libraries/botan { })
     botan2
@@ -9002,7 +8978,7 @@ with pkgs;
   fltk = fltk13;
   fltk-minimal = fltk13-minimal;
 
-  inherit (callPackages ../development/libraries/fmt { }) fmt_8 fmt_9 fmt_10 fmt_11;
+  inherit (callPackages ../development/libraries/fmt { }) fmt_9 fmt_10 fmt_11;
 
   fmt = fmt_10;
 
@@ -9443,10 +9419,7 @@ with pkgs;
     autoreconfHook = buildPackages.autoreconfHook269;
   };
 
-  hpx = callPackage ../development/libraries/hpx {
-    boost = boost179;
-    asio = asio.override { boost = boost179; };
-  };
+  hpx = callPackage ../development/libraries/hpx { };
 
   hspell = callPackage ../development/libraries/hspell { };
 
@@ -9461,8 +9434,6 @@ with pkgs;
   hunspellWithDicts = dicts: callPackage ../development/libraries/hunspell/wrapper.nix { inherit dicts; };
 
   hydra = callPackage ../by-name/hy/hydra/package.nix { nix = nixVersions.nix_2_24; };
-
-  hydra-check = with python3.pkgs; toPythonApplication hydra-check;
 
   icu-versions = callPackages ../development/libraries/icu { };
   inherit (icu-versions)
@@ -10126,18 +10097,6 @@ with pkgs;
 
   mediastreamer-openh264 = callPackage ../development/libraries/mediastreamer/msopenh264.nix { };
 
-  memorymapping = callPackage ../development/libraries/memorymapping { };
-  memorymappingHook = makeSetupHook {
-    name = "memorymapping-hook";
-    propagatedBuildInputs = [ memorymapping ];
-  } ../development/libraries/memorymapping/setup-hook.sh;
-
-  memstream = callPackage ../development/libraries/memstream { };
-  memstreamHook = makeSetupHook {
-    name = "memstream-hook";
-    propagatedBuildInputs = [ memstream ];
-  } ../development/libraries/memstream/setup-hook.sh;
-
   mergerfs = callPackage ../tools/filesystems/mergerfs { };
 
   mergerfs-tools = callPackage ../tools/filesystems/mergerfs/tools.nix { };
@@ -10199,6 +10158,8 @@ with pkgs;
     else callPackage ../development/libraries/mesa {};
 
   mesa_i686 = pkgsi686Linux.mesa; # make it build on Hydra
+
+  libgbm = callPackage ../development/libraries/mesa/gbm.nix {};
 
   ## End libGL/libGLU/Mesa stuff
 
@@ -10504,7 +10465,7 @@ with pkgs;
 
   prospector = callPackage ../development/tools/prospector { };
 
-  protobuf = protobuf_28;
+  protobuf = protobuf_29;
 
   inherit
     ({
@@ -10867,7 +10828,7 @@ with pkgs;
 
   inherit (callPackage ../development/libraries/sqlite/tools.nix {
     inherit (darwin.apple_sdk.frameworks) Foundation;
-  }) sqlite-analyzer sqldiff;
+  }) sqlite-analyzer sqldiff sqlite-rsync;
 
   sqlar = callPackage ../development/libraries/sqlite/sqlar.nix { };
 
@@ -10910,6 +10871,7 @@ with pkgs;
 
   termbench-pro = callPackage ../by-name/te/termbench-pro/package.nix {
     stdenv = if stdenv.hostPlatform.isDarwin then llvmPackages_17.stdenv else stdenv;
+    fmt = fmt_11;
   };
 
   texpresso = callPackage ../tools/typesetting/tex/texpresso {
@@ -11120,10 +11082,6 @@ with pkgs;
 
   ### DEVELOPMENT / LIBRARIES / DARWIN SDKS
 
-  apple-sdk_10_12 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "10.12"; };
-  apple-sdk_10_13 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "10.13"; };
-  apple-sdk_10_14 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "10.14"; };
-  apple-sdk_10_15 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "10.15"; };
   apple-sdk_11 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "11"; };
   apple-sdk_12 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "12"; };
   apple-sdk_13 = callPackage ../by-name/ap/apple-sdk/package.nix { darwinSdkMajorVersion = "13"; };
@@ -11755,8 +11713,6 @@ with pkgs;
   opensmtpd-filter-rspamd = callPackage ../servers/mail/opensmtpd/filter-rspamd.nix { };
   osrm-backend = callPackage ../servers/osrm-backend {
     tbb = tbb_2021_11;
-    # https://github.com/Project-OSRM/osrm-backend/issues/6503
-    boost = boost179;
   };
 
   postfix = callPackage ../servers/mail/postfix { };
@@ -11919,8 +11875,8 @@ with pkgs;
     postgresql_16_jit
     postgresql_17_jit
   ;
-  postgresql = postgresql_16;
-  postgresql_jit = postgresql_16_jit;
+  postgresql = postgresql_17;
+  postgresql_jit = postgresql_17_jit;
   postgresqlPackages = recurseIntoAttrs postgresql.pkgs;
   postgresqlJitPackages = recurseIntoAttrs postgresql_jit.pkgs;
   postgresql13Packages = recurseIntoAttrs postgresql_13.pkgs;
@@ -12018,7 +11974,7 @@ with pkgs;
 
   rabbitmq-server = callPackage ../by-name/ra/rabbitmq-server/package.nix rec {
     erlang = erlang_27;
-    elixir = pkgs.elixir.override { inherit erlang; };
+    elixir = elixir_1_17.override { inherit erlang; };
   };
 
   qcal = callPackage ../tools/networking/qcal/default.nix { };
@@ -15214,6 +15170,8 @@ with pkgs;
 
   qbittorrent-nox = qbittorrent.override { guiSupport = false; };
 
+  qbittorrent-enhanced-nox = qbittorrent-enhanced.override { guiSupport = false; };
+
   qcad = libsForQt5.callPackage ../applications/misc/qcad { };
 
   qcomicbook = libsForQt5.callPackage ../applications/graphics/qcomicbook { };
@@ -15225,17 +15183,8 @@ with pkgs;
   eiskaltdcpp = libsForQt5.callPackage ../applications/networking/p2p/eiskaltdcpp { };
 
   qemu = callPackage ../applications/virtualization/qemu {
-    inherit (darwin.apple_sdk_12_3.frameworks) CoreServices Cocoa Hypervisor Kernel vmnet;
     inherit (darwin.stubs) rez setfile;
     inherit (darwin) sigtool;
-    stdenv =
-      if stdenv.hostPlatform.isDarwin then
-        overrideSDK stdenv {
-          darwinSdkVersion = "12.3";
-          darwinMinVersion = "12.0";
-        }
-      else
-        stdenv;
   };
 
   qemu-python-utils = python3Packages.toPythonApplication (
@@ -15754,7 +15703,7 @@ with pkgs;
   };
 
   torrenttools = callPackage ../tools/misc/torrenttools {
-    fmt = fmt_8;
+    fmt = fmt_9;
   };
 
   tony = libsForQt5.callPackage ../applications/audio/tony { };
@@ -16440,6 +16389,8 @@ with pkgs;
   beanhub-cli = with python3.pkgs; toPythonApplication beanhub-cli;
 
   bean-add = callPackage ../applications/office/beancount/bean-add.nix { };
+
+  beanquery = with python3.pkgs; toPythonApplication beanquery;
 
   bench =
     # TODO: Erroneous references to GHC on aarch64-darwin: https://github.com/NixOS/nixpkgs/issues/318013
@@ -18046,7 +17997,7 @@ with pkgs;
   kmonad = haskellPackages.kmonad.bin;
 
   kompute = callPackage ../development/libraries/kompute {
-    fmt = fmt_8;
+    fmt = fmt_10;
   };
 
   # In general we only want keep the last three minor versions around that
@@ -18740,10 +18691,6 @@ with pkgs;
   };
 
   sieveshell = with python3.pkgs; toPythonApplication managesieve;
-
-  sunshine = callPackage ../by-name/su/sunshine/package.nix {
-    boost = boost185;
-  };
 
   jami = qt6Packages.callPackage ../applications/networking/instant-messengers/jami {
     # TODO: remove once `udev` is `systemdMinimal` everywhere.
