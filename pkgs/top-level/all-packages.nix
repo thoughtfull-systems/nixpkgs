@@ -1911,8 +1911,6 @@ with pkgs;
 
   gomobile = callPackage ../development/mobile/gomobile { };
 
-  titaniumenv = callPackage ../development/mobile/titaniumenv { };
-
   adb-sync = callPackage ../development/mobile/adb-sync {
     inherit (androidenv.androidPkgs) platform-tools;
   };
@@ -2189,8 +2187,6 @@ with pkgs;
   csv2md = with python3Packages; toPythonApplication csv2md;
 
   csvtool = callPackage ../development/ocaml-modules/csv/csvtool.nix { };
-
-  cutemarked-ng = libsForQt5.callPackage ../applications/office/cutemarked-ng { };
 
   dataclass-wizard = with python3Packages; toPythonApplication dataclass-wizard;
 
@@ -5665,8 +5661,6 @@ with pkgs;
 
   yapf = with python3Packages; toPythonApplication yapf;
 
-  yarn-berry = callPackage ../development/tools/yarn-berry { };
-
   yarn2nix-moretea = callPackage ../development/tools/yarn2nix-moretea { pkgs = pkgs.__splicedPackages; };
 
   inherit (yarn2nix-moretea)
@@ -6817,9 +6811,6 @@ with pkgs;
   cargo-lambda = callPackage ../development/tools/rust/cargo-lambda {
     zig = buildPackages.zig_0_12;
     inherit (darwin.apple_sdk.frameworks) CoreServices Security;
-  };
-  cargo-msrv = callPackage ../development/tools/rust/cargo-msrv {
-    inherit (darwin.apple_sdk.frameworks) Security;
   };
   cargo-ndk = callPackage ../development/tools/rust/cargo-ndk {
     inherit (darwin.apple_sdk.frameworks) CoreGraphics Foundation;
@@ -8771,10 +8762,7 @@ with pkgs;
     certbot-dns-route53
   ]);
 
-  # CGAL 5 has API changes
-  cgal_4 = callPackage ../development/libraries/CGAL/4.nix { };
-  cgal_5 = callPackage ../development/libraries/CGAL { };
-  cgal = cgal_5;
+  cgal = callPackage ../development/libraries/CGAL { };
 
   check = callPackage ../development/libraries/check {
     inherit (darwin.apple_sdk.frameworks) CoreServices;
@@ -14601,12 +14589,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) CoreServices;
   };
 
-  xmrig = darwin.apple_sdk_11_0.callPackage ../applications/misc/xmrig { };
-
-  xmrig-mo = darwin.apple_sdk_11_0.callPackage ../applications/misc/xmrig/moneroocean.nix { };
-
-  xmrig-proxy = darwin.apple_sdk_11_0.callPackage ../applications/misc/xmrig/proxy.nix { };
-
   monotone = callPackage ../applications/version-management/monotone {
     lua = lua5;
   };
@@ -18570,8 +18552,6 @@ with pkgs;
   };
 
   wfuzz = with python3Packages; toPythonApplication wfuzz;
-
-  zfs-replicate = python3Packages.callPackage ../tools/backup/zfs-replicate { };
 
   kodelife = callPackage ../applications/graphics/kodelife {
     inherit (gst_all_1) gstreamer gst-plugins-base;
