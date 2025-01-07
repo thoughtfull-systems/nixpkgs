@@ -131,6 +131,8 @@ self: super: with self; {
 
   aggdraw = callPackage ../development/python-modules/aggdraw { };
 
+  ahocorapy = callPackage ../development/python-modules/ahocorapy { };
+
   ahocorasick-rs = callPackage ../development/python-modules/ahocorasick-rs { };
 
   aigpy = callPackage ../development/python-modules/aigpy { };
@@ -1564,6 +1566,8 @@ self: super: with self; {
     callPackage ../development/python-modules/bcrypt { };
 
   bdffont = callPackage ../development/python-modules/bdffont { };
+
+  beacontools = callPackage ../development/python-modules/beacontools { };
 
   beaker = callPackage ../development/python-modules/beaker { };
 
@@ -5483,6 +5487,8 @@ self: super: with self; {
 
   gorilla = callPackage ../development/python-modules/gorilla { };
 
+  goslide-api = callPackage ../development/python-modules/goslide-api { };
+
   govee-ble = callPackage ../development/python-modules/govee-ble { };
 
   govee-led-wez = callPackage ../development/python-modules/govee-led-wez { };
@@ -6694,6 +6700,8 @@ self: super: with self; {
   jsonfield = callPackage ../development/python-modules/jsonfield { };
 
   jsonlines = callPackage ../development/python-modules/jsonlines { };
+
+  json-api-doc = callPackage ../development/python-modules/json-api-doc { };
 
   json-logging = callPackage ../development/python-modules/json-logging { };
 
@@ -8253,6 +8261,8 @@ self: super: with self; {
   mkdocs-get-deps = callPackage ../development/python-modules/mkdocs-get-deps { };
 
   mkdocs-git-authors-plugin = callPackage ../development/python-modules/mkdocs-git-authors-plugin { };
+
+  mkdocs-git-committers-plugin-2 = callPackage ../development/python-modules/mkdocs-git-committers-plugin-2 { };
 
   mkdocs-git-revision-date-localized-plugin = callPackage ../development/python-modules/mkdocs-git-revision-date-localized-plugin { };
 
@@ -11879,6 +11889,8 @@ self: super: with self; {
   pyjson5 = callPackage ../development/python-modules/pyjson5 { };
 
   pyjsparser = callPackage ../development/python-modules/pyjsparser { };
+
+  pyjvcprojector = callPackage ../development/python-modules/pyjvcprojector { };
 
   pyjwkest = callPackage ../development/python-modules/pyjwkest { };
 
