@@ -1679,6 +1679,8 @@ with pkgs;
     stdenv = gccStdenv;
   };
 
+  arpack-mpi = arpack.override { useMpi = true; };
+
   inherit (callPackages ../data/fonts/arphic {})
     arphic-ukai arphic-uming;
 
@@ -16701,8 +16703,8 @@ with pkgs;
     fteqcc;
 
   heroic-unwrapped = callPackage ../games/heroic {
-    # Match the version used by the upstream package.
-    electron = electron_31;
+    # Upstream uses EOL Electron 31.  Use next oldest version.
+    electron = electron_32;
   };
 
   heroic = callPackage ../games/heroic/fhsenv.nix { };
@@ -17059,8 +17061,6 @@ with pkgs;
     jre = temurin-bin-21;
     openjfx = openjfx21;
   };
-
-  manaplus = callPackage ../games/manaplus { stdenv = gcc11Stdenv; };
 
   mindustry-wayland = callPackage ../by-name/mi/mindustry/package.nix {
     enableWayland = true;
