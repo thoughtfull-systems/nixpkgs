@@ -18541,8 +18541,8 @@
   };
   pwnwriter = {
     name = "Nabeen Tiwaree";
-    email = "hey@pwnwriter.xyz";
-    keys = [ { fingerprint = "B681 763F 9B5B DF27 9A13  9E0C 0544 A89B C519 20AA"; } ];
+    email = "hi@pwnwriter.me";
+    keys = [ { fingerprint = "C153 DE7C 0A0D 432E F033  2B0B A524 11EC 5582 DE3A"; } ];
     github = "pwnwriter";
     githubId = 90331517;
   };
@@ -20348,6 +20348,11 @@
     github = "scalavision";
     githubId = 3958212;
     name = "Tom Sorlie";
+  };
+  scd31 = {
+    name = "scd31";
+    github = "scd31";
+    githubId = 57571338;
   };
   schinmai-akamai = {
     email = "schinmai@akamai.com";
@@ -25026,6 +25031,12 @@
     github = "ydlr";
     githubId = 58453832;
     keys = [ { fingerprint = "FD0A C425 9EF5 4084 F99F 9B47 2ACC 9749 7C68 FAD4"; } ];
+  };
+  yechielw = {
+    name = "yechielw";
+    email = "yechielworen@gmail.com";
+    github = "yechielw";
+    githubId = 41305372;
   };
   yelite = {
     name = "Lite Ye";
