@@ -4494,10 +4494,7 @@ self: super: with self; {
 
   fastimport = callPackage ../development/python-modules/fastimport { };
 
-  fastjet = toPythonModule (pkgs.fastjet.override {
-    withPython = true;
-    inherit (self) python;
-  });
+  fastjet = callPackage ../development/python-modules/fastjet { };
 
   fastjsonschema = callPackage ../development/python-modules/fastjsonschema { };
 
@@ -4634,7 +4631,11 @@ self: super: with self; {
 
   flake8-length = callPackage ../development/python-modules/flake8-length { };
 
+  flake8-class-newline = callPackage ../development/python-modules/flake8-class-newline { };
+
   flake8-debugger = callPackage ../development/python-modules/flake8-debugger { };
+
+  flake8-deprecated = callPackage ../development/python-modules/flake8-deprecated { };
 
   flake8-docstrings = callPackage ../development/python-modules/flake8-docstrings { };
 
@@ -6992,11 +6993,11 @@ self: super: with self; {
 
   kitchen = callPackage ../development/python-modules/kitchen { };
 
-  kivy = callPackage ../development/python-modules/kivy {
-    inherit (pkgs.darwin.apple_sdk.frameworks) Accelerate ApplicationServices AVFoundation;
-  };
+  kivy = callPackage ../development/python-modules/kivy { };
 
   kivy-garden = callPackage ../development/python-modules/kivy-garden { };
+
+  kivy-garden-modernmenu = callPackage ../development/python-modules/kivy-garden-modernmenu { };
 
   kiwiki-client = callPackage ../development/python-modules/kiwiki-client { };
 
@@ -7619,7 +7620,11 @@ self: super: with self; {
 
   llm = callPackage ../development/python-modules/llm { };
 
+  llm-cmd = callPackage ../development/python-modules/llm-cmd { };
+
   llm-gguf = callPackage ../development/python-modules/llm-gguf { };
+
+  llm-ollama = callPackage ../development/python-modules/llm-ollama { };
 
   llmx = callPackage ../development/python-modules/llmx { };
 
@@ -10555,6 +10560,8 @@ self: super: with self; {
 
   pygelf = callPackage ../development/python-modules/pygelf { };
 
+  pygerber = callPackage ../development/python-modules/pygerber { };
+
   pygments-style-github = callPackage ../development/python-modules/pygments-style-github { };
 
   pygnmi = callPackage ../development/python-modules/pygnmi { };
@@ -10700,6 +10707,8 @@ self: super: with self; {
   pysyncthru = callPackage ../development/python-modules/pysyncthru { };
 
   pytask = callPackage ../development/python-modules/pytask { };
+
+  pytest-lsp = callPackage ../development/python-modules/pytest-lsp { };
 
   pytest-mockito = callPackage ../development/python-modules/pytest-mockito { };
 
@@ -11276,8 +11285,6 @@ self: super: with self; {
   py3rijndael = callPackage ../development/python-modules/py3rijndael { };
 
   py3status = callPackage ../development/python-modules/py3status { };
-
-  py3to2 = callPackage ../development/python-modules/3to2 { };
 
   py4j = callPackage ../development/python-modules/py4j { };
 
@@ -15540,6 +15547,8 @@ self: super: with self; {
   stookwijzer = callPackage ../development/python-modules/stookwijzer { };
 
   stopit = callPackage ../development/python-modules/stopit { };
+
+  stop-words = callPackage ../development/python-modules/stop-words { };
 
   stransi = callPackage ../development/python-modules/stransi { };
 

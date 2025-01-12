@@ -2138,6 +2138,11 @@
     name = "aszlig";
     keys = [ { fingerprint = "DD52 6BC7 767D BA28 16C0 95E5 6840 89CE 67EB B691"; } ];
   };
+  atagen = {
+    name = "atagen";
+    github = "atagen";
+    githubId = 11548989;
+  };
   atalii = {
     email = "taliauster@gmail.com";
     github = "atalii";
@@ -4290,6 +4295,12 @@
     github = "cleeyv";
     githubId = 71959829;
     name = "Cleeyv";
+  };
+  clemjvdm = {
+    email = "clement.jvdm@gmail.com";
+    github = "clemjvdm";
+    githubId = 131002498;
+    name = "clement";
   };
   clerie = {
     email = "nix@clerie.de";
@@ -13628,6 +13639,12 @@
     github = "lxea";
     githubId = 7910815;
     name = "Alex McGrath";
+  };
+  lyn = {
+    name = "Lyn";
+    matrix = "@lynatic:catgirl.cloud";
+    github = "lynatic1337";
+    githubId = 39234676;
   };
   lyndeno = {
     name = "Lyndon Sanche";
