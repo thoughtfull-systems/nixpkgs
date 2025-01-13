@@ -5018,10 +5018,6 @@ with self; {
       url = "mirror://cpan/authors/id/D/DP/DPARIS/Crypt-DES-2.07.tar.gz";
       hash = "sha256-LbHrtYN7TLIAUcDuW3M7RFPjE33wqSMGA0yGdiHt1+c=";
     };
-    patches = [
-      # add extra definitions in header to please -Werror=implicit-function-declaration
-      ../development/perl-modules/CryptDES-gcc14.patch
-    ];
     meta = {
       description = "Perl DES encryption module";
       license = with lib.licenses; [ bsdOriginalShortened ];
@@ -10985,22 +10981,6 @@ with self; {
       description = "Dynamically create Perl language bindings";
       homepage = "https://gtk2-perl.sourceforge.net";
       license = with lib.licenses; [ lgpl21Only ];
-    };
-  };
-
-  GnuPG = buildPerlPackage {
-    pname = "GnuPG";
-    version = "0.19";
-    src = fetchurl {
-      url = "mirror://cpan/authors/id/Y/YA/YANICK/GnuPG-0.19.tar.gz";
-      hash = "sha256-r1Py0/Yyl+BGZ26uFKdilq/dKRDglyO2sRNwhiK3mJs=";
-    };
-    buildInputs = [ pkgs.gnupg1orig ];
-    doCheck = false;
-    meta = {
-      description = "Perl interface to the GNU Privacy Guard";
-      license = with lib.licenses; [ gpl2Plus ];
-      mainProgram = "gpgmailtunl";
     };
   };
 
@@ -29534,4 +29514,5 @@ with self; {
 
   Gtk2GladeXML = throw "Gtk2GladeXML has been removed"; # 2022-01-15
   pcscperl = throw "'pcscperl' has been renamed to 'ChipcardPCSC'"; # Added 2023-12-07
+  GnuPG = throw "'GnuPG' has been removed"; # 2025-01-11
 }
