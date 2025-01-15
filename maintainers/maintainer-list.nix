@@ -13862,6 +13862,13 @@
     githubId = 1678126;
     name = "Marco A L Barbosa";
   };
+  malik = {
+    name = "Malik";
+    email = "abdelmalik.najhi@stud.hs-kempten.de";
+    github = "malikwirin";
+    githubId = 117918464;
+    keys = [ { fingerprint = "B5ED 595C 8C7E 133C 6B68  63C8 CFEF 1E35 0351 F72D"; } ];
+  };
   malo = {
     email = "mbourgon@gmail.com";
     github = "malob";
@@ -15761,6 +15768,12 @@
     githubId = 110892040;
     name = "Mykyta Polchanov";
   };
+  mzabani = {
+    email = "mzabani@gmail.com";
+    github = "mzabani";
+    githubId = 4662691;
+    name = "Marcelo Zabani";
+  };
   mzacho = {
     email = "nixpkgs@martinzacho.net";
     github = "mzacho";
@@ -16686,10 +16699,16 @@
     githubId = 99221043;
   };
   numinit = {
-    email = "me@numin.it";
+    email = "me+nixpkgs@numin.it";
+    name = "Morgan Jones";
     github = "numinit";
     githubId = 369111;
-    name = "Morgan Jones";
+    keys = [
+      # >=2025
+      { fingerprint = "FD28 F9C9 81C5 D78E 56E8  8311 5C3E B94D 198F 1491"; }
+      # <=2024
+      { fingerprint = "190B DA97 F616 DE35 6899  ED17 F819 F1AF 2FC1 C1FF"; }
+    ];
   };
   numkem = {
     name = "Sebastien Bariteau";
@@ -23193,6 +23212,12 @@
     github = "tomberek";
     githubId = 178444;
     name = "Thomas Bereknyei";
+  };
+  tombert = {
+    email = "thomas@gebert.app";
+    github = "tombert";
+    githubId = 2027925;
+    name = "Thomas Gebert";
   };
   tomfitzhenry = {
     email = "tom@tom-fitzhenry.me.uk";

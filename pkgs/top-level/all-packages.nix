@@ -936,12 +936,7 @@ with pkgs;
     llvm = llvm_16;
   };
 
-  aflplusplus = callPackage ../tools/security/aflplusplus {
-    clang = clang_15;
-    llvm = llvm_15;
-    llvmPackages = llvmPackages_15;
-    wine = null;
-  };
+  aflplusplus = callPackage ../tools/security/aflplusplus { wine = null; };
 
   libdislocator = callPackage ../tools/security/aflplusplus/libdislocator.nix { };
 
@@ -3884,8 +3879,6 @@ with pkgs;
 
   kio-fuse = libsForQt5.callPackage ../tools/filesystems/kio-fuse { };
 
-  kphotoalbum = libsForQt5.callPackage ../applications/graphics/kphotoalbum { };
-
   krename = libsForQt5.callPackage ../applications/misc/krename { };
 
   krunner-pass = libsForQt5.callPackage ../tools/security/krunner-pass { };
@@ -4790,12 +4783,6 @@ with pkgs;
 
   polaris-web = callPackage ../servers/polaris/web.nix { };
 
-  povray = callPackage ../tools/graphics/povray {
-    # https://github.com/POV-Ray/povray/issues/460
-    # https://github.com/NixOS/nixpkgs/issues/311017
-    stdenv = gcc12Stdenv;
-  };
-
   projectlibre = callPackage ../applications/misc/projectlibre {
     jre = jre8;
     jdk = jdk8;
@@ -4870,8 +4857,6 @@ with pkgs;
   qlog = qt6Packages.callPackage ../applications/radio/qlog { };
 
   quickbms = pkgsi686Linux.callPackage ../tools/archivers/quickbms { };
-
-  qalculate-qt = qt6Packages.callPackage ../applications/science/math/qalculate-qt { };
 
   qastools = libsForQt5.callPackage ../tools/audio/qastools { };
 
@@ -6333,10 +6318,6 @@ with pkgs;
     inherit (emacs.pkgs.melpaStablePackages) irony;
   };
 
-  heptagon = callPackage ../development/compilers/heptagon {
-    ocamlPackages = ocaml-ng.ocamlPackages_4_14;
-  };
-
   openjfx17 = openjfx;
   openjfx21 = callPackage ../by-name/op/openjfx/package.nix { featureVersion = "21"; };
   openjfx23 = callPackage ../by-name/op/openjfx/package.nix { featureVersion = "23"; };
@@ -6749,7 +6730,6 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
   cargo-lambda = callPackage ../development/tools/rust/cargo-lambda {
-    zig = buildPackages.zig_0_12;
     inherit (darwin.apple_sdk.frameworks) CoreServices Security;
   };
   cargo-ndk = callPackage ../development/tools/rust/cargo-ndk {
@@ -6772,9 +6752,7 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  cargo-zigbuild = callPackage ../development/tools/rust/cargo-zigbuild {
-    zig = buildPackages.zig_0_12;
-  };
+  cargo-zigbuild = callPackage ../development/tools/rust/cargo-zigbuild { };
 
   opensmalltalk-vm = callPackage ../development/compilers/opensmalltalk-vm { };
 
@@ -8571,6 +8549,8 @@ with pkgs;
   aspellWithDicts = callPackage ../development/libraries/aspell/aspell-with-dicts.nix {
     aspell = aspell.override { searchNixProfiles = false; };
   };
+
+  astal = recurseIntoAttrs (lib.makeScope newScope (callPackage ../development/libraries/astal { }));
 
   attr = callPackage ../development/libraries/attr { };
 
@@ -14212,8 +14192,6 @@ with pkgs;
   leo-editor = libsForQt5.callPackage ../applications/editors/leo-editor { };
 
   libkiwix = callPackage ../applications/misc/kiwix/lib.nix { };
-
-  librecad = libsForQt5.callPackage ../applications/misc/librecad { };
 
   libreoffice-bin = callPackage ../applications/office/libreoffice/darwin { };
 
