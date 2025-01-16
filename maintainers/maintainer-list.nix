@@ -16554,6 +16554,18 @@
     githubId = 3521180;
     name = "Tom Sydney Kerckhove";
   };
+  normalcea = {
+    name = "normalcea";
+    email = "normalc@posteo.net";
+    github = "normalcea";
+    githubId = 190049873;
+    keys = [
+      {
+        fingerprint = "6057 1155 7BA4 B922 66D6 2064 3DE3 BCB2 142A 8C71";
+      }
+    ];
+    matrix = "@normalcea:matrix.org";
+  };
   nosewings = {
     name = "Nicholas Coltharp";
     email = "coltharpnicholas@gmail.com";
@@ -19440,6 +19452,12 @@
     github = "risicle";
     githubId = 807447;
     name = "Robert Scott";
+  };
+  Rishik-Y = {
+    name = "Rishik Yalamanchili";
+    email = "202301258@daiict.ac.in";
+    github = "Rishik-Y";
+    githubId = 73787402;
   };
   risson = {
     name = "Marc Schmitt";
