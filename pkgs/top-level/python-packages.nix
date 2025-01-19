@@ -9029,9 +9029,11 @@ self: super: with self; {
 
   netbox-documents = callPackage ../development/python-modules/netbox-documents { };
 
-  netbox-reorder-rack = callPackage ../development/python-modules/netbox-reorder-rack { };
-
   netbox-plugin-prometheus-sd = callPackage ../development/python-modules/netbox-plugin-prometheus-sd { };
+
+  netbox-qrcode = callPackage ../development/python-modules/netbox-qrcode { };
+
+  netbox-reorder-rack = callPackage ../development/python-modules/netbox-reorder-rack { };
 
   netcdf4 = callPackage ../development/python-modules/netcdf4 { };
 
@@ -11474,6 +11476,8 @@ self: super: with self; {
   pyegps = callPackage ../development/python-modules/pyegps { };
 
   pyeight = callPackage ../development/python-modules/pyeight { };
+
+  pyeiscp = callPackage ../development/python-modules/pyeiscp { };
 
   pyelectra = callPackage ../development/python-modules/pyelectra { };
 
