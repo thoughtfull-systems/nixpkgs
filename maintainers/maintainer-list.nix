@@ -2333,6 +2333,12 @@
     githubId = 59499799;
     keys = [ { fingerprint = "A0FF 4F26 6B80 0B86 726D  EA5B 3C23 C7BD 9945 2036"; } ];
   };
+  av-gal = {
+    email = "alex.v.galvin@gmail.com";
+    github = "av-gal";
+    githubId = 32237198;
+    name = "Alex Galvin";
+  };
   avh4 = {
     email = "gruen0aermel@gmail.com";
     github = "avh4";
@@ -3369,6 +3375,12 @@
     email = "bmg.avoin@gmail.com";
     github = "brianmcgillion";
     githubId = 1044263;
+  };
+  britter = {
+    name = "Benedikt Ritter";
+    email = "beneritter@gmail.com";
+    github = "britter";
+    githubId = 1327662;
   };
   brodes = {
     email = "me@brod.es";
@@ -16629,6 +16641,12 @@
     githubId = 126072875;
     name = "nova madeline";
   };
+  novaviper = {
+    email = "coder.nova99@mailbox.org";
+    github = "novaviper";
+    githubId = 7191115;
+    name = "Nova Leary";
+  };
   novoxd = {
     email = "radnovox@gmail.com";
     github = "novoxd";
@@ -17514,6 +17532,12 @@
     github = "patwid";
     githubId = 25278658;
     name = "Patrick Widmer";
+  };
+  paukaifler = {
+    email = "pau@kaifler.me";
+    github = "PauKaifler";
+    githubId = 81905706;
+    name = "Pau Kaifler";
   };
   paulsmith = {
     email = "paulsmith@pobox.com";
@@ -21311,6 +21335,12 @@
     github = "skovati";
     githubId = 49844593;
     name = "skovati";
+  };
+  skowalak = {
+    github = "skowalak";
+    githubId = 26260032;
+    name = "Sebastian Kowalak";
+    matrix = "@scl:tchncs.de";
   };
   skyesoss = {
     name = "Skye Soss";
