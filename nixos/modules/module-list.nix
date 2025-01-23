@@ -668,6 +668,7 @@
   ./services/home-automation/wyoming/satellite.nix
   ./services/home-automation/zigbee2mqtt.nix
   ./services/home-automation/zwave-js.nix
+  ./services/home-automation/zwave-js-ui.nix
   ./services/logging/SystemdJournal2Gelf.nix
   ./services/logging/awstats.nix
   ./services/logging/filebeat.nix
@@ -747,6 +748,7 @@
   ./services/misc/anki-sync-server.nix
   ./services/misc/apache-kafka.nix
   ./services/misc/atuin.nix
+  ./services/misc/autobrr.nix
   ./services/misc/autofs.nix
   ./services/misc/autorandr.nix
   ./services/misc/autosuspend.nix
@@ -856,6 +858,7 @@
   ./services/misc/radarr.nix
   ./services/misc/radicle.nix
   ./services/misc/readarr.nix
+  ./services/misc/realmd.nix
   ./services/misc/redlib.nix
   ./services/misc/redmine.nix
   ./services/misc/renovate.nix
@@ -1326,6 +1329,7 @@
   ./services/networking/xrdp.nix
   ./services/networking/yggdrasil.nix
   ./services/networking/zapret.nix
+  ./services/networking/yggdrasil-jumper.nix
   ./services/networking/zerobin.nix
   ./services/networking/zenohd.nix
   ./services/networking/zeronet.nix
@@ -1470,6 +1474,7 @@
   ./services/web-apps/eintopf.nix
   ./services/web-apps/engelsystem.nix
   ./services/web-apps/ethercalc.nix
+  ./services/web-apps/fider.nix
   ./services/web-apps/filesender.nix
   ./services/web-apps/firefly-iii.nix
   ./services/web-apps/firefly-iii-data-importer.nix
@@ -1562,6 +1567,7 @@
   ./services/web-apps/screego.nix
   ./services/web-apps/sftpgo.nix
   ./services/web-apps/suwayomi-server.nix
+  ./services/web-apps/readeck.nix
   ./services/web-apps/rss-bridge.nix
   ./services/web-apps/selfoss.nix
   ./services/web-apps/shiori.nix

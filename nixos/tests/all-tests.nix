@@ -144,6 +144,7 @@ in {
   auth-mysql = handleTest ./auth-mysql.nix {};
   authelia = handleTest ./authelia.nix {};
   auto-cpufreq = handleTest ./auto-cpufreq.nix {};
+  autobrr = handleTest ./autobrr.nix {};
   avahi = handleTest ./avahi.nix {};
   avahi-with-resolved = handleTest ./avahi.nix { networkd = true; };
   ayatana-indicators = runTest ./ayatana-indicators.nix;
@@ -335,6 +336,7 @@ in {
   fenics = handleTest ./fenics.nix {};
   ferm = handleTest ./ferm.nix {};
   ferretdb = handleTest ./ferretdb.nix {};
+  fider = runTest ./fider.nix;
   filesender = handleTest ./filesender.nix {};
   filesystems-overlayfs = runTest ./filesystems-overlayfs.nix;
   firefly-iii = handleTest ./firefly-iii.nix {};
@@ -592,7 +594,7 @@ in {
   matrix-synapse-workers = handleTest ./matrix/synapse-workers.nix {};
   mautrix-meta-postgres = handleTest ./matrix/mautrix-meta-postgres.nix {};
   mautrix-meta-sqlite = handleTest ./matrix/mautrix-meta-sqlite.nix {};
-  mattermost = handleTest ./mattermost.nix {};
+  mattermost = handleTest ./mattermost {};
   mealie = handleTest ./mealie.nix {};
   mediamtx = handleTest ./mediamtx.nix {};
   mediatomb = handleTest ./mediatomb.nix {};
@@ -892,6 +894,7 @@ in {
   rathole = handleTest ./rathole.nix {};
   readarr = handleTest ./readarr.nix {};
   realm = handleTest ./realm.nix {};
+  readeck = runTest ./readeck.nix;
   redis = handleTest ./redis.nix {};
   redlib = handleTest ./redlib.nix {};
   redmine = handleTestOn [ "x86_64-linux" "aarch64-linux" ] ./redmine.nix {};
@@ -930,6 +933,7 @@ in {
   scion-freestanding-deployment = handleTest ./scion/freestanding-deployment {};
   scrutiny = handleTest ./scrutiny.nix {};
   sddm = handleTest ./sddm.nix {};
+  sdl3 = handleTest ./sdl3.nix { };
   seafile = handleTest ./seafile.nix {};
   searx = runTest ./searx.nix;
   seatd = handleTest ./seatd.nix {};
@@ -1203,4 +1207,5 @@ in {
   zrepl = handleTest ./zrepl.nix {};
   zsh-history = handleTest ./zsh-history.nix {};
   zwave-js = handleTest ./zwave-js.nix {};
+  zwave-js-ui = handleTest ./zwave-js-ui.nix {};
 }
