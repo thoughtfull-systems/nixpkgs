@@ -9029,13 +9029,19 @@ self: super: with self; {
 
   netbox-bgp = callPackage ../development/python-modules/netbox-bgp { };
 
+  netbox-dns = callPackage ../development/python-modules/netbox-dns { };
+
   netbox-documents = callPackage ../development/python-modules/netbox-documents { };
+
+  netbox-interface-synchronization = callPackage ../development/python-modules/netbox-interface-synchronization { };
 
   netbox-plugin-prometheus-sd = callPackage ../development/python-modules/netbox-plugin-prometheus-sd { };
 
   netbox-qrcode = callPackage ../development/python-modules/netbox-qrcode { };
 
   netbox-reorder-rack = callPackage ../development/python-modules/netbox-reorder-rack { };
+
+  netbox-topology-views = callPackage ../development/python-modules/netbox-topology-views { };
 
   netcdf4 = callPackage ../development/python-modules/netcdf4 { };
 
