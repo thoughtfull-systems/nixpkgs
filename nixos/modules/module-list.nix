@@ -267,6 +267,7 @@
   ./programs/ns-usbloader.nix
   ./programs/oblogout.nix
   ./programs/oddjobd.nix
+  ./programs/opengamepadui.nix
   ./programs/openvpn3.nix
   ./programs/obs-studio.nix
   ./programs/partition-manager.nix
@@ -863,8 +864,6 @@
   ./services/misc/redlib.nix
   ./services/misc/redmine.nix
   ./services/misc/renovate.nix
-  ./services/misc/ripple-data-api.nix
-  ./services/misc/rippled.nix
   ./services/misc/rmfakecloud.nix
   ./services/misc/rkvm.nix
   ./services/misc/rshim.nix
