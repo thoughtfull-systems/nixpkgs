@@ -283,6 +283,8 @@ self: super: with self; {
 
   aiohttp-socks = callPackage ../development/python-modules/aiohttp-socks { };
 
+  aiohttp-sse = callPackage ../development/python-modules/aiohttp-sse { };
+
   aiohttp-sse-client2 = callPackage ../development/python-modules/aiohttp-sse-client2 { };
 
   aiohttp-swagger = callPackage ../development/python-modules/aiohttp-swagger { };
@@ -5793,7 +5795,7 @@ self: super: with self; {
 
   hakuin = callPackage ../development/python-modules/hakuin { };
 
-  halide = toPythonModule (pkgs.halide.override { pythonSupport = true; python3Packages = self; });
+  halide = toPythonModule (pkgs.halide.override { pythonSupport = true; python3Packages = self; }).lib;
 
   halo = callPackage ../development/python-modules/halo { };
 
@@ -7247,6 +7249,8 @@ self: super: with self; {
   };
 
   lektricowifi = callPackage ../development/python-modules/lektricowifi { };
+
+  letpot = callPackage ../development/python-modules/letpot { };
 
   leveldb = callPackage ../development/python-modules/leveldb { };
 
@@ -9931,6 +9935,8 @@ self: super: with self; {
 
   osxphotos = callPackage ../development/python-modules/osxphotos { };
 
+  otpauth = callPackage ../development/python-modules/otpauth { };
+
   ots-python = callPackage ../development/python-modules/ots-python { };
 
   outcome = callPackage ../development/python-modules/outcome { };
@@ -10029,6 +10035,8 @@ self: super: with self; {
   para = callPackage ../development/python-modules/para { };
 
   paragraphs = callPackage ../development/python-modules/paragraphs { };
+
+  parallel-ssh = callPackage ../development/python-modules/parallel-ssh { };
 
   param = callPackage ../development/python-modules/param { };
 
@@ -14526,7 +14534,15 @@ self: super: with self; {
 
   scienceplots = callPackage ../development/python-modules/scienceplots { };
 
+  scim2-client = callPackage ../development/python-modules/scim2-client { };
+
   scim2-filter-parser = callPackage ../development/python-modules/scim2-filter-parser { };
+
+  scim2-models = callPackage ../development/python-modules/scim2-models { };
+
+  scim2-server = callPackage ../development/python-modules/scim2-server { };
+
+  scim2-tester = callPackage ../development/python-modules/scim2-tester { };
 
   scikit-bio = callPackage ../development/python-modules/scikit-bio { };
 
@@ -15232,6 +15248,8 @@ self: super: with self; {
 
   speaklater3 = callPackage ../development/python-modules/speaklater3 { };
 
+  spectra = callPackage ../development/python-modules/spectra { };
+
   spectral-cube = callPackage ../development/python-modules/spectral-cube { };
 
   speechbrain = callPackage ../development/python-modules/speechbrain { };
@@ -15529,6 +15547,10 @@ self: super: with self; {
   sshpubkeys = callPackage ../development/python-modules/sshpubkeys { };
 
   sshtunnel = callPackage ../development/python-modules/sshtunnel { };
+
+  ssh-python = callPackage ../development/python-modules/ssh-python { };
+
+  ssh2-python = callPackage ../development/python-modules/ssh2-python { };
 
   sslib = callPackage ../development/python-modules/sslib { };
 
