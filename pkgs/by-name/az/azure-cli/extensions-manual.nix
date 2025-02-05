@@ -83,9 +83,9 @@
 
   containerapp = mkAzExtension rec {
     pname = "containerapp";
-    version = "1.0.0b1";
+    version = "1.1.0b2";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/containerapp-${version}-py2.py3-none-any.whl";
-    hash = "sha256-2AuDsOIncJJcJLyhUMhBgjdrewr/m28oSY12nchhi0U=";
+    hash = "sha256-+2iP6+jsuO3NKJzKUUdLuBCpscn0w/Gx+pqBagyv4rE=";
     description = "Microsoft Azure Command-Line Tools Containerapp Extension";
     propagatedBuildInputs = with python3Packages; [
       docker
@@ -126,9 +126,9 @@
 
   storage-preview = mkAzExtension rec {
     pname = "storage-preview";
-    version = "1.0.0b2";
+    version = "1.0.0b5";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/storage_preview-${version}-py2.py3-none-any.whl";
-    hash = "sha256-Lej6QhYikoowi7cASMP99AQAutOzSv1gHQs6/Ni4J2Q=";
+    hash = "sha256-gs4uQrnpXm03iPyP+i5DnFWvQ43+ZHN4wSZiNRVZU7g=";
     description = "Provides a preview for upcoming storage features";
     propagatedBuildInputs = with python3Packages; [ azure-core ];
     meta.maintainers = with lib.maintainers; [ katexochen ];
@@ -136,9 +136,9 @@
 
   vm-repair = mkAzExtension rec {
     pname = "vm-repair";
-    version = "2.0.0";
+    version = "2.0.2";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/vm_repair-${version}-py2.py3-none-any.whl";
-    hash = "sha256-mBa0SgKyGdxrTtrSVDp78Z0yXUMywL/9o0osKeUbhdU=";
+    hash = "sha256-ts7ByTWI1Chtx9kFQ3sfw4TWP8X5b1hYscudnYJDdOs=";
     description = "Support for repairing Azure Virtual Machines";
     propagatedBuildInputs = with python3Packages; [ opencensus ];
     meta.maintainers = with lib.maintainers; [ ];
