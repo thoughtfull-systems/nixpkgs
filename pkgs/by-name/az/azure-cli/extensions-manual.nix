@@ -16,9 +16,9 @@
 {
   application-insights = mkAzExtension rec {
     pname = "application-insights";
-    version = "1.2.1";
+    version = "1.2.2";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/application_insights-${version}-py2.py3-none-any.whl";
-    hash = "sha256-4fqCTrWH4r7H9MtNHEzhAzqz0/rGWvQt1iGPZzsBnO4=";
+    hash = "sha256-ijmPj8jG+s+855jly3m5wEz5myS8pxU/Scf7lRP2VvI=";
     description = "Support for managing Application Insights components and querying metrics, events, and logs from such components";
     propagatedBuildInputs = with python3Packages; [ isodate ];
     meta.maintainers = with lib.maintainers; [ andreasvoss ];
@@ -96,9 +96,9 @@
 
   rdbms-connect = mkAzExtension rec {
     pname = "rdbms-connect";
-    version = "1.0.6";
+    version = "1.0.7";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/rdbms_connect-${version}-py2.py3-none-any.whl";
-    hash = "sha256-Scvo2bfqB6iXSimtkCR+hk7XmL7V8o0OOleks39ZOec=";
+    hash = "sha256-66mX1K1azQvbuApyKBwvVuiKCbLaqezCDdrv0lhvVD0=";
     description = "Support for testing connection to Azure Database for MySQL & PostgreSQL servers";
     propagatedBuildInputs =
       (with python3Packages; [
@@ -113,15 +113,18 @@
 
   ssh = mkAzExtension rec {
     pname = "ssh";
-    version = "2.0.5";
+    version = "2.0.6";
     url = "https://azcliprod.blob.core.windows.net/cli-extensions/ssh-${version}-py3-none-any.whl";
-    hash = "sha256-gMmLENe/HOQAW3aUrt0FxHNVRWd1umElMIvmX7D+/JM=";
+    hash = "sha256-PSIGtOa91WxpzFCauZ5d5tx/ZtCRsBhbejtVfY3Bgss=";
     description = "SSH into Azure VMs using RBAC and AAD OpenSSH Certificates";
     propagatedBuildInputs = with python3Packages; [
       oras
       oschmod
     ];
-    meta.maintainers = with lib.maintainers; [ gordon-bp ];
+    meta = {
+      maintainers = with lib.maintainers; [ gordon-bp ];
+      changelog = "https://github.com/Azure/azure-cli-extensions/blob/ssh-${version}/src/ssh/HISTORY.md";
+    };
   };
 
   storage-preview = mkAzExtension rec {
