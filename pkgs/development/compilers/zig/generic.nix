@@ -4,6 +4,7 @@
   fetchFromGitHub,
   cmake,
   llvmPackages,
+  xcbuild,
   targetPackages,
   libxml2,
   zlib,
@@ -28,24 +29,17 @@ stdenv.mkDerivation (finalAttrs: {
     inherit hash;
   };
 
-  patches =
-    args.patches or [ ]
-    ++ lib.optionals (lib.versions.majorMinor finalAttrs.version == "0.9") [
-      # Fix index out of bounds reading RPATH (cherry-picked from 0.10-dev)
-      ./patches/0.9-read-dynstr-at-rpath-offset.patch
-      # Fix build on macOS 13 (cherry-picked from 0.10-dev)
-      ./patches/0.9-bump-macos-supported-version.patch
-    ]
-    ++
-      lib.optional (lib.versions.majorMinor finalAttrs.version == "0.10")
-        # Backport alignment related panics from zig-master to 0.10.
-        # Upstream issue: https://github.com/ziglang/zig/issues/14559
-        ./patches/0.10-macho-fixes.patch;
+  patches = args.patches or [ ];
 
-  nativeBuildInputs = [
-    cmake
-    (lib.getDev llvmPackages.llvm.dev)
-  ];
+  nativeBuildInputs =
+    [
+      cmake
+      (lib.getDev llvmPackages.llvm.dev)
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
+      # provides xcode-select, which is required for SDK detection
+      xcbuild
+    ];
 
   buildInputs =
     [
@@ -69,7 +63,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   outputs = [
     "out"
-  ] ++ lib.optional (lib.versionAtLeast finalAttrs.version "0.10") "doc";
+    "doc"
+  ];
 
   # strictDeps breaks zig when clang is being used.
   # https://github.com/NixOS/nixpkgs/issues/317055#issuecomment-2148438395
@@ -92,44 +87,48 @@ stdenv.mkDerivation (finalAttrs: {
   # Zig's build looks at /usr/bin/env to find dynamic linking info. This doesn't
   # work in Nix's sandbox. Use env from our coreutils instead.
   postPatch =
-    if lib.versionAtLeast finalAttrs.version "0.12" then
-      ''
-        substituteInPlace lib/std/zig/system.zig \
-          --replace-fail "/usr/bin/env" "${coreutils}/bin/env"
-      ''
-    else
-      ''
-        substituteInPlace lib/std/zig/system/NativeTargetInfo.zig \
-          --replace-fail "/usr/bin/env" "${coreutils}/bin/env"
-      '';
+    let
+      zigSystemPath =
+        if lib.versionAtLeast finalAttrs.version "0.12" then
+          "lib/std/zig/system.zig"
+        else
+          "lib/std/zig/system/NativeTargetInfo.zig";
+    in
+    ''
+      substituteInPlace ${zigSystemPath} \
+        --replace-fail "/usr/bin/env" "${lib.getExe' coreutils "env"}"
+    ''
+    # Zig tries to access xcrun and xcode-select at the absolute system path to query the macOS SDK
+    # location, which does not work in the darwin sandbox.
+    # Upstream issue: https://github.com/ziglang/zig/issues/22600
+    # Note that while this fix is already merged upstream and will be included in 0.14+,
+    # we can't fetchpatch the upstream commit as it won't cleanly apply on older versions,
+    # so we substitute the paths instead.
+    + lib.optionalString (stdenv.hostPlatform.isDarwin && lib.versionOlder finalAttrs.version "0.14") ''
+      substituteInPlace lib/std/zig/system/darwin.zig \
+        --replace-fail /usr/bin/xcrun xcrun \
+        --replace-fail /usr/bin/xcode-select xcode-select
+    '';
 
   postBuild =
     if lib.versionAtLeast finalAttrs.version "0.13" then
       ''
         stage3/bin/zig build langref
       ''
-    else if lib.versionAtLeast finalAttrs.version "0.11" then
+    else
       ''
         stage3/bin/zig run ../tools/docgen.zig -- ../doc/langref.html.in langref.html --zig $PWD/stage3/bin/zig
-      ''
-    else if lib.versionAtLeast finalAttrs.version "0.10" then
-      ''
-        ./zig2 run ../doc/docgen.zig -- ./zig2 ../doc/langref.html.in langref.html
-      ''
-    else
-      null;
+      '';
 
   postInstall =
     if lib.versionAtLeast finalAttrs.version "0.13" then
       ''
         install -Dm444 ../zig-out/doc/langref.html -t $doc/share/doc/zig-${finalAttrs.version}/html
       ''
-    else if lib.versionAtLeast finalAttrs.version "0.10" then
+    else
       ''
         install -Dm444 langref.html -t $doc/share/doc/zig-${finalAttrs.version}/html
-      ''
-    else
-      null;
+      '';
 
   doInstallCheck = true;
   installCheckPhase = ''

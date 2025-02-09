@@ -11,6 +11,7 @@
   pydantic,
   tabulate,
   pyyaml,
+  semchunk,
   typing-extensions,
   transformers,
   typer,
@@ -46,20 +47,19 @@ buildPythonPackage rec {
     pyyaml
     typing-extensions
     transformers
-    # semchunk
+    semchunk
     typer
     latex2mathml
   ];
 
   pythonRelaxDeps = [
     "pillow"
+    "typer"
   ];
 
   pythonImportsCheck = [
     "docling_core"
   ];
-
-  doCheck = false;
 
   nativeCheckInputs = [
     jsondiff
@@ -67,8 +67,13 @@ buildPythonPackage rec {
     requests
   ];
 
+  disabledTestPaths = [
+    # attempts to download models
+    "test/test_hybrid_chunker.py"
+  ];
+
   meta = {
-    changelog = "https://github.com/DS4SD/docling-core/blob/${version}/CHANGELOG.md";
+    changelog = "https://github.com/DS4SD/docling-core/blob/${src.tag}/CHANGELOG.md";
     description = "Python library to define and validate data types in Docling";
     homepage = "https://github.com/DS4SD/docling-core";
     license = lib.licenses.mit;

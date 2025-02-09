@@ -1222,7 +1222,7 @@ in
 
   fzf-lua = neovimUtils.buildNeovimPlugin {
     luaAttr = luaPackages.fzf-lua;
-    propagatedBuildInputs = [ fzf ];
+    runtimeDeps = [ fzf ];
   };
 
   fzf-vim = super.fzf-vim.overrideAttrs {
@@ -1630,10 +1630,6 @@ in
     dependencies = [ self.plenary-nvim ];
   };
 
-  lsp-progress-nvim = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.lsp-progress-nvim;
-  };
-
   lsp_lines-nvim = callPackage ./non-generated/lsp_lines-nvim { };
 
   lspecho-nvim = super.lspecho-nvim.overrideAttrs {
@@ -1669,18 +1665,6 @@ in
 
   LuaSnip-snippets-nvim = super.LuaSnip-snippets-nvim.overrideAttrs {
     checkInputs = [ self.luasnip ];
-  };
-
-  lz-n = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.lz-n;
-  };
-
-  lze = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.lze;
-  };
-
-  lzn-auto-require = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.lzn-auto-require;
   };
 
   magma-nvim = super.magma-nvim.overrideAttrs {
@@ -1729,7 +1713,7 @@ in
     };
 
   markid = super.markid.overrideAttrs {
-    dependencies = with super; [ nvim-treesitter ];
+    dependencies = [ self.nvim-treesitter ];
   };
 
   mason-lspconfig-nvim = super.mason-lspconfig-nvim.overrideAttrs {
@@ -1771,10 +1755,6 @@ in
     inherit (meson) pname version src;
     preInstall = "cd data/syntax-highlighting/vim";
     meta.maintainers = with lib.maintainers; [ vcunat ];
-  };
-
-  middleclass = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.middleclass;
   };
 
   mind-nvim = super.mind-nvim.overrideAttrs {
@@ -1918,12 +1898,6 @@ in
       "neorepl.map"
       "neorepl.repl"
     ];
-  };
-
-  neorg = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.neorg;
-
-    doInstallCheck = true;
   };
 
   neorg-telescope = super.neorg-telescope.overrideAttrs {
@@ -2265,6 +2239,10 @@ in
 
   nvim-cokeline = super.nvim-cokeline.overrideAttrs {
     dependencies = [ self.plenary-nvim ];
+  };
+
+  nvim-dap-cortex-debug = super.nvim-dap-cortex-debug.overrideAttrs {
+    dependencies = [ self.nvim-dap ];
   };
 
   nvim-coverage = super.nvim-coverage.overrideAttrs {
@@ -2743,14 +2721,9 @@ in
     ];
   };
 
-  # TODO: runtimedeps
-  plenary-nvim = super.plenary-nvim.overrideAttrs {
-    postPatch = ''
-      sed -Ei lua/plenary/curl.lua \
-          -e 's@(command\s*=\s*")curl(")@\1${curl}/bin/curl\2@'
-    '';
-
-    doInstallCheck = true;
+  plenary-nvim = neovimUtils.buildNeovimPlugin {
+    luaAttr = luaPackages.plenary-nvim;
+    runtimeDeps = [ curl ];
   };
 
   poimandres-nvim = super.poimandres-nvim.overrideAttrs {
@@ -2856,21 +2829,6 @@ in
         p.json
       ]))
     ];
-  };
-
-  rocks-nvim = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.rocks-nvim;
-  };
-
-  rocks-config-nvim = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.rocks-config-nvim;
-  };
-
-  roslyn-nvim = super.roslyn-nvim.overrideAttrs {
-  };
-
-  rtp-nvim = neovimUtils.buildNeovimPlugin {
-    luaAttr = luaPackages.rtp-nvim;
   };
 
   rustaceanvim = neovimUtils.buildNeovimPlugin {
@@ -3021,7 +2979,7 @@ in
   };
 
   startup-nvim = super.startup-nvim.overrideAttrs {
-    dependencies = with super; [ plenary-nvim ];
+    dependencies = [ self.plenary-nvim ];
   };
 
   statix = buildVimPlugin rec {
@@ -3149,6 +3107,10 @@ in
     ];
   };
 
+  telescope-emoji-nvim = super.telescope-emoji-nvim.overrideAttrs {
+    dependencies = [ self.telescope-nvim ];
+  };
+
   telescope-frecency-nvim = super.telescope-frecency-nvim.overrideAttrs {
     dependencies = with self; [
       sqlite-lua
@@ -3208,6 +3170,10 @@ in
       plenary-nvim
       telescope-nvim
     ];
+  };
+
+  telescope-glyph-nvim = super.telescope-github-nvim.overrideAttrs {
+    dependencies = [ self.telescope-nvim ];
   };
 
   telescope-live-grep-args-nvim = super.telescope-live-grep-args-nvim.overrideAttrs {
@@ -4056,4 +4022,39 @@ in
       };
   in
   lib.genAttrs nodePackageNames nodePackage2VimPackage
+)
+// (
+  let
+    luarocksPackageNames = [
+      "fidget-nvim"
+      "gitsigns-nvim"
+      "image-nvim"
+      "lsp-progress-nvim"
+      "luasnip"
+      "lush-nvim"
+      "lz-n"
+      "lze"
+      "lzn-auto-require"
+      "middleclass"
+      "neorg"
+      "neotest"
+      "nui-nvim"
+      "nvim-cmp"
+      "nvim-nio"
+      "orgmode"
+      "papis-nvim"
+      "rest-nvim"
+      "rocks-config-nvim"
+      "rocks-nvim"
+      "rtp-nvim"
+      "telescope-manix"
+      "telescope-nvim"
+    ];
+    toVimPackage =
+      name:
+      neovimUtils.buildNeovimPlugin {
+        luaAttr = luaPackages.${name};
+      };
+  in
+  lib.genAttrs luarocksPackageNames toVimPackage
 )
