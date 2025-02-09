@@ -505,6 +505,18 @@
     githubId = 1517066;
     name = "Aiken Cairncross";
   };
+  acaloiaro = {
+    email = "code@adriano.fyi";
+    githubId = 3331648;
+    github = "acaloiaro";
+    matrix = "@adriano@beeper.com";
+    name = "Adriano Caloiaro";
+    keys = [
+      {
+        fingerprint = "DCBD 2175 8A30 9C1F 41D7  A0FC 890F FDB1 1860 FE1C";
+      }
+    ];
+  };
   a-camarillo = {
     name = "Anthony Camarillo";
     email = "anthony.camarillo.96@gmail.com";
@@ -10950,6 +10962,11 @@
     githubId = 691552;
     name = "Jamie McClymont";
   };
+  jjtt = {
+    github = "jjtt";
+    githubId = 3908945;
+    name = "Juho Törmä";
+  };
   jk = {
     email = "hello+nixpkgs@j-k.io";
     matrix = "@j-k:matrix.org";
@@ -18752,6 +18769,12 @@
     githubId = 4633847;
     name = "Ben Hamlin";
   };
+  proux01 = {
+    email = "pierre.roux@onera.fr";
+    github = "proux01";
+    githubId = 15833376;
+    name = "Pierre ROux";
+  };
   prrlvr = {
     email = "po@prrlvr.fr";
     github = "prrlvr";
@@ -23730,6 +23753,12 @@
     github = "hmuehlhans";
     githubId = 9870613;
     name = "Hubert Mühlhans";
+  };
+  tris203 = {
+    email = "admin@snappeh.com";
+    github = "tris203";
+    githubId = 18444302;
+    name = " Tristan Knight";
   };
   trishtzy = {
     github = "trishtzy";
