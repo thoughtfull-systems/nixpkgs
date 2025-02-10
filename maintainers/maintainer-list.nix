@@ -3202,6 +3202,13 @@
     github = "brendanreis";
     githubId = 10686906;
   };
+  bretek = {
+    email = "josephmadden999@gmail.com";
+    github = "bretek";
+    githubId = 79257746;
+    name = "Joseph Madden";
+    keys = [ { fingerprint = "3CF8 E983 2219 AB4B 0E19  158E 6112 1921 C9F8 117C"; } ];
+  };
   brettlyons = {
     email = "blyons@fastmail.com";
     github = "brettlyons";
@@ -11133,6 +11140,11 @@
     github = "JulienMalka";
     githubId = 1792886;
     name = "Julien Malka";
+  };
+  juliusfreudenberger = {
+    name = "Julius Freudenberger";
+    github = "JuliusFreudenberger";
+    githubId = 13383409;
   };
   juliusrickert = {
     email = "nixpkgs@juliusrickert.de";
@@ -22575,6 +22587,12 @@
     github = "hmuehlhans";
     githubId = 9870613;
     name = "Hubert Mühlhans";
+  };
+  tris203 = {
+    email = "admin@snappeh.com";
+    github = "tris203";
+    githubId = 18444302;
+    name = " Tristan Knight";
   };
   trishtzy = {
     github = "trishtzy";
