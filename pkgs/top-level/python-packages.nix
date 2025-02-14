@@ -2961,8 +2961,6 @@ self: super: with self; {
 
   dask-awkward = callPackage ../development/python-modules/dask-awkward { };
 
-  dask-expr = callPackage ../development/python-modules/dask-expr { };
-
   dask-gateway = callPackage ../development/python-modules/dask-gateway { };
 
   dask-gateway-server = callPackage ../development/python-modules/dask-gateway-server { };
@@ -5291,6 +5289,8 @@ self: super: with self; {
 
   ghdiff = callPackage ../development/python-modules/ghdiff { };
 
+  ghome-foyer-api = callPackage ../development/python-modules/ghome-foyer-api { };
+
   ghp-import = callPackage ../development/python-modules/ghp-import { };
 
   ghrepo-stats = callPackage ../development/python-modules/ghrepo-stats { };
@@ -7603,6 +7603,8 @@ self: super: with self; {
 
   litestar-htmx = callPackage ../development/python-modules/litestar-htmx { };
 
+  litestar = callPackage ../development/python-modules/litestar { };
+
   littleutils = callPackage ../development/python-modules/littleutils { };
 
   livelossplot = callPackage ../development/python-modules/livelossplot { };
@@ -7743,6 +7745,8 @@ self: super: with self; {
   locust = callPackage ../development/python-modules/locust { };
 
   log-symbols = callPackage ../development/python-modules/log-symbols { };
+
+  logassert = callPackage ../development/python-modules/logassert { };
 
   logbook = callPackage ../development/python-modules/logbook { };
 
@@ -8194,6 +8198,8 @@ self: super: with self; {
   };
 
   messagebird = callPackage ../development/python-modules/messagebird { };
+
+  metaflow = callPackage ../development/python-modules/metaflow { };
 
   metakernel = callPackage ../development/python-modules/metakernel { };
 
@@ -9644,6 +9650,10 @@ self: super: with self; {
 
   od = callPackage ../development/python-modules/od { };
 
+  odc-geo = callPackage ../development/python-modules/odc-geo { };
+
+  odc-stac = callPackage ../development/python-modules/odc-stac { };
+
   oddsprout = callPackage ../development/python-modules/oddsprout { };
 
   odfpy = callPackage ../development/python-modules/odfpy { };
@@ -9738,6 +9748,8 @@ self: super: with self; {
   open-clip-torch = callPackage ../development/python-modules/open-clip-torch { };
 
   open-garage = callPackage ../development/python-modules/open-garage { };
+
+  open-hypergraphs = callPackage ../development/python-modules/open-hypergraphs { };
 
   open-interpreter = callPackage ../development/python-modules/open-interpreter { };
 
@@ -10046,7 +10058,7 @@ self: super: with self; {
 
   paho-mqtt_1 = callPackage ../development/python-modules/paho-mqtt/1.nix { };
   paho-mqtt_2 = callPackage ../development/python-modules/paho-mqtt/default.nix { };
-  paho-mqtt = paho-mqtt_1;
+  paho-mqtt = paho-mqtt_2;
 
   paintcompiler = callPackage ../development/python-modules/paintcompiler { };
 
@@ -11375,8 +11387,6 @@ self: super: with self; {
 
   pwlf = callPackage ../development/python-modules/pwlf { };
 
-  pwndbg = callPackage ../development/python-modules/pwndbg { };
-
   pwntools = callPackage ../development/python-modules/pwntools {
     debugger = pkgs.gdb;
   };
@@ -12378,6 +12388,10 @@ self: super: with self; {
   pynzb = callPackage ../development/python-modules/pynzb { };
 
   pyobihai = callPackage ../development/python-modules/pyobihai { };
+
+  pyobjc-core = callPackage ../development/python-modules/pyobjc-core { };
+
+  pyobjc-framework-Cocoa = callPackage ../development/python-modules/pyobjc-framework-Cocoa { };
 
   pyocd = callPackage ../development/python-modules/pyocd { };
 
@@ -13611,8 +13625,6 @@ self: super: with self; {
 
   pytransportnswv2 = callPackage ../development/python-modules/pytransportnswv2 { };
 
-  pytrends = callPackage ../development/python-modules/pytrends { };
-
   pytricia = callPackage ../development/python-modules/pytricia { };
 
   pytrydan = callPackage ../development/python-modules/pytrydan { };
@@ -14503,6 +14515,8 @@ self: super: with self; {
 
   rules = callPackage ../development/python-modules/rules { };
 
+  rumps = callPackage ../development/python-modules/rumps { };
+
   runs = callPackage ../development/python-modules/runs { };
 
   runstats = callPackage ../development/python-modules/runstats { };
@@ -14716,6 +14730,8 @@ self: super: with self; {
   };
 
   sdds = callPackage ../development/python-modules/sdds { };
+
+  sdjson = callPackage ../development/python-modules/sdjson { };
 
   sdkmanager = callPackage ../development/python-modules/sdkmanager { };
 
@@ -15111,6 +15127,8 @@ self: super: with self; {
   slicer = callPackage ../development/python-modules/slicer { };
 
   slicerator = callPackage ../development/python-modules/slicerator { };
+
+  slip10 = callPackage ../development/python-modules/slip10 { };
 
   slither-analyzer = callPackage ../development/python-modules/slither-analyzer { };
 
@@ -16233,6 +16251,8 @@ self: super: with self; {
 
   textual-universal-directorytree = callPackage ../development/python-modules/textual-universal-directorytree { };
 
+  textualeffects = callPackage ../development/python-modules/textualeffects { };
+
   textual-textarea = callPackage ../development/python-modules/textual-textarea { };
 
   testbook = callPackage ../development/python-modules/testbook { };
@@ -16511,6 +16531,8 @@ self: super: with self; {
   torchcrepe = callPackage ../development/python-modules/torchcrepe { };
 
   torchdiffeq = callPackage ../development/python-modules/torchdiffeq { };
+
+  torcheval = callPackage ../development/python-modules/torcheval { };
 
   torchmetrics = callPackage ../development/python-modules/torchmetrics { };
 
