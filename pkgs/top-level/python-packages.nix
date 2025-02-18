@@ -1876,11 +1876,7 @@ self: super: with self; {
 
   bottleneck = callPackage ../development/python-modules/bottleneck { };
 
-  boxx = callPackage ../development/python-modules/boxx { };
-
   bpemb = callPackage ../development/python-modules/bpemb { };
-
-  bpycv = callPackage ../development/python-modules/bpycv {};
 
   bpylist2 = callPackage ../development/python-modules/bpylist2 { };
 
@@ -2835,6 +2831,10 @@ self: super: with self; {
 
   cu2qu = callPackage ../development/python-modules/cu2qu { };
 
+  curated-tokenizers = callPackage ../development/python-modules/curated-tokenizers { };
+
+  curated-transformers = callPackage ../development/python-modules/curated-transformers { };
+
   customtkinter = callPackage ../development/python-modules/customtkinter { };
 
   cucumber-tag-expressions = callPackage ../development/python-modules/cucumber-tag-expressions { };
@@ -2948,6 +2948,8 @@ self: super: with self; {
   dash = callPackage ../development/python-modules/dash { };
 
   dash-bootstrap-components = callPackage ../development/python-modules/dash-bootstrap-components { };
+
+  dash-bootstrap-templates = callPackage ../development/python-modules/dash-bootstrap-templates { };
 
   dash-core-components = callPackage ../development/python-modules/dash-core-components { };
 
@@ -3417,8 +3419,6 @@ self: super: with self; {
   django-admin-sortable2 = callPackage ../development/python-modules/django-admin-sortable2 { };
 
   django-allauth = callPackage ../development/python-modules/django-allauth { };
-
-  django-allauth-2fa = callPackage ../development/python-modules/django-allauth-2fa { };
 
   django-anymail = callPackage ../development/python-modules/django-anymail { };
 
@@ -4895,8 +4895,6 @@ self: super: with self; {
   flyingsquid = callPackage ../development/python-modules/flyingsquid { };
 
   flynt = callPackage ../development/python-modules/flynt { };
-
-  fn = callPackage ../development/python-modules/fn { };
 
   fnv-hash-fast = callPackage ../development/python-modules/fnv-hash-fast { };
 
@@ -10368,6 +10366,8 @@ self: super: with self; {
 
   pgpy = callPackage ../development/python-modules/pgpy { };
 
+  pgpy-dtc = callPackage ../development/python-modules/pgpy-dtc { };
+
   pgsanity = callPackage ../development/python-modules/pgsanity { };
 
   pgspecial = callPackage ../development/python-modules/pgspecial { };
@@ -14769,6 +14769,8 @@ self: super: with self; {
 
   sectools = callPackage ../development/python-modules/sectools { };
 
+  sectxt = callPackage ../development/python-modules/sectxt { };
+
   seedir = callPackage ../development/python-modules/seedir { };
 
   seekpath = callPackage ../development/python-modules/seekpath { };
@@ -15230,6 +15232,8 @@ self: super: with self; {
 
   snowflake-sqlalchemy = callPackage ../development/python-modules/snowflake-sqlalchemy { };
 
+  snowplow-tracker = callPackage ../development/python-modules/snowplow-tracker { };
+
   snscrape = callPackage ../development/python-modules/snscrape { };
 
   snuggs = callPackage ../development/python-modules/snuggs { };
@@ -15326,6 +15330,8 @@ self: super: with self; {
   };
 
   spacy-alignments = callPackage ../development/python-modules/spacy-alignments { };
+
+  spacy-curated-transformers = callPackage ../development/python-modules/spacy-curated-transformers { };
 
   spacy-legacy = callPackage ../development/python-modules/spacy/legacy.nix { };
 
@@ -15773,6 +15779,10 @@ self: super: with self; {
 
   stop-words = callPackage ../development/python-modules/stop-words { };
 
+  stp = toPythonModule (pkgs.stp.override {
+    python3 = self.python;
+  });
+
   stransi = callPackage ../development/python-modules/stransi { };
 
   strategies = callPackage ../development/python-modules/strategies { };
@@ -15936,6 +15946,8 @@ self: super: with self; {
   symengine = callPackage ../development/python-modules/symengine {
     inherit (pkgs) symengine;
   };
+
+  symfc = callPackage ../development/python-modules/symfc { };
 
   sympy = callPackage ../development/python-modules/sympy { };
 
@@ -17573,8 +17585,6 @@ self: super: with self; {
 
   types-docutils = callPackage ../development/python-modules/types-docutils { };
 
-  types-enum34 = callPackage ../development/python-modules/types-enum34 { };
-
   types-freezegun = callPackage ../development/python-modules/types-freezegun { };
 
   types-futures = callPackage ../development/python-modules/types-futures { };
@@ -18682,8 +18692,6 @@ self: super: with self; {
   zcbor = callPackage ../development/python-modules/zcbor { };
 
   zconfig = callPackage ../development/python-modules/zconfig { };
-
-  zcs = callPackage ../development/python-modules/zcs { };
 
   zdaemon = callPackage ../development/python-modules/zdaemon { };
 

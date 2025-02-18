@@ -2528,7 +2528,7 @@ with pkgs;
   patool = with python3Packages; toPythonApplication patool;
 
   pocket-casts = callPackage ../by-name/po/pocket-casts/package.nix {
-    electron = electron_32;
+    electron = electron_33;
   };
 
   pueue = darwin.apple_sdk_11_0.callPackage ../applications/misc/pueue {
@@ -2676,8 +2676,6 @@ with pkgs;
 
   beetsPackages = lib.recurseIntoAttrs (callPackage ../tools/audio/beets { });
   inherit (beetsPackages) beets beets-unstable;
-
-  biber-for-tectonic = callPackage ../tools/typesetting/tectonic/biber.nix { };
 
   binlore = callPackage ../development/tools/analysis/binlore { };
 
@@ -3973,49 +3971,13 @@ with pkgs;
 
   md2pdf = with python3Packages; toPythonApplication md2pdf;
 
-  mdbook-epub = callPackage ../tools/text/mdbook-epub {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-graphviz = callPackage ../tools/text/mdbook-graphviz {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-katex = callPackage ../tools/text/mdbook-katex {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
+  mdcat = callPackage ../tools/text/mdcat {
+    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
+    inherit (python3Packages) ansi2html;
   };
 
   mdbook-linkcheck = callPackage ../tools/text/mdbook-linkcheck {
     inherit (darwin.apple_sdk.frameworks) Security;
-  };
-
-  mdbook-mermaid = callPackage ../tools/text/mdbook-mermaid {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-pdf = callPackage ../tools/text/mdbook-pdf {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-plantuml = callPackage ../tools/text/mdbook-plantuml {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-toc = callPackage ../tools/text/mdbook-toc {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-admonish = callPackage ../tools/text/mdbook-admonish {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdbook-footnote = callPackage ../tools/text/mdbook-footnote {
-    inherit (darwin.apple_sdk.frameworks) CoreServices;
-  };
-
-  mdcat = callPackage ../tools/text/mdcat {
-    inherit (darwin.apple_sdk.frameworks) Security SystemConfiguration;
-    inherit (python3Packages) ansi2html;
   };
 
   medfile = callPackage ../development/libraries/medfile {
@@ -4780,7 +4742,7 @@ with pkgs;
 
   rocket = libsForQt5.callPackage ../tools/graphics/rocket { };
 
-  rtabmap = libsForQt5.callPackage ../applications/video/rtabmap/default.nix {
+  rtabmap = callPackage ../by-name/rt/rtabmap/package.nix {
     pcl = pcl.override { vtk = vtkWithQt5; };
   };
 
@@ -4926,7 +4888,7 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
-  rustdesk-server = callPackage ../servers/rustdesk-server {
+  rustdesk-server = callPackage ../by-name/ru/rustdesk-server/package.nix {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
 
@@ -5759,8 +5721,6 @@ with pkgs;
   crystalline = callPackage ../development/tools/language-servers/crystalline {
     llvmPackages = crystal.llvmPackages;
   };
-
-  scry = callPackage ../development/tools/scry { crystal = crystal_1_2; };
 
   devpi-client = python3Packages.callPackage ../development/tools/devpi-client { };
 
@@ -7455,8 +7415,15 @@ with pkgs;
 
   anybadge = with python3Packages; toPythonApplication anybadge;
 
-  ansible = ansible_2_17;
-  ansible_2_17 = python3Packages.toPythonApplication python3Packages.ansible-core;
+  ansible = ansible_2_18;
+  ansible_2_18 = python3Packages.toPythonApplication python3Packages.ansible-core;
+  ansible_2_17 = python3Packages.toPythonApplication (python3Packages.ansible-core.overridePythonAttrs (oldAttrs: rec {
+    version = "2.17.8";
+    src = oldAttrs.src.override {
+      inherit version;
+      hash = "sha256-Ob6KeYaix9NgabDZciC8L2eDxl/qfG1+Di0A0ayK+Hc=";
+    };
+  }));
   ansible_2_16 = python3Packages.toPythonApplication (python3Packages.ansible-core.overridePythonAttrs (oldAttrs: rec {
     version = "2.16.8";
     src = oldAttrs.src.override {
@@ -10214,10 +10181,6 @@ with pkgs;
     buildPythonPackage buildPythonApplication setuptools pycsdr pydigiham;
   };
 
-  pcl = libsForQt5.callPackage ../development/libraries/pcl {
-    inherit (darwin.apple_sdk_11_0.frameworks) Cocoa AGL OpenGL;
-  };
-
   pcre = callPackage ../development/libraries/pcre { };
   pcre16 = res.pcre.override { variant = "pcre16"; };
   # pcre32 seems unused
@@ -10278,7 +10241,7 @@ with pkgs;
 
   proselint = callPackage ../tools/text/proselint {
     inherit (python3Packages)
-    buildPythonApplication click future six;
+    buildPythonApplication click;
   };
 
   prospector = callPackage ../development/tools/prospector { };
@@ -10681,12 +10644,6 @@ with pkgs;
   tclap_1_2 = callPackage ../development/libraries/tclap/1.2.nix { };
 
   tclap_1_4 = callPackage ../development/libraries/tclap/1.4.nix { };
-
-  tectonic = callPackage ../tools/typesetting/tectonic/wrapper.nix { };
-
-  tectonic-unwrapped = callPackage ../tools/typesetting/tectonic {
-    harfbuzz = harfbuzzFull;
-  };
 
   termbench-pro = callPackage ../by-name/te/termbench-pro/package.nix {
     stdenv = if stdenv.hostPlatform.isDarwin then llvmPackages_17.stdenv else stdenv;
@@ -18284,10 +18241,6 @@ with pkgs;
     wlroots = wlroots_0_17;
   };
 
-  ldid = callPackage ../development/tools/ldid {
-    inherit (darwin.apple_sdk.frameworks) CoreFoundation Security;
-  };
-
   zrythm = callPackage ../applications/audio/zrythm {
     inherit (plasma5Packages) breeze-icons;
   };
@@ -18301,8 +18254,6 @@ with pkgs;
   swift-corelibs-libdispatch = swiftPackages.Dispatch;
 
   aitrack = libsForQt5.callPackage ../applications/misc/aitrack { };
-
-  widevine-cdm = callPackage ../applications/networking/browsers/misc/widevine-cdm.nix { };
 
   tidal-dl = python3Packages.callPackage ../tools/audio/tidal-dl { };
 
