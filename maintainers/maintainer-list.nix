@@ -1750,6 +1750,12 @@
     githubId = 13347712;
     name = "Leo Shchurov";
   };
+  ardubev16 = {
+    email = "lorenzobevilacqua02@gmail.com";
+    github = "ardubev16";
+    githubId = 43483037;
+    name = "Lorenzo Bevilacqua";
+  };
   ardumont = {
     email = "eniotna.t@gmail.com";
     github = "ardumont";
@@ -22195,6 +22201,12 @@
     email = "mr.trubach@icloud.com";
     github = "tie";
     githubId = 14792994;
+  };
+  tiferrei = {
+    name = "Tiago Ferreira";
+    email = "me@tiferrei.com";
+    github = "tiferrei";
+    githubId = 8849915;
   };
   tilcreator = {
     name = "TilCreator";
